@@ -1,1 +1,32 @@
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-image: url(../assets/images/background/00_sparkly-purple-bkg.jpg);
+}
+
+footer {
+    background-color: rgba($color: #000000, $alpha: 0.75);
+    width: 100%;
+    height: 90px;
+    position: fixed;
+    bottom: 0;
+    #app-sig{
+        padding: 10px;
+        h5 {
+            color: white;
+            margin: 0 auto;
+            text-align: center;
+        }
+        #light-sig {
+            font-weight: lighter;
+        }
+        #bold-sig {
+            font-weight: bolder;
+        }
+    }
+}
