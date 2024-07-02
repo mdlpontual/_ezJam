@@ -1,6 +1,6 @@
 import React from "react";
 
-function LoginFooterSignature() {
+function LoginSignature() {
     return(
         <>
             <article id="app-signature">
@@ -11,4 +11,4 @@ function LoginFooterSignature() {
     );
 }
 
-export default LoginFooterSignature;
+export default LoginSignature;

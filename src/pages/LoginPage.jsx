@@ -1,6 +1,6 @@
 import React from "react";
 import LoginContainer from '../components/ui/LoginContainer.jsx';
-import LoginFooterSignature from "../components/ui/LoginFooterSignature.jsx";
+import LoginSignature from "../components/ui/LoginSignature.jsx";
 
 function LoginPage() {
     return (
@@ -10,7 +10,7 @@ function LoginPage() {
                     <LoginContainer/>
                 </main>
                 <footer id="footer-row" className="row">
-                    <LoginFooterSignature/>
+                    <LoginSignature/>
                 </footer>
             </div>
         </>
