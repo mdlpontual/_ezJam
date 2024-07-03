@@ -1,9 +1,11 @@
 import React from "react";
 import IMG from "../../assets/images/ImagesHUB";
-import LoginSignature from "../ui/LoginSignature"; 
-import PopoverDemo from "../PopoverDemo";  
+import AboutPopover from "../../utils/AboutPopover";  
+import LoginSignature from "../ui/LoginSignature";
 
 function HomeHeader() {
+    const stringOne = "Jammming - a Codecademy Practice Project";
+    const stringTwo = "copyright mdlpontual - 2024";
     return (
         <>  
             <figure id="home-logo" className="col-3">
@@ -19,7 +21,7 @@ function HomeHeader() {
             </figure>
             <nav id="navbar" className="col-9">
                 <ul>
-                    <li><PopoverDemo/></li>
+                <li><AboutPopover content="copyright mdlpontual - 2024"/></li>
                     <li><a href="">Logoff</a></li>
                 </ul>
             </nav>
