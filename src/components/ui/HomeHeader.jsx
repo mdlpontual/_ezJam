@@ -1,5 +1,7 @@
 import React from "react";
 import IMG from "../../assets/images/ImagesHUB";
+import LoginSignature from "../ui/LoginSignature"; 
+import PopoverDemo from "../PopoverDemo";  
 
 function HomeHeader() {
     return (
@@ -17,8 +19,8 @@ function HomeHeader() {
             </figure>
             <nav id="navbar" className="col-9">
                 <ul>
-                    <li>About</li>
-                    <li>Logoff</li>
+                    <li><PopoverDemo/></li>
+                    <li><a href="">Logoff</a></li>
                 </ul>
             </nav>
         </>
