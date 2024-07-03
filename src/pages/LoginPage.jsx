@@ -1,16 +1,18 @@
-import { Link } from "react-router-dom";
+import React from "react";
+import LoginContainer from '../components/ui/LoginContainer.jsx';
+import LoginSignature from "../components/ui/LoginSignature.jsx";
 
 function LoginPage() {
     return (
         <>
-            <footer>
-                <div className="container">
-                    <article id="app-sig">
-                        <h5 id="light-sig">Jammming - a Codecademy Practice Project</h5>
-                        <h5 id="bold-sig">copyright mdlpontual - 2024</h5>
-                    </article>
-                </div>
-            </footer>
+            <div className="container-fluid">
+                <main id="login-main" className="row justify-content-center align-items-center">
+                    <LoginContainer/>
+                </main>
+                <footer id="footer-row" className="row">
+                    <LoginSignature/>
+                </footer>
+            </div>
         </>
     );
 }

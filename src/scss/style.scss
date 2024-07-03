@@ -1,32 +1,223 @@
-@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+$primary: #1DB954;
+//-----------switch-box--------------
+$form-check-input-checked-bg-color: rgb(241, 91, 241);
+$form-check-input-checked-border-color: rgb(241, 91, 241);
+$form-check-input-focus-box-shadow: none;
 
-* {
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+//---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+*{
     margin: 0;
     padding: 0;
+    color: white;
 }
 
-body {
+html{
+    font-size: 16px;
+}
+
+body{
     background-image: url(../assets/images/background/00_sparkly-purple-bkg.jpg);
 }
 
-footer {
-    background-color: rgba($color: #000000, $alpha: 0.75);
-    width: 100%;
+//---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+#home-logo, #navbar{
+    //border: 2px solid yellow;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+#header-row{
+    padding: 0;
+    //border: 2px solid red;
+    #home-logo{
+        padding: 10px 5px 5px 0px;
+        //border: 1px solid blue;
+        #jam-logo{
+            display: flex;
+            justify-content: flex-start;
+            //border: 1px solid blue;
+        }
+        #spotify-logo{
+            display: flex;
+            justify-content: flex-start;
+            position: relative;
+            top: -32px;
+            left: 150px;
+            //border: 2px solid red;
+            #with-text{
+                position: relative;
+                top: 10px;
+                font-size: 0.75em;
+            }
+        }
+    }
+    #navbar{
+        //border: 2px solid red;
+        display: flex;
+        justify-content: flex-end;
+        flex-wrap: wrap;
+        align-items: center;
+        padding: 0;
+        margin: 0;
+        ul{
+            //border: 2px solid red;
+            display: flex;
+            justify-content: flex-end;
+            width: 500px;
+            gap: 17px;
+            align-items: center;
+            padding: 0;
+            margin: 0 25px;
+            list-style: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            a{
+                color: white;
+                text-decoration: none;
+            }
+            a:hover{
+                text-decoration: underline;
+            }
+            a:visited{
+                color: white;
+                text-decoration: none;
+            }
+        }
+    }
+}
+
+//--------------------------------------------------------------
+
+#home-main{
+    //border: 2px solid yellow;
+    #playlists-box{
+        //border: 2px solid red;
+        border-radius: 20px;
+        background-color: rgba($color: #000000, $alpha: 0.50);
+        padding: 0;
+        margin: 15px 7.5px 15px 15px;
+    }
+    #search-box{
+        //border: 2px solid red;
+        background-color: rgba($color: #000000, $alpha: 0.50);
+        border-radius: 20px;
+        padding: 0;
+        margin: 15px 15px 15px 7.5px;
+    }
+}
+
+//--------------------------------------------------------------------------------------------------------------------------------------------------------
+
+#login-box{
+    background-color: rgba($color: #000000, $alpha: 0.50);
+    border-radius: 20px;
+    max-width: 480px;
+    height: 750px;  
+    padding: 25px;
+    #logo-row{
+        #jam-logo{
+            display: flex;
+            justify-content: center;
+        }
+        #spotify-logo{
+            display: flex;
+            justify-content: flex-end;
+            margin-right: 20px;
+            position: relative;
+            top: -65px;
+            #with-text{
+                position: relative;
+                top: 25px;
+            }
+        }
+    }
+    #button-row{
+        height: 50%;
+        #button-col{
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+        }
+        #login-button{
+            width: 93%;
+            border-radius: 25px;
+            max-height: 50px;
+            color: white;
+        }
+    }
+    #switch-row{
+        position: relative;
+        #switch-col{
+            display: flex;
+            justify-content: center;
+            padding: 7px;
+            margin-left: 20px;
+        }
+    }
+    #subscribe-row{
+        position: relative;
+        height: 15%;
+        #subscribe-col{
+            display: flex;
+            justify-content: center;
+            padding: px;
+            align-items: flex-end;
+            p{
+                color: #1DB954;
+                font-weight: bolder;
+            }
+            a:link{
+                text-decoration: none;
+            }
+            a:hover {
+                p{
+                    color: rgb(241, 91, 241);
+                    font-weight: bolder;
+                }
+            }
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+#header-row{
+    background-color: rgba($color: #000000, $alpha: 0.50);
     height: 90px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    padding: 0px;
+}
+
+#login-main{
+    width: 100%;
+    position: fixed;
+    top: 0;
+    bottom: 90px;
+}
+
+#home-main{
+    width: 100%;
+    position: fixed;
+    top: 90px;
+    bottom: 90px;
+    //border: 2px solid red;
+}
+
+#footer-row{
+    background-color: rgba($color: #000000, $alpha: 0.50);
+    height: 90px;
+    width: 100%;
+    text-align: center;
     position: fixed;
     bottom: 0;
-    #app-sig{
-        padding: 10px;
-        h5 {
-            color: white;
-            margin: 0 auto;
-            text-align: center;
-        }
-        #light-sig {
-            font-weight: lighter;
-        }
-        #bold-sig {
-            font-weight: bolder;
-        }
+    padding: 10px;
+    #light-signature{
+        font-weight: lighter;
     }
 }
