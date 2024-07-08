@@ -1,6 +1,6 @@
 import React from "react";
-import LoginContainer from '../components/ui/LoginContainer.jsx';
-import LoginSignature from "../components/ui/LoginSignature.jsx";
+import LoginContainer from './ui/LoginContainer.jsx';
+import LoginSignature from "./ui/LoginSignature.jsx";
 
 function LoginPage() {
     return (

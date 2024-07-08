@@ -1,7 +1,6 @@
 import React from "react";
-import IMG from "../../assets/images/ImagesHUB";
-import AboutPopover from "../../utils/AboutPopover";  
-import LoginSignature from "../ui/LoginSignature";
+import IMG from "../../../assets/images/ImagesHUB";
+import AboutPopover from "../../../utils/AboutPopover";  
 
 function HomeHeader() {
     const stringOne = "Jammming - a Codecademy Practice Project";
