@@ -7,8 +7,8 @@ $form-check-input-focus-box-shadow: none;
 
 
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
-@import "./LoginPageStyle.scss";
-@import "./HomePageStyle.scss";
+@import "../pages/Login/LoginPageStyle.scss";
+@import "../pages/Home/HomePageStyle.scss";
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------
