@@ -1,12 +1,12 @@
 import React from "react";
-import UsersPlaylist from "./Playlists/UsersPlaylists";
+import UserPlaylist from "./Playlists/UserPlaylists";
 
 
 function HomeContainers(){
     return(
         <>
             <section id="playlists-box" className="col">
-                <UsersPlaylist />
+                <UserPlaylist />
             </section>
             <section id="search-box" className="col">
                 

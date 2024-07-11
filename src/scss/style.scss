@@ -13,6 +13,44 @@ $form-check-input-focus-box-shadow: none;
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------
 
+$tb-red-solid: 2px solid red;
+$tb-red-dashed: 2px dashed red;
+$tb-red-dotted: 2px dotted red;
+$tb-orange-solid: 2px solid orange;
+$tb-orange-dashed: 2px dashed orange;
+$tb-orange-dotted: 2px dotted orange;
+$tb-yellow-solid: 2px solid yellow;
+$tb-yellow-dashed: 2px dashed yellow;
+$tb-yellow-dotted: 2px dotted yellow;
+$tb-lime-solid: 2px solid lime;
+$tb-lime-dashed: 2px dashed lime;
+$tb-lime-dotted: 2px dotted lime;
+$tb-green-solid: 2px solid green;
+$tb-green-dashed: 2px dashed green;
+$tb-green-dotted: 2px dotted green;
+$tb-blue-solid: 2px solid blue;
+$tb-blue-dashed: 2px dashed blue;
+$tb-blue-dotted: 2px dotted blue;
+$tb-cyan-solid: 2px solid cyan;
+$tb-cyan-dashed: 2px dashed cyan;
+$tb-cyan-dotted: 2px dotted cyan;
+$tb-pink-solid: 2px solid pink;
+$tb-pink-dashed: 2px dashed pink;
+$tb-pink-dotted: 2px dotted pink;
+$tb-magenta-solid: 2px solid magenta;
+$tb-magenta-dashed: 2px dashed magenta;
+$tb-magenta-dotted: 2px dotted magenta;
+$tb-lilac-solid: 2px solid darkviolet;
+$tb-lilac-dashed: 2px dashed darkviolet;
+$tb-lilac-dotted: 2px dotted darkviolet;
+$tb-purple-solid: 2px solid purple;
+$tb-purple-dashed: 2px dashed purple;
+$tb-purple-dotted: 2px dotted purple;
+
+
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------------
+
 *{
     margin: 0;
     padding: 0;
@@ -42,27 +80,102 @@ body{
     }
 }
 
-#user-playlist{
-    border: 2px solid yellow;
+//---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+#user-playlists-container{
+    //border: $tb-red-solid;
     height: 100%;
-    display: flex;
-    flex-direction: column;
-    #playlist-header-row{
-        border: 2px solid green;
-        position: relative;
-        top: 0;
+    #user-playlists-header{
+        //border: $tb-cyan-dashed;
         height: 75px;
         display: flex;
-        .col{
-            border: 2px solid blue;
-            width: 100%;
+        justify-content: space-between;
+        align-items: center;
+        #pl-header-title{
+            //border: $tb-lime-dotted;
+            height: 100%;
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-start;
+            align-items: center;
+        }
+        #pl-add-button{
+            //border: $tb-lime-dotted;
+            height: 100%;
+            display: flex;
+            justify-content: flex-end;
             align-items: center;
         }
     }
-    #playlist-content-row{
-        border: 2px solid red;
+    #user-playlists-body{
+        //border: $tb-yellow-solid;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #num-col{
+        //border: $tb-yellow-solid;
         height: 100%;
+        width: 30px;
+    }
+    #rows-col{
+        display: flex;
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        #pl-ol{
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            #pl-row-item{
+                //border: $tb-yellow-dashed;
+                height: 100%;
+                width: 100%;
+                margin: 0;
+                padding: 0;
+                list-style-position: outside;
+                left: 20px;
+                #user-playlists-row{
+                    //border: $tb-yellow-dashed;
+                    height: 100%;
+                    width: 100%;
+                    display: flex;
+                    justify-content: flex-end;
+                    margin: 0;
+                    padding: 0;
+                    #pl-title{
+                        //border: $tb-cyan-dashed;
+                        height: 100%;
+                        display: flex;
+                        justify-content: flex-start;
+                        align-items: center;
+                    }
+                    #edit-buttons{
+                        //border: $tb-cyan-dashed;
+                        height: 100%;
+                        display: flex;
+                        justify-content: flex-end;
+                        align-items: center;
+                    }
+                    h5, img{
+                        //border: $tb-lime-dotted;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                    }
+                    h5{
+                        padding-top: 3px;
+                    }
+                    img{
+                        margin: 4px;
+                    }
+                }
+            }
+        }
     }
 }
