@@ -11,7 +11,7 @@ function HomePage() {
                     <HomeHeader/>
                 </header>
                 <main id="home-main" className="row">
-                    <HomeContainers/>
+                    <HomeContainers />
                 </main>
                 <footer id="footer-row" className="row">
                     <HomeFooter/>
