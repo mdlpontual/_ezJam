@@ -1,0 +1,77 @@
+#login-main{
+    width: 100%;
+    position: fixed;
+    top: 0;
+    bottom: 90px;
+}
+
+#login-box{
+    background-color: $bg-transparent;
+    border-radius: 20px;
+    max-width: 480px;
+    height: 750px;  
+    padding: 25px;
+    #logo-row{
+        #jam-logo{
+            display: flex;
+            justify-content: center;
+        }
+        #spotify-logo{
+            display: flex;
+            justify-content: flex-end;
+            margin-right: 20px;
+            position: relative;
+            top: -65px;
+            #with-text{
+                position: relative;
+                top: 25px;
+            }
+        }
+    }
+    #button-row{
+        height: 50%;
+        #button-col{
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+        }
+        #login-button{
+            width: 93%;
+            border-radius: 25px;
+            max-height: 50px;
+            color: white;
+        }
+    }
+    #switch-row{
+        position: relative;
+        #switch-col{
+            display: flex;
+            justify-content: center;
+            padding: 7px;
+            margin-left: 20px;
+        }
+    }
+    #subscribe-row{
+        position: relative;
+        height: 15%;
+        #subscribe-col{
+            display: flex;
+            justify-content: center;
+            padding: px;
+            align-items: flex-end;
+            p{
+                color: $primary;
+                font-weight: bolder;
+            }
+            a:link{
+                text-decoration: none;
+            }
+            a:hover {
+                p{
+                    color: $secondary;
+                    font-weight: bolder;
+                }
+            }
+        }
+    }
+}
