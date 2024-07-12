@@ -4,6 +4,16 @@ import IMG from "../../../../assets/images/ImagesHUB";
 function PlaylistRow() {
     return(
         <>  
+            
+        </>
+    );
+}
+
+export default PlaylistRow;
+
+/*function PlaylistRow() {
+    return(
+        <>  
             <div id="user-playlists-row" className="row">
                 <div id="pl-title" className="col">
                     <h5>Progorola</h5>
@@ -18,6 +28,4 @@ function PlaylistRow() {
             </div>
         </>
     );
-}
-
-export default PlaylistRow;
+}*/
