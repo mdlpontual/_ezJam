@@ -1,19 +1,17 @@
 import React from "react";
 import IMG from "../../../../assets/images/ImagesHUB";
+import TrackTable from "./TrackTable";
 
-function PlaylisRow() {
-    return (
+function OpenPlaylist() {
+    return(
         <>
-            <div id="pl-row" className="container d-flex align-items-start justify-content-center flex-column">
-                <div className="row align-items-center flex-grow-1 w-100 gap-3">
+            <div id="o-pl-container" className="container h-100 d-flex flex-column">
+                <div id="o-pl-header-row" className="row gap-3">
                     <div className="col-auto">
-                        <img src={IMG.placeHolders} alt="is saved icon" width="40px"/>
-                    </div>
-                    <div className="col-auto">
-                        <h4>Progorola</h4>
+                        <img src={IMG.gobackPNG} alt="go back" width="25px"/>
                     </div>
                     <div className="col">
-                        <img src={IMG.savedPNG} alt="is saved icon" width="30px"/>
+                        <h3>Progorola</h3>
                     </div>
                     <div className="col-auto">
                         <img src={IMG.pencilPNG} alt="to edit icon" width="30px"/>
@@ -25,9 +23,12 @@ function PlaylisRow() {
                         <img src={IMG.trashBinPNG} alt="to delete icon" width="30px"/>
                     </div>
                 </div>
+                <div id="o-pl-body-row" className="row flex-grow-1">
+                    <TrackTable />
+                </div>
             </div>
         </>
     );
 }
 
-export default PlaylisRow;
+export default OpenPlaylist;
