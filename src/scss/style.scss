@@ -28,7 +28,7 @@ $tb-lime-dotted: 2px dotted lime;
 $tb-green-solid: 2px solid green;
 $tb-green-dashed: 2px dashed green;
 $tb-green-dotted: 2px dotted green;
-$tb-blue-solid: 2px solid blue;
+$tb-blue-solid: 5px solid blue;
 $tb-blue-dashed: 2px dashed blue;
 $tb-blue-dotted: 2px dotted blue;
 $tb-cyan-solid: 2px solid cyan;
@@ -82,170 +82,88 @@ body{
     }
 }
 
-#containerrr{
-    border: $tb-red-solid;
-    height: 100%;
-    
-    h1{
-        border: $tb-red-dashed;
-
-    }
-    #rowOne{ 
+#pl-container{
+    //border: $tb-red-solid;
+    @include box-reset-default;
+    #pl-header-row{
+        //border: $tb-blue-solid;
+        @include box-reset-default;
         height: 75px;
+        padding-left: 20px;
+        padding-right: 13px
     }
-    #rowTwo{
-
+    #pl-body-row{ 
+        //border: $tb-yellow-solid;
+        @include box-reset-default;
+        padding: 20px;
     }
-    .row{
-        border: $tb-cyan-solid;
-
-        h3{
-            border: $tb-cyan-dashed;
-
-        }
-        .col, .col-auto{
-            border: $tb-yellow-solid;
-
-            h6, img{
-                border: $tb-yellow-dashed;
-
-            }
-        }
+    #pl-header-col-title, #pl-header-col-add{
+        //border: $tb-lime-solid;
+        @include box-reset-default;
+    }
+    h3{
+        //border: $tb-lime-dotted;
+        @include box-reset-default;
+        //padding-left: 10px;
     }
 }
 
-
-
-
-
-
-/*
-
-//---------------------------------------------------------------------------------------------------------------------------------------------------------
-#containerrr{
-    border: $tb-red-solid;
-    height: 100%;
+#pl-row{
+    //border: $tb-yellow-dashed;
     @include box-reset-default;
-    h1{
-        border: $tb-red-dashed;
-        @include box-reset-default;
-    }
+    height: 50px;
     .row{
-        border: $tb-cyan-solid;
-        height: 100px;
+        //border: $tb-cyan-dashed;
         @include box-reset-default;
-        h3{
-            border: $tb-cyan-dashed;
+        .col, .col-auto{
+            border: $tb-yellow-dashed;
             @include box-reset-default;
-        }
-        .col{
-            border: $tb-yellow-solid;
-            @include box-reset-default;
-            h6, img{
-                border: $tb-yellow-dashed;
+            h4{
                 @include box-reset-default;
             }
         }
     }
 }
 
-
-#user-playlists-container{
+#o-pl-container{
     //border: $tb-red-solid;
-    height: 100%;
-    #user-playlists-header{
-        //border: $tb-cyan-dashed;
+    @include box-reset-default;
+    #o-pl-header-row{
+        border: $tb-cyan-solid;
+        @include box-reset-default;
+        padding: 0 20px;
         height: 75px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        #pl-header-title{
-            //border: $tb-lime-dotted;
-            height: 100%;
+        .col, .col-auto{
+            //border: $tb-yellow-dashed;
+            @include box-reset-default;
             display: flex;
-            justify-content: flex-start;
             align-items: center;
-        }
-        #pl-add-button{
-            //border: $tb-lime-dotted;
-            height: 100%;
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-        }
-    }
-    #user-playlists-body{
-        //border: $tb-yellow-solid;
-        height: 50px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    #num-col{
-        //border: $tb-yellow-solid;
-        height: 100%;
-        width: 30px;
-    }
-    #rows-col{
-        display: flex;
-        height: 100%;
-        width: 100%;
-        margin: 0;
-        padding: 0;
-        #pl-ol{
-            height: 100%;
-            width: 100%;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            #pl-row-item{
-                //border: $tb-yellow-dashed;
-                height: 100%;
-                width: 100%;
-                margin: 0;
-                padding: 0;
-                list-style-position: outside;
-                left: 20px;
-                #user-playlists-row{
-                    //border: $tb-yellow-dashed;
-                    height: 100%;
-                    width: 100%;
-                    display: flex;
-                    justify-content: flex-end;
-                    margin: 0;
-                    padding: 0;
-                    #pl-title{
-                        //border: $tb-cyan-dashed;
-                        height: 100%;
-                        display: flex;
-                        justify-content: flex-start;
-                        align-items: center;
-                    }
-                    #edit-buttons{
-                        //border: $tb-cyan-dashed;
-                        height: 100%;
-                        display: flex;
-                        justify-content: flex-end;
-                        align-items: center;
-                    }
-                    h5, img{
-                        //border: $tb-lime-dotted;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                    }
-                    h5{
-                        padding-top: 3px;
-                    }
-                    img{
-                        margin: 4px;
-                    }
-                }
+            h4{
+                @include box-reset-default;
             }
         }
+        .col{
+            align-items: flex-start;
+            justify-content: center;
+            flex-direction: column;
+            @include box-reset-default;
+        }
+    }
+    #o-pl-body-row{
+        border: $tb-yellow-solid;
+        @include box-reset-default;
     }
 }
 
+
+
+/*
+    h5{
+        @include box-reset-default;
+    }
+    h6{
+        font-weight: lighter;
+        @include box-reset-default;
+        font-size: 0.9rem;
+    }
 */

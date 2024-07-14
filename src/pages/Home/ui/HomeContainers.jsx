@@ -1,5 +1,6 @@
 import React from "react";
 import UserPlaylist from "./Playlists/UserPlaylists";
+import OpenPlaylist from "./Playlists/OpenPlaylist";
 
 
 function HomeContainers(){
@@ -9,7 +10,7 @@ function HomeContainers(){
                 <UserPlaylist />
             </section>
             <section id="search-box" className="col">
-                
+                <OpenPlaylist />
             </section>
         </>
     )
