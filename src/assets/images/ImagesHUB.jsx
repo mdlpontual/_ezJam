@@ -12,6 +12,7 @@ const IMG = {
     optionsPNG: new URL('./symbols/01_interface.png', import.meta.url).href,
     searchPNG: new URL('./symbols/03_search.png', import.meta.url).href,
     clockPNG: new URL('./symbols/10_clock.png', import.meta.url).href,
+    placeHolders: new URL('./symbols/16_place-holder.png', import.meta.url).href,
 
     volumePNG: new URL('./symbols/11_volume.png', import.meta.url).href,
     mutePNG: new URL('./symbols/11_mute.png', import.meta.url).href,

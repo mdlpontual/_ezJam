@@ -116,7 +116,7 @@ body{
         //border: $tb-cyan-dashed;
         @include box-reset-default;
         .col, .col-auto{
-            border: $tb-yellow-dashed;
+            //border: $tb-yellow-dashed;
             @include box-reset-default;
             h4{
                 @include box-reset-default;
@@ -155,15 +155,86 @@ body{
     }
 }
 
+#track-tb-container{
+    @include box-reset-default;
+    padding: 15px;
+    #track-tb-row{
+        thead{
+            th{
+                @include box-reset-default;
+                font-weight: lighter;
+                padding-left: 10px;
+            }
+        }
+        tbody{
+            tr{
+                //border: $tb-cyan-dashed;
+                @include box-reset-default;
+                height: 50px;
+            }
+            
+        }
+        th, td{
+            padding: 0 10px;
+        }
+        h5{
+            @include box-reset-default;
+        }
+        h6{
+            @include box-reset-default;
+            font-weight: lighter;
+            font-size: 0.9rem;
+        }
+        tfoot{
+            //border: $tb-magenta-solid;
+            @include box-reset-default;
+            tr{
+                //border: $tb-yellow-solid;
+                @include box-reset-default;
+            }
+            th{
+                //border: $tb-red-solid;
+                @include box-reset-default;
+                padding: 10px;
+                button{
+                    color: white;
+                }
+            }
+        }
+    }
+}
+
+/*<div id="track-tb-container" className="container">
+                <div id="track-tb-row" className="row">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th colSpan={2}>#</th>
+                                <th>title</th>
+                                <th>album/collection</th>
+                                <th><img src={IMG.clockPNG} alt="" width="13px"/></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>1</th>
+                                <td><img src={IMG.placeHolders} alt="is saved icon" width="50px"/></td>
+                                <td>
+                                    <h5>Aquatic Mouth Dance</h5>
+                                    <h6>Red Hot Chili Peppers</h6>
+                                </td>
+                                <td>Unlimited Love</td>
+                                <td>4:21</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th colSpan={4}><button id="" className="btn btn-primary btn-lg d-flex justify-content-center">Save Playlist</button></th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>*/
 
 
-/*
-    h5{
-        @include box-reset-default;
-    }
-    h6{
-        font-weight: lighter;
-        @include box-reset-default;
-        font-size: 0.9rem;
-    }
-*/
+

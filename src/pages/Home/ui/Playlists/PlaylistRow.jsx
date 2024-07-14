@@ -7,6 +7,9 @@ function PlaylisRow() {
             <div id="pl-row" className="container d-flex align-items-start justify-content-center flex-column">
                 <div className="row align-items-center flex-grow-1 w-100 gap-3">
                     <div className="col-auto">
+                        <img src={IMG.placeHolders} alt="is saved icon" width="40px"/>
+                    </div>
+                    <div className="col-auto">
                         <h4>Progorola</h4>
                     </div>
                     <div className="col">
