@@ -28,8 +28,6 @@ const IMG = {
     unsavedPNG: new URL('./symbols/07_checked.png', import.meta.url).href,
     savedPNG: new URL('./symbols/07_checked-green.png', import.meta.url).href,
     cautionPNG: new URL('./symbols/09_caution-symbol.png', import.meta.url).href,
-
-
 };
 
 export default IMG;
