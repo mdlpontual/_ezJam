@@ -1,12 +1,23 @@
-$primary: #1DB954;
-$secondary:  rgb(241, 91, 241);
-$bg-transparent:  rgba($color: #000000, $alpha: 0.50);
+//--------bootstrap_override--------//
 
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
+
+//----------custom_modules----------//
+
 @import "./custom_modules/borders.scss";
 @import "./custom_modules/mixins.scss";
+@import "./custom_modules/variables.scss";
+
+//------------home_page------------//
+
 @import "../pages/home/HomePage.scss";
+
+//-----------login_page-----------//
+
 @import "../pages/login/LoginPage.scss";
+@import "../components/ui/login/LoginButtonBox.scss";
+
+//------------------------------------------------------------------------------//
 
 *{
     margin: 0;

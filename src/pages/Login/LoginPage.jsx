@@ -7,7 +7,7 @@ function LoginPage() {
             <div id="page-container" className="container-fluid d-flex flex-column">
                 <div id="main-row" className="row flex-grow-1">
                     <div id="main-col" className="col d-flex justify-content-center align-items-center">
-                        <LoginButtonBox/>
+                        <LoginButtonBox />
                     </div>
                 </div>
                 <div id="footer-row" className="row">
