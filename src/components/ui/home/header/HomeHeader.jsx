@@ -1,12 +1,12 @@
 import React from "react";
 import IMG from "../../../../assets/images/ImagesHUB";
 
-function TrackPlayer() {
+function HomeHeader() {
     return (
         <>
-            <h1>player</h1>
+            <h1>header</h1>
         </>
     );
 }
 
-export default TrackPlayer;
+export default HomeHeader;
