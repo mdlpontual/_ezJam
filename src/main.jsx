@@ -4,7 +4,7 @@ import routes from "./pages/RountingHUB.jsx"
 import { RouterProvider } from 'react-router-dom'
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
 import "../node_modules/bootstrap/dist/js/bootstrap.bundle.min"
-import "./scss/style.scss"
+import "./scss/main.scss"
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

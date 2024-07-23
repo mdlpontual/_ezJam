@@ -1,0 +1,57 @@
+#header-inner-container {
+    //border: $border-red-solid;
+    @include box-reset-default;
+    height: 100%;
+    #header-inner-row {
+        //border: $border-yellow-solid;
+        @include box-reset-default;
+        height: 100%;
+        #header-logo-col {
+            //border: $border-cyan-solid;
+            @include box-reset-default;
+            height: 100%;
+            #jammming-logo {
+                //border: $border-lime-dashed;
+                @include box-reset-default;
+            }
+            #spotify-logo {
+                //border: $border-lime-dashed;
+                @include box-reset-default;
+                position: relative;
+                top: 23px;
+                right: 95px;
+                p {
+                    font-size: 0.75rem;
+                    position: relative;
+                    top: 15px;
+                }
+            }
+        }
+        #header-nav-col {
+            //border: $border-cyan-solid;
+            @include box-reset-default;
+            height: 100%;
+            ul {
+                //border: $border-lime-dashed;
+                @include box-reset-default;
+                margin-right: 20px;
+                list-style: none;
+                flex-wrap: wrap;
+                gap: 10px;
+                button {
+                    color: white;
+                    font-weight: bold;
+                    border-radius: 20px;
+                }
+                a {
+                    text-decoration: none;
+                    color: white;
+                    font-weight: bold;
+                }
+                a:hover {
+                    color: $secondary;
+                }
+            }
+        }
+    }
+}

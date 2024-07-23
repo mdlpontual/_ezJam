@@ -1,0 +1,43 @@
+#home-page-container {
+    //border: $border-red-solid;
+    @include box-reset-default;
+    height: 100vh;
+    #header-row {
+        //border: $border-yellow-solid;
+        @include box-reset-default;
+        background-color: $bg-transparent;
+        height: 90px;
+        #header-col {
+            //border: $border-cyan-solid;
+            @include box-reset-default;
+        }
+    }
+    #main-row {
+        //border: $border-yellow-solid;
+        @include box-reset-default;
+        #playlists-col {
+            //border: $border-cyan-solid;
+            @include box-reset-default;
+            background-color: $bg-transparent;
+            border-radius: 20px;
+            margin: 20px 10px 20px 20px;
+        }
+        #search-col {
+            //border: $border-cyan-solid;
+            @include box-reset-default;
+            background-color: $bg-transparent;
+            border-radius: 20px;
+            margin: 20px 20px 20px 10px;
+        }
+    }
+    #footer-row {
+        //border: $border-yellow-solid;
+        @include box-reset-default;
+        background-color: $bg-transparent;
+        height: 90px;
+        #footer-col {
+            //border: $border-cyan-solid;
+            @include box-reset-default;
+        }
+    }
+}

@@ -1,20 +1,30 @@
 import React from "react";
-import HomeHeader from "./ui/HomeHeader";
-import HomeContainers from "./ui/HomeContainers";
-import HomeFooter from "./ui/HomeFooter";
+import HomeHeader from "../../components/ui/home/header/HomeHeader";
+import UserPlaylists from "../../components/ui/home/playlists_container/user_playlists/UserPlaylists";
+import SearchBox from "../../components/ui/home/search_container/SearchBox";
+import TrackPlayer from "../../components/ui/home/track_player/TrackPlayer";
 
 function HomePage() {
     return (
         <>
-            <div className="container-fluid">
+            <div id="home-page-container" className="container-fluid d-flex flex-column">
                 <header id="header-row" className="row">
-                    <HomeHeader/>
+                    <div id="header-col" className="col">
+                        <HomeHeader/>
+                    </div>
                 </header>
-                <main id="home-main" className="row">
-                    <HomeContainers />
+                <main id="main-row" className="row flex-grow-1">
+                    <div id="playlists-col" className="col">
+                        <UserPlaylists />
+                    </div>
+                    <div id="search-col" className="col">
+                        <SearchBox />
+                    </div>
                 </main>
                 <footer id="footer-row" className="row">
-                    <HomeFooter/>
+                    <div id="footer-col" className="col">
+                        <TrackPlayer />
+                    </div>
                 </footer>
             </div>
         </>

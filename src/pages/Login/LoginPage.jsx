@@ -1,16 +1,20 @@
 import React from "react";
-import LoginContainer from './ui/LoginContainer.jsx';
-import LoginSignature from "./ui/LoginSignature.jsx";
+import LoginButtonBox from "../../components/ui/login/LoginButtonBox";
 
 function LoginPage() {
     return (
         <>
-            <div className="container-fluid">
-                <main id="login-main" className="row justify-content-center align-items-center">
-                    <LoginContainer/>
+            <div id="page-container" className="container-fluid d-flex flex-column">
+                <main id="main-row" className="row flex-grow-1">
+                    <div id="main-col" className="col d-flex justify-content-center align-items-center">
+                        <LoginButtonBox />
+                    </div>
                 </main>
                 <footer id="footer-row" className="row">
-                    <LoginSignature/>
+                    <article id="footer-col" className="col">
+                        <h6 id="light-signature">Jammming - a Codecademy portfolio project</h6>
+                        <h6 id="bold-signature">copyright mdlpontual - 2024</h6>
+                    </article>
                 </footer>
             </div>
         </>
