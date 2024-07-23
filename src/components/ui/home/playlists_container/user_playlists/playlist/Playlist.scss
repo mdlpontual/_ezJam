@@ -1,0 +1,125 @@
+#single-pl-container {
+    //border: $border-red-solid;
+    @include box-reset-default;
+    height: 50px;
+    padding: 0 5px;
+    #single-pl-row {
+        //border: $border-yellow-solid;
+        @include box-reset-default;
+        height: 100%;
+        #checkmark-col {
+            //border: $border-cyan-solid;
+            @include box-reset-default;
+            img {
+                //border: $border-lime-dashed;
+                @include box-reset-default;
+                position: absolute;
+            }
+            #saved-icon {
+                visibility: visible;
+            }
+            #drag-icon {
+                visibility: hidden;
+            }
+        }
+        #pl-title-col {
+            //border: $border-cyan-solid;
+            @include box-reset-default;
+            h4 {
+                //border: $border-lime-dashed;
+                @include box-reset-default;
+            }
+        }
+        #edit-button-col {
+            //border: $border-cyan-solid;
+            @include box-reset-default;
+            img {
+                //border: $border-lime-dashed;
+                @include box-reset-default;
+                visibility: hidden;
+            }
+        }
+        #share-button-col {
+            //border: $border-cyan-solid;
+            @include box-reset-default;
+            img {
+                //border: $border-lime-dashed;
+                @include box-reset-default;
+                visibility: hidden;
+            }
+        }
+        #delete-button-col {
+            //border: $border-cyan-solid;
+            @include box-reset-default;
+            img {
+                //border: $border-lime-dashed;
+                @include box-reset-default;
+                visibility: hidden;
+            }
+        }
+    }
+}
+
+#single-pl-container:hover {
+    //border: $border-red-solid;
+    @include box-reset-default;
+    background-color: $bg-transparent;
+    border-radius: 10px;
+    height: 50px;
+    padding: 0 5px;
+    #single-pl-row {
+        //border: $border-yellow-solid;
+        @include box-reset-default;
+        height: 100%;
+        #checkmark-col {
+            //border: $border-cyan-solid;
+            @include box-reset-default;
+            img {
+                //border: $border-lime-dashed;
+                @include box-reset-default;
+                position: absolute;
+            }
+            #saved-icon {
+                visibility: hidden;
+            }
+            #drag-icon {
+                visibility: visible;
+            }
+        }
+        #pl-title-col {
+            //border: $border-cyan-solid;
+            @include box-reset-default;
+            h4 {
+                //border: $border-lime-dashed;
+                @include box-reset-default;
+            }
+        }
+        #edit-button-col {
+            //border: $border-cyan-solid;
+            @include box-reset-default;
+            img {
+                //border: $border-lime-dashed;
+                @include box-reset-default;
+                visibility: visible;
+            }
+        }
+        #share-button-col {
+            //border: $border-cyan-solid;
+            @include box-reset-default;
+            img {
+                //border: $border-lime-dashed;
+                @include box-reset-default;
+                visibility: visible;
+            }
+        }
+        #delete-button-col {
+            //border: $border-cyan-solid;
+            @include box-reset-default;
+            img {
+                //border: $border-lime-dashed;
+                @include box-reset-default;
+                visibility: visible;
+            }
+        }
+    }
+}
