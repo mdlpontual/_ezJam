@@ -8,24 +8,24 @@ function HomePage() {
     return (
         <>
             <div id="home-page-container" className="container-fluid d-flex flex-column">
-                <div id="header-row" className="row">
+                <header id="header-row" className="row">
                     <div id="header-col" className="col">
                         <HomeHeader/>
                     </div>
-                </div>
-                <div id="main-row" className="row flex-grow-1">
+                </header>
+                <main id="main-row" className="row flex-grow-1">
                     <div id="playlists-col" className="col">
                         <UserPlaylists />
                     </div>
                     <div id="search-col" className="col">
                         <SearchBox />
                     </div>
-                </div>
-                <div id="footer-row" className="row">
+                </main>
+                <footer id="footer-row" className="row">
                     <div id="footer-col" className="col">
                         <TrackPlayer />
                     </div>
-                </div>
+                </footer>
             </div>
         </>
     );
