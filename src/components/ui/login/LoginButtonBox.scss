@@ -3,53 +3,79 @@
     @include box-reset-default;
     background-color: $bg-transparent;
     border-radius: 20px;
-    height: 95%;
+    height: 750px;
     width: 500px;
     #logo-row{
         //border: $border-yellow-solid;
         @include box-reset-default;
-        height: 20%;
+        height: 30%;
         #logo-col{
             //border: $border-cyan-solid;
             @include box-reset-default;
             height: 100%;
-            #jammming-logo{
+            #jammming-logo {
                 //border: $border-lime-dotted;
-                @include box-reset-default;
-                width: 100%;
+                @include box-reset-default; 
+                margin-top: 20px;
+                img {
+                    width: 100%;
+                }
             }
-            h6 {
+            #spotify-logo{
                 //border: $border-lime-dotted;
-                @include box-reset-default;
-                position: absolute;
-                top: 175px;
-                right: 425px; 
-            }
-            a {
-                //border: $border-lime-dotted;
-                @include box-reset-default;    
-                position: absolute;  
-                top:125px;
-                right: 330px;             
+                margin-right: 50px;
+                position: relative;
+                top: -65px;
+                #with-text{
+                    //border: $border-lime-dotted;
+                    position: relative;
+                    top: 25px;
+                }
             }
         }
     }
     #button-row{
-        border: $border-yellow-solid;
+        //border: $border-yellow-solid;
         @include box-reset-default;
-        height: 70%;
+        height: 60%;
         #button-col{
-            border: $border-cyan-solid;
+            //border: $border-cyan-solid;
             @include box-reset-default;
+            button {
+                //border: $border-lime-dotted;
+                @include box-reset-default;
+                width: 425px;
+                border-radius: 25px;
+                height: 50px;
+                color: white;
+            }
+            #remember-me-switch {
+                //border: $border-lime-dotted;
+                @include box-reset-default;
+                position: relative;
+                left: 17px;
+            }
         }
     }
     #sub-link-row{
-        border: $border-yellow-solid;
+        //border: $border-yellow-solid;
         @include box-reset-default;
         height: 10%;
         #sub-link-col{
-            border: $border-cyan-solid;
+            //border: $border-cyan-solid;
             @include box-reset-default;
+            p {
+                color: $primary;
+                font-weight: bold;
+            }
+            a {
+                text-decoration: none;
+            }
+            a:hover {
+                p {
+                    color: $secondary;
+                }
+            }
         }
     }
 }
