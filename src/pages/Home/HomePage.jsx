@@ -18,7 +18,7 @@ function HomePage() {
                         <UserPlaylists />
                     </div>
                     <div id="search-col" className="col">
-                        <SearchBox />
+                        
                     </div>
                 </main>
                 <footer id="footer-row" className="row">

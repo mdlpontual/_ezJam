@@ -37,3 +37,5 @@ $form-check-input-focus-box-shadow: none;
 body{
     background-image: url(../assets/images/background/00_sparkly-purple-bkg.jpg);
 }
+
+@include custom-scroll-bar;

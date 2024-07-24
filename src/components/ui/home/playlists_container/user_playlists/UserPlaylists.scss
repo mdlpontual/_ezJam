@@ -31,10 +31,13 @@
         //border: $border-yellow-solid;
         @include box-reset-default;
         height: 750px;
+        overflow-y: hidden;
         #pl-body-col {
             //border: $border-cyan-solid;
             @include box-reset-default;
-            overflow: hidden;
         }
+    }
+    #pl-body-row:hover {
+        overflow-y: auto;
     }
 }
