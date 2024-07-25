@@ -13,13 +13,13 @@ function Playlist() {
                     <div id="pl-title-col" className="col d-flex flex-column justify-content-center align-items-start">
                         <h4>Progorola</h4>
                     </div>
-                    <div id="edit-button-col" className="col-1 d-flex flex-column justify-content-center align-items-center">
+                    <div id="edit-button-col" className="col-auto d-flex flex-column justify-content-center align-items-center">
                         <img src={IMG.pencilPNG} alt="saved icon" width="27px"/>
                     </div>
-                    <div id="share-button-col" className="col-1 d-flex flex-column justify-content-center align-items-center">
+                    <div id="share-button-col" className="col-auto d-flex flex-column justify-content-center align-items-center">
                         <img src={IMG.sharePNG} alt="saved icon" width="27px"/>
                     </div>
-                    <div id="delete-button-col" className="col-1 d-flex flex-column justify-content-center align-items-center">
+                    <div id="delete-button-col" className="col-auto d-flex flex-column justify-content-center align-items-center">
                         <img src={IMG.trashBinPNG} alt="saved icon" width="27px"/>
                     </div>
                 </div>

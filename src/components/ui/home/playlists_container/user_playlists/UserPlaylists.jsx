@@ -17,6 +17,24 @@ function UserPlaylists() {
                 <main id="pl-body-row" className="row">
                     <div id="pl-body-col" className="col" >
                         <Playlist />
+                        <Playlist />
+                        <Playlist />
+                        <Playlist />
+                        <Playlist />
+                        <Playlist />
+                        <Playlist />
+                        <Playlist />
+                        <Playlist />
+                        <Playlist />
+                        <Playlist />
+                        <Playlist />
+                        <Playlist />
+                        <Playlist />
+                        <Playlist />
+                        <Playlist />
+                        <Playlist />
+                        <Playlist />
+                        <Playlist />
                     </div>
                 </main>
             </div>

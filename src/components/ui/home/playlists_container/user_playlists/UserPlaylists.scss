@@ -2,6 +2,7 @@
     //border: $border-red-solid;
     @include box-reset-default;
     height: 100%;
+    position: relative;
     padding: 0px 10px 10px;
     #pl-header-row {
         //border: $border-yellow-solid;
@@ -30,11 +31,12 @@
     #pl-body-row {
         //border: $border-yellow-solid;
         @include box-reset-default;
-        height: 750px;
+        height: 100%;
         overflow-y: hidden;
         #pl-body-col {
             //border: $border-cyan-solid;
             @include box-reset-default;
+            height: 50px;
         }
     }
     #pl-body-row:hover {

@@ -1,0 +1,39 @@
+
+#open-pl-main {
+    #track-table {
+        #track-table-body {
+            #tt-body-row {
+                //border: $border-yellow-dotted;
+                @include box-reset-default;
+                height: 50px;
+                padding: 0 5px;
+                overflow-y: hidden;
+                td {
+                    //border: $border-cyan-solid;
+                    @include box-reset-default;
+                    height: 100%;
+                    padding: 0 5px;
+                }
+                img {
+                    //border: $border-lime-dashed;
+                    @include box-reset-default;
+                }
+                h6 {
+                    //border: $border-lime-dashed;
+                    @include box-reset-default;
+                    font-size: 1.05rem;
+                }
+                p {
+                    //border: $border-lime-dashed;
+                    @include box-reset-default;
+                    font-weight: lighter;
+                    font-size: 0.9rem;
+                }
+            }
+            #tt-body-row:hover {
+                background-color: $bg-transparent;
+                border-radius: 10px;
+            }
+        }
+    }
+}

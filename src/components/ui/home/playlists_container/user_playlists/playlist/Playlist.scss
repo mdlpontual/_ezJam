@@ -2,7 +2,7 @@
     //border: $border-red-solid;
     @include box-reset-default;
     height: 50px;
-    padding: 0 5px;
+    padding-right: 10px;
     margin-right: 5px;
     #single-pl-row {
         //border: $border-yellow-solid;
@@ -36,6 +36,7 @@
         #edit-button-col {
             //border: $border-cyan-solid;
             @include box-reset-default;
+            padding: 0px 5px;
             img {
                 //border: $border-lime-dashed;
                 @include box-reset-default;
@@ -45,6 +46,7 @@
         #share-button-col {
             //border: $border-cyan-solid;
             @include box-reset-default;
+            padding: 0px 5px;
             img {
                 //border: $border-lime-dashed;
                 @include box-reset-default;
@@ -54,6 +56,7 @@
         #delete-button-col {
             //border: $border-cyan-solid;
             @include box-reset-default;
+            padding: 0px 5px;
             img {
                 //border: $border-lime-dashed;
                 @include box-reset-default;
@@ -71,7 +74,7 @@
     background-color: $bg-transparent;
     border-radius: 10px;
     height: 50px;
-    padding: 0 5px;
+    padding-right: 10px;
     #single-pl-row {
         //border: $border-yellow-solid;
         @include box-reset-default;
@@ -104,6 +107,7 @@
         #edit-button-col {
             //border: $border-cyan-solid;
             @include box-reset-default;
+            padding: 0px 5px;
             img {
                 //border: $border-lime-dashed;
                 @include box-reset-default;
@@ -113,6 +117,7 @@
         #share-button-col {
             //border: $border-cyan-solid;
             @include box-reset-default;
+            padding: 0px 5px;
             img {
                 //border: $border-lime-dashed;
                 @include box-reset-default;
@@ -122,6 +127,7 @@
         #delete-button-col {
             //border: $border-cyan-solid;
             @include box-reset-default;
+            padding: 0px 5px;
             img {
                 //border: $border-lime-dashed;
                 @include box-reset-default;
