@@ -31,8 +31,9 @@
     #pl-body-row {
         //border: $border-yellow-solid;
         @include box-reset-default;
-        height: 100%;
+        height: 88%;
         overflow-y: hidden;
+        scrollbar-gutter: stable;
         #pl-body-col {
             //border: $border-cyan-solid;
             @include box-reset-default;

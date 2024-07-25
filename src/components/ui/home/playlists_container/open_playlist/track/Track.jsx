@@ -4,25 +4,29 @@ import IMG from "../../../../../../assets/images/ImagesHUB";
 function Track() {
     return (
         <>
-            <tr id="tt-body-row" className="row justify-content-center align-items-center">
-                <td id="#-col" className="col-1 d-flex justify-content-start align-items-center">00</td>
-                <td id="thumbnail-col" className="col-auto d-flex justify-content-center align-items-center">
-                    <img src={IMG.placeHolders} alt="empty" height="40px"/>
-                </td>
-                <td id="title-col" className="col d-flex flex-column justify-content-center align-items-start">
-                    <h6>Aquatic Mouth Dance </h6>
-                    <p>Red Hot Chili Peppers</p>
-                </td>
-                <td id="album-col" className="col-3 d-flex justify-content-start align-items-center">
-                    <p>Unlimited Love</p>
-                </td>
-                <td id="status-col" className="col-1 d-flex justify-content-center align-items-center">
-                    <img src={IMG.savedPNG} alt="" width="25px"/>
-                </td>
-                <td id="duration-col" className="col-1 d-flex justify-content-end align-items-center">
-                    4:20
-                </td>
-            </tr>
+            <div id="single-track-container" className="container-fluid">
+                <div id="single-track-row" className="row">
+                    <div id="col-num" className="col-1 d-flex justify-content-start align-items-center">
+                        <p>2</p>
+                    </div>
+                    <div id="col-cover" className="col-1 d-flex justify-content-center align-items-center">
+                        <img src={IMG.placeHolders} height="40px"/>
+                    </div>
+                    <div id="col-title" className="col d-flex justify-content-start align-items-center">
+                        <h5>Aquatic Mouth Dance</h5>
+                        <p>Red Hot Chilli Peppers</p>
+                    </div>
+                    <div id="col-album" className="col-3 d-flex justify-content-start align-items-center">
+                        <p>Unlimited Love</p>
+                    </div>
+                    <div id="col-duration" className="col-1 d-flex justify-content-end align-items-center">
+                        <p>4:20</p>
+                    </div>
+                    <div id="col-saved" className="col-1 d-flex justify-content-center align-items-center">
+                        <img src={IMG.savedPNG} height="20px" />
+                    </div>
+                </div>
+            </div>
         </>
     );
 }

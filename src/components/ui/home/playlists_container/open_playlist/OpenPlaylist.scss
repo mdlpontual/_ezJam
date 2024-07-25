@@ -4,46 +4,51 @@
     height: 100%;
     padding: 0px 10px;
     #open-pl-header {
-        //border: $border-yellow-solid;
+        border: $border-yellow-solid;
         @include box-reset-default;
         height: 75px;
         #go-back-col {
-            //border: $border-cyan-solid;
+            border: $border-cyan-solid;
             @include box-reset-default;
             padding: 0px 5px;
             img {
-                //border: $border-lime-dashed;
+                border: $border-lime-dashed;
                 @include box-reset-default;
             }
         }
         #title-col {
-            //border: $border-cyan-solid;
+            border: $border-cyan-solid;
             @include box-reset-default;
             padding: 0px 5px;
+            overflow: hidden;
             h4 {
-                //border: $border-lime-dashed;
+                border: $border-lime-dashed;
                 @include box-reset-default;
+                max-width: 100%;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
             }
         }
         #checkmark-col {
-            //border: $border-cyan-solid;
+            border: $border-cyan-solid;
             @include box-reset-default;
             padding: 0px 5px;
             img {
-                //border: $border-lime-dashed;
+                border: $border-lime-dashed;
                 @include box-reset-default;
             }
         }
         #blank-col {
-            //border: $border-cyan-solid;
+            border: $border-cyan-solid;
             @include box-reset-default;
         }
         #edit-button-col {
-            //border: $border-cyan-solid;
+            border: $border-cyan-solid;
             @include box-reset-default;
             padding: 0px 5px;
             img {
-                //border: $border-lime-dashed;
+                border: $border-lime-dashed;
                 @include box-reset-default;
             }
         }
@@ -69,44 +74,102 @@
     #open-pl-main {
         //border: $border-yellow-solid;
         @include box-reset-default;
-        position: relative;
-        #track-table {
+        #open-pl-col {
             //border: $border-cyan-solid;
             @include box-reset-default;
-            overflow-y: auto;
-            #track-table-header {
-                //border: $border-red-dotted;
+            #top-labels {
+                //border: $border-yellow-dashed;
                 @include box-reset-default;
                 height: 25px;
-                #tt-header-row {
-                    //border: $border-yellow-dotted;
+                margin-right: 5px;
+                border-bottom: 1px solid white;
+                #col-num {
+                    //border: $border-cyan-dotted;
                     @include box-reset-default;
-                    height: 100%;
-                    padding-left: 5px;
-                    border-bottom: 1px solid white;
-                    td {
-                        //border: $border-cyan-dashed;
+                    width: 43px;
+                    h6 {
+                        //border: $border-lime-dotted;
                         @include box-reset-default;
-                        height: 100%;
-                        padding: 0 5px;
+                        font-weight: lighter;
                     }
-                    #thumbnail-col {
-                        img {
-                            visibility: hidden;
-                            //border: $border-lime-dashed;
-                            @include box-reset-default;
-                        }
+                };
+                #col-cover {
+                    //border: $border-cyan-dotted;
+                    @include box-reset-default;
+                    width: 50px;
+                    img {
+                        //border: $border-lime-dotted;
+                        @include box-reset-default;
                     }
-                    #duration-col {
-                        padding-bottom: 5px;
-                        padding-right: 10px;
+                };
+                #col-title {
+                    //border: $border-cyan-dotted;
+                    @include box-reset-default;
+                    p {
+                        //border: $border-lime-dotted;
+                        @include box-reset-default;
+                        font-weight: lighter;
+                    }
+                    h5 {
+                        //border: $border-lime-dotted;
+                        @include box-reset-default;
+                    }
+                };
+                #col-album {
+                    //border: $border-cyan-dotted;
+                    @include box-reset-default;
+                    p {
+                        //border: $border-lime-dotted;
+                        @include box-reset-default;
+                        font-weight: lighter;
+                    }
+                };
+                #col-duration {
+                    //border: $border-cyan-dotted;
+                    @include box-reset-default;
+                    width: 70px;
+                    img {
+                        //border: $border-lime-dotted;
+                        @include box-reset-default;
+                        position: relative;
+                        bottom: 4px;
+                    }
+                };
+                #col-saved {
+                    //border: $border-cyan-dotted;
+                    @include box-reset-default;
+                    width: 25px;
+                    img {
+                        //border: $border-lime-dotted;
+                        @include box-reset-default;
+                    }
+                };
+                #col-num, #col-cover, #col-title, 
+                #col-album, #col-saved, #col-duration {
+                    height: 100%;
+                    padding: 0 5px;
+                };   
+                #col-cover, #col-saved {
+                    img {
+                        visibility: hidden;
                     }
                 }
             }
-            #track-table-body {
-                //border: $border-red-dotted;
+            #tracks-list {
+                //border: $border-yellow-dashed;
                 @include box-reset-default;
-                padding-top: 5px;
+                padding: 5px 0 5px 0;
+                overflow-y: hidden;
+                scrollbar-gutter: stable;
+                margin-bottom: 15px;
+                #tracks-list-col {
+                    //border: $border-cyan-dashed;
+                    @include box-reset-default;
+                    height: 50px;
+                }
+            }
+            #tracks-list:hover {
+                overflow-y: auto;
             }
         }
     }

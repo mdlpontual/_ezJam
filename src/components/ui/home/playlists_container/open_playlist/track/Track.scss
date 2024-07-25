@@ -1,39 +1,98 @@
-
-#open-pl-main {
-    #track-table {
-        #track-table-body {
-            #tt-body-row {
-                //border: $border-yellow-dotted;
+#single-track-container { 
+    //border: $border-red-dotted;
+    @include box-reset-default;
+    #single-track-row {
+        //border: $border-yellow-dotted;
+        @include box-reset-default;
+        height: 50px;
+        #col-num {
+            border: $border-cyan-dotted;
+            @include box-reset-default;
+            min-width: fit-content;
+            max-width: fit-content;
+            p {
+                border: $border-lime-dotted;
                 @include box-reset-default;
-                height: 50px;
-                padding: 0 5px;
-                overflow-y: hidden;
-                td {
-                    //border: $border-cyan-solid;
-                    @include box-reset-default;
-                    height: 100%;
-                    padding: 0 5px;
-                }
-                img {
-                    //border: $border-lime-dashed;
-                    @include box-reset-default;
-                }
-                h6 {
-                    //border: $border-lime-dashed;
-                    @include box-reset-default;
-                    font-size: 1.05rem;
-                }
-                p {
-                    //border: $border-lime-dashed;
-                    @include box-reset-default;
-                    font-weight: lighter;
-                    font-size: 0.9rem;
-                }
+                text-overflow: ellipsis;
+                overflow: hidden;
             }
-            #tt-body-row:hover {
-                background-color: $bg-transparent;
-                border-radius: 10px;
+        };
+        #col-cover {
+            border: $border-cyan-dotted;
+            @include box-reset-default;
+            width: 50px;
+            img {
+                border: $border-lime-dotted;
+                @include box-reset-default;
             }
-        }
+        };
+        #col-title {
+            border: $border-cyan-dotted;
+            @include box-reset-default;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            flex-wrap: wrap;
+            h5 {
+                border: $border-lime-dotted;
+                @include box-reset-default;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                width: 100%;
+                margin-bottom: -3px;
+            }
+            p {
+                border: $border-lime-dotted;
+                @include box-reset-default;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                width: 100%;
+                margin-top: -3px;
+            }
+        };
+        #col-album {
+            border: $border-cyan-dotted;
+            @include box-reset-default;
+            white-space: nowrap;
+            p {
+                border: $border-lime-dotted;
+                @include box-reset-default;
+                text-overflow: ellipsis;
+                overflow: hidden;
+            }
+        };
+        #col-duration {
+            border: $border-cyan-dotted;
+            @include box-reset-default;
+            white-space: nowrap;
+            min-width: fit-content;
+            max-width: fit-content;
+            p {
+                border: $border-lime-dotted;
+                @include box-reset-default;
+                text-overflow: ellipsis;
+                overflow: hidden;
+            }
+        };
+        #col-saved {
+            border: $border-cyan-dotted;
+            @include box-reset-default;
+            white-space: nowrap;
+            width: 25px;
+            img {
+                border: $border-lime-dotted;
+                @include box-reset-default;
+            }
+        };
+        #col-num, #col-cover, #col-title, 
+        #col-album, #col-saved, #col-duration {
+            height: 100%;
+            padding: 0 5px;
+        };   
     }
+}
+
+#single-track-row:hover {
+    background-color: $bg-transparent;
+    border-radius: 10px;
 }
