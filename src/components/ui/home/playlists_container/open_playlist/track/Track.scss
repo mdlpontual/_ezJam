@@ -6,35 +6,34 @@
         @include box-reset-default;
         height: 50px;
         #col-num {
-            border: $border-cyan-dotted;
+            //border: $border-cyan-dotted;
             @include box-reset-default;
-            min-width: fit-content;
-            max-width: fit-content;
+            width: 40px;
             p {
-                border: $border-lime-dotted;
+                //border: $border-lime-dotted;
                 @include box-reset-default;
                 text-overflow: ellipsis;
                 overflow: hidden;
             }
         };
         #col-cover {
-            border: $border-cyan-dotted;
+            //border: $border-cyan-dotted;
             @include box-reset-default;
             width: 50px;
             img {
-                border: $border-lime-dotted;
+                //border: $border-lime-dotted;
                 @include box-reset-default;
             }
         };
         #col-title {
-            border: $border-cyan-dotted;
+            //border: $border-cyan-dotted;
             @include box-reset-default;
             white-space: nowrap;
             text-overflow: ellipsis;
             overflow: hidden;
             flex-wrap: wrap;
             h5 {
-                border: $border-lime-dotted;
+                //border: $border-lime-dotted;
                 @include box-reset-default;
                 text-overflow: ellipsis;
                 overflow: hidden;
@@ -42,7 +41,7 @@
                 margin-bottom: -3px;
             }
             p {
-                border: $border-lime-dotted;
+                //border: $border-lime-dotted;
                 @include box-reset-default;
                 text-overflow: ellipsis;
                 overflow: hidden;
@@ -51,36 +50,36 @@
             }
         };
         #col-album {
-            border: $border-cyan-dotted;
+            //border: $border-cyan-dotted;
             @include box-reset-default;
             white-space: nowrap;
             p {
-                border: $border-lime-dotted;
+                //border: $border-lime-dotted;
                 @include box-reset-default;
                 text-overflow: ellipsis;
                 overflow: hidden;
             }
         };
         #col-duration {
-            border: $border-cyan-dotted;
+            //border: $border-cyan-dotted;
             @include box-reset-default;
             white-space: nowrap;
-            min-width: fit-content;
-            max-width: fit-content;
+            width: 55px;
             p {
-                border: $border-lime-dotted;
+                //border: $border-lime-dotted;
                 @include box-reset-default;
                 text-overflow: ellipsis;
                 overflow: hidden;
             }
         };
         #col-saved {
-            border: $border-cyan-dotted;
+            //border: $border-cyan-dotted;
             @include box-reset-default;
             white-space: nowrap;
             width: 25px;
+            margin-right: 5px;
             img {
-                border: $border-lime-dotted;
+                //border: $border-lime-dotted;
                 @include box-reset-default;
             }
         };

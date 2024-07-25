@@ -12,6 +12,7 @@
             //border: $border-cyan-solid;
             @include box-reset-default;
             position: relative;
+            width: 40px;
             img {
                 //border: $border-lime-dashed;
                 @include box-reset-default;
@@ -28,9 +29,14 @@
         #pl-title-col {
             //border: $border-cyan-solid;
             @include box-reset-default;
+            overflow: hidden;
             h4 {
                 //border: $border-lime-dashed;
                 @include box-reset-default;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                max-width: 100%;
             }
         }
         #edit-button-col {

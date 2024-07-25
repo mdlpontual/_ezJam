@@ -11,7 +11,7 @@ function OpenPlaylist() {
                         <img src={IMG.gobackPNG} alt="go back button" width="25px"/>
                     </div>
                     <div id="title-col" className="col d-flex flex-column justify-content-center align-items-start">
-                        <h4 className="d-flex align-items-center h-100">Progorola Progorola Progorola</h4>
+                        <h4 className="align-items-center">Progorola</h4>
                     </div>
                     <div id="checkmark-col" className="col-auto d-flex flex-column justify-content-center align-items-center">
                         <img id="saved-icon" src={IMG.savedPNG} alt="saved icon" width="27px"/>
@@ -33,7 +33,7 @@ function OpenPlaylist() {
                                 #
                             </div>
                             <div id="col-cover" className="col-1 d-flex justify-content-start align-items-end">
-                                <img src={IMG.placeHolders} height="40px"/>
+
                             </div>
                             <div id="col-title" className="col d-flex justify-content-start align-items-end">
                                 title
@@ -45,7 +45,7 @@ function OpenPlaylist() {
                                 <img src={IMG.clockPNG} alt="clock icon" height="15px"/>
                             </div>
                             <div id="col-saved" className="col-1 d-flex justify-content-start align-items-end">
-                                <img src={IMG.unsavedPNG} height="20px" />
+
                             </div>
                         </div>
                         <div id="tracks-list" className="row flex-grow-1">
@@ -56,7 +56,7 @@ function OpenPlaylist() {
                     </div>
                 </main>
                 <footer id="open-pl-footer" className="row">
-                    <div id="save-button-col" className="col d-flex flex-column justify-content-start align-items-center">
+                    <div id="save-button-col" className="col d-flex flex-column justify-content-center align-items-center">
                         <button id="save-button" className="btn btn-primary btn-lg">Save to Spotify</button>
                     </div>
                 </footer>
