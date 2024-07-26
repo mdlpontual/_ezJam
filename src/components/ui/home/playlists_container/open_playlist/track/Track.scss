@@ -9,11 +9,20 @@
             //border: $border-cyan-dotted;
             @include box-reset-default;
             width: 40px;
+            position: relative;
             p {
                 //border: $border-lime-dotted;
                 @include box-reset-default;
                 text-overflow: ellipsis;
                 overflow: hidden;
+                position: absolute;
+                font-weight: lighter;
+            }
+            #drag-icon {
+                //border: $border-lime-dotted;
+                @include box-reset-default;
+                visibility: hidden;
+                position: absolute;
             }
         };
         #col-cover {
@@ -78,9 +87,17 @@
             white-space: nowrap;
             width: 25px;
             margin-right: 5px;
-            img {
+            position: relative;
+            #saved-icon {
                 //border: $border-lime-dotted;
                 @include box-reset-default;
+                position: absolute;
+            }
+            #opt-icon {
+                //border: $border-lime-dotted;
+                @include box-reset-default;
+                position: absolute;
+                visibility: hidden;
             }
         };
         #col-num, #col-cover, #col-title, 
@@ -91,7 +108,52 @@
     }
 }
 
-#single-track-row:hover {
-    background-color: $bg-transparent;
-    border-radius: 10px;
+#single-track-container { 
+    #single-track-row:hover {
+        background-color: $bg-transparent;
+        border-radius: 10px;
+        #col-num {
+            //border: $border-cyan-dotted;
+            @include box-reset-default;
+            width: 40px;
+            position: relative;
+            p {
+                //border: $border-lime-dotted;
+                @include box-reset-default;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                visibility: hidden;
+                position: absolute;
+                font-weight: lighter;
+            }
+            #drag-icon {
+                //border: $border-lime-dotted;
+                @include box-reset-default;
+                visibility: visible;
+                position: absolute;
+                
+            }
+    
+        }
+        #col-saved {
+            //border: $border-cyan-dotted;
+            @include box-reset-default;
+            white-space: nowrap;
+            width: 25px;
+            margin-right: 5px;
+            position: relative;
+            #saved-icon {
+                //border: $border-lime-dotted;
+                @include box-reset-default;
+                position: absolute;
+                visibility: hidden;
+            }
+            #opt-icon {
+                //border: $border-lime-dotted;
+                @include box-reset-default;
+                position: absolute;
+                visibility: visible;
+            }
+        }  
+    }
 }

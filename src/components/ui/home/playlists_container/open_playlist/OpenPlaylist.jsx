@@ -41,7 +41,7 @@ function OpenPlaylist() {
                             <div id="col-album" className="col-3 d-flex justify-content-start align-items-end">
                                 album
                             </div>
-                            <div id="col-duration" className="col-1 d-flex justify-content-end align-items-end">
+                            <div id="col-duration" className="col-1 d-flex justify-content-center align-items-end">
                                 <img src={IMG.clockPNG} alt="clock icon" height="15px"/>
                             </div>
                             <div id="col-saved" className="col-1 d-flex justify-content-start align-items-end">

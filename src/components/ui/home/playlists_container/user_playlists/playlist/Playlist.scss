@@ -21,7 +21,7 @@
                 visibility: visible;
                 position: absolute;
             }
-            #drag-icon {
+            #play-icon {
                 visibility: hidden;
                 position: absolute;
             }
@@ -37,6 +37,7 @@
                 overflow: hidden;
                 text-overflow: ellipsis;
                 max-width: 100%;
+                height: 100%;
             }
         }
         #edit-button-col {
@@ -97,7 +98,7 @@
                 visibility: hidden;
                 position: absolute;
             }
-            #drag-icon {
+            #play-icon {
                 visibility: visible;
                 position: absolute;
             }
