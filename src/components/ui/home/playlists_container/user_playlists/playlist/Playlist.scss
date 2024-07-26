@@ -2,7 +2,7 @@
     //border: $border-red-solid;
     @include box-reset-default;
     height: 50px;
-    padding: 0 5px;
+    padding-right: 10px;
     margin-right: 5px;
     #single-pl-row {
         //border: $border-yellow-solid;
@@ -12,6 +12,7 @@
             //border: $border-cyan-solid;
             @include box-reset-default;
             position: relative;
+            width: 40px;
             img {
                 //border: $border-lime-dashed;
                 @include box-reset-default;
@@ -20,7 +21,7 @@
                 visibility: visible;
                 position: absolute;
             }
-            #drag-icon {
+            #play-icon {
                 visibility: hidden;
                 position: absolute;
             }
@@ -28,14 +29,21 @@
         #pl-title-col {
             //border: $border-cyan-solid;
             @include box-reset-default;
+            overflow: hidden;
             h4 {
                 //border: $border-lime-dashed;
                 @include box-reset-default;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                max-width: 100%;
+                height: 100%;
             }
         }
         #edit-button-col {
             //border: $border-cyan-solid;
             @include box-reset-default;
+            padding: 0px 5px;
             img {
                 //border: $border-lime-dashed;
                 @include box-reset-default;
@@ -45,6 +53,7 @@
         #share-button-col {
             //border: $border-cyan-solid;
             @include box-reset-default;
+            padding: 0px 5px;
             img {
                 //border: $border-lime-dashed;
                 @include box-reset-default;
@@ -54,6 +63,7 @@
         #delete-button-col {
             //border: $border-cyan-solid;
             @include box-reset-default;
+            padding: 0px 5px;
             img {
                 //border: $border-lime-dashed;
                 @include box-reset-default;
@@ -71,7 +81,7 @@
     background-color: $bg-transparent;
     border-radius: 10px;
     height: 50px;
-    padding: 0 5px;
+    padding-right: 10px;
     #single-pl-row {
         //border: $border-yellow-solid;
         @include box-reset-default;
@@ -88,7 +98,7 @@
                 visibility: hidden;
                 position: absolute;
             }
-            #drag-icon {
+            #play-icon {
                 visibility: visible;
                 position: absolute;
             }
@@ -104,6 +114,7 @@
         #edit-button-col {
             //border: $border-cyan-solid;
             @include box-reset-default;
+            padding: 0px 5px;
             img {
                 //border: $border-lime-dashed;
                 @include box-reset-default;
@@ -113,6 +124,7 @@
         #share-button-col {
             //border: $border-cyan-solid;
             @include box-reset-default;
+            padding: 0px 5px;
             img {
                 //border: $border-lime-dashed;
                 @include box-reset-default;
@@ -122,6 +134,7 @@
         #delete-button-col {
             //border: $border-cyan-solid;
             @include box-reset-default;
+            padding: 0px 5px;
             img {
                 //border: $border-lime-dashed;
                 @include box-reset-default;
@@ -129,16 +142,4 @@
             }
         }
     }
-}
-
-::-webkit-scrollbar {
-    width: 5px;
-}
-
-::-webkit-scrollbar-track {
-    background: $bg-transparent;
-}
-
-::-webkit-scrollbar-thumb {
-    background: white;
 }

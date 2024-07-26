@@ -1,0 +1,49 @@
+#track-player-container {
+    //border: $border-red-solid;
+    @include box-reset-default;
+    height: 100%;
+    #track-player-row {
+        //border: $border-yellow-solid;
+        @include box-reset-default;
+        height: 100%;
+        #col-track {
+            border: $border-cyan-solid;
+            @include box-reset-default;
+            #col-cover {
+                //border: $border-cyan-dashed;
+                @include box-reset-default;
+                width: 90px;
+            }
+            #col-title {
+                //border: $border-cyan-sdashed;
+                @include box-reset-default;
+                h5 {
+                    //border: $border-lime-dotted;
+                    @include box-reset-default;
+                }
+                p {
+                    //border: $border-lime-dotted;
+                    @include box-reset-default;
+                    font-weight: lighter;
+                }
+            }
+            #col-saved {
+                //border: $border-cyan-dashed;
+                @include box-reset-default;
+                padding: 15px;
+            }
+            #col-blank {
+                //border: $border-cyan-dashed;
+                @include box-reset-default;
+            }
+        }
+        #col-player {
+            border: $border-cyan-solid;
+            @include box-reset-default;
+        }
+        #col-volume {
+            border: $border-cyan-solid;
+            @include box-reset-default;
+        }
+    }
+}

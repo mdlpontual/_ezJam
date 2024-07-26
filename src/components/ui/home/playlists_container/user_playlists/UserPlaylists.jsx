@@ -14,7 +14,7 @@ function UserPlaylists() {
                         <img src={IMG.plusPNG} alt="add playlist button" height="40px"/>
                     </div>
                 </header>
-                <main id="pl-body-row" className="row overflow-y-auto">
+                <main id="pl-body-row" className="row">
                     <div id="pl-body-col" className="col" >
                         <Playlist />
                     </div>
