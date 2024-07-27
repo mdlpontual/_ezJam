@@ -1,4 +1,5 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import HomeHeader from "../../components/ui/home/header/HomeHeader";
 import UserPlaylists from "../../components/ui/home/playlists_container/user_playlists/UserPlaylists";
 import SearchBox from "../../components/ui/home/search_container/SearchBox";
@@ -19,7 +20,7 @@ function HomePage() {
                         <UserPlaylists/>
                     </div>
                     <div id="search-col" className="col">
-                        <OpenPlaylist/>
+                        <SearchBox/>
                     </div>
                 </main>
                 <footer id="footer-row" className="row">
@@ -33,3 +34,4 @@ function HomePage() {
 }
 
 export default HomePage;
+//<OpenPlaylist/>

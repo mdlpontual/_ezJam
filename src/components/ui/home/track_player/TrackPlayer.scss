@@ -102,14 +102,14 @@
                     #progress-bar {
                         //border: $border-lime-dotted;
                         @include box-reset-default;
-                        -webkit-appearance: none;
+                        appearance: none;
                         width: 100%;
                         height: 3px;
                         border-radius: 2.5px;
                         cursor: pointer;
                     }
                     #progress-bar::-webkit-slider-thumb {
-                        -webkit-appearance: none;
+                        appearance: none;
                         width: 13px;
                         height: 13px;
                         border-radius: 50%;
@@ -154,14 +154,14 @@
                     #volume-bar {
                         //border: $border-lime-dotted;
                         @include box-reset-default;
-                        -webkit-appearance: none;
+                        appearance: none;
                         width: 100%;
                         height: 5px;
                         border-radius: 2.5px;
                         cursor: pointer;
                     }
                     #volume-bar::-webkit-slider-thumb {
-                        -webkit-appearance: none;
+                        appearance: none;
                         width: 15px;
                         height: 15px;
                         border-radius: 50%;
