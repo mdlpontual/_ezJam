@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect, createContext } from "react";
 import IMG from "../../../../../assets/images/ImagesHUB";
 import Track from "./track/Track";
 
@@ -8,7 +8,9 @@ function OpenPlaylist() {
             <div id="open-pl-container" className="container-fluid d-flex flex-column">
                 <header id="open-pl-header" className="row">
                     <div id="go-back-col" className="col-auto d-flex flex-column justify-content-center align-items-center">
-                        <img src={IMG.gobackPNG} alt="go back button" width="25px"/>
+                        <a id="back-to-playlists" type="button">
+                            <img src={IMG.gobackPNG} alt="go back button" width="25px"/>
+                        </a>
                     </div>
                     <div id="title-col" className="col d-flex flex-column justify-content-center align-items-start">
                         <h4 className="align-items-center">Progorola</h4>
