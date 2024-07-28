@@ -12,7 +12,7 @@ function SearchBox() {
                                 <a id="search-button" type="button" className="col-2 d-flex justify-content-center align-items-center">
                                     <img className="col" src={IMG.searchPNG} alt="search button" width="30px"/>
                                 </a>
-                                <input id="input-elem" type="search" placeholder="Search the Spotify Library" className="col"/>
+                                <input id="input-elem" type="search" placeholder="Search the Spotify Library" className="col" autoComplete="off"/>
                             </div>
                         </form>
                     </div>
