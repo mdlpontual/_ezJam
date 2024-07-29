@@ -29,6 +29,11 @@ const IMG = {
     unsavedPNG: new URL('./symbols/07_checked.png', import.meta.url).href,
     savedPNG: new URL('./symbols/07_checked-green.png', import.meta.url).href,
     cautionPNG: new URL('./symbols/09_caution-symbol.png', import.meta.url).href,
+
+    spotifySearchPNG: new URL('./pictures/spotify-glass.png', import.meta.url).href,
+    glassSearchPNG: new URL('./pictures/search-glass.png', import.meta.url).href,
+    notFound1PNG: new URL('./pictures/page-not-found.png', import.meta.url).href,
+    notFound2PNG: new URL('./pictures/no-results.png', import.meta.url).href,
 };
 
 export default IMG;

@@ -1,20 +1,22 @@
-#empty-search-container {
+#search-container {
     //border: $border-red-solid;
     @include box-reset-default;
     height: 100%;
-    #empty-search-row {
+    padding: 0 10px 10px 10px;
+    #searchbar-row {
         //border: $border-yellow-solid;
         @include box-reset-default;
-        height: 100%;
-        #empty-search-col {
+        height: 75px;
+        padding: 0 5px;
+        #searchbar-col {
             //border: $border-cyan-solid;
             @include box-reset-default;
             height: 100%;
-            padding: 15px;
+            position: relative;
             #form-elem {
                 //border: $border-red-dashed;
                 @include box-reset-default;
-                height: 100px;
+                height: 100%;
                 ::placeholder {
                     color: rgb(148, 147, 147);
                 }
@@ -28,7 +30,7 @@
                     padding: 0 10px;
                     gap: 10px;
                     #input-elem {
-                        //border: $border-lime-dotted;
+                        //border: $border-cyan-solid;
                         @include box-reset-default;
                         height: 40px;
                         background-color: $bg-transparent;
@@ -47,12 +49,40 @@
                         cursor: pointer;
                     }
                     #search-button {
-                        //border: $border-lime-dotted;
+                        //border: $border-cyan-solid;
                         @include box-reset-default;
                         height: 30px;
                         width: 30px;
                     }
                 }
+            }
+        }
+    }
+    #results-row {
+        //border: $border-yellow-solid;
+        @include box-reset-default;
+        #results-col {
+            //border: $border-cyan-solid;
+            @include box-reset-default;
+            img {
+                //border: $border-lime-dashed;
+                @include box-reset-default;
+            }
+            #sptf {
+                //border: $border-lime-dashed;
+                @include box-reset-default;
+                text-align: center;
+                width: 50%;
+                color: white;
+                margin-top: 30px;
+            }
+            #nores {
+                //border: $border-lime-dashed;
+                @include box-reset-default;
+                text-align: center;
+                width: 75%;
+                color: #8e8e8e;
+                margin-top: 30px;
             }
         }
     }
