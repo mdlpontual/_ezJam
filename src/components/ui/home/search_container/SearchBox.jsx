@@ -2,6 +2,7 @@ import React from "react";
 import IMG from "../../../../assets/images/ImagesHUB";
 import EmptyResultsPage from "./EmptyResultsPage";
 import NoResultsPage from "./NoResultsPage";
+import GeneralResultsPage from "./general_results/GeneralResultsPage";
 
 function SearchBox() {
     return (
@@ -20,7 +21,7 @@ function SearchBox() {
                     </div>
                 </div>
                 <div id="results-row" className="row flex-grow-1 flex-column">
-                    <NoResultsPage/>
+                    <GeneralResultsPage/>
                 </div>
             </div>
         </>
@@ -28,5 +29,3 @@ function SearchBox() {
 }
 
 export default SearchBox;
-
-/*<EmptyResultsPage/>*/

@@ -1,0 +1,113 @@
+#gen-results-container {
+    //border: $border-red-dashed;
+    @include box-reset-default;
+    height: 100%;
+    overflow-y: auto;
+    #artist-results-row {
+        border: $border-yellow-dashed;
+        @include box-reset-default;
+        width: 100%;
+        #artist-results-col {
+            //border: $border-cyan-dashed;
+            @include box-reset-default;
+            #artist-container {
+                //border: $border-red-dotted;
+                @include box-reset-default;
+                #artist-label{
+                    //border: $border-yellow-dotted;
+                    @include box-reset-default;
+                    h4 {
+                        //border: $border-cyan-dotted;
+                        @include box-reset-default;
+                        border-bottom: 1px solid white;
+                    }
+                }
+                #artist-row {
+                    //border: $border-yellow-dotted;
+                    @include box-reset-default;
+                    height: 100px;
+                    #artist-thumbnail {
+                        //border: $border-cyan-dotted;
+                        @include box-reset-default;
+                    }
+                    #artist-name {
+                        //border: $border-cyan-dotted;
+                        @include box-reset-default;
+                    }
+                }
+            }
+        }
+    }
+    #album-results-row {
+        border: $border-yellow-dashed;
+        @include box-reset-default;
+        width: 100%;
+        #album-results-col {
+            //border: $border-cyan-dashed;
+            @include box-reset-default;
+            #album-container {
+                //border: $border-red-dotted;
+                @include box-reset-default;
+                #album-label{
+                    //border: $border-yellow-dotted;
+                    @include box-reset-default;
+                    h4 {
+                        //border: $border-cyan-dotted;
+                        @include box-reset-default;
+                        border-bottom: 1px solid white;
+                    }
+                }
+                #album-row {
+                    //border: $border-yellow-dotted;
+                    @include box-reset-default;
+                    height: 70px;
+                    #album-thumbnail {
+                        //border: $border-cyan-dotted;
+                        @include box-reset-default;
+                        padding: 10px;
+                    }
+                    #album-name {
+                        //border: $border-cyan-dotted;
+                        @include box-reset-default;
+                    }
+                }
+            }
+        }
+    }
+    #song-results-row {
+        border: $border-yellow-dashed;
+        @include box-reset-default;
+        width: 100%;
+        #song-results-col {
+            //border: $border-cyan-dashed;
+            @include box-reset-default;
+            #song-container {
+                //border: $border-red-dotted;
+                @include box-reset-default;
+                #song-label{
+                    //border: $border-yellow-dotted;
+                    @include box-reset-default;
+                    padding-bottom: 5px;
+                    h4 {
+                        //border: $border-cyan-dotted;
+                        @include box-reset-default;
+                        border-bottom: 1px solid white;
+                    }
+                }
+                #song-row {
+                    //border: $border-yellow-dotted;
+                    @include box-reset-default;
+                    #song-thumbnail {
+                        //border: $border-cyan-dotted;
+                        @include box-reset-default;
+                        padding: 10px;
+                    }
+                    #song-name {
+                        //border: $border-cyan-dotted;
+                        @include box-reset-default;
+                    }
+                }
+            }
+        }
+    }
+}

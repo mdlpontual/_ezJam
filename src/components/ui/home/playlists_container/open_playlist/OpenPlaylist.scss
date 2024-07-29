@@ -2,7 +2,7 @@
     //border: $border-red-solid;
     @include box-reset-default;
     height: 100%;
-    padding: 0px 10px;
+    padding: 0px 15px;
     #open-pl-header {
         //border: $border-yellow-solid;
         @include box-reset-default;
@@ -10,7 +10,6 @@
         #go-back-col {
             //border: $border-cyan-solid;
             @include box-reset-default;
-            padding: 0px 5px;
             img {
                 //border: $border-lime-dashed;
                 @include box-reset-default;
@@ -33,7 +32,8 @@
         #checkmark-col {
             //border: $border-cyan-solid;
             @include box-reset-default;
-            padding: 0px 5px;
+            padding-left: 10px;
+            padding-right: 10px;
             img {
                 //border: $border-lime-dashed;
                 @include box-reset-default;
@@ -42,11 +42,12 @@
         #blank-col {
             //border: $border-cyan-solid;
             @include box-reset-default;
+            padding-left: 10px;
         }
         #edit-button-col {
             //border: $border-cyan-solid;
             @include box-reset-default;
-            padding: 0px 5px;
+            padding-left: 10px;
             img {
                 //border: $border-lime-dashed;
                 @include box-reset-default;
@@ -55,7 +56,7 @@
         #share-button-col {
             //border: $border-cyan-solid;
             @include box-reset-default;
-            padding: 0px 5px;
+            padding-left: 10px;
             img {
                 //border: $border-lime-dashed;
                 @include box-reset-default;
@@ -64,7 +65,7 @@
         #delete-button-col {
             //border: $border-cyan-solid;
             @include box-reset-default;
-            padding: 0px 5px;
+            padding-left: 10px;
             img {
                 //border: $border-lime-dashed;
                 @include box-reset-default;
