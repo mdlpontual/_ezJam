@@ -35,6 +35,8 @@ const IMG = {
     spotifySearch2PNG: new URL('./pictures/spotify-glass2.png', import.meta.url).href,
     glassSearchPNG: new URL('./pictures/search-glass.png', import.meta.url).href,
     notFound2PNG: new URL('./pictures/no-results.png', import.meta.url).href,
+
+    rhcpPNG: new URL('./background/01_rhcp-placeholder.jpg', import.meta.url).href,
 };
 
 export default IMG;

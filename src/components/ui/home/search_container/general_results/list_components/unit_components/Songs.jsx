@@ -6,7 +6,7 @@ function Songs() {
         <>
             <div id="songs-inner-row" className="row">
                 <div id="col-add" className="col-1 d-flex justify-content-center align-items-center">
-                    <img id="plus-icon" src={IMG.plusPNG} alt="plus icon" width="35px"/>
+                    <img id="plus-icon" src={IMG.plusPNG} alt="plus icon" width="30px"/>
                     <img id="drag-icon" src={IMG.dragPNG} alt="drag icon" width="25px"/>
                 </div>
                 <div id="col-cover" className="col-1 d-flex justify-content-center align-items-center">
