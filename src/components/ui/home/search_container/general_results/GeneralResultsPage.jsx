@@ -1,31 +1,35 @@
 import React from "react";
 import IMG from "../../../../../assets/images/ImagesHUB";
-import ArtistsResults from "./list_components/ArtistsResults";
-import AlbunsResults from "./list_components/AlbunsResults";
-import SongsResults from "./list_components/SongsResults";
+import Artists from "./list_components/Artists";
+import Albuns from "./list_components/Albuns";
+import Songs from "./list_components/Songs";
 
 function GeneralResultsPage() {
     return (
         <>
-            <div id="gen-results-container" className="container-fluid d-flex flex-column">
-                <div id="artist-results-row" className="row flex-grow-1">
-                    <div id="artist-results-col" className="col">
-                        <ArtistsResults/>
+            <div id="gen-results-container" className="container-fluid">
+                <div id="gen-results-artists" className="row">
+                    <div id="gen-results-artists-col" className="col">
+                        <h4>artists:</h4>
+                        <Artists/>
                     </div>
                 </div>
-                <div id="album-results-row" className="row flex-grow-1">
-                    <div id="album-results-col" className="col">
-                        <AlbunsResults/>
+                <div id="gen-results-albuns" className="row">
+                    <div id="gen-results-albuns-col" className="col">
+                        <h4>albuns:</h4>
+                        <Albuns/>
                     </div>
                 </div>
-                <div id="song-results-row" className="row flex-grow-1">
-                    <div id="song-results-col" className="col">
-                        <SongsResults/>
+                <div id="gen-results-songs" className="row">
+                    <div id="gen-results-songs-col" className="col">
+                        <h4>songs:</h4>
+                        <Songs/>
                     </div>
                 </div>
             </div>
         </>
-    );
+    );       
 }
 
 export default GeneralResultsPage;
+

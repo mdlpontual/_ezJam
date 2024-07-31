@@ -1,11 +1,14 @@
 import React from "react";
-import IMG from "../../../../../../../assets/images/ImagesHUB";
+import IMG from "../../../../../../assets/images/ImagesHUB";
 
-function Song() {
+function Songs() {
     return (
         <>
-            <div id="single-track-container" className="container-fluid">
-                <div id="single-track-row" className="row d-flex ps-1">
+            <div id="songs-inner-row" className="row">
+                    <div id="col-add" className="col-1 d-flex justify-content-center align-items-center">
+                        <img id="plus-icon" src={IMG.plusPNG} alt="plus icon" width="35px"/>
+                        <img id="drag-icon" src={IMG.dragPNG} alt="drag icon" width="25px"/>
+                    </div>
                     <div id="col-cover" className="col-1 d-flex justify-content-center align-items-center">
                         <img src={IMG.placeHolders} height="40px"/>
                     </div>
@@ -19,10 +22,12 @@ function Song() {
                     <div id="col-duration" className="col-1 d-flex justify-content-center align-items-center">
                         <p>4:20</p>
                     </div>
-                </div>
-            </div>
+                    <div id="col-options" className="col-1 d-flex justify-content-center align-items-center">
+                        <img id="opt-icon" src={IMG.optionsPNG} alt="options button" height="20px"/>
+                    </div>
+            </div>  
         </>
     );
 }
 
-export default Song;
+export default Songs;

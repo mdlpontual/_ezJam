@@ -1,110 +1,196 @@
 #gen-results-container {
     //border: $border-red-dashed;
     @include box-reset-default;
-    height: 100%;
-    overflow-y: auto;
-    #artist-results-row {
-        border: $border-yellow-dashed;
+    height: 600px;
+    #gen-results-artists {
+        //border: $border-yellow-dashed;
         @include box-reset-default;
-        width: 100%;
-        #artist-results-col {
+        #gen-results-artists-col {
             //border: $border-cyan-dashed;
             @include box-reset-default;
-            #artist-container {
-                //border: $border-red-dotted;
+            h4 {
+                //border: $border-lime-dotted;
                 @include box-reset-default;
-                #artist-label{
-                    //border: $border-yellow-dotted;
+                border-bottom: 1px solid white;
+                height: 30px;
+            }
+            #artist-inner-row {
+                //border: $border-yellow-dotted;
+                @include box-reset-default;
+                height: 75px;
+                #artist-thumbnail {
+                    //border: $border-cyan-dotted;
                     @include box-reset-default;
-                    h4 {
-                        //border: $border-cyan-dotted;
-                        @include box-reset-default;
-                        border-bottom: 1px solid white;
-                    }
                 }
-                #artist-row {
-                    //border: $border-yellow-dotted;
+                #artist-name {
+                    //border: $border-cyan-dotted;
                     @include box-reset-default;
-                    height: 100px;
-                    #artist-thumbnail {
-                        //border: $border-cyan-dotted;
-                        @include box-reset-default;
-                    }
-                    #artist-name {
-                        //border: $border-cyan-dotted;
-                        @include box-reset-default;
-                    }
                 }
+            }
+            #artist-inner-row:hover {
+                background-color: $bg-transparent;
+                border-radius: 15px;
+            }
+        }
+    }  
+    #gen-results-albuns {
+        //border: $border-yellow-dashed;
+        @include box-reset-default;
+        #gen-results-albuns-col {
+            //border: $border-cyan-dashed;
+            @include box-reset-default;
+            h4 {
+                //border: $border-lime-dotted;
+                @include box-reset-default;
+                border-bottom: 1px solid white;
+                height: 30px;
+            }
+            #albuns-inner-row {
+                //border: $border-yellow-dotted;
+                @include box-reset-default;
+                height: 75px;
+                #album-thumbnail {
+                    //border: $border-cyan-dotted;
+                    @include box-reset-default;
+                }
+                #album-title {
+                    //border: $border-cyan-dotted;
+                    @include box-reset-default;
+                }
+            }
+            #albuns-inner-row:hover {
+                background-color: $bg-transparent;
+                border-radius: 15px;
             }
         }
     }
-    #album-results-row {
-        border: $border-yellow-dashed;
+    #gen-results-songs {
+        //border: $border-yellow-dashed;
         @include box-reset-default;
-        width: 100%;
-        #album-results-col {
+        #gen-results-songs-col {
             //border: $border-cyan-dashed;
             @include box-reset-default;
-            #album-container {
-                //border: $border-red-dotted;
+            h4 {
+                //border: $border-lime-dotted;
                 @include box-reset-default;
-                #album-label{
-                    //border: $border-yellow-dotted;
-                    @include box-reset-default;
-                    h4 {
-                        //border: $border-cyan-dotted;
-                        @include box-reset-default;
-                        border-bottom: 1px solid white;
-                    }
-                }
-                #album-row {
-                    //border: $border-yellow-dotted;
-                    @include box-reset-default;
-                    height: 70px;
-                    #album-thumbnail {
-                        //border: $border-cyan-dotted;
-                        @include box-reset-default;
-                        padding: 10px;
-                    }
-                    #album-name {
-                        //border: $border-cyan-dotted;
-                        @include box-reset-default;
-                    }
-                }
+                border-bottom: 1px solid white;
+                margin-bottom: 5px;
+                height: 30px;
             }
-        }
-    }
-    #song-results-row {
-        border: $border-yellow-dashed;
-        @include box-reset-default;
-        width: 100%;
-        #song-results-col {
-            //border: $border-cyan-dashed;
-            @include box-reset-default;
-            #song-container {
-                //border: $border-red-dotted;
+            #songs-inner-row {
+                //border: $border-yellow-dashed;
                 @include box-reset-default;
-                #song-label{
-                    //border: $border-yellow-dotted;
+                height: 50px;
+                #col-add {
+                    //border: $border-lime-dotted;
                     @include box-reset-default;
-                    padding-bottom: 5px;
-                    h4 {
-                        //border: $border-cyan-dotted;
+                    width: 40px;
+                    position: relative;
+                    #plus-icon {
+                        //border: $border-lime-dotted;
                         @include box-reset-default;
-                        border-bottom: 1px solid white;
+                        position: absolute;
+                    }
+                    #drag-icon {
+                        //border: $border-lime-dotted;
+                        @include box-reset-default;
+                        visibility: hidden;
+                        position: absolute;
                     }
                 }
-                #song-row {
-                    //border: $border-yellow-dotted;
+                #col-cover {
+                    //border: $border-lime-dotted;
                     @include box-reset-default;
-                    #song-thumbnail {
-                        //border: $border-cyan-dotted;
+                    width: 50px;
+                    img {
+                        //border: $border-lime-dotted;
                         @include box-reset-default;
-                        padding: 10px;
                     }
-                    #song-name {
-                        //border: $border-cyan-dotted;
+                }
+                #col-title {
+                    //border: $border-lime-dotted;
+                    @include box-reset-default;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    flex-wrap: wrap;
+                    h5 {
+                        //border: $border-magenta-dotted;
                         @include box-reset-default;
+                        text-overflow: ellipsis;
+                        overflow: hidden;
+                        width: 100%;
+                        margin-bottom: -3px;
+                    }
+                    p {
+                        //border: $border-magenta-dotted;
+                        @include box-reset-default;
+                        text-overflow: ellipsis;
+                        overflow: hidden;
+                        width: 100%;
+                        margin-top: -3px;
+                    }
+                }
+                #col-album {
+                    //border: $border-lime-dotted;
+                    @include box-reset-default;
+                    white-space: nowrap;
+                    p {
+                        //border: $border-lime-dotted;
+                        @include box-reset-default;
+                        text-overflow: ellipsis;
+                        overflow: hidden;
+                    }
+                }
+                #col-duration {
+                    //border: $border-lime-dotted;
+                    @include box-reset-default;
+                    white-space: nowrap;
+                    width: 55px;
+                    p {
+                        //border: $border-lime-dotted;
+                        @include box-reset-default;
+                        text-overflow: ellipsis;
+                        overflow: hidden;
+                    }
+                }
+                #col-options {
+                    //border: $border-lime-dotted;
+                    @include box-reset-default;
+                    white-space: nowrap;
+                    width: 25px;
+                    margin-right: 5px;
+                    position: relative;
+                    #opt-icon {
+                        //border: $border-lime-dotted;
+                        @include box-reset-default;
+                    }
+                }
+                #col-add, #col-cover, #col-title, 
+                #col-album, #col-options, #col-duration {
+                    height: 100%;
+                    padding: 0 5px;
+                };  
+            }
+            #songs-inner-row:hover {
+                background-color: $bg-transparent;
+                border-radius: 15px;
+                #col-add {
+                    //border: $border-lime-dotted;
+                    @include box-reset-default;
+                    width: 40px;
+                    position: relative;
+                    #plus-icon {
+                        //border: $border-lime-dotted;
+                        @include box-reset-default;
+                        visibility: hidden;
+                        position: absolute;
+                    }
+                    #drag-icon {
+                        //border: $border-lime-dotted;
+                        @include box-reset-default;
+                        visibility: visible;
+                        position: absolute;
                     }
                 }
             }

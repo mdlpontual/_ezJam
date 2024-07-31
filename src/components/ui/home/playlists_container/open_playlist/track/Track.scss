@@ -10,13 +10,12 @@
             @include box-reset-default;
             width: 40px;
             position: relative;
-            p {
+            h5 {
                 //border: $border-lime-dotted;
                 @include box-reset-default;
                 text-overflow: ellipsis;
                 overflow: hidden;
                 position: absolute;
-                font-weight: lighter;
             }
             #drag-icon {
                 //border: $border-lime-dotted;
@@ -117,23 +116,20 @@
             @include box-reset-default;
             width: 40px;
             position: relative;
-            p {
+            h5 {
                 //border: $border-lime-dotted;
                 @include box-reset-default;
                 text-overflow: ellipsis;
                 overflow: hidden;
                 visibility: hidden;
                 position: absolute;
-                font-weight: lighter;
             }
             #drag-icon {
                 //border: $border-lime-dotted;
                 @include box-reset-default;
                 visibility: visible;
                 position: absolute;
-                
             }
-    
         }
         #col-saved {
             //border: $border-cyan-dotted;

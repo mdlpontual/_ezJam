@@ -1,8 +1,8 @@
-#search-container {
+ #search-container {
     //border: $border-red-solid;
     @include box-reset-default;
     height: 100%;
-    padding: 0 15px 15px 15px;
+    padding: 0px 15px;
     #searchbar-row {
         //border: $border-yellow-solid;
         @include box-reset-default;
@@ -60,29 +60,40 @@
     #results-row {
         //border: $border-yellow-solid;
         @include box-reset-default;
-        #empty-results-col {
+        height: 100%;
+        #results-col {
             //border: $border-cyan-solid;
             @include box-reset-default;
-            img {
-                //border: $border-lime-dashed;
+            height: 100%;
+            overflow-y: hidden;
+            scrollbar-gutter: stable;
+            #empty-results-col {
+                //border: $border-cyan-solid;
                 @include box-reset-default;
+                img {
+                    //border: $border-lime-dashed;
+                    @include box-reset-default;
+                }
+                #sptf {
+                    //border: $border-lime-dashed;
+                    @include box-reset-default;
+                    text-align: center;
+                    width: 50%;
+                    color: white;
+                    margin-top: 30px;
+                }
+                #nores {
+                    //border: $border-lime-dashed;
+                    @include box-reset-default;
+                    text-align: center;
+                    width: 75%;
+                    color: #8e8e8e;
+                    margin-top: 30px;
+                }
             }
-            #sptf {
-                //border: $border-lime-dashed;
-                @include box-reset-default;
-                text-align: center;
-                width: 50%;
-                color: white;
-                margin-top: 30px;
-            }
-            #nores {
-                //border: $border-lime-dashed;
-                @include box-reset-default;
-                text-align: center;
-                width: 75%;
-                color: #8e8e8e;
-                margin-top: 30px;
-            }
+        }
+        #results-col:hover {
+            overflow-y: auto;
         }
     }
 }

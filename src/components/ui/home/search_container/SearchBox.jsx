@@ -20,8 +20,10 @@ function SearchBox() {
                         </form>
                     </div>
                 </div>
-                <div id="results-row" className="row flex-grow-1 flex-column">
-                    <GeneralResultsPage/>
+                <div id="results-row" className="row">
+                    <div id="results-col" className="col">
+                        <GeneralResultsPage/>
+                    </div>
                 </div>
             </div>
         </>
