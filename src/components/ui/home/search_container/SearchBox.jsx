@@ -1,7 +1,7 @@
 import React from "react";
 import IMG from "../../../../assets/images/ImagesHUB";
-import EmptyResultsPage from "./EmptyResultsPage";
-import NoResultsPage from "./NoResultsPage";
+import EmptyResultsPage from "./non_results/EmptyResultsPage";
+import NoResultsPage from "./non_results/NoResultsPage";
 import GeneralResultsPage from "./general_results/GeneralResultsPage";
 
 function SearchBox() {
@@ -21,7 +21,7 @@ function SearchBox() {
                     </div>
                 </div>
                 <div id="results-row" className="row">
-                    <div id="results-col" className="col">
+                    <div id="results-col" className="col d-flex">
                         <GeneralResultsPage/>
                     </div>
                 </div>

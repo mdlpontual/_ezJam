@@ -1,5 +1,5 @@
 import React from "react";
-import IMG from "../../../../assets/images/ImagesHUB";
+import IMG from "../../../../../assets/images/ImagesHUB";
 
 function NoResultsPage() {
     return (
