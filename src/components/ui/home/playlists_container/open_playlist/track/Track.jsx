@@ -7,7 +7,7 @@ function Track() {
             <div id="single-track-container" className="container-fluid">
                 <div id="single-track-row" className="row">
                     <div id="col-num" className="col-1 d-flex justify-content-center align-items-center">
-                        <p id="number-icon">2</p>
+                        <h5 id="number-icon">2</h5>
                         <img id="drag-icon" src={IMG.dragPNG} alt="drag icon" width="25px"/>
                     </div>
                     <div id="col-cover" className="col-1 d-flex justify-content-center align-items-center">

@@ -7,7 +7,7 @@
     #pl-header-row {
         //border: $border-yellow-solid;
         @include box-reset-default;
-        min-height: 75px;
+        height: 75px;
         #pl-heading-col {
             //border: $border-cyan-solid;
             @include box-reset-default;

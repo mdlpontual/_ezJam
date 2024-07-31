@@ -13,6 +13,7 @@ const IMG = {
     searchPNG: new URL('./symbols/03_search.png', import.meta.url).href,
     clockPNG: new URL('./symbols/10_clock.png', import.meta.url).href,
     placeHolders: new URL('./symbols/16_place-holder.png', import.meta.url).href,
+    profilePlaceHolder: new URL('./symbols/16_profile-place-holder.png', import.meta.url).href,
 
     volumePNG: new URL('./symbols/11_volume.png', import.meta.url).href,
     mutePNG: new URL('./symbols/11_mute.png', import.meta.url).href,
@@ -29,6 +30,13 @@ const IMG = {
     unsavedPNG: new URL('./symbols/07_checked.png', import.meta.url).href,
     savedPNG: new URL('./symbols/07_checked-green.png', import.meta.url).href,
     cautionPNG: new URL('./symbols/09_caution-symbol.png', import.meta.url).href,
+
+    spotifySearchPNG: new URL('./pictures/spotify-glass.png', import.meta.url).href,
+    spotifySearch2PNG: new URL('./pictures/spotify-glass2.png', import.meta.url).href,
+    glassSearchPNG: new URL('./pictures/search-glass.png', import.meta.url).href,
+    notFound2PNG: new URL('./pictures/no-results.png', import.meta.url).href,
+
+    rhcpPNG: new URL('./background/01_rhcp-placeholder.jpg', import.meta.url).href,
 };
 
 export default IMG;

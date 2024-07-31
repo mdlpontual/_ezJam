@@ -1,0 +1,37 @@
+#artist-page-container {
+    //border: $border-red-solid;
+    @include box-reset-default;
+    #artist-page-banner-row {
+        //border: $border-yellow-solid;
+        @include box-reset-default;
+        height: 200px;
+        background-image: url(../assets/images/background/01_rhcp-placeholder.jpg);
+        background-repeat: no-repeat;
+        background-position-y: -60px;
+        border-radius: 20px;
+        #artist-page-banner-col {
+            //border: $border-cyan-solid;
+            @include box-reset-default;
+            h1 {
+                font-weight: bolder;
+            }
+            margin-left: 15px;
+        }
+    }
+    #artist-page-top-five-row {
+        //border: $border-yellow-solid;
+        @include box-reset-default;
+        #artist-page-top-five-col {
+            //border: $border-cyan-solid;
+            @include box-reset-default;
+        }
+    }
+    #artist-page-disco-row {
+        //border: $border-yellow-solid;
+        @include box-reset-default;
+        #artist-page-top-five-col {
+            //border: $border-cyan-solid;
+            @include box-reset-default;
+        }
+    }
+}
