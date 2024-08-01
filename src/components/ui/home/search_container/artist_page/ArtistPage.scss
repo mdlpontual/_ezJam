@@ -1,10 +1,11 @@
 #artist-page-container {
     //border: $border-red-solid;
     @include box-reset-default;
+    height: 600px;
     #artist-page-banner-row {
         //border: $border-yellow-solid;
         @include box-reset-default;
-        height: 200px;
+        height: 225px;
         background-image: url(../assets/images/background/01_rhcp-placeholder.jpg);
         background-repeat: no-repeat;
         background-size: cover;

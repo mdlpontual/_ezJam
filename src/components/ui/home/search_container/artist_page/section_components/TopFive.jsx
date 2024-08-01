@@ -10,15 +10,6 @@ function TopFive() {
                     <div id="top-five-col" className="col">
                         <h4>Popular:</h4>
                         <TopSong/>
-                        <TopSong/>
-                        <TopSong/>
-                        <TopSong/>
-                        <TopSong/>
-                        <TopSong/>
-                        <TopSong/>
-                        <TopSong/>
-                        <TopSong/>
-                        <TopSong/>
                     </div>
                 </div>
             </div>

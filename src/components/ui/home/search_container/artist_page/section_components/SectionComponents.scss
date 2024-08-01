@@ -147,3 +147,55 @@
     }
 }
 
+#discography-container {
+    //border: $border-red-dashed;
+    @include box-reset-default;
+    height: fit-content;
+    #discography-row {
+        //border: $border-yellow-dashed;
+        @include box-reset-default;
+        #discography-col {
+            //border: $border-cyan-dashed;
+            @include box-reset-default;
+            h4 {
+                //border: $border-lime-solid;
+                @include box-reset-default;
+                height: 35px;
+                border-bottom: 1px solid white;
+                margin-bottom: 10px;
+            }
+            #albuns-inner-row {
+                //border: $border-yellow-dotted;
+                @include box-reset-default;
+                height: fit-content;
+                #album-thumbnail {
+                    //border: $border-cyan-dotted;
+                    @include box-reset-default;
+                    padding: 10px;
+                    img {
+                        //border: $border-lime-solid;
+                        @include box-reset-default;
+                        padding-bottom: 5px;
+                        width: 100%;
+                    } 
+                    h6 {
+                        //border: $border-lime-solid;
+                        @include box-reset-default;
+                        text-align: start
+                    }    
+                    p {
+                        //border: $border-lime-solid;
+                        @include box-reset-default;
+                        font-weight: lighter;
+                        text-align: start
+                    }
+                }
+                #album-thumbnail:hover {
+                    background-color: $bg-transparent;
+                    border-radius: 10px;
+                    padding: 10px;
+                }
+            }
+        }
+    }
+}
