@@ -7,8 +7,8 @@
         height: 200px;
         background-image: url(../assets/images/background/01_rhcp-placeholder.jpg);
         background-repeat: no-repeat;
-        background-position-y: -60px;
-        border-radius: 20px;
+        background-size: cover;
+        border-radius: 10px;
         #artist-page-banner-col {
             //border: $border-cyan-solid;
             @include box-reset-default;
@@ -21,6 +21,8 @@
     #artist-page-top-five-row {
         //border: $border-yellow-solid;
         @include box-reset-default;
+        padding: 15px 0;
+        height: fit-content;
         #artist-page-top-five-col {
             //border: $border-cyan-solid;
             @include box-reset-default;
