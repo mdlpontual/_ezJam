@@ -67,6 +67,7 @@
             height: 100%;
             overflow-y: hidden;
             scrollbar-gutter: stable;
+            padding-right: 5px;
             #empty-results-col {
                 //border: $border-cyan-solid;
                 @include box-reset-default;

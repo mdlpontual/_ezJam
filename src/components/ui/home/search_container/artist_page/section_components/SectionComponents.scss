@@ -172,6 +172,7 @@
                     //border: $border-cyan-dotted;
                     @include box-reset-default;
                     padding: 10px;
+                    white-space: nowrap;
                     img {
                         //border: $border-lime-solid;
                         @include box-reset-default;
@@ -181,13 +182,17 @@
                     h6 {
                         //border: $border-lime-solid;
                         @include box-reset-default;
-                        text-align: start
+                        text-align: start;
+                        text-overflow: ellipsis;
+                        overflow: hidden;
                     }    
                     p {
                         //border: $border-lime-solid;
                         @include box-reset-default;
                         font-weight: lighter;
-                        text-align: start
+                        text-align: start;
+                        text-overflow: ellipsis;
+                        overflow: hidden;
                     }
                 }
                 #album-thumbnail:hover {
