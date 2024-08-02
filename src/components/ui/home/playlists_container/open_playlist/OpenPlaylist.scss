@@ -158,7 +158,7 @@
                 padding: 5px 0 5px 0;
                 overflow-y: hidden;
                 scrollbar-gutter: stable;
-                //margin-bottom: 5px;
+                padding-right: 5px;
                 #tracks-list-col {
                     //border: $border-cyan-dashed;
                     @include box-reset-default;

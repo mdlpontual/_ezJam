@@ -4,6 +4,7 @@ import EmptyResultsPage from "./non_results/EmptyResultsPage";
 import NoResultsPage from "./non_results/NoResultsPage";
 import GeneralResultsPage from "./general_results/GeneralResultsPage";
 import ArtistPage from "./artist_page/ArtistPage";
+import AlbumPage from "./album_page/AlbumPage";
 
 function SearchBox() {
     return (
@@ -23,7 +24,7 @@ function SearchBox() {
                 </div>
                 <div id="results-row" className="row">
                     <div id="results-col" className="col d-flex">
-                        <ArtistPage/>
+                        <AlbumPage/>
                     </div>
                 </div>
             </div>

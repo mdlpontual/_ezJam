@@ -1,5 +1,7 @@
 import React from "react";
 import IMG from "../../../../../assets/images/ImagesHUB";
+import TopFive from "./section_components/TopFive";
+import Discography from "./section_components/Discography";
 
 function ArtistPage() {
     return (
@@ -12,12 +14,12 @@ function ArtistPage() {
                 </div>
                 <div id="artist-page-top-five-row" className="row">
                     <div id="artist-page-top-five-col" className="col">
-                        
+                        <TopFive/>
                     </div>
                 </div>
                 <div id="artist-page-disco-row" className="row">
-                    <div id="artist-page-top-five-col" className="col">
-                        
+                    <div id="artist-page-disco-col" className="col">
+                        <Discography/>                
                     </div>
                 </div>
             </div>
