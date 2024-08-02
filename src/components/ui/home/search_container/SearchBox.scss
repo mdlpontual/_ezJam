@@ -7,6 +7,39 @@
         //border: $border-yellow-solid;
         @include box-reset-default;
         height: 75px;
+        #arrow-box-col {
+            //border: $border-cyan-solid;
+            @include box-reset-default;
+            padding-right: 5px;
+            #arrow-container {
+                //border: $border-red-dashed;
+                @include box-reset-default;
+                height: 100%;
+                #arrow-row {
+                    //border: $border-yellow-dashed;
+                    @include box-reset-default;
+                    height: 100%;
+                    #go-back {
+                        //border: $border-cyan-dashed;
+                        @include box-reset-default;
+                        padding: 5px 5px 5px 0;
+                        img {
+                            //border: $border-lime-dotted;
+                            @include box-reset-default;
+                        }
+                    }
+                    #go-foward {
+                        //border: $border-cyan-dashed;
+                        @include box-reset-default;
+                        padding: 5px;
+                        img {
+                            //border: $border-lime-dotted;
+                            @include box-reset-default;
+                        }
+                    }
+                }
+            }
+        }
         #searchbar-col {
             //border: $border-cyan-solid;
             @include box-reset-default;

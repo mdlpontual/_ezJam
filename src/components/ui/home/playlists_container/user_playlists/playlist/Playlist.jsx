@@ -8,8 +8,8 @@ function Playlist() {
             <div id="single-pl-container" className="container-fluid">
                 <div id="single-pl-row" className="row">
                     <div id="checkmark-col" className="col-1 d-flex flex-column justify-content-center align-items-center">
-                        <img id="saved-icon" src={IMG.savedPNG} alt="saved icon" width="25px"/>
-                        <img id="play-icon" src={IMG.play2PNG} alt="play icon" width="25px"/>
+                        <img id="saved-icon" src={IMG.savedPNG} alt="saved icon" width="22px"/>
+                        <img id="play-icon" src={IMG.play2PNG} alt="play icon" width="22px"/>
                     </div>
                     <div id="pl-title-col" className="col d-flex flex-column justify-content-center align-items-start">
                         <h4 className="d-flex align-items-center">

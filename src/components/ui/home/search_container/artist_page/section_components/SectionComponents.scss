@@ -76,6 +76,18 @@
                         margin-top: -3px;
                     }
                 }
+                #col-plus {
+                    //border: $border-cyan-dotted;
+                    @include box-reset-default;
+                    width: 40px;
+                    padding: 3px;
+                }
+                #col-minus {
+                    //border: $border-cyan-dotted;
+                    @include box-reset-default;
+                    width: 40px;
+                    padding: 3px;
+                }
                 #col-plays {
                     //border: $border-lime-dotted;
                     @include box-reset-default;
@@ -99,20 +111,8 @@
                         overflow: hidden;
                     }
                 }
-                #col-options {
-                    //border: $border-lime-dotted;
-                    @include box-reset-default;
-                    white-space: nowrap;
-                    width: 25px;
-                    margin-right: 5px;
-                    position: relative;
-                    #opt-icon {
-                        //border: $border-lime-dotted;
-                        @include box-reset-default;
-                    }
-                }
                 #col-add, #col-cover, #col-title, 
-                #col-album, #col-options, #col-duration {
+                #col-plays,#col-plus, #col-minus, #col-duration {
                     height: 100%;
                     padding: 0 5px;
                 };  

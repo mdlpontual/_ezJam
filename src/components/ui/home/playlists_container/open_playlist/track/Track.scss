@@ -17,7 +17,7 @@
                 overflow: hidden;
                 position: absolute;
             }
-            #drag-icon {
+            #play-icon {
                 //border: $border-lime-dotted;
                 @include box-reset-default;
                 visibility: hidden;
@@ -57,6 +57,18 @@
                 margin-top: -3px;
             }
         };
+        #col-saved {
+            //border: $border-cyan-dotted;
+            @include box-reset-default;
+            white-space: nowrap;
+            width: 25px;
+            position: relative;
+            #saved-icon {
+                //border: $border-lime-dotted;
+                @include box-reset-default;
+                position: absolute;
+            }
+        };
         #col-album {
             //border: $border-cyan-dotted;
             @include box-reset-default;
@@ -80,27 +92,21 @@
                 overflow: hidden;
             }
         };
-        #col-saved {
+        #col-plus {
             //border: $border-cyan-dotted;
             @include box-reset-default;
-            white-space: nowrap;
-            width: 25px;
-            margin-right: 5px;
-            position: relative;
-            #saved-icon {
-                //border: $border-lime-dotted;
-                @include box-reset-default;
-                position: absolute;
-            }
-            #opt-icon {
-                //border: $border-lime-dotted;
-                @include box-reset-default;
-                position: absolute;
-                visibility: hidden;
-            }
-        };
+            width: 40px;
+            padding: 3px;
+        }
+        #col-minus {
+            //border: $border-cyan-dotted;
+            @include box-reset-default;
+            width: 40px;
+            padding: 3px;
+        }
         #col-num, #col-cover, #col-title, 
-        #col-album, #col-saved, #col-duration {
+        #col-saved, #col-album, #col-duration,
+        #col-plus, #col-minus {
             height: 100%;
             padding: 0 5px;
         };   
@@ -124,32 +130,12 @@
                 visibility: hidden;
                 position: absolute;
             }
-            #drag-icon {
+            #play-icon {
                 //border: $border-lime-dotted;
                 @include box-reset-default;
                 visibility: visible;
                 position: absolute;
             }
         }
-        #col-saved {
-            //border: $border-cyan-dotted;
-            @include box-reset-default;
-            white-space: nowrap;
-            width: 25px;
-            margin-right: 5px;
-            position: relative;
-            #saved-icon {
-                //border: $border-lime-dotted;
-                @include box-reset-default;
-                position: absolute;
-                visibility: hidden;
-            }
-            #opt-icon {
-                //border: $border-lime-dotted;
-                @include box-reset-default;
-                position: absolute;
-                visibility: visible;
-            }
-        }  
     }
 }

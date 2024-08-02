@@ -10,6 +10,7 @@
         #go-back-col {
             //border: $border-cyan-solid;
             @include box-reset-default;
+            width: 35px;
             img {
                 //border: $border-lime-dashed;
                 @include box-reset-default;
@@ -116,6 +117,15 @@
                         @include box-reset-default;
                     }
                 };
+                #col-saved {
+                    //border: $border-cyan-dotted;
+                    @include box-reset-default;
+                    width: 25px;
+                    img {
+                        //border: $border-lime-dotted;
+                        @include box-reset-default;
+                    }
+                };
                 #col-album {
                     //border: $border-cyan-dotted;
                     @include box-reset-default;
@@ -136,18 +146,20 @@
                         bottom: 4px;
                     }
                 };
-                #col-saved {
+                #col-plus {
                     //border: $border-cyan-dotted;
                     @include box-reset-default;
-                    width: 25px;
+                    width: 40px;
+                }
+                #col-minus {
+                    //border: $border-cyan-dotted;
+                    @include box-reset-default;
+                    width: 40px;
                     margin-right: 5px;
-                    img {
-                        //border: $border-lime-dotted;
-                        @include box-reset-default;
-                    }
-                };
+                }
                 #col-num, #col-cover, #col-title, 
-                #col-album, #col-saved, #col-duration {
+                #col-saved, #col-album, #col-duration,
+                #col-plus, #col-minus {
                     height: 100%;
                     padding: 0 5px;
                 };   
