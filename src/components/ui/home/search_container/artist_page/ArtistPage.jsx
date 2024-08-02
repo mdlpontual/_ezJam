@@ -18,7 +18,7 @@ function ArtistPage() {
                     </div>
                 </div>
                 <div id="artist-page-disco-row" className="row">
-                    <div id="artist-page-top-five-col" className="col">
+                    <div id="artist-page-disco-col" className="col">
                         <Discography/>                
                     </div>
                 </div>
