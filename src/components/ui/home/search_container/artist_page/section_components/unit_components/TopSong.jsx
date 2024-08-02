@@ -15,15 +15,18 @@ function TopSong() {
                 <div id="col-title" className="col d-flex justify-content-start align-items-center">
                     <h5>Aquatic Mouth Dance</h5>
                 </div>
+                <div id="col-plus" className="col-1 d-flex justify-content-end align-items-center">
+                    <img id="plus-icon" src={IMG.plus2PNG} alt="plus icon" width="25px"/>
+                </div>
+                <div id="col-minus" className="col-1 d-flex justify-content-start align-items-center">
+                    <img id="minus-icon" src={IMG.minus2PNG} alt="minus icon" width="25x"/>
+                </div>
                 <div id="col-plays" className="col-2 d-flex justify-content-start align-items-center">
                     <p>23,187,043</p>
                 </div>
                 <div id="col-duration" className="col-1 d-flex justify-content-center align-items-center">
                     <p>4:20</p>
                 </div>
-                <div id="col-options" className="col-1 d-flex justify-content-center align-items-center">
-                    <img id="opt-icon" src={IMG.optionsPNG} alt="options button" height="20px"/>
-                </div> 
             </div> 
         </>
     );

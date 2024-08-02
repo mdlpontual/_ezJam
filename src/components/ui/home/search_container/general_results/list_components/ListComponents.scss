@@ -54,15 +54,9 @@
                     @include box-reset-default;
                     width: 40px;
                     position: relative;
-                    #plus-icon {
+                    #play-icon {
                         //border: $border-lime-dotted;
                         @include box-reset-default;
-                        position: absolute;
-                    }
-                    #drag-icon {
-                        //border: $border-lime-dotted;
-                        @include box-reset-default;
-                        visibility: hidden;
                         position: absolute;
                     }
                 }
@@ -122,45 +116,28 @@
                         overflow: hidden;
                     }
                 }
-                #col-options {
-                    //border: $border-lime-dotted;
+                #col-plus {
+                    //border: $border-cyan-dotted;
                     @include box-reset-default;
-                    white-space: nowrap;
-                    width: 25px;
-                    margin-right: 5px;
-                    position: relative;
-                    #opt-icon {
-                        //border: $border-lime-dotted;
-                        @include box-reset-default;
-                    }
+                    width: 40px;
+                    padding: 3px;
                 }
-                #col-add, #col-cover, #col-title, 
-                #col-album, #col-options, #col-duration {
+                #col-minus {
+                    //border: $border-cyan-dotted;
+                    @include box-reset-default;
+                    width: 40px;
+                    padding: 3px;
+                }
+                #col-num, #col-cover, #col-title, 
+                #col-album, #col-duration,
+                #col-plus, #col-minus {
                     height: 100%;
                     padding: 0 5px;
-                };  
+                };   
             }
             #songs-inner-row:hover {
                 background-color: $bg-transparent;
                 border-radius: 15px;
-                #col-add {
-                    //border: $border-lime-dotted;
-                    @include box-reset-default;
-                    width: 40px;
-                    position: relative;
-                    #plus-icon {
-                        //border: $border-lime-dotted;
-                        @include box-reset-default;
-                        visibility: hidden;
-                        position: absolute;
-                    }
-                    #drag-icon {
-                        //border: $border-lime-dotted;
-                        @include box-reset-default;
-                        visibility: visible;
-                        position: absolute;
-                    }
-                }
             }
         }
     }

@@ -7,9 +7,9 @@ function OpenPlaylist() {
         <>
             <div id="open-pl-container" className="container-fluid d-flex flex-column">
                 <header id="open-pl-header" className="row">
-                    <div id="go-back-col" className="col-auto d-flex flex-column justify-content-center align-items-center">
+                    <div id="go-back-col" className="col-auto d-flex flex-column justify-content-center align-items-start">
                         <a id="back-to-playlists" type="button">
-                            <img src={IMG.gobackPNG} alt="go back button" width="25px"/>
+                            <img src={IMG.gobackPNG} alt="go back button" width="22px"/>
                         </a>
                     </div>
                     <div id="title-col" className="col d-flex flex-column justify-content-center align-items-start">
@@ -40,15 +40,15 @@ function OpenPlaylist() {
                             <div id="col-title" className="col d-flex justify-content-start align-items-end">
                                 title
                             </div>
-                            <div id="col-album" className="col-3 d-flex justify-content-start align-items-end">
+                            <div id="col-plus" className="col-1 d-flex justify-content-start align-items-end"></div>
+                            <div id="col-minus" className="col-1 d-flex justify-content-start align-items-end"></div>
+                            <div id="col-album" className="col-2 d-flex justify-content-start align-items-end">
                                 album
                             </div>
                             <div id="col-duration" className="col-1 d-flex justify-content-center align-items-end">
                                 <img src={IMG.clockPNG} alt="clock icon" height="15px"/>
                             </div>
-                            <div id="col-saved" className="col-1 d-flex justify-content-start align-items-end">
-
-                            </div>
+                            <div id="col-saved" className="col-1 d-flex justify-content-start align-items-end"></div>
                         </div>
                         <div id="tracks-list" className="row flex-grow-1">
                             <div id="tracks-list-col" className="col">

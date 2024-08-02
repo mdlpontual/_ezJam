@@ -7,10 +7,24 @@ import ArtistPage from "./artist_page/ArtistPage";
 import AlbumPage from "./album_page/AlbumPage";
 
 function SearchBox() {
+
+
     return (
         <>
             <div id="search-container" className="container-fluid d-flex flex-column">
                 <div id="searchbar-row" className="row">
+                    <div id="arrow-box-col" className="col-auto">
+                        <div id="arrow-container" className="container">
+                            <div id="arrow-row" className="row">
+                                <a id="go-back" type="button" className="col-auto d-flex flex-column justify-content-center align-items-center">
+                                    <img src={IMG.gobackPNG} alt="go back button" width="22px"/>
+                                </a>
+                                <a id="go-foward" type="button" className="col-auto d-flex flex-column justify-content-center align-items-center">
+                                    <img src={IMG.gofowardPNG} alt="go foward button" width="22px"/>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                     <div id="searchbar-col" className="col d-flex flex-column justify-content-center align-items-center">
                         <form id="form-elem" method="POST" className="container-fluid d-flex flex-column justify-content-center align-items-center">
                             <div id="form-row" className="row justify-content-center align-items-center">
@@ -33,3 +47,16 @@ function SearchBox() {
 }
 
 export default SearchBox;
+
+/*
+
+<div id="arrow-row" className="row">
+    <a id="go-back" type="button" className="col-auto d-flex flex-column justify-content-center align-items-center">
+        <img src={IMG.gobackPNG} alt="go back button" width="22px"/>
+    </a>
+    <a id="go-foward" type="button" className="col-auto d-flex flex-column justify-content-center align-items-center">
+        <img src={IMG.gofowardPNG} alt="go foward button" width="22px"/>
+    </a>
+</div>
+
+*/

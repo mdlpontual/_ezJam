@@ -47,7 +47,6 @@
                 //border: $border-yellow-dashed;
                 @include box-reset-default;
                 height: 25px;
-                margin-right: 5px;
                 border-bottom: 1px solid white;
                 margin-bottom: 5px;
                 #col-num {
@@ -82,6 +81,16 @@
                         @include box-reset-default;
                     }
                 };
+                #col-plus {
+                    //border: $border-cyan-dotted;
+                    @include box-reset-default;
+                    width: 40px;
+                }
+                #col-minus {
+                    //border: $border-cyan-dotted;
+                    @include box-reset-default;
+                    width: 40px;
+                }
                 #col-album {
                     //border: $border-cyan-dotted;
                     @include box-reset-default;
@@ -102,21 +111,12 @@
                         bottom: 4px;
                     }
                 };
-                #col-opt {
-                    //border: $border-cyan-dotted;
-                    @include box-reset-default;
-                    width: 25px;
-                    margin-right: 5px;
-                    img {
-                        //border: $border-lime-dotted;
-                        @include box-reset-default;
-                    }
-                };
                 #col-num, #col-cover, #col-title, 
-                #col-album, #col-saved, #col-duration {
+                #col-album, #col-plus, #col-minus, 
+                #col-duration {
                     height: 100%;
                     padding: 0 5px;
-                };   
+                };    
             }
             #tracks-list {
                 //border: $border-yellow-dashed;
@@ -140,7 +140,7 @@
                                 overflow: hidden;
                                 position: absolute;
                             }
-                            #add-icon {
+                            #play-icon {
                                 //border: $border-lime-dotted;
                                 @include box-reset-default;
                                 visibility: hidden;
@@ -180,6 +180,18 @@
                                 margin-top: -3px;
                             }
                         };
+                        #col-plus {
+                            //border: $border-cyan-dotted;
+                            @include box-reset-default;
+                            width: 40px;
+                            padding: 3px;
+                        }
+                        #col-minus {
+                            //border: $border-cyan-dotted;
+                            @include box-reset-default;
+                            width: 40px;
+                            padding: 3px;
+                        }
                         #col-album {
                             //border: $border-cyan-dotted;
                             @include box-reset-default;
@@ -203,21 +215,9 @@
                                 overflow: hidden;
                             }
                         };
-                        #col-options {
-                            //border: $border-cyan-dotted;
-                            @include box-reset-default;
-                            white-space: nowrap;
-                            width: 25px;
-                            margin-right: 5px;
-                            position: relative;
-                            #opt-icon {
-                                //border: $border-lime-dotted;
-                                @include box-reset-default;
-                                position: absolute
-                            }
-                        };
                         #col-num, #col-cover, #col-title, 
-                        #col-album, #col-options, #col-duration {
+                        #col-album, #col-plus, #col-minus, 
+                        #col-duration {
                             height: 100%;
                             padding: 0 5px;
                         };   
@@ -238,7 +238,7 @@
                                 visibility: hidden;
                                 position: absolute;
                             }
-                            #add-icon {
+                            #play-icon {
                                 //border: $border-lime-dotted;
                                 @include box-reset-default;
                                 visibility: visible;
