@@ -38,7 +38,7 @@ function SearchBox() {
                 </div>
                 <div id="results-row" className="row">
                     <div id="results-col" className="col d-flex">
-                        <AlbumPage/>
+
                     </div>
                 </div>
             </div>
@@ -47,16 +47,3 @@ function SearchBox() {
 }
 
 export default SearchBox;
-
-/*
-
-<div id="arrow-row" className="row">
-    <a id="go-back" type="button" className="col-auto d-flex flex-column justify-content-center align-items-center">
-        <img src={IMG.gobackPNG} alt="go back button" width="22px"/>
-    </a>
-    <a id="go-foward" type="button" className="col-auto d-flex flex-column justify-content-center align-items-center">
-        <img src={IMG.gofowardPNG} alt="go foward button" width="22px"/>
-    </a>
-</div>
-
-*/
