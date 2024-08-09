@@ -41,19 +41,15 @@
         #button-col{
             //border: $border-cyan-solid;
             @include box-reset-default;
-            button {
+            #login-button {
                 //border: $border-lime-dotted;
                 @include box-reset-default;
                 width: 425px;
                 border-radius: 25px;
                 height: 50px;
                 color: white;
-            }
-            #remember-me-switch {
-                //border: $border-lime-dotted;
-                @include box-reset-default;
-                position: relative;
-                left: 17px;
+                margin-bottom: 50px;
+                
             }
         }
     }

@@ -1,10 +1,11 @@
 import React from "react";
 import IMG from "../../../assets/images/ImagesHUB";
 
-function LoginButtonBox() {
+
+function LoginButtonBox({authUrl}) {
     return (
         <>
-            <main id="button-box-container" className="container">
+            <div id="button-box-container" className="container">
                 <figure id="logo-row" className="row">
                     <div id="logo-col" className="col-auto d-flex flex-column justify-content-start align-items-end">
                         <div id="jammming-logo" className="col">
@@ -20,11 +21,12 @@ function LoginButtonBox() {
                 </figure>
                 <section id="button-row" className="row">
                     <div id="button-col" className="col d-flex flex-column justify-content-end align-items-center pb-5">
-                        <button id="login-button" className="btn btn-primary btn-lg">Login to Spotify</button>
-                        <div id="remember-me-switch" className="form-check form-switch pt-3">
-                            <input id="switch" type="checkbox" role="switch" className="form-check-input"></input>
-                            <label for="switch">Remember-me</label>
-                        </div>
+                        <a 
+                            id="login-button" 
+                            className="btn btn-primary btn-lg d-flex flex-column justify-content-center align-items-center" 
+                            href={authUrl}>
+                                Login to Spotify
+                        </a>
                     </div>
                 </section>
                 <article id="sub-link-row" className="row">
@@ -34,7 +36,7 @@ function LoginButtonBox() {
                         </a>
                     </div>
                 </article>
-            </main>
+            </div>
         </>
     );
 }
