@@ -6,13 +6,13 @@ import NotFoundPage from './NotFoundPage.jsx';
 const routes = createBrowserRouter([
   {
     path: '/',
-    element: <HomePage />,
-    errorElement: <NotFoundPage />
+    element: <HomePage/>,
+    errorElement: <NotFoundPage/>
   },
   {
     path: '/loginpage',
-    element: <LoginPage />,
-    errorElement: <NotFoundPage />
+    element: <LoginPage/>,
+    errorElement: <NotFoundPage/>
   },
 ]);
 

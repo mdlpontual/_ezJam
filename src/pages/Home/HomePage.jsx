@@ -4,8 +4,11 @@ import UserPlaylists from "../../components/ui/home/playlists_container/user_pla
 import SearchBox from "../../components/ui/home/search_container/SearchBox";
 import TrackPlayer from "../../components/ui/home/track_player/TrackPlayer";
 import OpenPlaylist from "../../components/ui/home/playlists_container/open_playlist/OpenPlaylist";
+import useAuth from "../../hooks/useAuth";
 
-function HomePage() {
+function HomePage({ code }) {
+    const accessToken = useAuth(code);
+
     const [isPlaylistOpen, setIsPlaylistOpen] = useState(false);
 
     useEffect(() => {
@@ -37,7 +40,7 @@ function HomePage() {
             }
         };
     }, [isPlaylistOpen]);
-    
+
     return (
         <>
             <div id="home-page-container" className="container-fluid d-flex flex-column">

@@ -38,7 +38,7 @@ function SearchBox() {
                 </div>
                 <div id="results-row" className="row">
                     <div id="results-col" className="col d-flex">
-
+                        <EmptyResultsPage/>
                     </div>
                 </div>
             </div>
