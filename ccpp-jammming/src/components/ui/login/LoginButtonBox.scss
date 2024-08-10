@@ -1,0 +1,77 @@
+#button-box-container{
+    //border: $border-red-solid;
+    @include box-reset-default;
+    background-color: $bg-transparent;
+    border-radius: 20px;
+    height: 750px;
+    width: 500px;
+    #logo-row{
+        //border: $border-yellow-solid;
+        @include box-reset-default;
+        height: 30%;
+        #logo-col{
+            //border: $border-cyan-solid;
+            @include box-reset-default;
+            height: 100%;
+            #jammming-logo {
+                //border: $border-lime-dotted;
+                @include box-reset-default; 
+                margin-top: 20px;
+                img {
+                    width: 100%;
+                }
+            }
+            #spotify-logo{
+                //border: $border-lime-dotted;
+                margin-right: 50px;
+                position: relative;
+                top: -65px;
+                #with-text{
+                    //border: $border-lime-dotted;
+                    position: relative;
+                    top: 25px;
+                }
+            }
+        }
+    }
+    #button-row{
+        //border: $border-yellow-solid;
+        @include box-reset-default;
+        height: 60%;
+        #button-col{
+            //border: $border-cyan-solid;
+            @include box-reset-default;
+            #login-button {
+                //border: $border-lime-dotted;
+                @include box-reset-default;
+                width: 425px;
+                border-radius: 25px;
+                height: 50px;
+                color: white;
+                margin-bottom: 50px;
+                
+            }
+        }
+    }
+    #sub-link-row{
+        //border: $border-yellow-solid;
+        @include box-reset-default;
+        height: 10%;
+        #sub-link-col{
+            //border: $border-cyan-solid;
+            @include box-reset-default;
+            p {
+                color: $primary;
+                font-weight: bold;
+            }
+            a {
+                text-decoration: none;
+            }
+            a:hover {
+                p {
+                    color: $secondary;
+                }
+            }
+        }
+    }
+}

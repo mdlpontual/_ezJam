@@ -1,0 +1,144 @@
+#gen-results-container {
+    #gen-results-artists {
+        #gen-results-artists-col {
+            #artist-inner-row {
+                //border: $border-yellow-dotted;
+                @include box-reset-default;
+                height: 75px;
+                #artist-thumbnail {
+                    //border: $border-cyan-dotted;
+                    @include box-reset-default;
+                    width: 75px;
+                }
+                #artist-name {
+                    //border: $border-cyan-dotted;
+                    @include box-reset-default;
+                }
+            }
+            #artist-inner-row:hover {
+                background-color: $bg-transparent;
+                border-radius: 15px;
+            }
+        }
+    }  
+    #gen-results-albuns {
+        #gen-results-albuns-col {
+            #albuns-inner-row {
+                //border: $border-yellow-dotted;
+                @include box-reset-default;
+                height: 75px;
+                #album-thumbnail {
+                    //border: $border-cyan-dotted;
+                    @include box-reset-default;
+                    width: 75px;
+                }
+                #album-title {
+                    //border: $border-cyan-dotted;
+                    @include box-reset-default;
+                }
+            }
+            #albuns-inner-row:hover {
+                background-color: $bg-transparent;
+                border-radius: 15px;
+            }
+        }
+    }
+    #gen-results-songs {
+        #gen-results-songs-col {
+            #songs-inner-row {
+                //border: $border-yellow-dashed;
+                @include box-reset-default;
+                height: 50px;
+                #col-add {
+                    //border: $border-lime-dotted;
+                    @include box-reset-default;
+                    width: 40px;
+                    position: relative;
+                    #play-icon {
+                        //border: $border-lime-dotted;
+                        @include box-reset-default;
+                        position: absolute;
+                    }
+                }
+                #col-cover {
+                    //border: $border-lime-dotted;
+                    @include box-reset-default;
+                    width: 50px;
+                    img {
+                        //border: $border-lime-dotted;
+                        @include box-reset-default;
+                    }
+                }
+                #col-title {
+                    //border: $border-lime-dotted;
+                    @include box-reset-default;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    flex-wrap: wrap;
+                    h5 {
+                        //border: $border-magenta-dotted;
+                        @include box-reset-default;
+                        text-overflow: ellipsis;
+                        overflow: hidden;
+                        width: 100%;
+                        margin-bottom: -3px;
+                    }
+                    p {
+                        //border: $border-magenta-dotted;
+                        @include box-reset-default;
+                        text-overflow: ellipsis;
+                        overflow: hidden;
+                        width: 100%;
+                        margin-top: -3px;
+                    }
+                }
+                #col-album {
+                    //border: $border-lime-dotted;
+                    @include box-reset-default;
+                    white-space: nowrap;
+                    p {
+                        //border: $border-lime-dotted;
+                        @include box-reset-default;
+                        text-overflow: ellipsis;
+                        overflow: hidden;
+                    }
+                }
+                #col-duration {
+                    //border: $border-lime-dotted;
+                    @include box-reset-default;
+                    white-space: nowrap;
+                    width: 55px;
+                    p {
+                        //border: $border-lime-dotted;
+                        @include box-reset-default;
+                        text-overflow: ellipsis;
+                        overflow: hidden;
+                    }
+                }
+                #col-plus {
+                    //border: $border-cyan-dotted;
+                    @include box-reset-default;
+                    width: 40px;
+                    padding: 3px;
+                }
+                #col-minus {
+                    //border: $border-cyan-dotted;
+                    @include box-reset-default;
+                    width: 40px;
+                    padding: 3px;
+                }
+                #col-num, #col-cover, #col-title, 
+                #col-album, #col-duration,
+                #col-plus, #col-minus {
+                    height: 100%;
+                    padding: 0 5px;
+                };   
+            }
+            #songs-inner-row:hover {
+                background-color: $bg-transparent;
+                border-radius: 15px;
+            }
+        }
+    }
+}

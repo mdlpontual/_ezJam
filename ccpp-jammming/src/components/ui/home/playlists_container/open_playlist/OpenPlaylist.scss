@@ -1,0 +1,201 @@
+#open-pl-container {
+    //border: $border-red-solid;
+    @include box-reset-default;
+    height: 100%;
+    padding: 0px 15px;
+    #open-pl-header {
+        //border: $border-yellow-solid;
+        @include box-reset-default;
+        height: 75px;
+        #go-back-col {
+            //border: $border-cyan-solid;
+            @include box-reset-default;
+            width: 35px;
+            img {
+                //border: $border-lime-dashed;
+                @include box-reset-default;
+            }
+        }
+        #title-col {
+            //border: $border-cyan-solid;
+            @include box-reset-default;
+            padding: 0px 5px;
+            overflow: hidden;
+            h4 {
+                //border: $border-lime-dashed;
+                @include box-reset-default;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                max-width: 100%;
+            }
+        }
+        #checkmark-col {
+            //border: $border-cyan-solid;
+            @include box-reset-default;
+            padding-left: 10px;
+            padding-right: 10px;
+            img {
+                //border: $border-lime-dashed;
+                @include box-reset-default;
+            }
+        }
+        #blank-col {
+            //border: $border-cyan-solid;
+            @include box-reset-default;
+            padding-left: 10px;
+        }
+        #edit-button-col {
+            //border: $border-cyan-solid;
+            @include box-reset-default;
+            padding-left: 10px;
+            img {
+                //border: $border-lime-dashed;
+                @include box-reset-default;
+            }
+        }
+        #share-button-col {
+            //border: $border-cyan-solid;
+            @include box-reset-default;
+            padding-left: 10px;
+            img {
+                //border: $border-lime-dashed;
+                @include box-reset-default;
+            }
+        }
+        #delete-button-col {
+            //border: $border-cyan-solid;
+            @include box-reset-default;
+            padding-left: 10px;
+            img {
+                //border: $border-lime-dashed;
+                @include box-reset-default;
+            }
+        }
+    }
+    #open-pl-main {
+        //border: $border-yellow-solid;
+        @include box-reset-default;
+        #open-pl-col {
+            //border: $border-cyan-solid;
+            @include box-reset-default;
+            #top-labels {
+                //border: $border-yellow-dashed;
+                @include box-reset-default;
+                height: 25px;
+                margin-right: 5px;
+                border-bottom: 1px solid white;
+                #col-num {
+                    //border: $border-cyan-dotted;
+                    @include box-reset-default;
+                    width: 40px;
+                    h6 {
+                        //border: $border-lime-dotted;
+                        @include box-reset-default;
+                        font-weight: lighter;
+                    }
+                };
+                #col-cover {
+                    //border: $border-cyan-dotted;
+                    @include box-reset-default;
+                    width: 50px;
+                    img {
+                        //border: $border-lime-dotted;
+                        @include box-reset-default;
+                    }
+                };
+                #col-title {
+                    //border: $border-cyan-dotted;
+                    @include box-reset-default;
+                    p {
+                        //border: $border-lime-dotted;
+                        @include box-reset-default;
+                        font-weight: lighter;
+                    }
+                    h5 {
+                        //border: $border-lime-dotted;
+                        @include box-reset-default;
+                    }
+                };
+                #col-saved {
+                    //border: $border-cyan-dotted;
+                    @include box-reset-default;
+                    width: 25px;
+                    img {
+                        //border: $border-lime-dotted;
+                        @include box-reset-default;
+                    }
+                };
+                #col-album {
+                    //border: $border-cyan-dotted;
+                    @include box-reset-default;
+                    p {
+                        //border: $border-lime-dotted;
+                        @include box-reset-default;
+                        font-weight: lighter;
+                    }
+                };
+                #col-duration {
+                    //border: $border-cyan-dotted;
+                    @include box-reset-default;
+                    width: 55px;
+                    img {
+                        //border: $border-lime-dotted;
+                        @include box-reset-default;
+                        position: relative;
+                        bottom: 4px;
+                    }
+                };
+                #col-plus {
+                    //border: $border-cyan-dotted;
+                    @include box-reset-default;
+                    width: 40px;
+                }
+                #col-minus {
+                    //border: $border-cyan-dotted;
+                    @include box-reset-default;
+                    width: 40px;
+                    margin-right: 5px;
+                }
+                #col-num, #col-cover, #col-title, 
+                #col-saved, #col-album, #col-duration,
+                #col-plus, #col-minus {
+                    height: 100%;
+                    padding: 0 5px;
+                };   
+            }
+            #tracks-list {
+                //border: $border-yellow-dashed;
+                @include box-reset-default;
+                padding: 5px 0 5px 0;
+                overflow-y: hidden;
+                scrollbar-gutter: stable;
+                padding-right: 5px;
+                #tracks-list-col {
+                    //border: $border-cyan-dashed;
+                    @include box-reset-default;
+                    height: 50px;
+                }
+            }
+            #tracks-list:hover {
+                overflow-y: auto;
+            }
+        }
+    }
+    #open-pl-footer {
+        //border: $border-yellow-solid;
+        @include box-reset-default;
+        border-top: 1px solid white;
+        height: 90px;
+        #save-button-col {
+            //border: $border-cyan-solid;
+            @include box-reset-default;
+            padding-bottom: 5px;
+            #save-button {
+                color: white;
+                width: 50%;
+                border-radius: 25px;
+            }
+        }
+    }
+}

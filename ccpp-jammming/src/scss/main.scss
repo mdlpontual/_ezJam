@@ -1,0 +1,50 @@
+//--------bootstrap_override--------//
+
+$primary: #1DB954;
+$secondary:  rgb(241, 91, 241);
+
+$form-check-input-checked-border-color: $primary;
+$form-check-input-focus-box-shadow: none;
+
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+
+//----------custom_modules----------//
+
+@import "./custom_modules/borders.scss";
+@import "./custom_modules/mixins.scss";
+@import "./custom_modules/variables.scss";
+
+//------------home_page------------//
+
+@import "../pages/home/HomePage.scss";
+@import "../components/ui/home/header/HomeHeader.scss";
+@import "../components/ui/home/playlists_container/user_playlists/UserPlaylists.scss";
+@import "../components/ui/home/playlists_container/user_playlists/playlist/Playlist.scss";
+@import "../components/ui/home/playlists_container/open_playlist/OpenPlaylist.scss";
+@import "../components/ui/home/playlists_container/open_playlist/track/Track.scss";
+@import "../components/ui/home/track_player/TrackPlayer.scss";
+@import "../components/ui/home/search_container/SearchBox.scss";
+@import "../components/ui/home/search_container/general_results/GeneralResultsPage.scss";
+@import "../components/ui/home/search_container/general_results/list_components/ListComponents.scss";
+@import "../components/ui/home/search_container/artist_page/ArtistPage.scss";
+@import "../components//ui/home/search_container/artist_page/section_components/SectionComponents.scss";
+@import "../components/ui/home/search_container/album_page/AlbumPage.scss";
+
+//-----------login_page-----------//
+
+@import "../pages/login/LoginPage.scss";
+@import "../components/ui/login/LoginButtonBox.scss";
+
+//------------------------------------------------------------------------------//
+
+*{
+    margin: 0;
+    padding: 0;
+    color: white;
+}
+
+body{
+    background-image: url(../assets/images/background/00_sparkly-purple-bkg.jpg);
+}
+
+@include custom-scroll-bar;
