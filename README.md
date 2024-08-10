@@ -20,4 +20,6 @@ The primary goals of this project are:
 * Build a UI showing two containers at all times, one for displaying playlists and another for search results, so that the user can see in real-time any modifications to their playlists;
 * Make the interactions between tracks and playlists as effortless as possible by reducing the number of clicks the user needs to make to add, edit, share, or remove content;
 * Create the same easy-to-use experience for editing and creating playlists;
-* Embed a track player so the user can listen to the content, but with a more comprehensive range of controls.
+* Embed a track player so the user can listen to the content, but with a more comprehensive range of controls. 
+
+..
