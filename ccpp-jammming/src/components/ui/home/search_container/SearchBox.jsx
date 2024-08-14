@@ -5,10 +5,9 @@ import NoResultsPage from "./non_results/NoResultsPage";
 import GeneralResultsPage from "./general_results/GeneralResultsPage";
 import ArtistPage from "./artist_page/ArtistPage";
 import AlbumPage from "./album_page/AlbumPage";
+import SearchInput from "../../../SearchInput";
 
-function SearchBox() {
-
-
+function SearchBox({ code }) {
     return (
         <>
             <div id="search-container" className="container-fluid d-flex flex-column">
@@ -31,14 +30,14 @@ function SearchBox() {
                                 <a id="search-button" type="button" className="col-2 d-flex justify-content-center align-items-center">
                                     <img className="col" src={IMG.searchPNG} alt="search button" width="30px"/>
                                 </a>
-                                <input id="input-elem" type="search" placeholder="Search the Spotify Library" className="col"/>
+                                <SearchInput code={code}/>
                             </div>
                         </form>
                     </div>
                 </div>
                 <div id="results-row" className="row">
                     <div id="results-col" className="col d-flex">
-                        <EmptyResultsPage/>
+                        <GeneralResultsPage/>
                     </div>
                 </div>
             </div>

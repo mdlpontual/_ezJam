@@ -21,7 +21,7 @@ function useAuth(code) {
 
                 setAccessToken(res.data.accessToken);
                 setRefreshToken(res.data.refreshToken);
-                setExpiresIn(res.data.expiresIn);
+                setExpiresIn(res.data.expiresIn); 
 
                 console.log("Authorization successful:", res.data);
                 window.history.pushState({}, null, '/');
@@ -32,7 +32,7 @@ function useAuth(code) {
                 isRequestInProgress.current = false;
             }
         };
-
+        
         fetchAuthData();
     }, [code]);
 
@@ -62,7 +62,16 @@ function useAuth(code) {
             fetchAuthData();
         }, (expiresIn - 60) * 1000);
         return () => clearInterval(interval); // Clean up the timeout when the component is unmounted
-    }, [refreshToken, expiresIn]);
+    }, [refreshToken, expiresIn]); 
+
+    
+
+    /* console.log("code in useAuth: ", code);
+    console.log("accessToken in useAuth: ", accessToken);
+    console.log("refreshToken in useAuth: ", refreshToken);
+    console.log("expiresIn in useAuth: ", expiresIn);  */
+    
+   
 
     return { accessToken, refreshToken, expiresIn };
 }
