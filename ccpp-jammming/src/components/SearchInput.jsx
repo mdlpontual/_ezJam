@@ -11,15 +11,6 @@ function SearchInput({ code }) {
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
-  /* 
-  
-  console.log("code in SearchInput: " + code);
-  console.log("accessToken in SearchInput: " + accessToken);
-  console.log("refreshToken in SearchInput: " + refreshToken);
-  console.log("expiresIn in SearchInput: " + expiresIn); 
-  
-  */
-
   useEffect(() => {
     if (!accessToken) return;
     spotifyApi.setAccessToken(accessToken);
