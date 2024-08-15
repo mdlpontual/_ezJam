@@ -13,7 +13,7 @@ function GeneralResultsPage() {
                         <ArtistResults/>
                     </div>
                 </div>
-                <div id="gen-results-albuns" className="row">
+                {/* <div id="gen-results-albuns" className="row">
                     <div id="gen-results-albuns-col" className="col">
                         <AlbumResults/>
                     </div>
@@ -22,7 +22,7 @@ function GeneralResultsPage() {
                     <div id="gen-results-songs-col" className="col">
                         <SongResults/>
                     </div>
-                </div>
+                </div> */}
             </div>
         </>
     );       

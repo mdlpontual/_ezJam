@@ -7,14 +7,15 @@ const spotifyApi = new SpotifyWebApi({
 });
 
 function SearchInput({ code }) {
-  const { accessToken, refreshToken, expiresIn } = useAuth(code);
+  const { accessToken } = useAuth(code);
   const [search, setSearch] = useState("");
   const [searchTrackResults, setSearchTrackResults] = useState([]);
   const [searchArtistResults, setSearchArtistResults] = useState([]);
   const [searchAlbumResults, setSearchAlbumResults] = useState([]);
-  console.log(searchTrackResults);
+
+  /* console.log(searchTrackResults);
   console.log(searchArtistResults);
-  console.log(searchAlbumResults);
+  console.log(searchAlbumResults); */
 
   useEffect(() => {
     if (!accessToken) return;
@@ -24,7 +25,10 @@ function SearchInput({ code }) {
   useEffect(() => {
     if (!search) return setSearchTrackResults([]);
     if (!accessToken) return;
+
+    let cancel = false;
     spotifyApi.searchTracks(search).then(res => {
+      if (cancel) return;
       setSearchTrackResults(res.body.tracks.items.map(track => {
         const smallestAlbumCover = track.album.images.length - 1;
         return {
@@ -36,13 +40,17 @@ function SearchInput({ code }) {
           duration: track.duration_ms,
         }
       }));
-    }) 
+    })
+    return () => cancel = true;
   }, [search, accessToken]);  
 
   useEffect(() => {
     if (!search) return setSearchArtistResults([]);
     if (!accessToken) return;
+
+    let cancel = false;
     spotifyApi.searchArtists(search).then(res => {
+      if (cancel) return;
       setSearchArtistResults(res.body.artists.items.map(artist => {
         const smallestProfilePicture = artist.images.length - 1;
         return {
@@ -51,12 +59,15 @@ function SearchInput({ code }) {
         }
       }));
     })
+    return () => cancel = true;
   }, [search, accessToken]);
 
-   useEffect(() => {
+  useEffect(() => {
     if (!search) return setSearchAlbumResults([]);
     if (!accessToken) return;
+    let cancel = false;
     spotifyApi.searchAlbums(search).then(res => {
+      if (cancel) return;
       setSearchAlbumResults(res.body.albums.items.map(album => {
         const smallestAlbumCover = album.images.length - 1;
         return {
@@ -69,7 +80,14 @@ function SearchInput({ code }) {
         }
       }));
     })
-  }, [search, accessToken]); 
+    return () => cancel = true;
+  }, [search, accessToken]);
+  
+  const disableEnter = (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+    }
+  };
 
   return (
     <>
@@ -80,6 +98,7 @@ function SearchInput({ code }) {
         className="col"
         value={search}
         onChange={e => setSearch(e.target.value)}
+        onKeyDown={disableEnter}
       />
     </>
   );
