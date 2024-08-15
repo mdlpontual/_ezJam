@@ -35,6 +35,22 @@
                 #album-title {
                     //border: $border-cyan-dotted;
                     @include box-reset-default;
+                    h5 {
+                        //border: $border-magenta-dotted;
+                        @include box-reset-default;
+                        text-overflow: ellipsis;
+                        overflow: hidden;
+                        width: 100%;
+                        margin-bottom: -2px;
+                    }
+                    p {
+                        //border: $border-magenta-dotted;
+                        @include box-reset-default;
+                        text-overflow: ellipsis;
+                        overflow: hidden;
+                        width: 100%;
+                        margin-top: -2px;
+                    }
                 }
             }
             #albuns-inner-row:hover {

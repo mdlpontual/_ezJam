@@ -8,8 +8,9 @@ function Albuns() {
                 <div id="album-thumbnail" className="col-1 d-flex justify-content-center align-items-center">
                     <img src={IMG.placeHolders} alt="album cover" height="50px"/>
                 </div>
-                <div id="album-title" className="col d-flex justify-content-start align-items-center">
+                <div id="album-title" className="col d-flex flex-column justify-content-center align-items-start">
                     <h5>Unlimited Love</h5>
+                    <p>2022 - Red Hot Chili Peppers</p>
                 </div>
             </div>  
         </>
