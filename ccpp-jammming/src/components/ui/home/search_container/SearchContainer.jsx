@@ -1,13 +1,24 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import IMG from "../../../../assets/images/ImagesHUB";
 import EmptyResultsPage from "./non_results/EmptyResultsPage";
 import NoResultsPage from "./non_results/NoResultsPage";
 import GeneralResultsPage from "./general_results/GeneralResultsPage";
 import ArtistPage from "./artist_page/ArtistPage";
 import AlbumPage from "./album_page/AlbumPage";
-import SearchInput from "../../../SearchInput";
+import useAuth from "../../../../hooks/useAuth";
+import useResults from "../../../../hooks/useResults";
 
-function SearchBox({ code }) {
+function SearchContainer({ code }) {
+    const [search, setSearch] = useState("");
+    const { accessToken } = useAuth(code);
+    const { searchTrackResults, searchArtistResults, searchAlbumResults } = useResults({search, accessToken});
+  
+    const disableEnter = (event) => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+      }
+    };
+  
     return (
         <>
             <div id="search-container" className="container-fluid d-flex flex-column">
@@ -30,14 +41,21 @@ function SearchBox({ code }) {
                                 <div id="search-button" className="col-2 d-flex justify-content-center align-items-center">
                                     <img className="col" src={IMG.searchPNG} alt="search button" width="30px"/>
                                 </div>
-                                <SearchInput code={code}/>
+                                <input 
+                                    id="input-elem" 
+                                    type="search" 
+                                    placeholder="Search the Spotify Library" 
+                                    className="col" 
+                                    value={search} 
+                                    onChange={e => setSearch(e.target.value)} 
+                                    onKeyDown={disableEnter}/>
                             </div>
                         </form>
                     </div>
                 </div>
                 <div id="results-row" className="row">
                     <div id="results-col" className="col d-flex">
-                        <GeneralResultsPage/>
+                        <GeneralResultsPage artistsResults={searchArtistResults} albumResults={searchAlbumResults} songsResults={searchTrackResults}/>
                     </div>
                 </div>
             </div>
@@ -45,4 +63,4 @@ function SearchBox({ code }) {
     );
 }
 
-export default SearchBox;
+export default SearchContainer;

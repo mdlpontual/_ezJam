@@ -2,11 +2,13 @@ import React from "react";
 import IMG from "../../../../../../assets/images/ImagesHUB";
 import Albuns from "./unit_components/Albuns";
 
-function AlbumResults() {
+function AlbumResults({ albumResults }) {
     return (
         <>
             <h4>albuns:</h4>
-            <Albuns/>
+            {albumResults.map(album => (
+                <Albuns album={album} key={album.uri}/>
+            ))}
         </>
     );
 }

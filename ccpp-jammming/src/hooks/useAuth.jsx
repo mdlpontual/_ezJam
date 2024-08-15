@@ -61,17 +61,8 @@ function useAuth(code) {
             };
             fetchAuthData();
         }, (expiresIn - 60) * 1000);
-        return () => clearInterval(interval); // Clean up the timeout when the component is unmounted
+        return () => clearInterval(interval); 
     }, [refreshToken, expiresIn]); 
-
-    
-
-    /* console.log("code in useAuth: ", code);
-    console.log("accessToken in useAuth: ", accessToken);
-    console.log("refreshToken in useAuth: ", refreshToken);
-    console.log("expiresIn in useAuth: ", expiresIn);  */
-    
-   
 
     return { accessToken, refreshToken, expiresIn };
 }

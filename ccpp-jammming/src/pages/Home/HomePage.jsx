@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import HomeHeader from "../../components/ui/home/header/HomeHeader";
 import UserPlaylists from "../../components/ui/home/playlists_container/user_playlists/UserPlaylists";
-import SearchBox from "../../components/ui/home/search_container/SearchBox";
+import SearchContainer from "../../components/ui/home/search_container/SearchContainer";
 import TrackPlayer from "../../components/ui/home/track_player/TrackPlayer";
 import OpenPlaylist from "../../components/ui/home/playlists_container/open_playlist/OpenPlaylist";
 
@@ -51,7 +51,7 @@ function HomePage({ code }) {
                         {isPlaylistOpen ? <OpenPlaylist /> : <UserPlaylists />}
                     </div>
                     <div id="search-col" className="col">
-                        <SearchBox code={code}/>
+                        <SearchContainer code={code}/>
                     </div>
                 </main>
                 <footer id="footer-row" className="row">
