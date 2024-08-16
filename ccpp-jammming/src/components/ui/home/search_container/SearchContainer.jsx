@@ -1,17 +1,10 @@
 import React, { useState, useEffect } from "react";
 import IMG from "../../../../assets/images/ImagesHUB";
-import EmptyResultsPage from "./non_results/EmptyResultsPage";
-import NoResultsPage from "./non_results/NoResultsPage";
-import GeneralResultsPage from "./general_results/GeneralResultsPage";
-import ArtistPage from "./artist_page/ArtistPage";
-import AlbumPage from "./album_page/AlbumPage";
-import useAuth from "../../../../hooks/useAuth";
-import useResults from "../../../../hooks/useResults";
+import useAdimSearchPage from "../../../../hooks/useAdimSearchPage";
 
 function SearchContainer({ code }) {
     const [search, setSearch] = useState("");
-    const { accessToken } = useAuth(code);
-    const { searchArtistResults, searchAlbumResults, searchTrackResults } = useResults({search, accessToken});
+    const activePage = useAdimSearchPage(search, code);
   
     const disableEnter = (event) => {
       if (event.key === 'Enter') {
@@ -55,7 +48,7 @@ function SearchContainer({ code }) {
                 </div>
                 <div id="results-row" className="row">
                     <div id="results-col" className="col d-flex">
-                        <GeneralResultsPage artistsResults={searchArtistResults} albumResults={searchAlbumResults} songsResults={searchTrackResults}/>
+                        {activePage}
                     </div>
                 </div>
             </div>

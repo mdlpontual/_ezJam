@@ -15,8 +15,10 @@ function Albuns({ album }) {
                     <img src={album.cover} alt="album cover" height="65px"/>
                 </div>
                 <div id="album-title" className="col d-flex flex-column justify-content-center align-items-start">
-                    <h5>{album.album}</h5>
-                    <p>{album.year} - {album.artist}</p>
+                    <a id="open-album-page" type="button">
+                        <h5>{album.album}</h5>
+                    </a>
+                    <p>{album.year} - <a id="open-artist-page" type="button">{album.artist}</a></p>
                 </div>
             </div>  
         </>

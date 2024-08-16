@@ -8,11 +8,13 @@
         #gen-results-artists-col {
             //border: $border-cyan-dashed;
             @include box-reset-default;
+            padding-bottom: 25px;
             h4 {
                 //border: $border-lime-dotted;
                 @include box-reset-default;
                 border-bottom: 1px solid white;
                 height: 30px;
+                margin-bottom: 10px;
             }
         }
     }  
@@ -22,11 +24,13 @@
         #gen-results-albuns-col {
             //border: $border-cyan-dashed;
             @include box-reset-default;
+            padding-bottom: 25px;
             h4 {
                 //border: $border-lime-dotted;
                 @include box-reset-default;
                 border-bottom: 1px solid white;
                 height: 30px;
+                margin-bottom: 10px;
             }
         }
     }
@@ -36,12 +40,14 @@
         #gen-results-songs-col {
             //border: $border-cyan-dashed;
             @include box-reset-default;
+            padding-bottom: 25px;
             h4 {
                 //border: $border-lime-dotted;
                 @include box-reset-default;
                 border-bottom: 1px solid white;
                 margin-bottom: 5px;
                 height: 30px;
+                margin-bottom: 10px;
             }
             
         }

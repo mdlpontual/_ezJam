@@ -4,40 +4,10 @@ import UserPlaylists from "../../components/ui/home/playlists_container/user_pla
 import SearchContainer from "../../components/ui/home/search_container/SearchContainer";
 import TrackPlayer from "../../components/ui/home/track_player/TrackPlayer";
 import OpenPlaylist from "../../components/ui/home/playlists_container/open_playlist/OpenPlaylist";
+import useAdimPlaylistPage from "../../hooks/useAdimPlaylistPage";
 
 function HomePage({ code }) {
-    const [isPlaylistOpen, setIsPlaylistOpen] = useState(false);
-
-    useEffect(() => {
-        const handlePlaylistClick = () => {
-            setIsPlaylistOpen(true);
-        };
-
-        const handleBackClick = () => {
-            setIsPlaylistOpen(false);
-        };
-
-        const playlistElement = document.getElementById("pl-name");
-        const backElement = document.getElementById("back-to-playlists");
-
-        if (playlistElement) {
-            playlistElement.addEventListener("click", handlePlaylistClick);
-        }
-
-        if (backElement) {
-            backElement.addEventListener("click", handleBackClick);
-        }
-
-        return () => {
-            if (playlistElement) {
-                playlistElement.removeEventListener("click", handlePlaylistClick);
-            }
-            if (backElement) {
-                backElement.removeEventListener("click", handleBackClick);
-            }
-        };
-    }, [isPlaylistOpen]);
-
+    const isPlaylistOpen = useAdimPlaylistPage();
     return (
         <>
             <div id="home-page-container" className="container-fluid d-flex flex-column">
