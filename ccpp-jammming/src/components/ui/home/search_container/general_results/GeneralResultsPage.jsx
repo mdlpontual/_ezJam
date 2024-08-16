@@ -4,7 +4,7 @@ import ArtistResults from "./list_components/ArtistResults";
 import AlbumResults from "./list_components/AlbumResults";
 import SongResults from "./list_components/SongResults";
 
-function GeneralResultsPage({ songsResults, artistsResults, albumResults }) {
+function GeneralResultsPage({ artistsResults, albumResults, songsResults }) {
     return (
         <>
             <div id="gen-results-container" className="container-fluid">

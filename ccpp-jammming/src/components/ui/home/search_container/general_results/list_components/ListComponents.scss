@@ -8,7 +8,11 @@
                 #artist-thumbnail {
                     //border: $border-cyan-dotted;
                     @include box-reset-default;
-                    width: 75px;
+                    width: 65px;
+                    height: 65px;
+                    border-radius: 50%;
+                    overflow: hidden;
+                    margin: 0 15px 0 10px;
                 }
                 #artist-name {
                     //border: $border-cyan-dotted;
@@ -31,6 +35,11 @@
                     //border: $border-cyan-dotted;
                     @include box-reset-default;
                     width: 75px;
+                    img {
+                        //border: $border-cyan-dotted;
+                        @include box-reset-default;
+                        border-radius: 5px;
+                    }
                 }
                 #album-title {
                     //border: $border-cyan-dotted;

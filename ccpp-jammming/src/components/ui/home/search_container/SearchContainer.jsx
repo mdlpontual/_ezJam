@@ -11,7 +11,7 @@ import useResults from "../../../../hooks/useResults";
 function SearchContainer({ code }) {
     const [search, setSearch] = useState("");
     const { accessToken } = useAuth(code);
-    const { searchTrackResults, searchArtistResults, searchAlbumResults } = useResults({search, accessToken});
+    const { searchArtistResults, searchAlbumResults, searchTrackResults } = useResults({search, accessToken});
   
     const disableEnter = (event) => {
       if (event.key === 'Enter') {

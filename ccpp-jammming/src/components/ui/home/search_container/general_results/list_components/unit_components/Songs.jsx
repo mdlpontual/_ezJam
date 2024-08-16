@@ -2,11 +2,17 @@ import React from "react";
 import IMG from "../../../../../../../assets/images/ImagesHUB";
 
 function Songs({ song }) {
+    let songCover;
+    if (song.cover) {
+        songCover = song.cover;
+    } else {
+        songCover = IMG.placeHolders;
+    }
     return (
         <>
             <div id="songs-inner-row" className="row">
                 <div id="col-add" className="col-1 d-flex justify-content-center align-items-center">
-                    <img id="play-icon" src={IMG.play2PNG} alt="play icon" width="22px"/>
+                    <img id="play-icon" src={IMG.play2PNG} alt="play icon" width="20px"/>
                 </div>
                 <div id="col-cover" className="col-1 d-flex justify-content-center align-items-center">
                     <img src={song.cover} height="40px"/>
