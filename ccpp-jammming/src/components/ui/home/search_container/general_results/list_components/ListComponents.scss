@@ -8,11 +8,22 @@
                 #artist-thumbnail {
                     //border: $border-cyan-dotted;
                     @include box-reset-default;
-                    width: 75px;
+                    width: 65px;
+                    height: 65px;
+                    border-radius: 50%;
+                    overflow: hidden;
+                    margin: 0 15px 0 10px;
                 }
                 #artist-name {
                     //border: $border-cyan-dotted;
                     @include box-reset-default;
+                    #open-artist-page{
+                        //border: $border-lime-dotted;
+                        @include box-reset-default;
+                    }
+                    #open-artist-page:hover{
+                        text-decoration: underline;
+                    }
                 }
             }
             #artist-inner-row:hover {
@@ -31,10 +42,18 @@
                     //border: $border-cyan-dotted;
                     @include box-reset-default;
                     width: 75px;
+                    img {
+                        //border: $border-cyan-dotted;
+                        @include box-reset-default;
+                        border-radius: 5px;
+                    }
                 }
                 #album-title {
                     //border: $border-cyan-dotted;
                     @include box-reset-default;
+                    #open-album-page:hover{
+                        text-decoration: underline;
+                    }
                     h5 {
                         //border: $border-magenta-dotted;
                         @include box-reset-default;
@@ -50,6 +69,9 @@
                         overflow: hidden;
                         width: 100%;
                         margin-top: -2px;
+                        #open-artist-page:hover{
+                            text-decoration: underline;
+                        }
                     }
                 }
             }
