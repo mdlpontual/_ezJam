@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import SpotifyWebApi from "spotify-web-api-node";
-import IMG from "../assets/images/ImagesHUB";
 
 const spotifyApi = new SpotifyWebApi({
   clientId: "9ebed4e372ba404ca817a45f1136c5d8",
@@ -12,8 +11,8 @@ function useResults({ search, accessToken }) {
     const [searchTrackResults, setSearchTrackResults] = useState([]);
 
     useEffect(() => {
-        if (!accessToken) return;
-        spotifyApi.setAccessToken(accessToken);
+      if (!accessToken) return;
+      spotifyApi.setAccessToken(accessToken);
     }, [accessToken]);
 
     useEffect(() => {

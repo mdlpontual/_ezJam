@@ -1,70 +1,80 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
+import useAuth from "./useAuth";
+import useResults from "./useResults";
 import EmptyResultsPage from "../components/ui/home/search_container/non_results/EmptyResultsPage";
 import GeneralResultsPage from "../components/ui/home/search_container/general_results/GeneralResultsPage";
 import ArtistPage from "../components/ui/home/search_container/artist_page/ArtistPage";
 import AlbumPage from "../components/ui/home/search_container/album_page/AlbumPage";
-import useResults from "./useResults";
-import useAuth from "./useAuth";
+
+const emptyPage = <EmptyResultsPage />;
 
 function useAdimSearchPage(search, code) {
-    const [activePage, setActivePage] = useState();
-    const [history, setHistory] = useState([]);
+    const [activePage, setActivePage] = useState(emptyPage);
+    const [history, setHistory] = useState([emptyPage]);
+    const [currentHistoryIndex, setCurrentHistoryIndex] = useState(0);
+
     const { accessToken } = useAuth(code);
-    const { searchArtistResults, searchAlbumResults, searchTrackResults } = useResults({search, accessToken})
+    const { searchArtistResults, searchAlbumResults, searchTrackResults } = useResults({search, accessToken});
+    
+    useEffect(() => {
+        if (!search) {
+            setActivePage(emptyPage);
+        } else {
+            const newPage = (
+                <GeneralResultsPage
+                    artistsResults={searchArtistResults}
+                    albumResults={searchAlbumResults}
+                    songsResults={searchTrackResults}
+                    onArtistClick={() => handleArtistClick()}
+                    onAlbumClick={() => handleAlbumClick()}
+                />
+            );
+            updateHistory(newPage);
+        }
+    }, [search, searchArtistResults, searchAlbumResults, searchTrackResults]);
 
-    const emptyPage = <EmptyResultsPage />;
-    const generalPage = <GeneralResultsPage artistsResults={searchArtistResults} albumResults={searchAlbumResults} songsResults={searchTrackResults}/>;
-    const artistPage = <ArtistPage artistsResults={searchArtistResults} songsResults={searchTrackResults}/>;
-    const albumPage = <AlbumPage albumResults={searchAlbumResults} songsResults={searchTrackResults}/>;
+    const handleArtistClick = () => {
+        const newPage = <ArtistPage artistsResults={searchArtistResults} songsResults={searchTrackResults} />;
+        updateHistory(newPage);
+    };
+    const handleAlbumClick = () => {
+        const newPage = <AlbumPage albumResults={searchAlbumResults} songsResults={searchTrackResults} />;
+        updateHistory(newPage);
+    };
 
-    const artistPageLink = document.getElementById("open-artist-page");
-    const albumPageLink = document.getElementById("open-album-page");
-    const backElement = document.getElementById("go-back");
+    /*
+    State and Effect Management: The useEffect now handles switching between pages based on the search and results.
+    Event Handlers: The GeneralResultsPage now takes onArtistClick and onAlbumClick props that update the activePage state when an artist or album is clicked.
+    */
 
-    const renderComponent = (component) => {
-        setHistory((prevHistory) => [...prevHistory, activePage]);
-        setActivePage(component);
+    const updateHistory = (newPage) => {
+        const newHistory = history.slice(0, currentHistoryIndex + 1); // remove forward history if any
+        setHistory([...newHistory, newPage]);
+        setCurrentHistoryIndex(newHistory.length);
+        setActivePage(newPage);
     };
 
     const goBack = () => {
-        if (history.length > 0) {
-            setActivePage(history[history.length - 1]);
-            setHistory(history.slice(0, -1));
+        if (currentHistoryIndex > 0) {
+            const newIndex = currentHistoryIndex - 1;
+            setCurrentHistoryIndex(newIndex);
+            setActivePage(history[newIndex]);
         }
     };
 
-    const goEmptyPage = () => {setActivePage(emptyPage)}
-    const goResultsPage = () => {setActivePage(generalPage)}
-    const goToArtistPage = () => {setActivePage(artistPage)}
-    const goToAlbumPage = () => {setActivePage(albumPage)}
+    const goForward = () => {
+        if (currentHistoryIndex < history.length - 1) {
+            const newIndex = currentHistoryIndex + 1;
+            setCurrentHistoryIndex(newIndex);
+            setActivePage(history[newIndex]);
+        }
+    };
 
-    useEffect(() => {
-        if (!search) {
-            renderComponent(goEmptyPage);
-        } else {
-            renderComponent(goResultsPage);
-        }
-    }, [search]);
+    console.log("history:", history);
+    console.log("history index:", currentHistoryIndex);
+    
 
-    useEffect(() => {
-        if (artistPageLink) {
-            artistPageLink.addEventListener("click", () =>{
-                renderComponent(goToArtistPage);
-            })
-        }
-        if (albumPageLink) {
-            albumPageLink.addEventListener("click", () =>{
-                renderComponent(goToAlbumPage);
-            })
-        }
-        if (backElement) {
-            backElement.addEventListener("click", () =>{
-                renderComponent(goBack);
-            })
-        }
-    }, [activePage]);
-
-    return activePage;
+    return { activePage, goBack, goForward };
 };
 
 export default useAdimSearchPage;

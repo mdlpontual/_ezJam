@@ -1,7 +1,7 @@
 import React from "react";
 import IMG from "../../../../../../../assets/images/ImagesHUB";
 
-function Albuns({ album }) {
+function Albuns({ album, artist, onAlbumClick, onArtistClick }) {
     let albumCover;
     if (album.cover) {
         albumCover = album.cover;
@@ -15,10 +15,10 @@ function Albuns({ album }) {
                     <img src={album.cover} alt="album cover" height="65px"/>
                 </div>
                 <div id="album-title" className="col d-flex flex-column justify-content-center align-items-start">
-                    <a id="open-album-page" type="button">
+                    <a id="open-album-page" type="button" onClick={() => onAlbumClick(album)}>
                         <h5>{album.album}</h5>
                     </a>
-                    <p>{album.year} - <a id="open-artist-page" type="button">{album.artist}</a></p>
+                    <p>{album.year} - <a id="open-artist-page" type="button" onClick={() => onArtistClick(artist)}>{album.artist}</a></p>
                 </div>
             </div>  
         </>
