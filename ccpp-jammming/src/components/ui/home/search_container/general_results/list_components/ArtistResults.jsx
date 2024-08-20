@@ -1,5 +1,4 @@
 import React from "react";
-import IMG from "../../../../../../assets/images/ImagesHUB";
 import Artists from "./unit_components/Artists";
 
 function ArtistResults({ artistsResults, onArtistClick }) {

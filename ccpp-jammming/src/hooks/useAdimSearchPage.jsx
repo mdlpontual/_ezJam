@@ -29,18 +29,20 @@ function useAdimSearchPage(search, code) {
                     onAlbumClick={() => handleAlbumClick()}
                 />
             );
-            updateHistory(newPage);
+            setTimeout(() => updateHistory(newPage), 1500);
         }
     }, [search, searchArtistResults, searchAlbumResults, searchTrackResults]);
 
-    const handleArtistClick = () => {
-        const newPage = <ArtistPage artistsResults={searchArtistResults} songsResults={searchTrackResults} />;
+    /* const handleArtistClick = (artist) => {
+        const newPage = <ArtistPage artist={artist} artistsResults={searchArtistResults} songsResults={searchTrackResults} />;
         updateHistory(newPage);
-    };
-    const handleAlbumClick = () => {
-        const newPage = <AlbumPage albumResults={searchAlbumResults} songsResults={searchTrackResults} />;
+    }; */
+
+    
+    /* const handleAlbumClick = (album) => {
+        const newPage = <AlbumPage album={album} albumResults={searchAlbumResults} songsResults={searchTrackResults} />;
         updateHistory(newPage);
-    };
+    }; */
 
     /*
     State and Effect Management: The useEffect now handles switching between pages based on the search and results.
@@ -49,10 +51,53 @@ function useAdimSearchPage(search, code) {
 
     const updateHistory = (newPage) => {
         const newHistory = history.slice(0, currentHistoryIndex + 1); // remove forward history if any
-        setHistory([...newHistory, newPage]);
-        setCurrentHistoryIndex(newHistory.length);
+        newHistory.push(newPage); // add the new page to history
+        setHistory(newHistory);
+        setCurrentHistoryIndex(newHistory.length - 1); // update the index to the last item
         setActivePage(newPage);
     };
+
+        // Async handler for artist click
+        const handleArtistClick = async (artist) => {
+            try {
+                console.log("Artist clicked:", artist);
+    
+                // If you need to fetch additional artist data, you can do it here
+                // const artistDetails = await fetchArtistDetails(artist.id);
+    
+                const newPage = (
+                    <ArtistPage 
+                        artist={artist} // or artistDetails if you fetch more data
+                        artistsResults={searchArtistResults}
+                        songsResults={searchTrackResults}
+                    />
+                );
+                updateHistory(newPage);
+            } catch (error) {
+                console.error("Error in handleArtistClick:", error);
+            }
+        };
+    
+        // Async handler for album click
+        const handleAlbumClick = async (album) => {
+            try {
+                console.log("Album clicked:", album);
+    
+                // If you need to fetch additional album data, you can do it here
+                // const albumDetails = await fetchAlbumDetails(album.id);
+    
+                const newPage = (
+                    <AlbumPage 
+                        album={album} // or albumDetails if you fetch more data
+                        albumResults={searchAlbumResults}
+                        songsResults={searchTrackResults}
+                    />
+                );
+                updateHistory(newPage);
+            } catch (error) {
+                console.error("Error in handleAlbumClick:", error);
+            }
+        };
 
     const goBack = () => {
         if (currentHistoryIndex > 0) {

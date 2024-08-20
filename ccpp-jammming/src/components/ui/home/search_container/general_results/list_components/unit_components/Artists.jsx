@@ -8,6 +8,10 @@ function Artists({ artist, onArtistClick }) {
     } else {
         profilePicture = IMG.profilePlaceHolder;
     }
+
+    console.log("ARTIST COMP RECEIVE:", artist);
+    console.log("AAAAAAAAA prop in Artists component:", artist);
+
     return (
         <>
             <div id="artist-inner-row" className="row d-flex justify-content-center align-items-center">
