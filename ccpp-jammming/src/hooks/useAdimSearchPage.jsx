@@ -8,118 +8,110 @@ import AlbumPage from "../components/ui/home/search_container/album_page/AlbumPa
 
 const emptyPage = <EmptyResultsPage />;
 
+// Debounce function
+const debounce = (func, delay) => {
+    let timeoutId;
+    return (...args) => {
+        if (timeoutId) clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => {
+            func(...args);
+        }, delay);
+    };
+};
+
 function useAdimSearchPage(search, code) {
     const [activePage, setActivePage] = useState(emptyPage);
     const [history, setHistory] = useState([emptyPage]);
     const [currentHistoryIndex, setCurrentHistoryIndex] = useState(0);
+    const [isHistoryUpdateNeeded, setIsHistoryUpdateNeeded] = useState(false);  // New state to control history updates
 
     const { accessToken } = useAuth(code);
-    const { searchArtistResults, searchAlbumResults, searchTrackResults } = useResults({search, accessToken});
-    
+    const { searchArtistResults, searchAlbumResults, searchTrackResults } = useResults({ search, accessToken });
+
+    // Debounced function for setting the page
+    const debouncedSetPage = useCallback(debounce((newPage) => {
+        setActivePage(newPage);
+        setIsHistoryUpdateNeeded(true);
+    }, 750), []);
+
     useEffect(() => {
         if (!search) {
             setActivePage(emptyPage);
+            setIsHistoryUpdateNeeded(false);  // No need to update history if no search
         } else {
             const newPage = (
                 <GeneralResultsPage
                     artistsResults={searchArtistResults}
                     albumResults={searchAlbumResults}
                     songsResults={searchTrackResults}
-                    onArtistClick={() => handleArtistClick()}
-                    onAlbumClick={() => handleAlbumClick()}
+                    onArtistClick={handleArtistClick}
+                    onAlbumClick={handleAlbumClick}
                 />
             );
-            setTimeout(() => updateHistory(newPage), 1500);
+
+            debouncedSetPage(newPage);  // Use the debounced function for page updates
         }
-    }, [search, searchArtistResults, searchAlbumResults, searchTrackResults]);
+    }, [search, searchArtistResults, searchAlbumResults, searchTrackResults, debouncedSetPage]);
 
-    /* const handleArtistClick = (artist) => {
-        const newPage = <ArtistPage artist={artist} artistsResults={searchArtistResults} songsResults={searchTrackResults} />;
-        updateHistory(newPage);
-    }; */
+    useEffect(() => {
+        if (isHistoryUpdateNeeded) {
+            updateHistory(activePage);
+            setIsHistoryUpdateNeeded(false);  // Reset flag after history update
+        }
+    }, [activePage, isHistoryUpdateNeeded]);
 
-    
-    /* const handleAlbumClick = (album) => {
-        const newPage = <AlbumPage album={album} albumResults={searchAlbumResults} songsResults={searchTrackResults} />;
-        updateHistory(newPage);
-    }; */
+    const updateHistory = useCallback((newPage) => {
+        setHistory((prevHistory) => {
+            const newHistory = prevHistory.slice(0, currentHistoryIndex + 1);
+            newHistory.push(newPage);
+            return newHistory;
+        });
 
-    /*
-    State and Effect Management: The useEffect now handles switching between pages based on the search and results.
-    Event Handlers: The GeneralResultsPage now takes onArtistClick and onAlbumClick props that update the activePage state when an artist or album is clicked.
-    */
+        setCurrentHistoryIndex((prevIndex) => prevIndex + 1);
+    }, [currentHistoryIndex]);
 
-    const updateHistory = (newPage) => {
-        const newHistory = history.slice(0, currentHistoryIndex + 1); // remove forward history if any
-        newHistory.push(newPage); // add the new page to history
-        setHistory(newHistory);
-        setCurrentHistoryIndex(newHistory.length - 1); // update the index to the last item
+    const handleArtistClick = useCallback((artist) => {
+        const newPage = (
+            <ArtistPage
+                artist={artist}
+                artistsResults={searchArtistResults}
+                songsResults={searchTrackResults}
+            />
+        );
         setActivePage(newPage);
-    };
+        setIsHistoryUpdateNeeded(true);  // Flag to update history when page changes
+    }, [searchArtistResults, searchTrackResults]);
 
-        // Async handler for artist click
-        const handleArtistClick = async (artist) => {
-            try {
-                console.log("Artist clicked:", artist);
-    
-                // If you need to fetch additional artist data, you can do it here
-                // const artistDetails = await fetchArtistDetails(artist.id);
-    
-                const newPage = (
-                    <ArtistPage 
-                        artist={artist} // or artistDetails if you fetch more data
-                        artistsResults={searchArtistResults}
-                        songsResults={searchTrackResults}
-                    />
-                );
-                updateHistory(newPage);
-            } catch (error) {
-                console.error("Error in handleArtistClick:", error);
-            }
-        };
-    
-        // Async handler for album click
-        const handleAlbumClick = async (album) => {
-            try {
-                console.log("Album clicked:", album);
-    
-                // If you need to fetch additional album data, you can do it here
-                // const albumDetails = await fetchAlbumDetails(album.id);
-    
-                const newPage = (
-                    <AlbumPage 
-                        album={album} // or albumDetails if you fetch more data
-                        albumResults={searchAlbumResults}
-                        songsResults={searchTrackResults}
-                    />
-                );
-                updateHistory(newPage);
-            } catch (error) {
-                console.error("Error in handleAlbumClick:", error);
-            }
-        };
+    const handleAlbumClick = useCallback((album) => {
+        const newPage = (
+            <AlbumPage
+                album={album}
+                albumResults={searchAlbumResults}
+                songsResults={searchTrackResults}
+            />
+        );
+        setActivePage(newPage);
+        setIsHistoryUpdateNeeded(true);  // Flag to update history when page changes
+    }, [searchAlbumResults, searchTrackResults]);
 
-    const goBack = () => {
+    const goBack = useCallback(() => {
         if (currentHistoryIndex > 0) {
-            const newIndex = currentHistoryIndex - 1;
-            setCurrentHistoryIndex(newIndex);
-            setActivePage(history[newIndex]);
+            setCurrentHistoryIndex((prevIndex) => prevIndex - 1);
+            setActivePage(history[currentHistoryIndex - 1]);
         }
-    };
+    }, [currentHistoryIndex, history]);
 
-    const goForward = () => {
+    const goForward = useCallback(() => {
         if (currentHistoryIndex < history.length - 1) {
-            const newIndex = currentHistoryIndex + 1;
-            setCurrentHistoryIndex(newIndex);
-            setActivePage(history[newIndex]);
+            setCurrentHistoryIndex((prevIndex) => prevIndex + 1);
+            setActivePage(history[currentHistoryIndex + 1]);
         }
-    };
+    }, [currentHistoryIndex, history]);
 
-    console.log("history:", history);
-    console.log("history index:", currentHistoryIndex);
-    
+    /* console.log("history:", history);
+    console.log("history index:", currentHistoryIndex); */
 
     return { activePage, goBack, goForward };
-};
+}
 
 export default useAdimSearchPage;

@@ -8,6 +8,7 @@ function Albuns({ album, artist, onAlbumClick, onArtistClick }) {
     } else {
         albumCover = IMG.placeHolders;
     }
+    
     return (
         <>
             <div id="albuns-inner-row" className="row">
