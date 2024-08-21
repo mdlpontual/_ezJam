@@ -2,7 +2,7 @@ import React from "react";
 import IMG from "../../../../../assets/images/ImagesHUB";
 import AlbumSongs from "./AlbumSongs";
 
-function AlbumPage() {
+function AlbumPage({ album, artistsResults, songsResults }) {
     return (
         <>
             <div id="album-page-container" className="container-fluid">

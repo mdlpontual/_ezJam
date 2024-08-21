@@ -74,7 +74,6 @@ function useAdimSearchPage(search, code) {
         const newPage = (
             <ArtistPage
                 artist={artist}
-                artistsResults={searchArtistResults}
                 albumResults={searchAlbumResults}
                 songsResults={searchTrackResults}
             />
@@ -88,7 +87,6 @@ function useAdimSearchPage(search, code) {
             <AlbumPage
                 album={album}
                 artistsResults={searchArtistResults}
-                albumResults={searchAlbumResults}
                 songsResults={searchTrackResults}
             />
         );
