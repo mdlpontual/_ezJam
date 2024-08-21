@@ -6,15 +6,43 @@
         //border: $border-yellow-solid;
         @include box-reset-default;
         height: 225px;
-        background-image: url(../assets/images/background/01_rhcp-placeholder.jpg);
+        width: 100%;
         background-repeat: no-repeat;
         background-size: cover;
         border-radius: 10px;
+        position: relative;
+        overflow: hidden;
+        padding-right: 30px;
+        #filter {
+            //border: $border-yellow-solid;
+            @include box-reset-default;
+            background-color: rgba($color: #000000, $alpha: 0.35);;
+            position: absolute;
+            z-index: 1;
+            width: 100%;
+            height: 100%;
+        }
+        img {
+            //border: $border-yellow-solid;
+            @include box-reset-default;
+            z-index: 0;
+            display: block;
+            overflow: hidden;
+            width: 100%;
+            position: absolute;
+            top: -50%;
+            border-radius: 10px;
+        }
         #artist-page-banner-col {
             //border: $border-cyan-solid;
             @include box-reset-default;
+            white-space: nowrap;
+            z-index: 1;
             h1 {
                 font-weight: bolder;
+                font-size: 3rem;
+                text-overflow: ellipsis;
+                overflow: hidden;
             }
             margin-left: 15px;
         }

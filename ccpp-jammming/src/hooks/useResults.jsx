@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import SpotifyWebApi from "spotify-web-api-node";
-import IMG from "../assets/images/ImagesHUB";
 
 const spotifyApi = new SpotifyWebApi({
   clientId: "9ebed4e372ba404ca817a45f1136c5d8",
@@ -12,8 +11,8 @@ function useResults({ search, accessToken }) {
     const [searchTrackResults, setSearchTrackResults] = useState([]);
 
     useEffect(() => {
-        if (!accessToken) return;
-        spotifyApi.setAccessToken(accessToken);
+      if (!accessToken) return;
+      spotifyApi.setAccessToken(accessToken);
     }, [accessToken]);
 
     useEffect(() => {
@@ -31,7 +30,8 @@ function useResults({ search, accessToken }) {
             const smallestProfilePicture = artist.images.length - 1;
             return {
               artist: artist.name,
-              cover: artist.images[smallestProfilePicture]?.url,
+              cover: artist.images[0]?.url,
+              profile: artist.images[smallestProfilePicture]?.url,
               uri: artist.uri
             }
           });

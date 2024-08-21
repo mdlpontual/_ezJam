@@ -1,13 +1,20 @@
 import React from "react";
 import IMG from "../../../../../../../assets/images/ImagesHUB";
 
-function Songs({ song }) {
+function Songs({ song, album, artist, onAlbumClick, onArtistClick  }) {
     let songCover;
     if (song.cover) {
         songCover = song.cover;
     } else {
         songCover = IMG.placeHolders;
     }
+
+    function millisToMinutesAndSeconds(millis) {
+        const minutes = Math.floor(millis / 60000);
+        const seconds = ((millis % 60000) / 1000).toFixed(0);
+        return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+      }
+
     return (
         <>
             <div id="songs-inner-row" className="row">
@@ -19,7 +26,7 @@ function Songs({ song }) {
                 </div>
                 <div id="col-title" className="col d-flex justify-content-start align-items-center">
                     <h5>{song.title}</h5>
-                    <p>{song.artist}</p>
+                    <p><a id="open-artist-page" type="button" onClick={() => onArtistClick(artist)}>{song.artist}</a></p>
                 </div>
                 <div id="col-plus" className="col-1 d-flex justify-content-end align-items-center">
                     <img id="plus-icon" src={IMG.plus2PNG} alt="plus icon" width="25px"/>
@@ -27,11 +34,11 @@ function Songs({ song }) {
                 <div id="col-minus" className="col-1 d-flex justify-content-start align-items-center">
                     <img id="minus-icon" src={IMG.minus2PNG} alt="minus icon" width="25x"/>
                 </div>
-                <div id="col-album" className="col-2 d-flex justify-content-start align-items-center">
-                    <p>{song.album}</p>
+                <div id="col-album" className="col-3 d-flex justify-content-start align-items-center">
+                    <p><a id="open-album-page" type="button" onClick={() => onAlbumClick(album)}>{song.album}</a></p>
                 </div>
                 <div id="col-duration" className="col-1 d-flex justify-content-center align-items-center">
-                    <p>{song.duration / 60000}</p>
+                    <p>{millisToMinutesAndSeconds(song.duration)}</p>
                 </div>
             </div> 
         </>

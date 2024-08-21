@@ -4,7 +4,7 @@ import useAdimSearchPage from "../../../../hooks/useAdimSearchPage";
 
 function SearchContainer({ code }) {
     const [search, setSearch] = useState("");
-    const activePage = useAdimSearchPage(search, code);
+    const { activePage, goBack, goForward } = useAdimSearchPage(search, code);
   
     const disableEnter = (event) => {
       if (event.key === 'Enter') {
@@ -19,10 +19,10 @@ function SearchContainer({ code }) {
                     <div id="arrow-box-col" className="col-auto">
                         <div id="arrow-container" className="container">
                             <div id="arrow-row" className="row">
-                                <a id="go-back" type="button" className="col-auto d-flex flex-column justify-content-center align-items-center">
+                                <a id="go-back" type="button" className="col-auto d-flex flex-column justify-content-center align-items-center" onClick={goBack}>
                                     <img src={IMG.gobackPNG} alt="go back button" width="22px"/>
                                 </a>
-                                <a id="go-foward" type="button" className="col-auto d-flex flex-column justify-content-center align-items-center">
+                                <a id="go-foward" type="button" className="col-auto d-flex flex-column justify-content-center align-items-center" onClick={goForward}>
                                     <img src={IMG.gofowardPNG} alt="go foward button" width="22px"/>
                                 </a>
                             </div>

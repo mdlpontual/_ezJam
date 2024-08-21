@@ -1,13 +1,12 @@
 import React from "react";
-import IMG from "../../../../../../assets/images/ImagesHUB";
 import Artists from "./unit_components/Artists";
 
-function ArtistResults({ artistsResults  }) {
+function ArtistResults({ artistsResults, onArtistClick }) {
     return (
         <>
             <h4>artists:</h4>
-            {artistsResults.map(artist => (
-                <Artists artist={artist} key={artist.uri}/>
+            {artistsResults.filter((artist, idx) => idx < 5).map(artist => (
+                <Artists artist={artist} onArtistClick={onArtistClick} key={artist.uri}/>
             ))}
         </>
     );
