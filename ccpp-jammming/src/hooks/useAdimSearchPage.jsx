@@ -32,7 +32,7 @@ function useAdimSearchPage(search, code) {
     const debouncedSetPage = useCallback(debounce((newPage) => {
         setActivePage(newPage);
         setIsHistoryUpdateNeeded(true);
-    }, 750), []);
+    }, 675), []);
 
     useEffect(() => {
         if (!search) {
@@ -75,6 +75,7 @@ function useAdimSearchPage(search, code) {
             <ArtistPage
                 artist={artist}
                 artistsResults={searchArtistResults}
+                albumResults={searchAlbumResults}
                 songsResults={searchTrackResults}
             />
         );
@@ -86,6 +87,7 @@ function useAdimSearchPage(search, code) {
         const newPage = (
             <AlbumPage
                 album={album}
+                artistsResults={searchArtistResults}
                 albumResults={searchAlbumResults}
                 songsResults={searchTrackResults}
             />

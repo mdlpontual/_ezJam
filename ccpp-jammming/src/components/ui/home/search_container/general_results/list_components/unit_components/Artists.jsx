@@ -3,8 +3,8 @@ import IMG from "../../../../../../../assets/images/ImagesHUB";
 
 function Artists({ artist, onArtistClick }) {
     let profilePicture;
-    if (artist.cover) {
-        profilePicture = artist.cover;
+    if (artist.profile) {
+        profilePicture = artist.profile;
     } else {
         profilePicture = IMG.profilePlaceHolder;
     }

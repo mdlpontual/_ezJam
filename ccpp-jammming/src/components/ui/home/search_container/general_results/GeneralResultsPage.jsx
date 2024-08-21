@@ -19,7 +19,7 @@ function GeneralResultsPage({ artistsResults, albumResults, songsResults, onArti
                 </div>
                 <div id="gen-results-songs" className="row">
                     <div id="gen-results-songs-col" className="col">
-                        <SongResults songsResults={songsResults}/>
+                        <SongResults songsResults={songsResults} albumResults={albumResults} onAlbumClick={onAlbumClick} artistsResults={artistsResults} onArtistClick={onArtistClick}/>
                     </div>
                 </div>
             </div>

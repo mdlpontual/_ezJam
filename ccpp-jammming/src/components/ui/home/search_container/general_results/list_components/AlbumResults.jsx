@@ -5,8 +5,13 @@ function AlbumResults({ albumResults, artistsResults, onAlbumClick, onArtistClic
     return (
         <>
             <h4>albuns:</h4>
-            {albumResults.filter((album, idx) => idx < 10).map(album => (
-                <Albuns album={album} artist={artistsResults} key={album.uri} onAlbumClick={onAlbumClick} onArtistClick={onArtistClick}/>
+            {albumResults.filter((album, idx) => idx < 5).map(album => (
+                <Albuns 
+                    album={album} 
+                    artist={artistsResults} 
+                    onAlbumClick={onAlbumClick} 
+                    onArtistClick={onArtistClick} 
+                    key={album.uri}/>
             ))}
         </>
     );

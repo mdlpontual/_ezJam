@@ -6,7 +6,7 @@ function ArtistResults({ artistsResults, onArtistClick }) {
         <>
             <h4>artists:</h4>
             {artistsResults.filter((artist, idx) => idx < 5).map(artist => (
-                <Artists artist={artist} key={artist.uri} onArtistClick={onArtistClick}/>
+                <Artists artist={artist} onArtistClick={onArtistClick} key={artist.uri}/>
             ))}
         </>
     );

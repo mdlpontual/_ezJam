@@ -30,7 +30,8 @@ function useResults({ search, accessToken }) {
             const smallestProfilePicture = artist.images.length - 1;
             return {
               artist: artist.name,
-              cover: artist.images[smallestProfilePicture]?.url,
+              cover: artist.images[0]?.url,
+              profile: artist.images[smallestProfilePicture]?.url,
               uri: artist.uri
             }
           });

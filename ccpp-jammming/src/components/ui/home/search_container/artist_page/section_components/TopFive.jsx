@@ -9,7 +9,9 @@ function TopFive() {
                 <div id="top-five-row" className="row">
                     <div id="top-five-col" className="col">
                         <h4>Popular:</h4>
-                        <TopSong/>
+                        {/* {.filter((song, idx) => idx < 10).map(song => ( */}
+                            <TopSong />
+                        {/* ))} */}
                     </div>
                 </div>
             </div>
