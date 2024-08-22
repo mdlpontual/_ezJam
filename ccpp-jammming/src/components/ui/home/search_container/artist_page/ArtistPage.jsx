@@ -3,25 +3,25 @@ import IMG from "../../../../../assets/images/ImagesHUB";
 import TopFive from "./section_components/TopFive";
 import Discography from "./section_components/Discography";
 
-function ArtistPage({ artist, albumResults, songsResults }) {
+function ArtistPage({ artistContent }) {
     return (
         <>
             <div id="artist-page-container" className="container-fluid">
                 <div id="artist-page-banner-row" className="row">
-                    <img src={artist.cover} alt="artist image" />
+                    <img src={artistContent.cover} alt="artist image" />
                     <div id="filter"></div>
                     <div id="artist-page-banner-col" className="col d-flex justify-content-start align-items-end">
-                        <h1>{artist.artist}</h1>
+                        <h1>{artistContent.artist}</h1>
                     </div>
                 </div>
                 <div id="artist-page-top-five-row" className="row">
                     <div id="artist-page-top-five-col" className="col">
-                        <TopFive songsResults={songsResults} />
+                        <TopFive />
                     </div>
                 </div>
                 <div id="artist-page-disco-row" className="row">
                     <div id="artist-page-disco-col" className="col">
-                        <Discography albumResults={albumResults} />
+                        <Discography />
                     </div>
                 </div>
             </div>
