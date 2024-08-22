@@ -3,7 +3,7 @@ import IMG from "../../../../../assets/images/ImagesHUB";
 import TopFive from "./section_components/TopFive";
 import Discography from "./section_components/Discography";
 
-function ArtistPage({ artistContent }) {
+function ArtistPage({ artistContent, albumContent }) {
     return (
         <>
             <div id="artist-page-container" className="container-fluid">
@@ -21,7 +21,7 @@ function ArtistPage({ artistContent }) {
                 </div>
                 <div id="artist-page-disco-row" className="row">
                     <div id="artist-page-disco-col" className="col">
-                        <Discography />
+                        <Discography albumContent={albumContent} />
                     </div>
                 </div>
             </div>

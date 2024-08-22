@@ -26,7 +26,6 @@ function useSearchResults({ search, accessToken }) {
         const res = await spotifyApi.searchArtists(search);
         if (cancel) return;
 
-        console.log("useSearchResults", res.body)
         const artists = res.body.artists.items.map(artist => {
           const smallestProfilePicture = artist.images.length - 1;
           return {

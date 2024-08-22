@@ -2,7 +2,7 @@ import React from "react";
 import IMG from "../../../../../assets/images/ImagesHUB";
 import AlbumSongs from "./AlbumSongs";
 
-function AlbumPage() {
+function AlbumPage({ albumContent }) {
     return (
         <>
             <div id="album-page-container" className="container-fluid">
@@ -10,11 +10,11 @@ function AlbumPage() {
                     <div id="album-page-banner-col" className="col">
                         <div id="album-inner-banner-row" className="row">
                             <div id="album-cover-col" className="col-auto">
-                                <img src={IMG.placeHolders} alt="album cover" height="100px"/>
+                                <img src={albumContent.cover} alt="album cover" height="100px"/>
                             </div>
                             <div id="album-title-col" className="col d-flex flex-column justify-content-end align-items-start">
-                                <p>album</p>
-                                <h1>Unlimited Love</h1>
+                                <p>{albumContent.albumType}</p>
+                                <h1>{albumContent.album}</h1>
                             </div>
                         </div>
                     </div>

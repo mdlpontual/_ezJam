@@ -3,23 +3,47 @@ import ArtistResults from "./list_components/ArtistResults";
 import AlbumResults from "./list_components/AlbumResults";
 import SongResults from "./list_components/SongResults";
 
-function GeneralResultsPage({ artistsResults, albumResults, songsResults, onArtistClick, onAlbumClick }) {
+function GeneralResultsPage({ artistsResults, albumResults, songsResults, artistContent, albumContent, songContent, onArtistClick, onAlbumClick }) {
     return (
         <>
             <div id="gen-results-container" className="container-fluid">
                 <div id="gen-results-artists" className="row">
                     <div id="gen-results-artists-col" className="col">
-                        <ArtistResults artistsResults={artistsResults} onArtistClick={onArtistClick}/>
+                        <ArtistResults 
+                            artistsResults={artistsResults} 
+                            albumResults={albumResults} 
+                            songsResults={songsResults}
+                            artistContent={artistContent} 
+                            albumContent={albumContent} 
+                            songContent={songContent} 
+                            onArtistClick={onArtistClick}
+                            onAlbumClick={onAlbumClick}/>
                     </div>
                 </div>
                 <div id="gen-results-albuns" className="row">
                     <div id="gen-results-albuns-col" className="col">
-                        <AlbumResults albumResults={albumResults} onAlbumClick={onAlbumClick} artistsResults={artistsResults} onArtistClick={onArtistClick}/>
+                        <AlbumResults 
+                            artistsResults={artistsResults} 
+                            albumResults={albumResults} 
+                            songsResults={songsResults}
+                            artistContent={artistContent} 
+                            albumContent={albumContent} 
+                            songContent={songContent} 
+                            onArtistClick={onArtistClick}
+                            onAlbumClick={onAlbumClick}/>
                     </div>
                 </div>
                 <div id="gen-results-songs" className="row">
                     <div id="gen-results-songs-col" className="col">
-                        <SongResults songsResults={songsResults} albumResults={albumResults} onAlbumClick={onAlbumClick} artistsResults={artistsResults} onArtistClick={onArtistClick}/>
+                        <SongResults 
+                            artistsResults={artistsResults} 
+                            albumResults={albumResults} 
+                            songsResults={songsResults}
+                            artistContent={artistContent} 
+                            albumContent={albumContent} 
+                            songContent={songContent} 
+                            onArtistClick={onArtistClick}
+                            onAlbumClick={onAlbumClick}/>
                     </div>
                 </div>
             </div>
@@ -28,3 +52,9 @@ function GeneralResultsPage({ artistsResults, albumResults, songsResults, onArti
 }
 
 export default GeneralResultsPage;
+
+/*
+artistContent={artistContent}
+albumContent={albumContent}
+songContent={songContent}
+*/

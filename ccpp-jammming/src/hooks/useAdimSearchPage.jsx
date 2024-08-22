@@ -50,6 +50,9 @@ function useAdimSearchPage(search, code) {
                     artistsResults={searchArtistResults}
                     albumResults={searchAlbumResults}
                     songsResults={searchTrackResults}
+                    artistContent={artistContent}
+                    albumContent={albumContent}
+                    songContent={songContent}
                     onArtistClick={handleArtistClick}
                     onAlbumClick={handleAlbumClick}
                 />
@@ -57,7 +60,7 @@ function useAdimSearchPage(search, code) {
 
             debouncedSetPage(newPage);  // Use the debounced function for page updates
         }
-    }, [search, searchArtistResults, searchAlbumResults, searchTrackResults, debouncedSetPage]);
+    }, [search, artistContent, albumContent, songContent, searchArtistResults, searchAlbumResults, searchTrackResults, debouncedSetPage]);
 
     useEffect(() => {
         if (isHistoryUpdateNeeded) {
@@ -76,17 +79,17 @@ function useAdimSearchPage(search, code) {
         setCurrentHistoryIndex((prevIndex) => prevIndex + 1);
     }, [currentHistoryIndex]);
 
-    const handleArtistClick = useCallback((artistContent) => {
+    const handleArtistClick = useCallback((artistContent, albumContent) => {
         const newPage = (
-            <ArtistPage artistContent={artistContent} />
+            <ArtistPage artistContent={artistContent} albumContent={albumContent} />
         );
         setActivePage(newPage);
         setIsHistoryUpdateNeeded(true);  // Flag to update history when page changes
-    }, [searchArtistResults, searchTrackResults]);
+    }, [artistContent, albumContent]);
 
-    const handleAlbumClick = useCallback(() => {
+    const handleAlbumClick = useCallback((albumContent) => {
         const newPage = (
-            <AlbumPage />
+            <AlbumPage albumContent={albumContent} />
         );
         setActivePage(newPage);
         setIsHistoryUpdateNeeded(true);  // Flag to update history when page changes
