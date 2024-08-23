@@ -1,10 +1,10 @@
 import React from "react";
 import IMG from "../../../../../../../assets/images/ImagesHUB";
 
-function Songs({ song, album, artist, onAlbumClick, onArtistClick  }) {
+function Songs({ searchArtistResults, searchAlbumResults, searchTrackResults, artistContent, albumContent, songContent, onArtistClick, onAlbumClick  }) {
     let songCover;
-    if (song.cover) {
-        songCover = song.cover;
+    if (searchTrackResults.cover) {
+        songCover = searchTrackResults.cover;
     } else {
         songCover = IMG.placeHolders;
     }
@@ -22,11 +22,11 @@ function Songs({ song, album, artist, onAlbumClick, onArtistClick  }) {
                     <img id="play-icon" src={IMG.play2PNG} alt="play icon" width="20px"/>
                 </div>
                 <div id="col-cover" className="col-1 d-flex justify-content-center align-items-center">
-                    <img src={song.cover} height="40px"/>
+                    <img src={searchTrackResults.cover} height="40px"/>
                 </div>
                 <div id="col-title" className="col d-flex justify-content-start align-items-center">
-                    <h5>{song.title}</h5>
-                    <p><a id="open-artist-page" type="button" onClick={() => onArtistClick(artist)}>{song.artist}</a></p>
+                    <h5>{searchTrackResults.title}</h5>
+                    <p><a id="open-artist-page" type="button" onClick={() => onArtistClick(artist)}>{searchTrackResults.artist}</a></p>
                 </div>
                 <div id="col-plus" className="col-1 d-flex justify-content-end align-items-center">
                     <img id="plus-icon" src={IMG.plus2PNG} alt="plus icon" width="25px"/>
@@ -35,10 +35,10 @@ function Songs({ song, album, artist, onAlbumClick, onArtistClick  }) {
                     <img id="minus-icon" src={IMG.minus2PNG} alt="minus icon" width="25x"/>
                 </div>
                 <div id="col-album" className="col-3 d-flex justify-content-start align-items-center">
-                    <p><a id="open-album-page" type="button" onClick={() => onAlbumClick(album)}>{song.album}</a></p>
+                    <p><a id="open-album-page" type="button" onClick={() => onAlbumClick(album)}>{searchTrackResults.album}</a></p>
                 </div>
                 <div id="col-duration" className="col-1 d-flex justify-content-center align-items-center">
-                    <p>{millisToMinutesAndSeconds(song.duration)}</p>
+                    <p>{millisToMinutesAndSeconds(searchTrackResults.duration)}</p>
                 </div>
             </div> 
         </>

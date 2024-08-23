@@ -3,16 +3,16 @@ import ArtistResults from "./list_components/ArtistResults";
 import AlbumResults from "./list_components/AlbumResults";
 import SongResults from "./list_components/SongResults";
 
-function GeneralResultsPage({ artistsResults, albumResults, songsResults, artistContent, albumContent, songContent, onArtistClick, onAlbumClick }) {
+function GeneralResultsPage({ searchArtistResults, searchAlbumResults, searchTrackResults, artistContent, albumContent, songContent, onArtistClick, onAlbumClick }) {
     return (
         <>
             <div id="gen-results-container" className="container-fluid">
                 <div id="gen-results-artists" className="row">
                     <div id="gen-results-artists-col" className="col">
                         <ArtistResults 
-                            artistsResults={artistsResults} 
-                            albumResults={albumResults} 
-                            songsResults={songsResults}
+                            searchArtistResults={searchArtistResults}
+                            searchAlbumResults={searchAlbumResults}
+                            searchTrackResults={searchTrackResults}
                             artistContent={artistContent} 
                             albumContent={albumContent} 
                             songContent={songContent} 
@@ -23,9 +23,9 @@ function GeneralResultsPage({ artistsResults, albumResults, songsResults, artist
                 <div id="gen-results-albuns" className="row">
                     <div id="gen-results-albuns-col" className="col">
                         <AlbumResults 
-                            artistsResults={artistsResults} 
-                            albumResults={albumResults} 
-                            songsResults={songsResults}
+                            searchArtistResults={searchArtistResults}
+                            searchAlbumResults={searchAlbumResults}
+                            searchTrackResults={searchTrackResults}
                             artistContent={artistContent} 
                             albumContent={albumContent} 
                             songContent={songContent} 
@@ -36,9 +36,9 @@ function GeneralResultsPage({ artistsResults, albumResults, songsResults, artist
                 <div id="gen-results-songs" className="row">
                     <div id="gen-results-songs-col" className="col">
                         <SongResults 
-                            artistsResults={artistsResults} 
-                            albumResults={albumResults} 
-                            songsResults={songsResults}
+                            searchArtistResults={searchArtistResults}
+                            searchAlbumResults={searchAlbumResults}
+                            searchTrackResults={searchTrackResults}
                             artistContent={artistContent} 
                             albumContent={albumContent} 
                             songContent={songContent} 
@@ -52,9 +52,3 @@ function GeneralResultsPage({ artistsResults, albumResults, songsResults, artist
 }
 
 export default GeneralResultsPage;
-
-/*
-artistContent={artistContent}
-albumContent={albumContent}
-songContent={songContent}
-*/

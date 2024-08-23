@@ -5,10 +5,14 @@ const spotifyApi = new SpotifyWebApi({
   clientId: "9ebed4e372ba404ca817a45f1136c5d8",
 });
 
-function useFetchedContent({ firstArtistId, firstAlbumId, firstSongId, accessToken }) {
+function useFetchedContent({ searchArtistResults, searchAlbumResults, searchTrackResults, accessToken }) {
   const [artistContent, setArtistContent] = useState([]);
   const [albumContent, setAlbumContent] = useState([]);
   const [songContent, setSongContent] = useState([]);
+
+  const firstArtistId = searchArtistResults.length > 0 ? searchArtistResults[0].id : null;
+  //const firstAlbumId = searchAlbumResults.length > 0 ? searchAlbumResults[0].id : null;
+  //const firstSongId = searchTrackResults.length > 0 ? searchTrackResults[0].id : null;
 
   useEffect(() => {
     if (!accessToken) return;
@@ -36,7 +40,7 @@ function useFetchedContent({ firstArtistId, firstAlbumId, firstSongId, accessTok
             profile: res.body.images[smallestProfilePicture]?.url,
             genres: res.body.genres,
             uri: res.body.uri
-          }
+          };
         };
   
         setArtistContent(artists);
@@ -94,7 +98,7 @@ function useFetchedContent({ firstArtistId, firstAlbumId, firstSongId, accessTok
       try {
         let cancel = false;
   
-        const res = await spotifyApi.getTracks(firstSongId);
+        const res = await spotifyApi.getArtistTopTracks(firstSongId);
         if (cancel) return;
 
         const songs = () => {

@@ -28,11 +28,8 @@ function useAdimSearchPage(search, code) {
 
     const { accessToken } = useAuth(code);
     const { searchArtistResults, searchAlbumResults, searchTrackResults } = useSearchResults({ search, accessToken });
-
-    const firstArtistId = searchArtistResults.length > 0 ? searchArtistResults[0].id : null;
-    const firstAlbumId = searchAlbumResults.length > 0 ? searchAlbumResults[0].id : null;
-    const firstSongId = searchTrackResults.length > 0 ? searchTrackResults[0].id : null;
-    const { artistContent, albumContent, songContent } = useFetchedContent({ firstArtistId, firstAlbumId, firstSongId, accessToken });
+    
+    const { artistContent, albumContent, songContent } = useFetchedContent({ searchArtistResults, searchAlbumResults, searchTrackResults, accessToken });
 
     // Debounced function for setting the page
     const debouncedSetPage = useCallback(debounce((newPage) => {
@@ -47,9 +44,9 @@ function useAdimSearchPage(search, code) {
         } else {
             const newPage = (
                 <GeneralResultsPage
-                    artistsResults={searchArtistResults}
-                    albumResults={searchAlbumResults}
-                    songsResults={searchTrackResults}
+                    searchArtistResults={searchArtistResults}
+                    searchAlbumResults={searchAlbumResults}
+                    searchTrackResults={searchTrackResults}
                     artistContent={artistContent}
                     albumContent={albumContent}
                     songContent={songContent}
@@ -62,6 +59,9 @@ function useAdimSearchPage(search, code) {
         }
     }, [search, artistContent, albumContent, songContent, searchArtistResults, searchAlbumResults, searchTrackResults, debouncedSetPage]);
 
+
+
+    
     useEffect(() => {
         if (isHistoryUpdateNeeded) {
             updateHistory(activePage);
@@ -79,21 +79,36 @@ function useAdimSearchPage(search, code) {
         setCurrentHistoryIndex((prevIndex) => prevIndex + 1);
     }, [currentHistoryIndex]);
 
-    const handleArtistClick = useCallback((artistContent, albumContent) => {
+    const handleArtistClick = useCallback(( artistContent, albumContent, songContent, searchArtistResults, searchAlbumResults, searchTrackResults ) => {
         const newPage = (
-            <ArtistPage artistContent={artistContent} albumContent={albumContent} />
+            <ArtistPage 
+                artistContent={artistContent} 
+                albumContent={albumContent} 
+                songContent={songContent}
+                searchArtistResults={searchArtistResults}
+                searchAlbumResults={searchAlbumResults}
+                searchTrackResults={searchTrackResults}/>
         );
         setActivePage(newPage);
         setIsHistoryUpdateNeeded(true);  // Flag to update history when page changes
-    }, [artistContent, albumContent]);
+    }, [ artistContent, albumContent, songContent, searchArtistResults, searchAlbumResults, searchTrackResults ]);
+    
+    const handleAlbumClick = useCallback(( artistContent, albumContent, songContent, searchArtistResults, searchAlbumResults, searchTrackResults ) => {
+        const newPage = (
+            <AlbumPage 
+                artistContent={artistContent} 
+                albumContent={albumContent} 
+                songContent={songContent}
+                searchArtistResults={searchArtistResults}
+                searchAlbumResults={searchAlbumResults}
+                searchTrackResults={searchTrackResults}/>
+        );
+        setActivePage(newPage);
+        setIsHistoryUpdateNeeded(true);  // Flag to update history when page changes
+    }, [ artistContent, albumContent, songContent, searchArtistResults, searchAlbumResults, searchTrackResults ]);
 
-    const handleAlbumClick = useCallback((albumContent) => {
-        const newPage = (
-            <AlbumPage albumContent={albumContent} />
-        );
-        setActivePage(newPage);
-        setIsHistoryUpdateNeeded(true);  // Flag to update history when page changes
-    }, [searchAlbumResults, searchTrackResults]);
+
+
 
     const goBack = useCallback(() => {
         if (currentHistoryIndex > 0) {

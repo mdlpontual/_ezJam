@@ -1,10 +1,10 @@
 import React from "react";
 import IMG from "../../../../../../../assets/images/ImagesHUB";
 
-function Albuns({ album, artist, onAlbumClick, onArtistClick }) {
+function Albuns({ searchArtistResults, searchAlbumResults, searchTrackResults, artistContent, albumContent, songContent, onArtistClick, onAlbumClick }) {
     let albumCover;
-    if (album.cover) {
-        albumCover = album.cover;
+    if (searchAlbumResults.cover) {
+        albumCover = searchAlbumResults.cover;
     } else {
         albumCover = IMG.placeHolders;
     }
@@ -13,13 +13,13 @@ function Albuns({ album, artist, onAlbumClick, onArtistClick }) {
         <>
             <div id="albuns-inner-row" className="row">
                 <div id="album-thumbnail" className="col-1 d-flex justify-content-center align-items-center">
-                    <img src={album.cover} alt="album cover" height="65px"/>
+                    <img src={albumCover} alt="album cover" height="65px"/>
                 </div>
                 <div id="album-title" className="col d-flex flex-column justify-content-center align-items-start">
-                    <a id="open-album-page" type="button" onClick={() => onAlbumClick(album)}>
-                        <h5>{album.album}</h5>
+                    <a id="open-album-page" type="button" onClick={() => onAlbumClick(artistContent, albumContent, songContent)}>
+                        <h5>{searchAlbumResults.album}</h5>
                     </a>
-                    <p>{album.year} - <a id="open-artist-page" type="button" onClick={() => onArtistClick(artist)}>{album.artist}</a></p>
+                    <p>{searchAlbumResults.year} - <a id="open-artist-page" type="button" onClick={() => onArtistClick(artistContent, albumContent, songContent, searchAlbumResults)}>{searchAlbumResults.artist}</a></p>
                 </div>
             </div>  
         </>

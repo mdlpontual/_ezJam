@@ -1,16 +1,20 @@
 import React from "react";
 import Albuns from "./unit_components/Albuns";
 
-function AlbumResults({ albumResults, artistsResults, onAlbumClick, onArtistClick }) {
+function AlbumResults({ searchArtistResults, searchAlbumResults, searchTrackResults, artistContent, albumContent, songContent, onArtistClick, onAlbumClick }) {
     return (
         <>
             <h4>albuns:</h4>
-            {albumResults.filter((album, idx) => idx < 5).map(album => (
+            {searchAlbumResults.filter((album, idx) => idx < 5).map(album => (
                 <Albuns 
-                    album={album} 
-                    artist={artistsResults} 
+                    searchArtistResults={searchArtistResults}
+                    searchAlbumResults={album}
+                    searchTrackResults={searchTrackResults}
+                    artistContent={artistContent} 
+                    albumContent={albumContent} 
+                    songContent={songContent} 
+                    onArtistClick={onArtistClick}
                     onAlbumClick={onAlbumClick} 
-                    onArtistClick={onArtistClick} 
                     key={album.uri}/>
             ))}
         </>
