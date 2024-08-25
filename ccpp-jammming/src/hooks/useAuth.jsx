@@ -23,7 +23,7 @@ function useAuth(code) {
                 setRefreshToken(res.data.refreshToken);
                 setExpiresIn(res.data.expiresIn); 
 
-                console.log("Authorization successful:", res.data);
+                /* console.log("Authorization successful:", res.data); */
                 window.history.pushState({}, null, '/');
             } catch (error) {
                 console.error("Authorization failed:", error.res?.data || error.message);
@@ -51,7 +51,7 @@ function useAuth(code) {
                     setAccessToken(res.data.accessToken);
                     setExpiresIn(res.data.expiresIn);
     
-                    console.log("Authorization successful:", res.data);
+                    /* console.log("Authorization successful:", res.data); */
                 } catch (error) {
                     console.error("Authorization failed:", error.res?.data || error.message);
                     window.location = '/';
