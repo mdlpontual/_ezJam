@@ -9,7 +9,7 @@ function GeneralResultsPage({ searchArtistResults, searchAlbumResults, searchTra
             <div id="gen-results-container" className="container-fluid">
                 <div id="gen-results-artists" className="row">
                     <div id="gen-results-artists-col" className="col">
-                        <ArtistResults 
+                        {/* <ArtistResults 
                             searchArtistResults={searchArtistResults}
                             searchAlbumResults={searchAlbumResults}
                             searchTrackResults={searchTrackResults}
@@ -17,12 +17,12 @@ function GeneralResultsPage({ searchArtistResults, searchAlbumResults, searchTra
                             albumContent={albumContent} 
                             songContent={songContent} 
                             onArtistClick={onArtistClick}
-                            onAlbumClick={onAlbumClick}/>
+                            onAlbumClick={onAlbumClick}/> */}
                     </div>
                 </div>
                 <div id="gen-results-albuns" className="row">
                     <div id="gen-results-albuns-col" className="col">
-                        <AlbumResults 
+                        {/* <AlbumResults 
                             searchArtistResults={searchArtistResults}
                             searchAlbumResults={searchAlbumResults}
                             searchTrackResults={searchTrackResults}
@@ -30,12 +30,12 @@ function GeneralResultsPage({ searchArtistResults, searchAlbumResults, searchTra
                             albumContent={albumContent} 
                             songContent={songContent} 
                             onArtistClick={onArtistClick}
-                            onAlbumClick={onAlbumClick}/>
+                            onAlbumClick={onAlbumClick}/> */}
                     </div>
                 </div>
                 <div id="gen-results-songs" className="row">
                     <div id="gen-results-songs-col" className="col">
-                        <SongResults 
+                        {/* <SongResults 
                             searchArtistResults={searchArtistResults}
                             searchAlbumResults={searchAlbumResults}
                             searchTrackResults={searchTrackResults}
@@ -43,7 +43,7 @@ function GeneralResultsPage({ searchArtistResults, searchAlbumResults, searchTra
                             albumContent={albumContent} 
                             songContent={songContent} 
                             onArtistClick={onArtistClick}
-                            onAlbumClick={onAlbumClick}/>
+                            onAlbumClick={onAlbumClick}/> */}
                     </div>
                 </div>
             </div>

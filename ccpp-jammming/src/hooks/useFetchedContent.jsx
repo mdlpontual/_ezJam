@@ -1,9 +1,143 @@
 import React, { useState, useEffect } from "react";
-import SpotifyWebApi from "spotify-web-api-node";
+import axios from "axios";
 
-const spotifyApi = new SpotifyWebApi({
-  clientId: "9ebed4e372ba404ca817a45f1136c5d8",
-});
+function useFetchedContent({ searchArtistResults, searchAlbumResults, accessToken }) {
+  const [artistContent, setArtistContent] = useState([]);
+  const [albumContent, setAlbumContent] = useState([]);
+
+  useEffect(() => {
+    const fetchArtistContent = async () => {
+      if (!searchArtistResults || searchArtistResults.length === 0) return setArtistContent([]);
+      if (!accessToken) return;
+
+      try {
+        let cancelToken = axios.CancelToken.source();
+
+        const joinedArtistsIds = searchArtistResults.filter((art, idx) => idx < 10).map((artistIdx) => artistIdx.artistIdResponse).join(',');
+
+        const res = await axios.get(`https://api.spotify.com/v1/artists?ids=${joinedArtistsIds}`, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+          cancelToken: cancelToken.token,
+        });
+
+        console.log("AAAAAAAAAAAAA", res);
+
+        const artists = res.data.artists.map((artist) => ({
+          artistType: artist.type,
+          artistName: artist.name,
+          artistBanner: artist.images[0]?.url,
+          artistProfileImg: artist.images[artist.images.length - 1]?.url,
+          artistGenres: artist.genres,
+          artistUri: artist.uri
+        }));
+
+        setArtistContent(artists);
+      } catch (error) {
+        if (axios.isCancel(error)) return;
+        console.error("Error fetching artist content:", error);
+      }
+    };
+
+    fetchArtistContent();
+  }, [searchArtistResults, accessToken]);
+
+  useEffect(() => {
+    const fetchAlbumContent = async () => {
+      if (!searchAlbumResults || searchAlbumResults.length === 0) return setAlbumContent([]);
+      if (!accessToken) return;
+
+      try {
+        let cancelToken = axios.CancelToken.source();
+
+        const joinedAlbumsIds = searchAlbumResults.filter((art, idx) => idx < 10).map((albumIdx) => albumIdx.albumIdResponse).join(',');
+
+        const res = await axios.get(`https://api.spotify.com/v1/albums?ids=${joinedAlbumsIds}`, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+          cancelToken: cancelToken.token,
+        });
+
+        console.log("BBBBBBBBBBB", res);
+
+        const albums = res.data.albums.map((album) => ({
+          albumAutor: album.artists[0].name,
+          albumTitle: album.name,
+          albumType: album.album_type,
+          albumCover: album.images[0]?.url,
+          albumYear: album.release_date.slice(0, 4),
+          albumUri: album.uri,
+          albumTotalTracks: album.total_tracks,
+          albumExternalUrls: album.external_urls,
+        }));
+
+        setAlbumContent(albums);
+      } catch (error) {
+        if (axios.isCancel(error)) return;
+        console.error("Error fetching album content:", error);
+      }
+    };
+
+    fetchAlbumContent();
+  }, [searchAlbumResults, accessToken]);
+
+  return { artistContent, albumContent };
+}
+
+export default useFetchedContent;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 function useFetchedContent({ searchArtistResults, searchAlbumResults, searchTrackResults, accessToken }) {
   const [artistContent, setArtistContent] = useState([]);
@@ -11,127 +145,124 @@ function useFetchedContent({ searchArtistResults, searchAlbumResults, searchTrac
   const [songContent, setSongContent] = useState([]);
 
   const firstArtistId = searchArtistResults.length > 0 ? searchArtistResults[0].id : null;
-  //const firstAlbumId = searchAlbumResults.length > 0 ? searchAlbumResults[0].id : null;
-  //const firstSongId = searchTrackResults.length > 0 ? searchTrackResults[0].id : null;
 
   useEffect(() => {
-    if (!accessToken) return;
-    spotifyApi.setAccessToken(accessToken);
-  }, [accessToken]);
-
-  useEffect(() => {
-    const fetchArtistResults = async () => {
+    const fetchArtistContent = async () => {
       if (!firstArtistId) return setArtistContent([]);
       if (!accessToken) return;
-  
-      try {
-        let cancel = false;
-  
-        const res = await spotifyApi.getArtist(firstArtistId);
-        if (cancel) return;
 
-        const artists = () => {
-          const smallestProfilePicture = res.body.images.length - 1;
-          return {
-            id: res.body.id,
-            type: res.body.type,
-            artist: res.body.name,
-            cover: res.body.images[0]?.url,
-            profile: res.body.images[smallestProfilePicture]?.url,
-            genres: res.body.genres,
-            uri: res.body.uri
-          };
+      try {
+        let cancelToken = axios.CancelToken.source();
+
+        const res = await axios.get(`https://api.spotify.com/v1/artists/${firstArtistId}`, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+          cancelToken: cancelToken.token,
+        });
+
+        const artist = {
+          id: res.data.id,
+          type: res.data.type,
+          artist: res.data.name,
+          cover: res.data.images[0]?.url,
+          profile: res.data.images[res.data.images.length - 1]?.url,
+          genres: res.data.genres,
+          uri: res.data.uri,
         };
-  
-        setArtistContent(artists);
+
+        setArtistContent(artist);
       } catch (error) {
-        console.error('Error fetching artists:', error);
+        if (axios.isCancel(error)) return;
+        console.error("Error fetching artist content:", error);
       }
-  
-      return () => cancel = true;
     };
-  
-    fetchArtistResults();
+
+    fetchArtistContent();
   }, [firstArtistId, accessToken]);
 
   useEffect(() => {
-    const fetchArtistResults = async () => {
+    const fetchAlbumContent = async () => {
       if (!firstArtistId) return setAlbumContent([]);
       if (!accessToken) return;
-  
-      try {
-        let cancel = false;
-  
-        const res = await spotifyApi.getArtistAlbums(firstArtistId);
-        if (cancel) return;
 
-        const albums = res.body.items.map(albums => {
-          return {
-            id: albums.id,
-            artist: albums.artists[0].name,
-            album: albums.name,
-            albumType: albums.album_type,
-            cover: albums.images[0]?.url,
-            year: albums.release_date.slice(0, 4),
-            uri: albums.uri,
-            totalTracks: albums.total_tracks,
-            externalUrls: albums.external_urls
-          }
+      try {
+        let cancelToken = axios.CancelToken.source();
+
+        const res = await axios.get(`https://api.spotify.com/v1/artists/${firstArtistId}/albums`, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+          cancelToken: cancelToken.token,
         });
-  
+
+        const albums = res.data.items.map((album) => ({
+          id: album.id,
+          artist: album.artists[0].name,
+          album: album.name,
+          albumType: album.album_type,
+          cover: album.images[0]?.url,
+          year: album.release_date.slice(0, 4),
+          uri: album.uri,
+          totalTracks: album.total_tracks,
+          externalUrls: album.external_urls,
+        }));
+
         setAlbumContent(albums);
       } catch (error) {
-        console.error('Error fetching artists:', error);
+        if (axios.isCancel(error)) return;
+        console.error("Error fetching album content:", error);
       }
-  
-      return () => cancel = true;
     };
-  
-    fetchArtistResults();
+
+    fetchAlbumContent();
   }, [firstArtistId, accessToken]);
 
-  /* useEffect(() => {
-    const fetchArtistResults = async () => {
+   useEffect(() => {
+    const fetchTrackContent = async () => {
       if (!firstSongId) return setSongContent([]);
       if (!accessToken) return;
-  
+
       try {
-        let cancel = false;
-  
-        const res = await spotifyApi.getArtistTopTracks(firstSongId);
-        if (cancel) return;
+        let cancelToken = axios.CancelToken.source();
 
-        const songs = () => {
-          const smallestAlbumCover = res.body.images.length - 1;
-          return {
-            id: res.body.id,
-            title: res.body.name,
-            artist: res.body.artists[0].name,
-            album: res.body.album.name,
-            cover: res.body.album.images[smallestAlbumCover]?.url,
-            uri: res.body.uri,
-            duration: res.body.duration_ms,
-            popularity: res.body.popularity,
-            trackNumber: res.body.track_number,
-            discNumber: res.body.disc_number,
-            explicit: res.body.explicit,
-            previewUrl: res.body.preview_url,
-            externalIds: res.body.external_ids
+        const res = await axios.get(
+          `https://api.spotify.com/v1/tracks/${firstSongId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+            cancelToken: cancelToken.token,
           }
+        );
+
+        const track = {
+          id: res.data.id,
+          title: res.data.name,
+          artist: res.data.artists[0].name,
+          album: res.data.album.name,
+          cover: res.data.album.images[res.data.album.images.length - 1]?.url,
+          uri: res.data.uri,
+          duration: res.data.duration_ms,
+          popularity: res.data.popularity,
+          trackNumber: res.data.track_number,
+          discNumber: res.data.disc_number,
+          explicit: res.data.explicit,
+          previewUrl: res.data.preview_url,
+          externalIds: res.data.external_ids,
         };
-  
-        setSongContent(songs);
+
+        setSongContent(track);
       } catch (error) {
-        console.error('Error fetching artists:', error);
+        if (axios.isCancel(error)) return;
+        console.error("Error fetching track content:", error);
       }
-  
-      return () => cancel = true;
     };
-  
-    fetchArtistResults();
-  }, [firstSongId, accessToken]); */
 
-  return { artistContent, albumContent, songContent };  
-};
+    fetchTrackContent();
+  }, [firstSongId, accessToken]); 
 
-export default useFetchedContent;
+  return { artistContent, albumContent, songContent };
+}
+
+export default useFetchedContent; */

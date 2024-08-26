@@ -35,7 +35,7 @@ function useAdimSearchPage(search, code) {
     const debouncedSetPage = useCallback(debounce((newPage) => {
         setActivePage(newPage);
         setIsHistoryUpdateNeeded(true);
-    }, 505), []);
+    }, 500), []);
 
     useEffect(() => {
         if (!search) {

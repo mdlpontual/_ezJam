@@ -3,7 +3,7 @@ import IMG from "../../../../../../../assets/images/ImagesHUB";
 
 function Artists({ searchArtistResults, searchAlbumResults, searchTrackResults, artistContent, albumContent, songContent, onArtistClick, onAlbumClick }) {
     let profilePicture;
-    if (searchArtistResults.profile) {
+    if (searchArtistResults.artistProfileImgSearchRes) {
         profilePicture = searchArtistResults.profile;
     } else {
         profilePicture = IMG.profilePlaceHolder;
