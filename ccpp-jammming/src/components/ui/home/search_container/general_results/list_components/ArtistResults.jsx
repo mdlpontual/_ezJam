@@ -14,7 +14,7 @@ function ArtistResults({ searchArtistResults, onArtistClick, accessToken }) {
                 <Artists 
                     artistContent={artist}
                     onArtistClick={onArtistClick}
-                    key={artist.artistUriResponse}/>
+                    key={artist.artistUri}/>
             ))}
         </>
     );
