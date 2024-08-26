@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-function useFetchedContent({ searchArtistResults, searchAlbumResults, accessToken }) {
+function useFetchContent({ searchArtistResults, searchAlbumResults, accessToken }) {
   const [artistContent, setArtistContent] = useState([]);
   const [albumContent, setAlbumContent] = useState([]);
 
@@ -21,8 +21,6 @@ function useFetchedContent({ searchArtistResults, searchAlbumResults, accessToke
           },
           cancelToken: cancelToken.token,
         });
-
-        console.log("AAAAAAAAAAAAA", res);
 
         const artists = res.data.artists.map((artist) => ({
           artistType: artist.type,
@@ -60,8 +58,6 @@ function useFetchedContent({ searchArtistResults, searchAlbumResults, accessToke
           cancelToken: cancelToken.token,
         });
 
-        console.log("BBBBBBBBBBB", res);
-
         const albums = res.data.albums.map((album) => ({
           albumAutor: album.artists[0].name,
           albumTitle: album.name,
@@ -86,7 +82,7 @@ function useFetchedContent({ searchArtistResults, searchAlbumResults, accessToke
   return { artistContent, albumContent };
 }
 
-export default useFetchedContent;
+export default useFetchContent;
 
 
 

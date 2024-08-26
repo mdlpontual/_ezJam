@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import useAuth from "./useAuth";
-import useSearchResults from "./useSearchResults";
-import useFetchedContent from "./useFetchedContent";
+import useFetchId from "./useFetchId";
+import useFetchContent from "./useFetchContent";
 import EmptyResultsPage from "../components/ui/home/search_container/non_results/EmptyResultsPage";
 import GeneralResultsPage from "../components/ui/home/search_container/general_results/GeneralResultsPage";
 import ArtistPage from "../components/ui/home/search_container/artist_page/ArtistPage";
@@ -27,9 +27,8 @@ function useAdimSearchPage(search, code) {
     const [isHistoryUpdateNeeded, setIsHistoryUpdateNeeded] = useState(false);  // New state to control history updates
 
     const { accessToken } = useAuth(code);
-    const { searchArtistResults, searchAlbumResults, searchTrackResults } = useSearchResults({ search, accessToken });
-    
-    const { artistContent, albumContent, songContent } = useFetchedContent({ searchArtistResults, searchAlbumResults, searchTrackResults, accessToken });
+    const { searchArtistResults, searchAlbumResults, searchTrackResults } = useFetchId({ search, accessToken });
+    const { artistContent, albumContent, songContent } = useFetchContent({ searchArtistResults, searchAlbumResults, searchTrackResults, accessToken });
 
     // Debounced function for setting the page
     const debouncedSetPage = useCallback(debounce((newPage) => {
@@ -47,21 +46,20 @@ function useAdimSearchPage(search, code) {
                     searchArtistResults={searchArtistResults}
                     searchAlbumResults={searchAlbumResults}
                     searchTrackResults={searchTrackResults}
-                    artistContent={artistContent}
-                    albumContent={albumContent}
-                    songContent={songContent}
                     onArtistClick={handleArtistClick}
                     onAlbumClick={handleAlbumClick}
+                    accessToken={accessToken}
                 />
             );
 
             debouncedSetPage(newPage);  // Use the debounced function for page updates
         }
-    }, [search, artistContent, albumContent, songContent, searchArtistResults, searchAlbumResults, searchTrackResults, debouncedSetPage]);
+    }, [search, searchArtistResults, searchAlbumResults, searchTrackResults, debouncedSetPage]);
 
 
 
     
+
     useEffect(() => {
         if (isHistoryUpdateNeeded) {
             updateHistory(activePage);
@@ -79,6 +77,10 @@ function useAdimSearchPage(search, code) {
         setCurrentHistoryIndex((prevIndex) => prevIndex + 1);
     }, [currentHistoryIndex]);
 
+
+
+
+
     const handleArtistClick = useCallback(( artistContent, albumContent, songContent, searchArtistResults, searchAlbumResults, searchTrackResults ) => {
         const newPage = (
             <ArtistPage 
@@ -93,6 +95,10 @@ function useAdimSearchPage(search, code) {
         setIsHistoryUpdateNeeded(true);  // Flag to update history when page changes
     }, [ artistContent, albumContent, songContent, searchArtistResults, searchAlbumResults, searchTrackResults ]);
     
+
+
+
+
     const handleAlbumClick = useCallback(( artistContent, albumContent, songContent, searchArtistResults, searchAlbumResults, searchTrackResults ) => {
         const newPage = (
             <AlbumPage 
@@ -106,6 +112,7 @@ function useAdimSearchPage(search, code) {
         setActivePage(newPage);
         setIsHistoryUpdateNeeded(true);  // Flag to update history when page changes
     }, [ artistContent, albumContent, songContent, searchArtistResults, searchAlbumResults, searchTrackResults ]);
+
 
 
 

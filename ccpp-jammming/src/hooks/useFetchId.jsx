@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-function useSearchResults({ search, accessToken }) {
+function useFetchId({ search, accessToken }) {
   const [searchArtistResults, setSearchArtistResults] = useState([]);
   const [searchAlbumResults, setSearchAlbumResults] = useState([]);
   const [searchTrackResults, setSearchTrackResults] = useState([]);
@@ -27,6 +27,7 @@ function useSearchResults({ search, accessToken }) {
         const artists = res.data.artists.items.map((artist) => {
           return {
             artistIdResponse: artist.id,
+            artistUriResponse: artist.uri
           };
         });
 
@@ -61,6 +62,7 @@ function useSearchResults({ search, accessToken }) {
         const albums = res.data.albums.items.map((album) => {
           return {
             albumIdResponse: album.id,
+            albumUriResponse: album.uri
           };
         });
 
@@ -111,7 +113,7 @@ function useSearchResults({ search, accessToken }) {
   return { searchArtistResults, searchAlbumResults, searchTrackResults };
 }
 
-export default useSearchResults;
+export default useFetchId;
 
 
 

@@ -1,21 +1,20 @@
 import React from "react";
 import Artists from "./unit_components/Artists";
+import useFetchContent from "../../../../../../hooks/useFetchContent";
 
-function ArtistResults({ searchArtistResults, searchAlbumResults, searchTrackResults, artistContent, albumContent, songContent, onArtistClick, onAlbumClick }) {
+function ArtistResults({ searchArtistResults, onArtistClick, accessToken }) {
+    const { artistContent } = useFetchContent({ searchArtistResults, accessToken })
+
+    console.log("ArtistResults", artistContent);
+
     return (
         <>
             <h4>artists:</h4>
-            {searchArtistResults.filter((artist, idx) => idx < 5).map(artist => (
+            {artistContent.filter((artist, idx) => idx < 5).map((artist, idx) => (
                 <Artists 
-                    searchArtistResults={artist}
-                    searchAlbumResults={searchAlbumResults}
-                    searchTrackResults={searchTrackResults}
-                    artistContent={artistContent} 
-                    albumContent={albumContent} 
-                    songContent={songContent} 
+                    artistContent={artist}
                     onArtistClick={onArtistClick}
-                    onAlbumClick={onAlbumClick}
-                    key={artist.uri}/>
+                    key={artist.artistUriResponse}/>
             ))}
         </>
     );
