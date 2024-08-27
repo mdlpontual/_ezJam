@@ -59,14 +59,14 @@ function useFetchContent({ searchArtistResults, searchAlbumResults, accessToken 
         });
 
         const albums = res.data.albums.map((album) => ({
-          albumAutor: album.artists[0].name,
+          albumAuthor: album.artists[0].name,
           albumTitle: album.name,
           albumType: album.album_type,
           albumCover: album.images[0]?.url,
           albumYear: album.release_date.slice(0, 4),
-          albumUri: album.uri,
           albumTotalTracks: album.total_tracks,
           albumExternalUrls: album.external_urls,
+          albumUri: album.uri
         }));
 
         setAlbumContent(albums);

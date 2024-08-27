@@ -5,12 +5,10 @@ import useFetchContent from "../../../../../../hooks/useFetchContent";
 function ArtistResults({ searchArtistResults, onArtistClick, accessToken }) {
     const { artistContent } = useFetchContent({ searchArtistResults, accessToken })
 
-    console.log("ArtistResults", artistContent);
-
     return (
         <>
             <h4>artists:</h4>
-            {artistContent.filter((artist, idx) => idx < 5).map((artist, idx) => (
+            {artistContent.filter((artist, idx) => idx < 5).map(artist => (
                 <Artists 
                     artistContent={artist}
                     onArtistClick={onArtistClick}

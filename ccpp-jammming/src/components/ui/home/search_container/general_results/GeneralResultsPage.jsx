@@ -17,12 +17,12 @@ function GeneralResultsPage({ searchArtistResults, searchAlbumResults, searchTra
                 </div>
                 <div id="gen-results-albuns" className="row">
                     <div id="gen-results-albuns-col" className="col">
-                        {/* <AlbumResults 
+                        <AlbumResults 
                             searchArtistResults={searchArtistResults}
                             searchAlbumResults={searchAlbumResults}
-                            searchTrackResults={searchTrackResults} 
                             onArtistClick={onArtistClick}
-                            onAlbumClick={onAlbumClick}/> */}
+                            onAlbumClick={onAlbumClick}
+                            accessToken={accessToken}/>
                     </div>
                 </div>
                 <div id="gen-results-songs" className="row">

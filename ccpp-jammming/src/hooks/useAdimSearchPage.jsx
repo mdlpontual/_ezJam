@@ -47,7 +47,7 @@ function useAdimSearchPage(search, code) {
                     searchAlbumResults={searchAlbumResults}
                     searchTrackResults={searchTrackResults}
                     onArtistClick={handleArtistClick}
-                    /* onAlbumClick={handleAlbumClick} */
+                    onAlbumClick={handleAlbumClick}
                     accessToken={accessToken}
                 />
             );
@@ -87,26 +87,20 @@ function useAdimSearchPage(search, code) {
         );
         setActivePage(newPage);
         setIsHistoryUpdateNeeded(true);  // Flag to update history when page changes
+        console.log(newPage);
     }, [ searchArtistResults ]);
     
 
 
 
 
-   /*  const handleAlbumClick = useCallback(( artistContent, albumContent, songContent, searchArtistResults, searchAlbumResults, searchTrackResults ) => {
+    const handleAlbumClick = useCallback(( albumContent ) => {
         const newPage = (
-            <AlbumPage 
-                artistContent={artistContent} 
-                albumContent={albumContent} 
-                songContent={songContent}
-                searchArtistResults={searchArtistResults}
-                searchAlbumResults={searchAlbumResults}
-                searchTrackResults={searchTrackResults}/>
+            <AlbumPage albumContent={albumContent} />
         );
         setActivePage(newPage);
         setIsHistoryUpdateNeeded(true);  // Flag to update history when page changes
-    }, [ artistContent, albumContent, songContent, searchArtistResults, searchAlbumResults, searchTrackResults ]); */
-
+    }, [ searchAlbumResults ]);
 
 
 
