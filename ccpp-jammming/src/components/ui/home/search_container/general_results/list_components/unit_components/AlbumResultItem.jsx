@@ -1,7 +1,7 @@
 import React from "react";
 import IMG from "../../../../../../../assets/images/ImagesHUB";
 
-function Albuns({ artistContent, albumContent, onArtistClick, onAlbumClick }) {
+function AlbumResultItem({ artistContent, albumContent, onArtistClick, onAlbumClick }) {
     let albumCoverImg;
     if (albumContent.albumCover) {
         albumCoverImg = albumContent.albumCover;
@@ -26,4 +26,4 @@ function Albuns({ artistContent, albumContent, onArtistClick, onAlbumClick }) {
     );
 }
 
-export default Albuns;
+export default AlbumResultItem;

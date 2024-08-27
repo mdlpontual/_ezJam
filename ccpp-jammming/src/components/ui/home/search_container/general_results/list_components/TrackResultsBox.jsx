@@ -1,24 +1,24 @@
 import React, { useState, useEffect } from "react";
-import Tracks from "./unit_components/Tracks";
+import TrackResultItem from "./unit_components/TrackResultItem";
 import useFetchContent from "../../../../../../hooks/useFetchContent";
 
-function TrackResults({ searchArtistResults, searchAlbumResults, searchTrackResults, onArtistClick, onAlbumClick, accessToken }) {
-    const { artistContent, albumContent, trackContent, fetchMissingArtistByName, fetchMissingAlbumByName } = useFetchContent({ searchArtistResults, searchAlbumResults, searchTrackResults, accessToken });
+function TrackResultsBox({ searchArtistResults, searchAlbumResults, searchTrackResults, onArtistClick, onAlbumClick, accessToken }) {
+    const { fetchedArtistsArray, fetchedAlbumsArray, fetchedTracksArray, fetchMissingArtistByName, fetchMissingAlbumByName } = useFetchContent({ searchArtistResults, searchAlbumResults, searchTrackResults, accessToken });
     const [updatedArtistContent, setUpdatedArtistContent] = useState([]);
     const [updatedAlbumContent, setUpdatedAlbumContent] = useState([]);
 
     useEffect(() => {
-        setUpdatedArtistContent(artistContent);
-    }, [artistContent]);
+        setUpdatedArtistContent(fetchedArtistsArray);
+    }, [fetchedArtistsArray]);
 
     useEffect(() => {
-        setUpdatedAlbumContent(albumContent);
-    }, [albumContent]);
+        setUpdatedAlbumContent(fetchedAlbumsArray);
+    }, [fetchedAlbumsArray]);
 
     return (
         <>
             <h4>tracks:</h4>
-            {trackContent.filter((track, idx) => idx < 10).map(track => {
+            {fetchedTracksArray.filter((track, idx) => idx < 10).map(track => {
                 let matchingArtist = updatedArtistContent.find(artist => artist.artistName === track.trackAuthor);
                 let matchingAlbum = updatedAlbumContent.find(album => album.albumTitle === track.trackAlbum);
 
@@ -40,7 +40,7 @@ function TrackResults({ searchArtistResults, searchAlbumResults, searchTrackResu
                 }
 
                 return (
-                    <Tracks 
+                    <TrackResultItem 
                         trackContent={track}
                         artistContent={matchingArtist} 
                         albumContent={matchingAlbum} 
@@ -54,4 +54,4 @@ function TrackResults({ searchArtistResults, searchAlbumResults, searchTrackResu
     );
 }
 
-export default TrackResults;
+export default TrackResultsBox;

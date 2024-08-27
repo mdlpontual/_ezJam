@@ -1,6 +1,6 @@
 import React, { useState, useEffect, createContext } from "react";
 import IMG from "../../../../../assets/images/ImagesHUB";
-import Track from "./track/Track";
+import PlaylistTrack from "./track/PlaylistTrack";
 
 function OpenPlaylist() {
     return (
@@ -52,7 +52,7 @@ function OpenPlaylist() {
                         </div>
                         <div id="tracks-list" className="row flex-grow-1">
                             <div id="tracks-list-col" className="col">
-                                <Track/>
+                                <PlaylistTrack/>
                             </div>
                         </div>
                     </div>
