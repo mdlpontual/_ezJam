@@ -1,7 +1,7 @@
 import React from "react";
 import ArtistResults from "./list_components/ArtistResults";
 import AlbumResults from "./list_components/AlbumResults";
-import SongResults from "./list_components/SongResults";
+import TrackResults from "./list_components/TrackResults";
 
 function GeneralResultsPage({ searchArtistResults, searchAlbumResults, searchTrackResults, onArtistClick, onAlbumClick, accessToken }) {
     return (
@@ -27,12 +27,13 @@ function GeneralResultsPage({ searchArtistResults, searchAlbumResults, searchTra
                 </div>
                 <div id="gen-results-songs" className="row">
                     <div id="gen-results-songs-col" className="col">
-                        {/* <SongResults 
+                        <TrackResults 
                             searchArtistResults={searchArtistResults}
                             searchAlbumResults={searchAlbumResults}
                             searchTrackResults={searchTrackResults}
                             onArtistClick={onArtistClick}
-                            onAlbumClick={onAlbumClick}/> */}
+                            onAlbumClick={onAlbumClick}
+                            accessToken={accessToken}/>
                     </div>
                 </div>
             </div>

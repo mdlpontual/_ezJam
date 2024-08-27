@@ -28,7 +28,6 @@ function useAdimSearchPage(search, code) {
 
     const { accessToken } = useAuth(code);
     const { searchArtistResults, searchAlbumResults, searchTrackResults } = useFetchId({ search, accessToken });
-    //const { artistContent, albumContent, songContent } = useFetchContent({ searchArtistResults, searchAlbumResults, searchTrackResults, accessToken });
 
     // Debounced function for setting the page
     const debouncedSetPage = useCallback(debounce((newPage) => {
@@ -81,6 +80,12 @@ function useAdimSearchPage(search, code) {
         setIsHistoryUpdateNeeded(true);  // Flag to update history when page changes
     }, [ searchArtistResults ]);
 
+
+
+
+
+
+    
     const handleAlbumClick = useCallback(( albumContent ) => {
         const newPage = (
             <AlbumPage albumContent={albumContent} />

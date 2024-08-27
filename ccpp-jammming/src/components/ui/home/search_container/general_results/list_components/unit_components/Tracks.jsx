@@ -1,12 +1,12 @@
 import React from "react";
 import IMG from "../../../../../../../assets/images/ImagesHUB";
 
-function Songs({ searchArtistResults, searchAlbumResults, searchTrackResults, artistContent, albumContent, songContent, onArtistClick, onAlbumClick  }) {
-    let songCover;
-    if (searchTrackResults.cover) {
-        songCover = searchTrackResults.cover;
+function Tracks({ artistContent, albumContent, trackContent, onArtistClick, onAlbumClick  }) {
+    let trackCover;
+    if (trackContent.trackCover) {
+        trackCover = trackContent.trackCover;
     } else {
-        songCover = IMG.placeHolders;
+        trackCover = IMG.placeHolders;
     }
 
     function millisToMinutesAndSeconds(millis) {
@@ -22,11 +22,11 @@ function Songs({ searchArtistResults, searchAlbumResults, searchTrackResults, ar
                     <img id="play-icon" src={IMG.play2PNG} alt="play icon" width="20px"/>
                 </div>
                 <div id="col-cover" className="col-1 d-flex justify-content-center align-items-center">
-                    <img src={searchTrackResults.cover} height="40px"/>
+                    <img src={trackCover} height="40px"/>
                 </div>
                 <div id="col-title" className="col d-flex justify-content-start align-items-center">
-                    <h5>{searchTrackResults.title}</h5>
-                    <p><a id="open-artist-page" type="button" onClick={() => onArtistClick(artist)}>{searchTrackResults.artist}</a></p>
+                    <h5>{trackContent.trackTitle}</h5>
+                    <p><a id="open-artist-page" type="button" onClick={() => onArtistClick(artistContent)}>{trackContent.trackAuthor}</a></p>
                 </div>
                 <div id="col-plus" className="col-1 d-flex justify-content-end align-items-center">
                     <img id="plus-icon" src={IMG.plus2PNG} alt="plus icon" width="25px"/>
@@ -35,14 +35,14 @@ function Songs({ searchArtistResults, searchAlbumResults, searchTrackResults, ar
                     <img id="minus-icon" src={IMG.minus2PNG} alt="minus icon" width="25x"/>
                 </div>
                 <div id="col-album" className="col-3 d-flex justify-content-start align-items-center">
-                    <p><a id="open-album-page" type="button" onClick={() => onAlbumClick(album)}>{searchTrackResults.album}</a></p>
+                    <p><a id="open-album-page" type="button" onClick={() => onAlbumClick(albumContent)}>{trackContent.trackAlbum}</a></p>
                 </div>
                 <div id="col-duration" className="col-1 d-flex justify-content-center align-items-center">
-                    <p>{millisToMinutesAndSeconds(searchTrackResults.duration)}</p>
+                    <p>{millisToMinutesAndSeconds(trackContent.trackDuration)}</p>
                 </div>
             </div> 
         </>
     );
 }
 
-export default Songs;
+export default Tracks;
