@@ -1,7 +1,7 @@
 import React from "react";
-import ArtistResults from "./list_components/ArtistResults";
-import AlbumResults from "./list_components/AlbumResults";
-import TrackResults from "./list_components/TrackResults";
+import ArtistResultsBox from "./list_components/ArtistResultsBox";
+import AlbumResultsBox from "./list_components/AlbumResultsBox";
+import TrackResultsBox from "./list_components/TrackResultsBox";
 
 function GeneralResultsPage({ searchArtistResults, searchAlbumResults, searchTrackResults, onArtistClick, onAlbumClick, accessToken }) {
     return (
@@ -9,17 +9,21 @@ function GeneralResultsPage({ searchArtistResults, searchAlbumResults, searchTra
             <div id="gen-results-container" className="container-fluid">
                 <div id="gen-results-artists" className="row">
                     <div id="gen-results-artists-col" className="col">
-                        <ArtistResults 
-                            searchArtistResults={searchArtistResults} 
+                        <ArtistResultsBox 
+                            searchArtistResults={searchArtistResults}
+                            searchAlbumResults={searchAlbumResults}
+                            searchTrackResults={searchTrackResults}
                             onArtistClick={onArtistClick}
+                            onAlbumClick={onAlbumClick}
                             accessToken={accessToken}/>
                     </div>
                 </div>
                 <div id="gen-results-albuns" className="row">
                     <div id="gen-results-albuns-col" className="col">
-                        <AlbumResults 
+                        <AlbumResultsBox 
                             searchArtistResults={searchArtistResults}
                             searchAlbumResults={searchAlbumResults}
+                            searchTrackResults={searchTrackResults}
                             onArtistClick={onArtistClick}
                             onAlbumClick={onAlbumClick}
                             accessToken={accessToken}/>
@@ -27,7 +31,7 @@ function GeneralResultsPage({ searchArtistResults, searchAlbumResults, searchTra
                 </div>
                 <div id="gen-results-songs" className="row">
                     <div id="gen-results-songs-col" className="col">
-                        <TrackResults 
+                        <TrackResultsBox 
                             searchArtistResults={searchArtistResults}
                             searchAlbumResults={searchAlbumResults}
                             searchTrackResults={searchTrackResults}

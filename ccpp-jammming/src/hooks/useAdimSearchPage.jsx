@@ -80,12 +80,6 @@ function useAdimSearchPage(search, code) {
         setIsHistoryUpdateNeeded(true);  // Flag to update history when page changes
     }, [ searchArtistResults ]);
 
-
-
-
-
-
-    
     const handleAlbumClick = useCallback(( albumContent ) => {
         const newPage = (
             <AlbumPage albumContent={albumContent} />

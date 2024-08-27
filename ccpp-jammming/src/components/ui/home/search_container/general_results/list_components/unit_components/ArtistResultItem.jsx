@@ -1,7 +1,7 @@
 import React from "react";
 import IMG from "../../../../../../../assets/images/ImagesHUB";
 
-function Artists({ artistContent, onArtistClick }) {
+function ArtistResultItem({ artistContent, onArtistClick }) {
     let profilePicture;
     if (artistContent.artistProfileImg) {
         profilePicture = artistContent.artistProfileImg;
@@ -25,4 +25,4 @@ function Artists({ artistContent, onArtistClick }) {
     );
 }
 
-export default Artists;
+export default ArtistResultItem;

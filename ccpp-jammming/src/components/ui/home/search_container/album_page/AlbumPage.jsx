@@ -1,6 +1,6 @@
 import React from "react";
 import IMG from "../../../../../assets/images/ImagesHUB";
-import AlbumSongs from "./AlbumSongs";
+import AlbumTracks from "./AlbumTracks";
 
 function AlbumPage({ albumContent }) {
     return (
@@ -42,7 +42,7 @@ function AlbumPage({ albumContent }) {
                         </div>
                         <div id="tracks-list" className="row flex-grow-1">
                             <div id="tracks-list-col" className="col">
-                                <AlbumSongs/>
+                                <AlbumTracks />
                             </div>
                         </div>
                     </div>

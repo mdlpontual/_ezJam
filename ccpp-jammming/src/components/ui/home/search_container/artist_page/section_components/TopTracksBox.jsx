@@ -1,8 +1,8 @@
 import React from "react";
 import IMG from "../../../../../../assets/images/ImagesHUB";
-import TopSong from "./unit_components/TopSong";
+import TopTrack from "./unit_components/TopTrack";
 
-function TopFive() {
+function TopTracksBox() {
     //const sortedSongs = songsResults.sort((a, b) => b.popularity - a.popularity).filter((song, idx) => idx < 10);
 
     return (
@@ -22,4 +22,4 @@ function TopFive() {
     );
 }
 
-export default TopFive;
+export default TopTracksBox;

@@ -2,9 +2,9 @@ import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 
 function useFetchContent({ searchArtistResults, searchAlbumResults, searchTrackResults, accessToken }) {
-  const [artistContent, setArtistContent] = useState([]);
-  const [albumContent, setAlbumContent] = useState([]);
-  const [trackContent, setTrackContent] = useState([]);
+  const [fetchedArtistsArray, setFetchedArtistsArray] = useState([]);
+  const [fetchedAlbumsArray, setFetchedAlbumsArray] = useState([]);
+  const [fetchedTracksArray, setFetchedTracksArray] = useState([]);
 
   const fetchMissingArtistByName = useCallback(async (artistName) => {
     if (!artistName || !accessToken) return null;
@@ -31,7 +31,7 @@ function useFetchContent({ searchArtistResults, searchAlbumResults, searchTrackR
           artistUri: artist.uri,
         };
 
-        setArtistContent((prevContent) => [...prevContent, artistData]);
+        setFetchedArtistsArray((prevContent) => [...prevContent, artistData]);
         return artistData;
       }
 
@@ -69,7 +69,7 @@ function useFetchContent({ searchArtistResults, searchAlbumResults, searchTrackR
           albumUri: album.uri,
         };
 
-        setAlbumContent((prevContent) => [...prevContent, albumData]);
+        setFetchedAlbumsArray((prevContent) => [...prevContent, albumData]);
         return albumData;
       }
 
@@ -84,7 +84,7 @@ function useFetchContent({ searchArtistResults, searchAlbumResults, searchTrackR
 
   useEffect(() => {
     const fetchArtistContent = async () => {
-      if (!searchArtistResults || searchArtistResults.length === 0) return setArtistContent([]);
+      if (!searchArtistResults || searchArtistResults.length === 0) return setFetchedArtistsArray([]);
       if (!accessToken) return;
 
       try {
@@ -108,7 +108,7 @@ function useFetchContent({ searchArtistResults, searchAlbumResults, searchTrackR
           artistUri: artist.uri,
         }));
 
-        setArtistContent(artists);
+        setFetchedArtistsArray(artists);
       } catch (error) {
         console.error("Error fetching artist content:", error);
       }
@@ -119,7 +119,7 @@ function useFetchContent({ searchArtistResults, searchAlbumResults, searchTrackR
 
   useEffect(() => {
     const fetchAlbumContent = async () => {
-      if (!searchAlbumResults || searchAlbumResults.length === 0) return setAlbumContent([]);
+      if (!searchAlbumResults || searchAlbumResults.length === 0) return setFetchedAlbumsArray([]);
       if (!accessToken) return;
 
       try {
@@ -145,7 +145,7 @@ function useFetchContent({ searchArtistResults, searchAlbumResults, searchTrackR
           albumUri: album.uri,
         }));
 
-        setAlbumContent(albums);
+        setFetchedAlbumsArray(albums);
       } catch (error) {
         console.error("Error fetching album content:", error);
       }
@@ -156,7 +156,7 @@ function useFetchContent({ searchArtistResults, searchAlbumResults, searchTrackR
 
   useEffect(() => {
     const fetchTrackContent = async () => {
-      if (!searchTrackResults || searchTrackResults.length === 0) return setTrackContent([]);
+      if (!searchTrackResults || searchTrackResults.length === 0) return setFetchedTracksArray([]);
       if (!accessToken) return;
 
       try {
@@ -186,7 +186,7 @@ function useFetchContent({ searchArtistResults, searchAlbumResults, searchTrackR
           trackExternalIds: track.external_ids,
         }));
 
-        setTrackContent(tracks);
+        setFetchedTracksArray(tracks);
       } catch (error) {
         console.error("Error fetching album content:", error);
       }
@@ -195,7 +195,7 @@ function useFetchContent({ searchArtistResults, searchAlbumResults, searchTrackR
     fetchTrackContent();
   }, [searchTrackResults, accessToken]);
 
-  return { artistContent, albumContent, trackContent, fetchMissingArtistByName, fetchMissingAlbumByName };
+  return { fetchedArtistsArray, fetchedAlbumsArray, fetchedTracksArray, fetchMissingArtistByName, fetchMissingAlbumByName };
 }
 
 export default useFetchContent;

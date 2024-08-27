@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react";
-import Albuns from "./unit_components/Albuns";
+import AlbumResultItem from "./unit_components/AlbumResultItem";
 import useFetchContent from "../../../../../../hooks/useFetchContent";
 
-function AlbumResults({ searchArtistResults, searchAlbumResults, onArtistClick, onAlbumClick, accessToken }) {
-    const { artistContent, albumContent, fetchMissingArtistByName } = useFetchContent({ searchArtistResults, searchAlbumResults, accessToken });
+function AlbumResultsBox({ searchArtistResults, searchAlbumResults, onArtistClick, onAlbumClick, accessToken }) {
+    const { fetchedArtistsArray,  fetchedAlbumsArray, fetchMissingArtistByName } = useFetchContent({ searchArtistResults, searchAlbumResults, accessToken });
     const [updatedArtistContent, setUpdatedArtistContent] = useState([]);
 
     useEffect(() => {
-        setUpdatedArtistContent(artistContent);
-    }, [artistContent]);
+        setUpdatedArtistContent(fetchedArtistsArray);
+    }, [fetchedArtistsArray]);
 
     return (
         <>
             <h4>albums:</h4>
-            {albumContent.filter((album, idx) => idx < 5).map(album => {
+            { fetchedAlbumsArray.filter((album, idx) => idx < 5).map(album => {
                 let matchingArtist = updatedArtistContent.find(artist => artist.artistName === album.albumAuthor);
 
                 // If matchingArtist is not found, trigger a fetch
@@ -26,7 +26,7 @@ function AlbumResults({ searchArtistResults, searchAlbumResults, onArtistClick, 
                 }
 
                 return (
-                    <Albuns 
+                    <AlbumResultItem 
                         albumContent={album}
                         artistContent={matchingArtist} 
                         onArtistClick={onArtistClick}
@@ -39,4 +39,4 @@ function AlbumResults({ searchArtistResults, searchAlbumResults, onArtistClick, 
     );
 }
 
-export default AlbumResults;
+export default AlbumResultsBox;

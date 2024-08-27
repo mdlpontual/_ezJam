@@ -1,7 +1,7 @@
 import React from 'react';
 import IMG from "../../../../../../assets/images/ImagesHUB";
 
-function Track() {
+function PlaylistTrack() {
     return (
         <>
             <div id="single-track-container" className="container-fluid">
@@ -40,4 +40,4 @@ function Track() {
     );
 }
 
-export default Track;
+export default PlaylistTrack;

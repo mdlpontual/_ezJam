@@ -1,7 +1,7 @@
 import React from "react";
 import IMG from "../../../../../../../assets/images/ImagesHUB";
 
-function Tracks({ artistContent, albumContent, trackContent, onArtistClick, onAlbumClick  }) {
+function TrackResultItem({ artistContent, albumContent, trackContent, onArtistClick, onAlbumClick  }) {
     let trackCover;
     if (trackContent.trackCover) {
         trackCover = trackContent.trackCover;
@@ -45,4 +45,4 @@ function Tracks({ artistContent, albumContent, trackContent, onArtistClick, onAl
     );
 }
 
-export default Tracks;
+export default TrackResultItem;
