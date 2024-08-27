@@ -1,23 +1,18 @@
 import React from "react";
 import ArtistResults from "./list_components/ArtistResults";
 import AlbumResults from "./list_components/AlbumResults";
-import SongResults from "./list_components/SongResults";
+import TrackResults from "./list_components/TrackResults";
 
-function GeneralResultsPage({ searchArtistResults, searchAlbumResults, searchTrackResults, artistContent, albumContent, songContent, onArtistClick, onAlbumClick }) {
+function GeneralResultsPage({ searchArtistResults, searchAlbumResults, searchTrackResults, onArtistClick, onAlbumClick, accessToken }) {
     return (
         <>
             <div id="gen-results-container" className="container-fluid">
                 <div id="gen-results-artists" className="row">
                     <div id="gen-results-artists-col" className="col">
                         <ArtistResults 
-                            searchArtistResults={searchArtistResults}
-                            searchAlbumResults={searchAlbumResults}
-                            searchTrackResults={searchTrackResults}
-                            artistContent={artistContent} 
-                            albumContent={albumContent} 
-                            songContent={songContent} 
+                            searchArtistResults={searchArtistResults} 
                             onArtistClick={onArtistClick}
-                            onAlbumClick={onAlbumClick}/>
+                            accessToken={accessToken}/>
                     </div>
                 </div>
                 <div id="gen-results-albuns" className="row">
@@ -25,25 +20,20 @@ function GeneralResultsPage({ searchArtistResults, searchAlbumResults, searchTra
                         <AlbumResults 
                             searchArtistResults={searchArtistResults}
                             searchAlbumResults={searchAlbumResults}
-                            searchTrackResults={searchTrackResults}
-                            artistContent={artistContent} 
-                            albumContent={albumContent} 
-                            songContent={songContent} 
                             onArtistClick={onArtistClick}
-                            onAlbumClick={onAlbumClick}/>
+                            onAlbumClick={onAlbumClick}
+                            accessToken={accessToken}/>
                     </div>
                 </div>
                 <div id="gen-results-songs" className="row">
                     <div id="gen-results-songs-col" className="col">
-                        <SongResults 
+                        <TrackResults 
                             searchArtistResults={searchArtistResults}
                             searchAlbumResults={searchAlbumResults}
                             searchTrackResults={searchTrackResults}
-                            artistContent={artistContent} 
-                            albumContent={albumContent} 
-                            songContent={songContent} 
                             onArtistClick={onArtistClick}
-                            onAlbumClick={onAlbumClick}/>
+                            onAlbumClick={onAlbumClick}
+                            accessToken={accessToken}/>
                     </div>
                 </div>
             </div>

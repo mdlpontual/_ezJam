@@ -1,10 +1,10 @@
 import React from "react";
 import IMG from "../../../../../../../assets/images/ImagesHUB";
 
-function Artists({ searchArtistResults, searchAlbumResults, searchTrackResults, artistContent, albumContent, songContent, onArtistClick, onAlbumClick }) {
+function Artists({ artistContent, onArtistClick }) {
     let profilePicture;
-    if (searchArtistResults.profile) {
-        profilePicture = searchArtistResults.profile;
+    if (artistContent.artistProfileImg) {
+        profilePicture = artistContent.artistProfileImg;
     } else {
         profilePicture = IMG.profilePlaceHolder;
     }
@@ -16,8 +16,8 @@ function Artists({ searchArtistResults, searchAlbumResults, searchTrackResults, 
                     <img src={profilePicture} alt="profile picture" height="65px"/>
                 </div>
                 <div id="artist-name" className="col d-flex justify-content-start align-items-center">
-                    <a id="open-artist-page" type="button" onClick={() => onArtistClick(artistContent, albumContent, songContent, searchArtistResults)}>
-                        <h5>{searchArtistResults.artist}</h5>
+                    <a id="open-artist-page" type="button" onClick={() => onArtistClick(artistContent)}>
+                        <h5>{artistContent.artistName}</h5>
                     </a>
                 </div>
             </div>

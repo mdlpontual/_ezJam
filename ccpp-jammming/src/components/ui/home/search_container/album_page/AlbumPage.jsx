@@ -10,11 +10,11 @@ function AlbumPage({ albumContent }) {
                     <div id="album-page-banner-col" className="col">
                         <div id="album-inner-banner-row" className="row">
                             <div id="album-cover-col" className="col-auto">
-                                <img src={albumContent.cover} alt="album cover" height="100px"/>
+                                <img src={albumContent.albumCover} alt="album cover" height="100px"/>
                             </div>
                             <div id="album-title-col" className="col d-flex flex-column justify-content-end align-items-start">
                                 <p>{albumContent.albumType}</p>
-                                <h1>{albumContent.album}</h1>
+                                <h1>{albumContent.albumTitle}</h1>
                             </div>
                         </div>
                     </div>
