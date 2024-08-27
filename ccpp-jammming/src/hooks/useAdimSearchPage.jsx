@@ -56,10 +56,6 @@ function useAdimSearchPage(search, code) {
         }
     }, [search, searchArtistResults, searchAlbumResults, searchTrackResults, debouncedSetPage]);
 
-
-
-
-
     useEffect(() => {
         if (isHistoryUpdateNeeded) {
             updateHistory(activePage);
@@ -77,22 +73,13 @@ function useAdimSearchPage(search, code) {
         setCurrentHistoryIndex((prevIndex) => prevIndex + 1);
     }, [currentHistoryIndex]);
 
-
-
-
-
     const handleArtistClick = useCallback(( artistContent ) => {
         const newPage = (
             <ArtistPage artistContent={artistContent} />
         );
         setActivePage(newPage);
         setIsHistoryUpdateNeeded(true);  // Flag to update history when page changes
-        console.log(newPage);
     }, [ searchArtistResults ]);
-    
-
-
-
 
     const handleAlbumClick = useCallback(( albumContent ) => {
         const newPage = (
@@ -101,9 +88,6 @@ function useAdimSearchPage(search, code) {
         setActivePage(newPage);
         setIsHistoryUpdateNeeded(true);  // Flag to update history when page changes
     }, [ searchAlbumResults ]);
-
-
-
 
     const goBack = useCallback(() => {
         if (currentHistoryIndex > 0) {
