@@ -89,9 +89,9 @@ function useAdimSearchPage(search, code) {
     //----------------------------------------------------------------------------------------------------------------------------------------------
     //----------------------------------------------------------------------------------------------------------------------------------------------
 
-    const handleArtistClick = useCallback((artistContent, accessToken) => {
+    const handleArtistClick = useCallback((artistContent, onAlbumClick, accessToken) => {
         const newPage = (
-            <ArtistPage artistContent={artistContent} accessToken={accessToken}/>
+            <ArtistPage artistContent={artistContent} onAlbumClick={onAlbumClick} accessToken={accessToken}/>
         );
         setActivePage(newPage);
         setIsHistoryUpdateNeeded(true);
@@ -99,9 +99,9 @@ function useAdimSearchPage(search, code) {
 
     //--------------------------------------------------------------
 
-    const handleAlbumClick = useCallback((albumContent) => {
+    const handleAlbumClick = useCallback((albumContent, accessToken) => {
         const newPage = (
-            <AlbumPage albumContent={albumContent} />
+            <AlbumPage albumContent={albumContent} accessToken={accessToken}/>
         );
         setActivePage(newPage);
         setIsHistoryUpdateNeeded(true);

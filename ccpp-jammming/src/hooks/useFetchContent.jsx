@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-function useFetchContent({ idArtist, idAlbum, accessToken }) {
+function useFetchContent({ idArtist, idAlbum, accessToken, limit = 50, offset = 0 }) {
   const [fetchedArtistDiscographyArray, setFetchedArtistDiscographyArray] = useState([]);
   const [fetchedArtistTopTracksArray, setFetchedArtistTopTracksArray] = useState([]);
   const [fetchedAlbumTracksArray, setFetchedAlbumTracksArray] = useState([]);
@@ -19,17 +19,22 @@ function useFetchContent({ idArtist, idAlbum, accessToken }) {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
+          params: {
+            limit: limit,    // Specify the number of albums to fetch
+            offset: offset,  // Specify the offset for pagination
+          },
         });
 
         const discography = res.data.items.map((album) => ({
-          albumAuthor: album.artists[0].name,
-          albumTitle: album.name,
-          albumType: album.album_type,
-          albumCover: album.images[0]?.url,
-          albumYear: album.release_date.slice(0, 4),
-          albumTotalTracks: album.total_tracks,
-          albumExternalUrls: album.external_urls,
-          albumUri: album.uri,
+            albumId: album.id,  
+            albumAuthor: album.artists[0].name,
+            albumTitle: album.name,
+            albumType: album.album_type,
+            albumCover: album.images[1]?.url,
+            albumYear: album.release_date.slice(0, 4),
+            albumTotalTracks: album.total_tracks,
+            albumExternalUrls: album.external_urls,
+            albumUri: album.uri,
         }));
 
         setFetchedArtistDiscographyArray(discography);
@@ -39,7 +44,7 @@ function useFetchContent({ idArtist, idAlbum, accessToken }) {
     };
 
     fetchDiscography();
-  }, [idArtist , accessToken]);
+  }, [idArtist, accessToken, limit, offset]);
 
   //-------------------------------------------------------------------------------------------------------------------
 
@@ -56,6 +61,7 @@ function useFetchContent({ idArtist, idAlbum, accessToken }) {
         });
 
         const topTracks = res.data.tracks.map((track) => ({
+            trackId: track.id,
             trackTitle: track.name,
             trackAuthor: track.artists[0].name,
             trackAlbum: track.album.name,
@@ -94,6 +100,7 @@ function useFetchContent({ idArtist, idAlbum, accessToken }) {
         });
 
         const albumTracks = res.data.items.map((track) => ({
+            trackId: track.id,
             trackTitle: track.name,
             trackAuthor: track.artists[0].name,
             trackAlbum: track.album.name,

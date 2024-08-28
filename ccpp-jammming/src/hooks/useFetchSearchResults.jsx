@@ -65,6 +65,7 @@ function useFetchSearchResults({ searchArtistResults, searchAlbumResults, search
         });
 
         const albums = res.data.albums.map((album) => ({
+          albumId: album.id,
           albumAuthor: album.artists[0].name,
           albumTitle: album.name,
           albumType: album.album_type,
@@ -104,6 +105,7 @@ function useFetchSearchResults({ searchArtistResults, searchAlbumResults, search
         });
 
         const tracks = res.data.tracks.map((track) => ({
+          trackId: track.id,
           trackTitle: track.name,
           trackAuthor: track.artists[0].name,
           trackAlbum: track.album.name,

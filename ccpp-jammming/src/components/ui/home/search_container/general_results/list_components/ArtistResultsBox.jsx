@@ -3,7 +3,7 @@ import ArtistResultItem from "./unit_components/ArtistResultItem";
 import useFetchSearchResults from "../../../../../../hooks/useFetchSearchResults";
 
 function ArtistResultsBox({ searchArtistResults, searchAlbumResults, searchTrackResults, onArtistClick, onAlbumClick, accessToken }) {
-    const { fetchedArtistsArray } = useFetchSearchResults({ searchArtistResults, accessToken })
+    const { fetchedArtistsArray, fetchedAlbumsArray, fetchedTracksArray } = useFetchSearchResults({ searchArtistResults, searchAlbumResults, searchTrackResults, accessToken })
 
     return (
         <>
@@ -11,7 +11,10 @@ function ArtistResultsBox({ searchArtistResults, searchAlbumResults, searchTrack
             {fetchedArtistsArray.filter((artist, idx) => idx < 5).map(artist => (
                 <ArtistResultItem 
                     artistContent={artist}
+                    fetchedAlbumsArray={fetchedAlbumsArray}
+                    fetchedTracksArray={fetchedTracksArray}
                     onArtistClick={onArtistClick}
+                    onAlbumClick={onAlbumClick}
                     accessToken={accessToken}
                     key={artist.artistUri}/>
             ))}

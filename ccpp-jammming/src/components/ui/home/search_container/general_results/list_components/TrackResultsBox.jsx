@@ -46,6 +46,7 @@ function TrackResultsBox({ searchArtistResults, searchAlbumResults, searchTrackR
                         albumContent={matchingAlbum} 
                         onArtistClick={onArtistClick}
                         onAlbumClick={onAlbumClick} 
+                        accessToken={accessToken}
                         key={track.trackUri} 
                     />
                 );

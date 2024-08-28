@@ -31,6 +31,7 @@ function AlbumResultsBox({ searchArtistResults, searchAlbumResults, onArtistClic
                         artistContent={matchingArtist} 
                         onArtistClick={onArtistClick}
                         onAlbumClick={onAlbumClick} 
+                        accessToken={accessToken}
                         key={album.albumUri}
                     />
                 );
