@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import TrackResultItem from "./unit_components/TrackResultItem";
-import useFetchContent from "../../../../../../hooks/useFetchContent";
+import useFetchSearchResults from "../../../../../../hooks/useFetchSearchResults";
 
 function TrackResultsBox({ searchArtistResults, searchAlbumResults, searchTrackResults, onArtistClick, onAlbumClick, accessToken }) {
-    const { fetchedArtistsArray, fetchedAlbumsArray, fetchedTracksArray, fetchMissingArtistByName, fetchMissingAlbumByName } = useFetchContent({ searchArtistResults, searchAlbumResults, searchTrackResults, accessToken });
+    const { fetchedArtistsArray, fetchedAlbumsArray, fetchedTracksArray, fetchMissingArtistByName, fetchMissingAlbumByName } = useFetchSearchResults({ searchArtistResults, searchAlbumResults, searchTrackResults, accessToken });
     const [updatedArtistContent, setUpdatedArtistContent] = useState([]);
     const [updatedAlbumContent, setUpdatedAlbumContent] = useState([]);
 

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import AlbumResultItem from "./unit_components/AlbumResultItem";
-import useFetchContent from "../../../../../../hooks/useFetchContent";
+import useFetchSearchResults from "../../../../../../hooks/useFetchSearchResults";
 
 function AlbumResultsBox({ searchArtistResults, searchAlbumResults, onArtistClick, onAlbumClick, accessToken }) {
-    const { fetchedArtistsArray,  fetchedAlbumsArray, fetchMissingArtistByName } = useFetchContent({ searchArtistResults, searchAlbumResults, accessToken });
+    const { fetchedArtistsArray,  fetchedAlbumsArray, fetchMissingArtistByName } = useFetchSearchResults({ searchArtistResults, searchAlbumResults, accessToken });
     const [updatedArtistContent, setUpdatedArtistContent] = useState([]);
 
     useEffect(() => {

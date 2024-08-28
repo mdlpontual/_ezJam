@@ -1,7 +1,7 @@
 import React from "react";
 import IMG from "../../../../../../../assets/images/ImagesHUB";
 
-function ArtistResultItem({ artistContent, onArtistClick }) {
+function ArtistResultItem({ artistContent, onArtistClick, accessToken }) {
     let profilePicture;
     if (artistContent.artistProfileImg) {
         profilePicture = artistContent.artistProfileImg;
@@ -16,7 +16,7 @@ function ArtistResultItem({ artistContent, onArtistClick }) {
                     <img src={profilePicture} alt="profile picture" height="65px"/>
                 </div>
                 <div id="artist-name" className="col d-flex justify-content-start align-items-center">
-                    <a id="open-artist-page" type="button" onClick={() => onArtistClick(artistContent)}>
+                    <a id="open-artist-page" type="button" onClick={() => onArtistClick(artistContent, accessToken)}>
                         <h5>{artistContent.artistName}</h5>
                     </a>
                 </div>

@@ -43,6 +43,9 @@ function useAdimSearchPage(search, code) {
         setIsHistoryUpdateNeeded(true);
     }, 500), []);
 
+    //----------------------------------------------------------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------------------------------------------------------
+
     useEffect(() => {
         if (!search) {
             setActivePage(emptyPage);
@@ -70,6 +73,9 @@ function useAdimSearchPage(search, code) {
         }
     }, [activePage, isHistoryUpdateNeeded]);
 
+    //----------------------------------------------------------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------------------------------------------------------
+
     const updateHistory = useCallback((newPage) => {
         setHistory((prevHistory) => {
             const newHistory = prevHistory.slice(0, currentHistoryIndex + 1);
@@ -80,13 +86,18 @@ function useAdimSearchPage(search, code) {
         setCurrentHistoryIndex((prevIndex) => prevIndex + 1);
     }, [currentHistoryIndex]);
 
-    const handleArtistClick = useCallback((artistContent) => {
+    //----------------------------------------------------------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------------------------------------------------------
+
+    const handleArtistClick = useCallback((artistContent, accessToken) => {
         const newPage = (
-            <ArtistPage artistContent={artistContent} />
+            <ArtistPage artistContent={artistContent} accessToken={accessToken}/>
         );
         setActivePage(newPage);
         setIsHistoryUpdateNeeded(true);
     }, []);
+
+    //--------------------------------------------------------------
 
     const handleAlbumClick = useCallback((albumContent) => {
         const newPage = (
@@ -96,12 +107,17 @@ function useAdimSearchPage(search, code) {
         setIsHistoryUpdateNeeded(true);
     }, []);
 
+    //----------------------------------------------------------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------------------------------------------------------
+
     const goBack = useCallback(() => {
         if (currentHistoryIndex > 0) {
             setCurrentHistoryIndex((prevIndex) => prevIndex - 1);
             setActivePage(history[currentHistoryIndex - 1]);
         }
     }, [currentHistoryIndex, history]);
+
+    //--------------------------------------------------------------
 
     const goForward = useCallback(() => {
         if (currentHistoryIndex < history.length - 1) {
