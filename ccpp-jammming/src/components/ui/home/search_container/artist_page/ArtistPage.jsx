@@ -1,10 +1,9 @@
 import React from "react";
-import IMG from "../../../../../assets/images/ImagesHUB";
 import TopTracksBox from "./section_components/TopTracksBox";
 import DiscographyBox from "./section_components/DiscographyBox";
 import useFetchContent from "../../../../../hooks/useFetchContent";
 
-function ArtistPage({ artistContent, onAlbumClick, accessToken }) {
+function ArtistPage({ artistContent, onArtistClick, onAlbumClick, accessToken }) {
     const idArtist = artistContent.artistId;
     const { fetchedArtistDiscographyArray, fetchedArtistTopTracksArray } = useFetchContent({ idArtist, accessToken })
 
@@ -25,7 +24,11 @@ function ArtistPage({ artistContent, onAlbumClick, accessToken }) {
                 </div>
                 <div id="artist-page-disco-row" className="row">
                     <div id="artist-page-disco-col" className="col">
-                        <DiscographyBox fetchedArtistDiscographyArray={fetchedArtistDiscographyArray} onAlbumClick={onAlbumClick} accessToken={accessToken}/>
+                        <DiscographyBox 
+                            fetchedArtistDiscographyArray={fetchedArtistDiscographyArray} 
+                            onArtistClick={onArtistClick}
+                            onAlbumClick={onAlbumClick} 
+                            accessToken={accessToken}/>
                     </div>
                 </div> 
             </div>

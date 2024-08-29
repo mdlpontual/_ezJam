@@ -41,7 +41,7 @@ function useAdimSearchPage(search, code) {
     const debouncedSetPage = useCallback(debounce((newPage) => {
         setActivePage(newPage);
         setIsHistoryUpdateNeeded(true);
-    }, 500), []);
+    }, 1000), []);
 
     //----------------------------------------------------------------------------------------------------------------------------------------------
     //----------------------------------------------------------------------------------------------------------------------------------------------
@@ -89,9 +89,13 @@ function useAdimSearchPage(search, code) {
     //----------------------------------------------------------------------------------------------------------------------------------------------
     //----------------------------------------------------------------------------------------------------------------------------------------------
 
-    const handleArtistClick = useCallback((artistContent, onAlbumClick, accessToken) => {
+    const handleArtistClick = useCallback((artistContent, onArtistClick, onAlbumClick, accessToken) => {
         const newPage = (
-            <ArtistPage artistContent={artistContent} onAlbumClick={onAlbumClick} accessToken={accessToken}/>
+            <ArtistPage 
+                artistContent={artistContent} 
+                onArtistClick={onArtistClick}
+                onAlbumClick={onAlbumClick} 
+                accessToken={accessToken}/>
         );
         setActivePage(newPage);
         setIsHistoryUpdateNeeded(true);
@@ -99,9 +103,13 @@ function useAdimSearchPage(search, code) {
 
     //--------------------------------------------------------------
 
-    const handleAlbumClick = useCallback((albumContent, accessToken) => {
+    const handleAlbumClick = useCallback((albumContent, onArtistClick, onAlbumClick, accessToken) => {
         const newPage = (
-            <AlbumPage albumContent={albumContent} accessToken={accessToken}/>
+            <AlbumPage 
+                albumContent={albumContent} 
+                onArtistClick={onArtistClick}
+                onAlbumClick={onAlbumClick} 
+                accessToken={accessToken}/>
         );
         setActivePage(newPage);
         setIsHistoryUpdateNeeded(true);

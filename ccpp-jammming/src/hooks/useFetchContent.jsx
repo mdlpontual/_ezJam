@@ -102,9 +102,6 @@ function useFetchContent({ idArtist, idAlbum, accessToken, limit = 50, offset = 
         const albumTracks = res.data.items.map((track) => ({
             trackId: track.id,
             trackTitle: track.name,
-            trackAuthor: track.artists[0].name,
-            trackAlbum: track.album.name,
-            trackCover: track.album.images[track.album.images.length - 1]?.url,
             trackUri: track.uri,
             trackDuration: track.duration_ms,
             trackPopularity: track.popularity,

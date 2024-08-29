@@ -1,8 +1,12 @@
 import React from "react";
 import IMG from "../../../../../assets/images/ImagesHUB";
 import AlbumTracks from "./AlbumTracks";
+import useFetchContent from "../../../../../hooks/useFetchContent";
 
-function AlbumPage({ albumContent }) {
+function AlbumPage({ albumContent, onArtistClick, onAlbumClick, accessToken }) {
+    const idAlbum = albumContent.albumId;
+    const { fetchedAlbumTracksArray } = useFetchContent({ idAlbum, accessToken });
+
     return (
         <>
             <div id="album-page-container" className="container-fluid">
@@ -42,7 +46,14 @@ function AlbumPage({ albumContent }) {
                         </div>
                         <div id="tracks-list" className="row flex-grow-1">
                             <div id="tracks-list-col" className="col">
-                                <AlbumTracks />
+                                {fetchedAlbumTracksArray.map(track => (
+                                    <AlbumTracks 
+                                        trackContent={track} 
+                                        onArtistClick={onArtistClick}
+                                        onAlbumClick={onAlbumClick} 
+                                        accessToken={accessToken} 
+                                        key={track.trackUri}/>
+                                ))}
                             </div>
                         </div>
                     </div>

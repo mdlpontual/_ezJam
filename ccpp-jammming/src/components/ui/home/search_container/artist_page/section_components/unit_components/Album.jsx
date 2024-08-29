@@ -1,10 +1,10 @@
 import React from "react";
 import IMG from "../../../../../../../assets/images/ImagesHUB";
 
-function Album({ discographyAlbum, fetchedAlbumTracksArray, onAlbumClick, accessToken }) {
+function Album({ albumContent, onArtistClick, onAlbumClick, accessToken }) {
     let coverPicture;
-    if (discographyAlbum.albumCover) {
-        coverPicture = discographyAlbum.albumCover;
+    if (albumContent.albumCover) {
+        coverPicture = albumContent.albumCover;
     } else {
         coverPicture = IMG.profilePlaceHolder;
     }
@@ -12,15 +12,15 @@ function Album({ discographyAlbum, fetchedAlbumTracksArray, onAlbumClick, access
     return (
         <>
             <div id="album-thumbnail" className="col-sm-6 col-md-4 col-lg-4 col-xl-3" >
-                <a type="button" onClick={() => onAlbumClick(fetchedAlbumTracksArray, accessToken)} >
+                <a type="button" onClick={() => onAlbumClick(albumContent, onArtistClick, onAlbumClick, accessToken)} >
                     <img src={coverPicture} alt="album cover"/>
                 </a>
                 <h6>
-                    <a type="button" onClick={() => onAlbumClick(fetchedAlbumTracksArray, accessToken)} >
-                        {discographyAlbum.albumTitle}
+                    <a type="button" onClick={() => onAlbumClick(albumContent, onArtistClick, onAlbumClick, accessToken)} >
+                        {albumContent.albumTitle}
                     </a>
                 </h6>
-                <p>{discographyAlbum.albumYear} - {discographyAlbum.albumType}</p>
+                <p>{albumContent.albumYear} - {albumContent.albumType}</p>
             </div>
         </>
     );
