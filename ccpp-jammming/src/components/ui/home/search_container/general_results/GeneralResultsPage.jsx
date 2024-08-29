@@ -11,8 +11,6 @@ function GeneralResultsPage({ searchArtistResults, searchAlbumResults, searchTra
                     <div id="gen-results-artists-col" className="col">
                         <ArtistResultsBox 
                             searchArtistResults={searchArtistResults}
-                            searchAlbumResults={searchAlbumResults}
-                            searchTrackResults={searchTrackResults}
                             onArtistClick={onArtistClick}
                             onAlbumClick={onAlbumClick}
                             accessToken={accessToken}/>
