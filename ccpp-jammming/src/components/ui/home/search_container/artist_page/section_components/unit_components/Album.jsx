@@ -1,13 +1,26 @@
 import React from "react";
 import IMG from "../../../../../../../assets/images/ImagesHUB";
 
-function Album({ album }) {
+function Album({ albumContent, onArtistClick, onAlbumClick, accessToken }) {
+    let coverPicture;
+    if (albumContent.albumCover) {
+        coverPicture = albumContent.albumCover;
+    } else {
+        coverPicture = IMG.profilePlaceHolder;
+    }
+    
     return (
         <>
-            <div id="album-thumbnail" className="col-sm-6 col-md-4 col-lg-4 col-xl-3">
-                <img src={album.cover} alt="album cover"/>
-                <h6>{album.album}</h6>
-                <p>{album.year} - {album.albumType}</p>
+            <div id="album-thumbnail" className="col-sm-6 col-md-4 col-lg-4 col-xl-3" >
+                <a type="button" onClick={() => onAlbumClick(albumContent, onArtistClick, onAlbumClick, accessToken)} >
+                    <img src={coverPicture} alt="album cover"/>
+                </a>
+                <h6>
+                    <a type="button" onClick={() => onAlbumClick(albumContent, onArtistClick, onAlbumClick, accessToken)} >
+                        {albumContent.albumTitle}
+                    </a>
+                </h6>
+                <p>{albumContent.albumYear} - {albumContent.albumType}</p>
             </div>
         </>
     );

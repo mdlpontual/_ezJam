@@ -1,8 +1,7 @@
 import React from "react";
-import IMG from "../../../../../../assets/images/ImagesHUB";
 import Album from "./unit_components/Album";
 
-function DiscographyBox({ /* albumContent */ }) {
+function DiscographyBox({ fetchedArtistDiscographyArray, onArtistClick, onAlbumClick, accessToken }) {
     return (
         <>
             <div id="discography-container" className="container-fluid">
@@ -10,9 +9,14 @@ function DiscographyBox({ /* albumContent */ }) {
                     <div id="discography-col" className="col">
                         <h4>Discography:</h4>
                         <div id="albuns-inner-row" className="row">
-                            {/* {albumContent.map((album) => (
-                                <Album album={album} key={album.uri}/>
-                            ))} */}
+                            {fetchedArtistDiscographyArray.map(album => (
+                                <Album 
+                                    albumContent={album} 
+                                    onArtistClick={onArtistClick}
+                                    onAlbumClick={onAlbumClick} 
+                                    accessToken={accessToken} 
+                                    key={album.albumUri}/>
+                            ))}
                         </div>  
                     </div>
                 </div>

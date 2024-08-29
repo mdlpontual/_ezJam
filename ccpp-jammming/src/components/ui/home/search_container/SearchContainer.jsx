@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import IMG from "../../../../assets/images/ImagesHUB";
 import useAdimSearchPage from "../../../../hooks/useAdimSearchPage";
 

@@ -1,9 +1,9 @@
 import React from "react";
 import ArtistResultItem from "./unit_components/ArtistResultItem";
-import useFetchContent from "../../../../../../hooks/useFetchContent";
+import useFetchSearchResults from "../../../../../../hooks/useFetchSearchResults";
 
-function ArtistResultsBox({ searchArtistResults, searchAlbumResults, searchTrackResults, onArtistClick, onAlbumClick, accessToken }) {
-    const { fetchedArtistsArray } = useFetchContent({ searchArtistResults, accessToken })
+function ArtistResultsBox({ searchArtistResults, onArtistClick, onAlbumClick, accessToken }) {
+    const { fetchedArtistsArray } = useFetchSearchResults({ searchArtistResults, accessToken })
 
     return (
         <>
@@ -12,10 +12,12 @@ function ArtistResultsBox({ searchArtistResults, searchAlbumResults, searchTrack
                 <ArtistResultItem 
                     artistContent={artist}
                     onArtistClick={onArtistClick}
+                    onAlbumClick={onAlbumClick}
+                    accessToken={accessToken}
                     key={artist.artistUri}/>
             ))}
         </>
     );
 }
 
-export default ArtistResultsBox;
+export default ArtistResultsBox; 
