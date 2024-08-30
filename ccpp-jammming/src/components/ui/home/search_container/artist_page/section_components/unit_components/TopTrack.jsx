@@ -1,7 +1,9 @@
 import React from "react";
 import IMG from "../../../../../../../assets/images/ImagesHUB";
 
-function TopTrack({ topTrack, order }) {
+function TopTrack({ topTrack, order, onPlayButton }) {
+    const uriTrack = topTrack.trackUri;
+
     let cover;
     if (topTrack.trackCover) {
         cover = topTrack.trackCover;
@@ -20,7 +22,9 @@ function TopTrack({ topTrack, order }) {
             <div id="songs-inner-row" className="row">
                 <div id="col-add" className="col-1 d-flex justify-content-center align-items-center">
                     <p>{order + 1}</p>
-                    <img id="drag-icon" src={IMG.play2PNG} alt="play icon" width="20px"/>
+                    <a id="play-button" type="button" onClick={() => onPlayButton(uriTrack)}>
+                        <img id="play-icon" src={IMG.play2PNG} alt="play icon" width="20px"/>
+                    </a>
                 </div>
                 <div id="col-cover" className="col-1 d-flex justify-content-center align-items-center">
                     <img src={cover} height="40px"/>
