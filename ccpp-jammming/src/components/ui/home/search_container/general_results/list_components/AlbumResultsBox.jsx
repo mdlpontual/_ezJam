@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import AlbumResultItem from "./unit_components/AlbumResultItem";
 import useFetchSearchResults from "../../../../../../hooks/useFetchSearchResults";
 
-function AlbumResultsBox({ searchArtistResults, searchAlbumResults, searchTrackResults, onArtistClick, onAlbumClick, accessToken }) {
+function AlbumResultsBox({ searchArtistResults, searchAlbumResults, searchTrackResults, onArtistClick, onAlbumClick, onPlayButton, accessToken }) {
     const { fetchedArtistsArray,  fetchedAlbumsArray, fetchedTracksArray, fetchMissingArtistByName } = useFetchSearchResults({ searchArtistResults, searchAlbumResults, searchTrackResults, accessToken });
     const [updatedArtistContent, setUpdatedArtistContent] = useState([]);
 
@@ -33,6 +33,7 @@ function AlbumResultsBox({ searchArtistResults, searchAlbumResults, searchTrackR
                         fetchedTracksArray={fetchedTracksArray}
                         onArtistClick={onArtistClick}
                         onAlbumClick={onAlbumClick} 
+                        onPlayButton={onPlayButton}
                         accessToken={accessToken}
                         key={album.albumUri}
                     />

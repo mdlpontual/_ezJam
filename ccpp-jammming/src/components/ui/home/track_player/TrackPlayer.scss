@@ -7,7 +7,7 @@
         @include box-reset-default;
         height: 100%;
         #col-track {
-            border: $border-cyan-solid;
+            //border: $border-cyan-solid;
             @include box-reset-default;
             padding-left: 5px;
             #col-cover {
@@ -39,7 +39,7 @@
             }
         }
         #col-player {
-            border: $border-cyan-solid;
+            //border: $border-cyan-solid;
             @include box-reset-default;
             #track-butttons-row {
                 // border: $border-yellow-dashed;
@@ -160,7 +160,7 @@
             }
         }
         #col-volume {
-            border: $border-cyan-solid;
+            //border: $border-cyan-solid;
             @include box-reset-default;
             #volume-bar-row {
                 //border: $border-yellow-dashed;

@@ -1,7 +1,7 @@
 import React from "react";
 import IMG from "../../../../../../../assets/images/ImagesHUB";
 
-function Album({ albumContent, onArtistClick, onAlbumClick, accessToken }) {
+function Album({ albumContent, onArtistClick, onAlbumClick, onPlayButton, accessToken }) {
     let coverPicture;
     if (albumContent.albumCover) {
         coverPicture = albumContent.albumCover;
@@ -12,11 +12,11 @@ function Album({ albumContent, onArtistClick, onAlbumClick, accessToken }) {
     return (
         <>
             <div id="album-thumbnail" className="col-sm-6 col-md-4 col-lg-4 col-xl-3" >
-                <a type="button" onClick={() => onAlbumClick(albumContent, onArtistClick, onAlbumClick, accessToken)} >
+                <a type="button" onClick={() => onAlbumClick(albumContent, onArtistClick, onAlbumClick, onPlayButton, accessToken)} >
                     <img src={coverPicture} alt="album cover"/>
                 </a>
                 <h6>
-                    <a type="button" onClick={() => onAlbumClick(albumContent, onArtistClick, onAlbumClick, accessToken)} >
+                    <a type="button" onClick={() => onAlbumClick(albumContent, onArtistClick, onAlbumClick, onPlayButton, accessToken)} >
                         {albumContent.albumTitle}
                     </a>
                 </h6>

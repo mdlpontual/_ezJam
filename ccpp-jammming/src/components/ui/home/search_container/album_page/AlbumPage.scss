@@ -140,11 +140,16 @@
                                 overflow: hidden;
                                 position: absolute;
                             }
-                            #play-icon {
+                            #play-button {
                                 //border: $border-lime-dotted;
                                 @include box-reset-default;
-                                visibility: hidden;
                                 position: absolute;
+                                #play-icon {
+                                    //border: $border-lime-dotted;
+                                    @include box-reset-default;
+                                    visibility: hidden;
+                                    position: relative;
+                                }
                             }
                         };
                         #col-cover {
@@ -238,11 +243,16 @@
                                 visibility: hidden;
                                 position: absolute;
                             }
-                            #play-icon {
+                            #play-button {
                                 //border: $border-lime-dotted;
                                 @include box-reset-default;
-                                visibility: visible;
                                 position: absolute;
+                                #play-icon {
+                                    //border: $border-lime-dotted;
+                                    @include box-reset-default;
+                                    visibility: visible;
+                                    position: relative;
+                                }
                             }
                         }
                         #col-options {
