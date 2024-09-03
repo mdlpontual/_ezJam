@@ -77,6 +77,23 @@
                     padding: 10px;
                 }
             }
+            #track-butttons-row:hover {
+                #col-shuffle {
+                    cursor: pointer;
+                }
+                #col-prev {
+                    cursor: pointer;
+                }
+                #col-play {
+                    cursor: pointer;
+                }
+                #col-next {
+                    cursor: pointer;
+                }
+                #col-repeat {
+                    cursor: pointer;
+                }
+            }
             #progress-bar-row {
                 //border: $border-yellow-dashed;
                 @include box-reset-default;

@@ -13,6 +13,13 @@ function HomePage({ code }) {
     const { uriTrack, updateUriTrack } = usePlayTrack();
 
     const isPlaylistOpen = useAdimPlaylistPage();
+
+    useEffect(() => {
+        // Assign the accessToken to a global variable when it's available
+        if (accessToken) {
+            window.spotifyAccessToken = accessToken;
+        }
+    }, [accessToken]);
     return (
         <>
             <div id="home-page-container" className="container-fluid d-flex flex-column">
