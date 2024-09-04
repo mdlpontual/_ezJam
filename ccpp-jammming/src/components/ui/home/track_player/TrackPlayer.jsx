@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import IMG from "../../../../assets/images/ImagesHUB";
 import TrackDisplay from "./unit_components/TrackDisplay";
 import TrackVolume from "./unit_components/TrackVolume";
@@ -8,6 +8,12 @@ import usePlayerDataPost from "../../../../hooks/usePlayerDataPost";
 function TrackPlayer({ uriTrack, accessToken }) {
     const { playbackState, currentPlayingTrack, availableDevices } = usePlayerDataFetch({ accessToken });
     const { startPlayback, pausePlayback, isPlaying } = usePlayerDataPost({ availableDevices, accessToken, uriTrack });
+
+    useEffect(() => {
+        if (uriTrack) {
+            startPlayback();
+        }
+    }, [uriTrack]);
 
     return (
         <>

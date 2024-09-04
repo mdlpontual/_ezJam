@@ -8,10 +8,8 @@ function usePlayerDataPost({ availableDevices, accessToken, uriTrack }) {
 
     const startPlayback = async () => {
         if (!idDevice || !uriTrack || !accessToken) return;
-
         try {
-            await axios.put(
-                `https://api.spotify.com/v1/me/player/play?device_id=${idDevice}`,
+            await axios.put(`https://api.spotify.com/v1/me/player/play?device_id=${idDevice}`,
                 {
                     uris: [uriTrack],
                 },
@@ -29,10 +27,8 @@ function usePlayerDataPost({ availableDevices, accessToken, uriTrack }) {
 
     const pausePlayback = async () => {
         if (!idDevice || !accessToken) return;
-
         try {
-            await axios.put(
-                `https://api.spotify.com/v1/me/player/pause?device_id=${idDevice}`,
+            await axios.put(`https://api.spotify.com/v1/me/player/pause?device_id=${idDevice}`, 
                 {},
                 {
                     headers: {
