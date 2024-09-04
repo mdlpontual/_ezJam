@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useCallback, useMemo } from "react";
-import useAuth from "./useAuth";
 import useFetchId from "./useFetchId";
 import EmptyResultsPage from "../components/ui/home/search_container/non_results/EmptyResultsPage";
 import GeneralResultsPage from "../components/ui/home/search_container/general_results/GeneralResultsPage";
@@ -19,13 +18,12 @@ const debounce = (func, delay) => {
     };
 };
 
-function useAdimSearchPage(search, code) {
+function useAdimSearchPage(search, onPlayButton, accessToken) {
     const [activePage, setActivePage] = useState(emptyPage);
     const [history, setHistory] = useState([emptyPage]);
     const [currentHistoryIndex, setCurrentHistoryIndex] = useState(0);
     const [isHistoryUpdateNeeded, setIsHistoryUpdateNeeded] = useState(false);
 
-    const { accessToken } = useAuth(code);
     const { searchArtistResults, searchAlbumResults, searchTrackResults } = useFetchId({ search, accessToken });
 
     // Memoize the fetched results so they don't change unless the search query changes
@@ -58,6 +56,7 @@ function useAdimSearchPage(search, code) {
                     searchTrackResults={cachedResults.tracks}
                     onArtistClick={handleArtistClick}
                     onAlbumClick={handleAlbumClick}
+                    onPlayButton={onPlayButton}
                     accessToken={accessToken}
                 />
             );
@@ -89,12 +88,13 @@ function useAdimSearchPage(search, code) {
     //----------------------------------------------------------------------------------------------------------------------------------------------
     //----------------------------------------------------------------------------------------------------------------------------------------------
 
-    const handleArtistClick = useCallback((artistContent, onArtistClick, onAlbumClick, accessToken) => {
+    const handleArtistClick = useCallback((artistContent, onArtistClick, onAlbumClick, onPlayButton, accessToken) => {
         const newPage = (
             <ArtistPage 
                 artistContent={artistContent} 
                 onArtistClick={onArtistClick}
                 onAlbumClick={onAlbumClick} 
+                onPlayButton={onPlayButton}
                 accessToken={accessToken}/>
         );
         setActivePage(newPage);
@@ -103,12 +103,13 @@ function useAdimSearchPage(search, code) {
 
     //--------------------------------------------------------------
 
-    const handleAlbumClick = useCallback((albumContent, onArtistClick, onAlbumClick, accessToken) => {
+    const handleAlbumClick = useCallback((albumContent, onArtistClick, onAlbumClick, onPlayButton, accessToken) => {
         const newPage = (
             <AlbumPage 
                 albumContent={albumContent} 
                 onArtistClick={onArtistClick}
                 onAlbumClick={onAlbumClick} 
+                onPlayButton={onPlayButton}
                 accessToken={accessToken}/>
         );
         setActivePage(newPage);

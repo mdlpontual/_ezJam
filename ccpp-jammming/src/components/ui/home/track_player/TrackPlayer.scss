@@ -7,7 +7,7 @@
         @include box-reset-default;
         height: 100%;
         #col-track {
-            border: $border-cyan-solid;
+            //border: $border-cyan-solid;
             @include box-reset-default;
             padding-left: 5px;
             #col-cover {
@@ -39,7 +39,7 @@
             }
         }
         #col-player {
-            border: $border-cyan-solid;
+            //border: $border-cyan-solid;
             @include box-reset-default;
             #track-butttons-row {
                 // border: $border-yellow-dashed;
@@ -75,6 +75,23 @@
                     @include box-reset-default;
                     height: 100%;
                     padding: 10px;
+                }
+            }
+            #track-butttons-row:hover {
+                #col-shuffle {
+                    cursor: pointer;
+                }
+                #col-prev {
+                    cursor: pointer;
+                }
+                #col-play {
+                    cursor: pointer;
+                }
+                #col-next {
+                    cursor: pointer;
+                }
+                #col-repeat {
+                    cursor: pointer;
                 }
             }
             #progress-bar-row {
@@ -160,7 +177,7 @@
             }
         }
         #col-volume {
-            border: $border-cyan-solid;
+            //border: $border-cyan-solid;
             @include box-reset-default;
             #volume-bar-row {
                 //border: $border-yellow-dashed;

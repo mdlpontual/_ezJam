@@ -5,9 +5,21 @@ import SearchContainer from "../../components/ui/home/search_container/SearchCon
 import TrackPlayer from "../../components/ui/home/track_player/TrackPlayer";
 import OpenPlaylist from "../../components/ui/home/playlists_container/open_playlist/OpenPlaylist";
 import useAdimPlaylistPage from "../../hooks/useAdimPlaylistPage";
+import useAuth from "../../hooks/useAuth";
+import usePlayTrack from "../../hooks/usePlayTrack";
 
 function HomePage({ code }) {
+    const { accessToken } = useAuth(code);
+    const { uriTrack, updateUriTrack } = usePlayTrack();
+
     const isPlaylistOpen = useAdimPlaylistPage();
+
+    useEffect(() => {
+        // Assign the accessToken to a global variable when it's available
+        if (accessToken) {
+            window.spotifyAccessToken = accessToken;
+        }
+    }, [accessToken]);
     return (
         <>
             <div id="home-page-container" className="container-fluid d-flex flex-column">
@@ -21,12 +33,12 @@ function HomePage({ code }) {
                         {isPlaylistOpen ? <OpenPlaylist /> : <UserPlaylists />}
                     </div>
                     <div id="search-col" className="col">
-                        <SearchContainer code={code}/>
+                        <SearchContainer onPlayButton={updateUriTrack} accessToken={accessToken}/>
                     </div>
                 </main>
                 <footer id="footer-row" className="row">
                     <div id="footer-col" className="col">
-                        <TrackPlayer/>
+                        <TrackPlayer uriTrack={uriTrack} accessToken={accessToken} />
                     </div>
                 </footer>
             </div>

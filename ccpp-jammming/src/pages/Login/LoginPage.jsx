@@ -1,7 +1,7 @@
 import React from "react";
 import LoginButtonBox from "../../components/ui/login/LoginButtonBox";
 
-const AUTH_URL = "https://accounts.spotify.com/authorize?client_id=9ebed4e372ba404ca817a45f1136c5d8&response_type=code&redirect_uri=http://localhost:3000&scope=streaming%20ugc-image-upload%20user-read-email%20user-read-private%20playlist-read-private%20playlist-modify-private%20playlist-modify-public%20user-library-read";
+const AUTH_URL = "https://accounts.spotify.com/authorize?client_id=9ebed4e372ba404ca817a45f1136c5d8&response_type=code&redirect_uri=http://localhost:3000&scope=streaming%20user-read-playback-state%20user-modify-playback-state%20user-read-currently-playing%20ugc-image-upload%20user-read-email%20user-read-private%20playlist-read-private%20playlist-modify-private%20playlist-modify-public%20user-library-read";
 
 function LoginPage() {
     return (

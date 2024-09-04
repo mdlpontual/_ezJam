@@ -3,7 +3,7 @@ import TopTracksBox from "./section_components/TopTracksBox";
 import DiscographyBox from "./section_components/DiscographyBox";
 import useFetchContent from "../../../../../hooks/useFetchContent";
 
-function ArtistPage({ artistContent, onArtistClick, onAlbumClick, accessToken }) {
+function ArtistPage({ artistContent, onArtistClick, onAlbumClick, onPlayButton, accessToken }) {
     const idArtist = artistContent.artistId;
     const { fetchedArtistDiscographyArray, fetchedArtistTopTracksArray } = useFetchContent({ idArtist, accessToken })
 
@@ -19,7 +19,7 @@ function ArtistPage({ artistContent, onArtistClick, onAlbumClick, accessToken })
                 </div>
                 <div id="artist-page-top-five-row" className="row">
                     <div id="artist-page-top-five-col" className="col">
-                        <TopTracksBox fetchedArtistTopTracksArray={fetchedArtistTopTracksArray} />
+                        <TopTracksBox fetchedArtistTopTracksArray={fetchedArtistTopTracksArray} onPlayButton={onPlayButton}/>
                     </div>
                 </div>
                 <div id="artist-page-disco-row" className="row">
@@ -28,6 +28,7 @@ function ArtistPage({ artistContent, onArtistClick, onAlbumClick, accessToken })
                             fetchedArtistDiscographyArray={fetchedArtistDiscographyArray} 
                             onArtistClick={onArtistClick}
                             onAlbumClick={onAlbumClick} 
+                            onPlayButton={onPlayButton}
                             accessToken={accessToken}/>
                     </div>
                 </div> 
