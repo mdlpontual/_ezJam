@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-function usePlayerDataPost({ availableDevices, accessToken, uriTrack }) {
+function usePlayerDataPost({ availableDevices, uriTrack, accessToken }) {
     const [isPlaying, setIsPlaying] = useState(false);
+    const [currentPosition, setCurrentPosition] = useState(0);
     
     const idDevice = availableDevices.length > 0 ? availableDevices[0].deviceId : null;
 
@@ -10,14 +11,8 @@ function usePlayerDataPost({ availableDevices, accessToken, uriTrack }) {
         if (!idDevice || !uriTrack || !accessToken) return;
         try {
             await axios.put(`https://api.spotify.com/v1/me/player/play?device_id=${idDevice}`,
-                {
-                    uris: [uriTrack],
-                },
-                {
-                    headers: {
-                        Authorization: `Bearer ${accessToken}`,
-                    },
-                }
+                { uris: [uriTrack], position_ms: currentPosition },
+                { headers: { Authorization: `Bearer ${accessToken}` } }
             );
             setIsPlaying(true);
         } catch (error) {
@@ -30,11 +25,7 @@ function usePlayerDataPost({ availableDevices, accessToken, uriTrack }) {
         try {
             await axios.put(`https://api.spotify.com/v1/me/player/pause?device_id=${idDevice}`, 
                 {},
-                {
-                    headers: {
-                        Authorization: `Bearer ${accessToken}`,
-                    },
-                }
+                { headers: { Authorization: `Bearer ${accessToken}` } }
             );
             setIsPlaying(false);
         } catch (error) {

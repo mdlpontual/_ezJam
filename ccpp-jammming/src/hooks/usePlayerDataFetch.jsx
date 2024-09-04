@@ -1,34 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-function usePlayerDataFetch({ accessToken }) {
-    const [playbackState, setPlaybackState] = useState([]);
-    const [currentPlayingTrack, setCurrentPlayingTrack] = useState([]);
+function usePlayerDataFetch({ uriTrack, accessToken }) {
+    const [currentPlayingTrack, setCurrentPlayingTrack] = useState({});
     const [availableDevices, setAvailableDevices] = useState([]);
-
-    /* useEffect(() => {
-      const fetchPlaybackState = async () => {
-        if (!accessToken) return;
-  
-        try {
-          const res = await axios.get(`https://api.spotify.com/v1/me/player`, {
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-            }
-          });
-  
-          const states = res.data.map((state) => ({
-
-          }));
-  
-          setPlaybackState(states);
-        } catch (error) {
-          console.error("Error fetching playback state:", error);
-        }
-      };
-  
-      fetchPlaybackState();
-    }, [accessToken]);
 
     //---------------------------------------------------------------------------------------------------------
 
@@ -42,19 +17,15 @@ function usePlayerDataFetch({ accessToken }) {
               Authorization: `Bearer ${accessToken}`,
             }
           });
-  
-          const devices = res.data.map((device) => ({
 
-          }));
-  
-          setCurrentPlayingTrack(devices);
+          setCurrentPlayingTrack(res.data);
         } catch (error) {
-          console.error("Error fetching playing track:", error);
+          console.error("Error fetching playback state:", error);
         }
       };
   
       fetchCurrentPlayingTrack();
-    }, [accessToken]); */
+    }, [uriTrack, accessToken]);
 
     //---------------------------------------------------------------------------------------------------------
 
@@ -89,8 +60,7 @@ function usePlayerDataFetch({ accessToken }) {
       fetchAvailableDevices();
     }, [accessToken]);
 
-
-  return { playbackState, currentPlayingTrack, availableDevices }
+  return { currentPlayingTrack, availableDevices }
 };
 
 export default usePlayerDataFetch;
