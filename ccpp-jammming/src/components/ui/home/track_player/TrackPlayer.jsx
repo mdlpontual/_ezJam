@@ -6,26 +6,10 @@ import usePlayerDataFetch from "../../../../hooks/usePlayerDataFetch";
 import usePlayerDataPost from "../../../../hooks/usePlayerDataPost";
 
 function TrackPlayer({ uriTrack, accessToken }) {
-    const { currentPlayingTrack, availableDevices } = usePlayerDataFetch({ uriTrack, accessToken });
-    const { startPlayback, pausePlayback, isPlaying } = usePlayerDataPost({ availableDevices, uriTrack, accessToken });
+    const { startPlayback, pausePlayback, isPlaying, availableDevices } = usePlayerDataPost({ uriTrack, accessToken });
+    const { currentPlayingTrack } = usePlayerDataFetch({ uriTrack, accessToken });
 
     console.log("currentPlayingTrack", currentPlayingTrack)
-    console.log("availableDevices", availableDevices)
-
-    /* 
-    function millisToMinutesAndSeconds(millis) {
-        const minutes = Math.floor(millis / 60000);
-        const seconds = ((millis % 60000) / 1000).toFixed(0);
-        return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
-    }
-
-    const albumCover = playbackState.item.album.images[1].url;
-    const trackName = playbackState.item.name;
-    const artistName = playbackState.item.artists[0].name;
-    const trackDuration = millisToMinutesAndSeconds(playbackState.item.duration_ms); 
-    const timeStamp = millisToMinutesAndSeconds(playbackState.timestamp);
-    const progressMS = millisToMinutesAndSeconds(playbackState.progress_ms); 
-    */
    
     useEffect(() => {
         if (uriTrack && availableDevices.length > 0) {

@@ -1,9 +1,41 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-function usePlayerDataPost({ availableDevices, uriTrack, accessToken }) {
+function usePlayerDataPost({ uriTrack, accessToken }) {
     const [isPlaying, setIsPlaying] = useState(false);
     const [currentPosition, setCurrentPosition] = useState(0);
+    const [availableDevices, setAvailableDevices] = useState([]);
+
+    useEffect(() => {
+        const fetchAvailableDevices = async () => {
+          if (!accessToken) return;
+    
+          try {
+            const res = await axios.get(`https://api.spotify.com/v1/me/player/devices`, {
+              headers: {
+                Authorization: `Bearer ${accessToken}`,
+              }
+            });
+    
+            const devices = res.data.devices.map((device) => ({
+                deviceId: device.id,  
+                deviceStatus: device.is_active,
+                devicePrivateSession: device.is_private_session,
+                deviceRestriction: device.is_restricted,
+                deviceName: device.name,
+                deviceType: device.type,
+                deviceVolumePercent: device.volume_percent,
+                deviceSupportsVolume: device.supports_volume
+            })); 
+    
+            setAvailableDevices(devices);
+          } catch (error) {
+            console.error("Error fetching available devices:", error);
+          }
+        };
+    
+        fetchAvailableDevices();
+      }, [accessToken]);
     
     const idDevice = availableDevices.length > 0 ? availableDevices[0].deviceId : null;
 
@@ -33,7 +65,7 @@ function usePlayerDataPost({ availableDevices, uriTrack, accessToken }) {
         }
     };
 
-    return { startPlayback, pausePlayback, isPlaying };
+    return { startPlayback, pausePlayback, isPlaying, availableDevices };
 }
 
 export default usePlayerDataPost;
