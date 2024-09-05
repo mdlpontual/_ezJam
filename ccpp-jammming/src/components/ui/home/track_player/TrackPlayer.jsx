@@ -2,21 +2,8 @@ import React, { useState, useEffect } from "react";
 import IMG from "../../../../assets/images/ImagesHUB";
 import TrackDisplay from "./unit_components/TrackDisplay";
 import TrackVolume from "./unit_components/TrackVolume";
-import usePlayerDataFetch from "../../../../hooks/usePlayerDataFetch";
-import usePlayerDataPost from "../../../../hooks/usePlayerDataPost";
 
 function TrackPlayer({ uriTrack, accessToken }) {
-    const { startPlayback, pausePlayback, isPlaying, availableDevices } = usePlayerDataPost({ uriTrack, accessToken });
-    const { currentPlayingTrack } = usePlayerDataFetch({ uriTrack, accessToken });
-
-    console.log("currentPlayingTrack", currentPlayingTrack)
-   
-    useEffect(() => {
-        if (uriTrack && availableDevices.length > 0) {
-            startPlayback();
-        }
-    }, [uriTrack, availableDevices]);
-
     return (
         <>
             <div id="track-player-container" className="container-fluid">
@@ -34,10 +21,9 @@ function TrackPlayer({ uriTrack, accessToken }) {
                             </div>
                             <div id="col-play" className="col-auto d-flex justify-content-center align-items-center">
                                 <img
-                                    src={isPlaying ? IMG.pausePNG : IMG.playPNG}
+                                    src={IMG.playPNG}
                                     alt="play pause button"
                                     height="35px"
-                                    onClick={isPlaying ? pausePlayback : startPlayback}
                                 />
                             </div>
                             <div id="col-next" className="col-auto d-flex justify-content-center align-items-center">
