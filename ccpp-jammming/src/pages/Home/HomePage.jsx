@@ -7,11 +7,12 @@ import OpenPlaylist from "../../components/ui/home/playlists_container/open_play
 import useAdimPlaylistPage from "../../hooks/useAdimPlaylistPage";
 import useAuth from "../../hooks/useAuth";
 import usePlayTrack from "../../hooks/usePlayTrack";
+import usePlayerControls from "../../hooks/usePlayerControls";
 
 function HomePage({ code }) {
     const { accessToken } = useAuth(code);
     const { uriTrack, updateUriTrack } = usePlayTrack();
-
+    const { isPaused, isActive, currentTrack, playTrack, pauseTrack } = usePlayerControls(uriTrack);
     const isPlaylistOpen = useAdimPlaylistPage();
 
     useEffect(() => {
@@ -20,6 +21,7 @@ function HomePage({ code }) {
             window.spotifyAccessToken = accessToken;
         }
     }, [accessToken]);
+
     return (
         <>
             <div id="home-page-container" className="container-fluid d-flex flex-column">
@@ -38,7 +40,14 @@ function HomePage({ code }) {
                 </main>
                 <footer id="footer-row" className="row">
                     <div id="footer-col" className="col">
-                        <TrackPlayer uriTrack={uriTrack} accessToken={accessToken} />
+                        <TrackPlayer 
+                            uriTrack={uriTrack} 
+                            isPaused={isPaused}
+                            isActive={isActive}
+                            currentTrack={currentTrack}
+                            playTrack={playTrack}
+                            pauseTrack={pauseTrack}
+                            accessToken={accessToken}/>
                     </div>
                 </footer>
             </div>
