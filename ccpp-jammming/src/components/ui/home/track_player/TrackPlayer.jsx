@@ -6,9 +6,9 @@ import TrackVolume from "./unit_components/TrackVolume";
 function TrackPlayer({ isPaused, isActive, currentTrack, playTrack, pauseTrack }) {
     const handleTogglePlay = () => {
         if (isPaused) {
-            playTrack(); // Play the track
+            playTrack();
         } else {
-            pauseTrack(); // Pause the track
+            pauseTrack();
         }
     };
 
