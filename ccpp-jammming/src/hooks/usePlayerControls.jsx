@@ -112,7 +112,27 @@ function usePlayerControls(uriTrack) {
         }
     };
 
-    return { isPaused, isActive, currentTrack, trackPosition, playTrack, pauseTrack };
+    // Function to seek to a specific position
+    const seekPosition = (pos) => {
+        if (player) {
+            player._options.getOAuthToken(access_token => {
+                // Make a PUT request to seek to the new position
+                fetch(`https://api.spotify.com/v1/me/player/seek?position_ms=${pos}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${access_token}`,
+                    },
+                }).then(() => {
+                    console.log(`Successfully moved to ${pos} ms`);
+                }).catch((error) => {
+                    console.error('Failed to seek:', error);
+                });
+            });
+        };
+    };
+
+    return { isPaused, isActive, currentTrack, trackPosition, playTrack, pauseTrack, seekPosition };
 }
 
 export default usePlayerControls;

@@ -12,7 +12,7 @@ import usePlayerControls from "../../hooks/usePlayerControls";
 function HomePage({ code }) {
     const { accessToken } = useAuth(code);
     const { uriTrack, updateUriTrack } = usePlayTrack();
-    const { isPaused, isActive, currentTrack, trackPosition, playTrack, pauseTrack } = usePlayerControls(uriTrack);
+    const { isPaused, isActive, currentTrack, trackPosition, playTrack, pauseTrack, seekPosition  } = usePlayerControls(uriTrack);
     const isPlaylistOpen = useAdimPlaylistPage();
 
     useEffect(() => {
@@ -46,7 +46,8 @@ function HomePage({ code }) {
                             currentTrack={currentTrack}
                             trackPosition={trackPosition}
                             playTrack={playTrack}
-                            pauseTrack={pauseTrack}/>
+                            pauseTrack={pauseTrack}
+                            seekPosition={seekPosition}/>
                     </div>
                 </footer>
             </div>
