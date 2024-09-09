@@ -1,7 +1,7 @@
 import React from "react";
 import IMG from "../../../../../assets/images/ImagesHUB";
 
-function AlbumTracks({ trackContent, onArtistClick, onAlbumClick, onPlayButton, accessToken }) {
+function AlbumTracks({ trackContent, fetchedAlbumTracksArray, onArtistClick, onAlbumClick, onPlayButton, accessToken }) {
     const uriTrack = trackContent.trackUri;
 
     function millisToMinutesAndSeconds(millis) {

@@ -49,6 +49,7 @@ function AlbumPage({ albumContent, onArtistClick, onAlbumClick, onPlayButton, ac
                                 {fetchedAlbumTracksArray.map(track => (
                                     <AlbumTracks 
                                         trackContent={track} 
+                                        fetchedAlbumTracksArray={fetchedAlbumTracksArray}
                                         onArtistClick={onArtistClick}
                                         onAlbumClick={onAlbumClick} 
                                         onPlayButton={onPlayButton}

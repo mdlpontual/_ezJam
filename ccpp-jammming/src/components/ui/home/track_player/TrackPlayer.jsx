@@ -37,6 +37,16 @@ function TrackPlayer({ isPaused, isActive, currentTrack, trackPosition, playTrac
         }
     };
 
+    // Handle previous
+    const handlePreviousTrack = () => {
+        console.log("previous")
+    };
+
+    // Handle next
+    const handleNextTrack = () => {
+        console.log("next")
+    };
+
     // Convert milliseconds to minutes and seconds for display
     function millisToMinutesAndSeconds(millis) {
         if (!millis) return "00:00"; // Ensure we return a valid format if millis is 0 or undefined
@@ -75,13 +85,24 @@ function TrackPlayer({ isPaused, isActive, currentTrack, trackPosition, playTrac
                         <TrackDisplay currentTrack={currentTrack} />
                     </div>
                     <div id="col-player" className="col d-flex flex-column">
-
-                        <div id="track-butttons-row" className="row d-flex">
+                        <div id="track-butttons-row" className="row d-flex justify-content-center align-items-center">
+                            {/* <div id="col-shuffle" className="col d-flex justify-content-end align-items-center">
+                                <img src={IMG.noshufflePNG} alt="shuffle button" height="20px" />
+                            </div> */}
+                            <div id="col-prev" className="col-auto d-flex justify-content-center align-items-center">
+                                <img src={IMG.previousPNG} alt="previous track button" height="20px" onClick={handlePreviousTrack}/>
+                            </div>
                             <div id="col-play" className="col-auto d-flex justify-content-center align-items-center">
                                 <a id="togglePlay-button" type="button" onClick={handleTogglePlay} >
                                     <img src={isPaused ? IMG.playPNG : IMG.pausePNG} alt="play pause button" height="35px"/>
                                 </a>
                             </div>
+                            <div id="col-next" className="col-auto d-flex justify-content-center align-items-center">
+                                <img src={IMG.nextPNG} alt="next track button" height="20px" onClick={handleNextTrack}/>
+                            </div>
+                            {/* <div id="col-repeat" className="col d-flex justify-content-start align-items-center">
+                                <img src={IMG.norepeatPNG} alt="repeat button" height="20px" />
+                            </div> */}
                         </div>
                         <div id="progress-bar-row" className="row d-flex">
                             <div id="col-left-time" className="col-1 d-flex justify-content-center align-items-center">
