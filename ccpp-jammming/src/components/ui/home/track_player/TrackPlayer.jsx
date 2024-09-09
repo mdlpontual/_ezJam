@@ -3,7 +3,7 @@ import IMG from "../../../../assets/images/ImagesHUB";
 import TrackDisplay from "./unit_components/TrackDisplay";
 import TrackVolume from "./unit_components/TrackVolume";
 
-function TrackPlayer({ isPaused, isActive, currentTrack, trackPosition, playTrack, pauseTrack, seekPosition }) {
+function TrackPlayer({ isPaused, isActive, currentTrack, trackPosition, playTrack, pauseTrack, seekPosition, volumeControl }) {
     const [liveTrackPosition, setLiveTrackPosition] = useState(trackPosition); // Local track position
     const intervalRef = useRef(null); // Ref to store the interval
     const debounceRef = useRef(null); // Ref to store the debounce timeout
@@ -12,6 +12,7 @@ function TrackPlayer({ isPaused, isActive, currentTrack, trackPosition, playTrac
     useEffect(() => {
         setLiveTrackPosition(trackPosition); // Align the live position with trackPosition when updated
     }, [trackPosition]);
+
 
     // Handle counting when the track is playing
     useEffect(() => {
@@ -102,7 +103,7 @@ function TrackPlayer({ isPaused, isActive, currentTrack, trackPosition, playTrac
                         </div>
                     </div>
                     <div id="col-volume" className="col">
-                        {/* <TrackVolume /> */}
+                        <TrackVolume volumeControl={volumeControl}/>
                     </div>
                 </div>
             </div>
