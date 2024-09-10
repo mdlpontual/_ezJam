@@ -44,6 +44,7 @@ function TrackResultsBox({ searchArtistResults, searchAlbumResults, searchTrackR
                         trackContent={track}
                         artistContent={matchingArtist} 
                         albumContent={matchingAlbum} 
+                        fetchedTracksArray={fetchedTracksArray}
                         onArtistClick={onArtistClick}
                         onAlbumClick={onAlbumClick} 
                         onPlayButton={onPlayButton}

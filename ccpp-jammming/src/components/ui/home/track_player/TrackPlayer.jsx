@@ -7,6 +7,7 @@ function TrackPlayer({ isPaused, isActive, currentTrack, trackPosition, playTrac
     const [liveTrackPosition, setLiveTrackPosition] = useState(trackPosition); // Local track position
     const intervalRef = useRef(null); // Ref to store the interval
     const debounceRef = useRef(null); // Ref to store the debounce timeout
+    const previousTrackUriRef = useRef(null); // Ref to store the previous track's URI
 
     // Sync liveTrackPosition with trackPosition when the track is played or resumed
     useEffect(() => {
@@ -28,12 +29,21 @@ function TrackPlayer({ isPaused, isActive, currentTrack, trackPosition, playTrac
         return () => clearInterval(intervalRef.current);
     }, [isPaused]);
 
-    // Reset the progress bar when the current track changes
+    // Reset the progress bar when a new track starts playing
     useEffect(() => {
-        if (currentTrack) {
+        if (currentTrack?.uri !== previousTrackUriRef.current) {
+            // If the current track is different from the previous one, reset the progress bar
             setLiveTrackPosition(0); // Reset the progress to 0 when the track changes
+            previousTrackUriRef.current = currentTrack?.uri; // Update the previous track URI
+
+            clearInterval(intervalRef.current); // Ensure the interval is reset
+            if (!isPaused) {
+                intervalRef.current = setInterval(() => {
+                    setLiveTrackPosition((prevPosition) => prevPosition + 1000); // Increment by 1 second (1000ms)
+                }, 1000); // Update every second
+            }
         }
-    }, [currentTrack]);
+    }, [currentTrack, isPaused]);
 
     // Handle play/pause toggle
     const handleTogglePlay = () => {

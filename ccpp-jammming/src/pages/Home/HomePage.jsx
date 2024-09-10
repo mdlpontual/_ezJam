@@ -9,6 +9,7 @@ import useAuth from "../../hooks/useAuth";
 import usePlayTrack from "../../hooks/usePlayTrack";
 import usePlayerControls from "../../hooks/usePlayerControls";
 
+
 function HomePage({ code }) {
     const { accessToken } = useAuth(code);
     const { uriTrack, uriQueue, updateUri } = usePlayTrack();

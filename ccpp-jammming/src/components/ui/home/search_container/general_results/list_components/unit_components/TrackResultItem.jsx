@@ -1,8 +1,10 @@
 import React from "react";
 import IMG from "../../../../../../../assets/images/ImagesHUB";
 
-function TrackResultItem({ artistContent, albumContent, trackContent, onArtistClick, onAlbumClick, onPlayButton, accessToken }) {
+function TrackResultItem({ artistContent, albumContent, trackContent, fetchedTracksArray, onArtistClick, onAlbumClick, onPlayButton, accessToken }) {
     const uriTrack = trackContent.trackUri;
+    let uriQueue = [];
+    fetchedTracksArray.map(track => uriQueue.push(track.trackUri));
 
     let trackCover;
     if (trackContent.trackCover) {
@@ -21,7 +23,7 @@ function TrackResultItem({ artistContent, albumContent, trackContent, onArtistCl
         <>
             <div id="songs-inner-row" className="row">
                 <div id="col-add" className="col-1 d-flex justify-content-center align-items-center">
-                    <a id="play-button" type="button" onClick={() => onPlayButton(uriTrack)}>
+                    <a id="play-button" type="button" onClick={() => onPlayButton(uriTrack, uriQueue)}>
                         <img id="play-icon" src={IMG.play2PNG} alt="play icon" width="20px"/>
                     </a>
                 </div>

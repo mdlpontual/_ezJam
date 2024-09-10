@@ -135,7 +135,7 @@ function useAdimSearchPage(search, onPlayButton, accessToken) {
         }
     }, [currentHistoryIndex, history]);
 
-    return { activePage, goBack, goForward };
+    return { activePage, goBack, goForward, handleArtistClick, handleAlbumClick };
 }
 
 export default useAdimSearchPage;

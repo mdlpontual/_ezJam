@@ -10,7 +10,12 @@ function TopTracksBox({ fetchedArtistTopTracksArray, onPlayButton }) {
                     <div id="top-five-col" className="col">
                         <h4>Popular:</h4>
                         {fetchedArtistTopTracksArray.map((track, i) => (
-                            <TopTrack topTrack={track} order={i} onPlayButton={onPlayButton} key={track.trackUri} />
+                            <TopTrack 
+                                topTrack={track} 
+                                order={i} 
+                                onPlayButton={onPlayButton} 
+                                key={track.trackUri} 
+                                fetchedArtistTopTracksArray={fetchedArtistTopTracksArray}/>
                         ))}
                     </div>
                 </div>
