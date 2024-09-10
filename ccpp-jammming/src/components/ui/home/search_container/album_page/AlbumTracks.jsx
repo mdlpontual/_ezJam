@@ -1,8 +1,10 @@
 import React from "react";
 import IMG from "../../../../../assets/images/ImagesHUB";
 
-function AlbumTracks({ trackContent, fetchedAlbumTracksArray, onArtistClick, onAlbumClick, onPlayButton, accessToken }) {
+function AlbumTracks({ trackContent, fetchedAlbumTracksArray, onPlayButton }) {
     const uriTrack = trackContent.trackUri;
+    let uriQueue = [];
+    fetchedAlbumTracksArray.map(track => uriQueue.push(track.trackUri));
 
     function millisToMinutesAndSeconds(millis) {
         const minutes = Math.floor(millis / 60000);
@@ -15,7 +17,7 @@ function AlbumTracks({ trackContent, fetchedAlbumTracksArray, onArtistClick, onA
             <div id="songs-inner-row" className="row">
                 <div id="col-num" className="col-1 d-flex justify-content-center align-items-center">
                     <h5 id="number-icon">{trackContent.trackNumber}</h5>
-                    <a id="play-button" type="button" onClick={() => onPlayButton(uriTrack)}>
+                    <a id="play-button" type="button" onClick={() => onPlayButton(uriTrack, uriQueue)}>
                         <img id="play-icon" src={IMG.play2PNG} alt="play icon" width="20px"/>
                     </a>
                 </div>

@@ -7,7 +7,7 @@ const defaultTrack = {
     artists: [{ name: "" }],
 };
 
-function usePlayerControls(uriTrack) {
+function usePlayerControls({ uriTrack, uriQueue }) {
     const [isPaused, setIsPaused] = useState(true); // Initial state for pause/play
     const [isActive, setIsActive] = useState(false); // If the player is active
     const [currentTrack, setCurrentTrack] = useState(defaultTrack); // Current track details
@@ -43,14 +43,15 @@ function usePlayerControls(uriTrack) {
                             console.log("Device ID has gone offline", device_id);
                         });
 
+                        // Use player_state_changed to capture track changes and update state immediately
                         player.addListener('player_state_changed', state => {
                             if (!state) return;
-                            setCurrentTrack(state.track_window.current_track); // Update current track
-                            setIsPaused(state.paused); // Update paused state
+
+                            // Update the current track details, paused state, and position
+                            setCurrentTrack(state.track_window.current_track);
+                            setIsPaused(state.paused);
                             setTrackPosition(state.position);
-                            player.getCurrentState().then(state => {
-                                setIsActive(!!state); // Update active state
-                            });
+                            setIsActive(true);
                         });
 
                         player.connect();
@@ -75,14 +76,19 @@ function usePlayerControls(uriTrack) {
         };
     }, []);
 
-    // Play a new track when uriTrack changes
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    // Play a new track when uriTrack changes and set the whole queue
     useEffect(() => {
         const player = playerInstanceRef.current;
-        if (player && uriTrack) {
+        if (player && uriTrack && uriQueue) {
             player._options.getOAuthToken(access_token => {
                 fetch(`https://api.spotify.com/v1/me/player/play`, {
                     method: 'PUT',
-                    body: JSON.stringify({ uris: [uriTrack] }),
+                    body: JSON.stringify({
+                        uris: uriQueue,  // Set the entire queue
+                        offset: { uri: uriTrack }, // Start from the current track
+                    }),
                     headers: {
                         'Content-Type': 'application/json',
                         Authorization: `Bearer ${access_token}`,
@@ -90,7 +96,7 @@ function usePlayerControls(uriTrack) {
                 });
             });
         }
-    }, [uriTrack]);
+    }, [uriTrack, uriQueue]);
 
     // Function to play track
     const playTrack = () => {
@@ -128,8 +134,57 @@ function usePlayerControls(uriTrack) {
         }
     };
 
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    // Use debouncing technique to prevent multiple re-renders
+    const debounceFetchState = (func, delay) => {
+        let debounceTimeout;
+        return (...args) => {
+            if (debounceTimeout) clearTimeout(debounceTimeout);
+            debounceTimeout = setTimeout(() => func(...args), delay);
+        };
+    };
+
+    // Skip to previous track
+    const previousTrack = () => {
+        const player = playerInstanceRef.current;
+        if (player) {
+            player._options.getOAuthToken(access_token => {
+                fetch(`https://api.spotify.com/v1/me/player/previous`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${access_token}`,
+                    },
+                }).catch((error) => {
+                    console.error('Failed to move to previous track:', error);
+                });
+            });
+        }
+    };
+
+    // Skip to next track
+    const nextTrack = () => {
+        const player = playerInstanceRef.current;
+        if (player) {
+            player._options.getOAuthToken(access_token => {
+                fetch(`https://api.spotify.com/v1/me/player/next`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${access_token}`,
+                    },
+                }).catch((error) => {
+                    console.error('Failed to move to next track:', error);
+                });
+            });
+        }
+    };
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------
+
     // Function to seek to a specific position
-    const seekPosition = (pos) => {
+    const seekPosition = debounceFetchState((pos) => {
         const player = playerInstanceRef.current;
         if (player) {
             player._options.getOAuthToken(access_token => {
@@ -147,7 +202,7 @@ function usePlayerControls(uriTrack) {
                 });
             });
         }
-    };
+    }, 300); // Debounce delay of 300ms
 
     // Function to control volume
     const volumeControl = (vol) => {
@@ -155,14 +210,14 @@ function usePlayerControls(uriTrack) {
         if (player) {
             player._options.getOAuthToken(access_token => {
                 // Make a PUT request to seek the volume value
-                fetch(`https://api.spotify.com/v1/me/player/volume?volume_percent=${vol*100}`, {
+                fetch(`https://api.spotify.com/v1/me/player/volume?volume_percent=${vol * 100}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
                         Authorization: `Bearer ${access_token}`,
                     },
                 }).then(() => {
-                    console.log(`Successfully moved to ${vol} ms`);
+                    console.log(`Successfully changed volume to ${vol}`);
                 }).catch((error) => {
                     console.error('Failed to change volume:', error);
                 });
@@ -170,9 +225,7 @@ function usePlayerControls(uriTrack) {
         }
     };
 
-
-
-    return { isPaused, isActive, currentTrack, trackPosition, playTrack, pauseTrack, seekPosition, volumeControl };
+    return { isPaused, isActive, currentTrack, trackPosition, playTrack, pauseTrack, previousTrack, nextTrack, seekPosition, volumeControl };
 }
 
 export default usePlayerControls;

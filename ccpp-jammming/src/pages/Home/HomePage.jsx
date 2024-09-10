@@ -11,8 +11,8 @@ import usePlayerControls from "../../hooks/usePlayerControls";
 
 function HomePage({ code }) {
     const { accessToken } = useAuth(code);
-    const { uriTrack, updateUriTrack } = usePlayTrack();
-    const { isPaused, isActive, currentTrack, trackPosition, playTrack, pauseTrack, seekPosition, volumeControl } = usePlayerControls(uriTrack);
+    const { uriTrack, uriQueue, updateUri } = usePlayTrack();
+    const { isPaused, isActive, currentTrack, trackPosition, playTrack, pauseTrack, previousTrack, nextTrack, seekPosition, volumeControl } = usePlayerControls({uriTrack, uriQueue});
     const isPlaylistOpen = useAdimPlaylistPage();
 
     useEffect(() => {
@@ -35,7 +35,7 @@ function HomePage({ code }) {
                         {isPlaylistOpen ? <OpenPlaylist /> : <UserPlaylists />}
                     </div>
                     <div id="search-col" className="col">
-                        <SearchContainer onPlayButton={updateUriTrack} accessToken={accessToken}/>
+                        <SearchContainer onPlayButton={updateUri} accessToken={accessToken}/>
                     </div>
                 </main>
                 <footer id="footer-row" className="row">
@@ -47,6 +47,8 @@ function HomePage({ code }) {
                             trackPosition={trackPosition}
                             playTrack={playTrack}
                             pauseTrack={pauseTrack}
+                            previousTrack={previousTrack}
+                            nextTrack={nextTrack}
                             seekPosition={seekPosition}
                             volumeControl={volumeControl}/>
                     </div>
