@@ -16,7 +16,7 @@ function HomePage({ code }) {
 
     const { accessToken } = useAuth(code);
     const { uriTrack, uriQueue, updateUri } = usePlayTrack();
-    const { activePage, goBack, goForward } = useAdimSearchPage(search, updateUri, accessToken);
+    const { activePage, goBack, goForward, handleArtistClick, handleAlbumClick } = useAdimSearchPage(search, updateUri, accessToken);
     const { isPaused, isActive, currentTrack, trackPosition, playTrack, pauseTrack, previousTrack, nextTrack, seekPosition, volumeControl } = usePlayerControls({uriTrack, uriQueue});
 
     const isPlaylistOpen = useAdimPlaylistPage();
@@ -55,7 +55,11 @@ function HomePage({ code }) {
                             previousTrack={previousTrack}
                             nextTrack={nextTrack}
                             seekPosition={seekPosition}
-                            volumeControl={volumeControl}/>
+                            volumeControl={volumeControl}
+                            onPlayButton={updateUri}
+                            onArtistClick={handleArtistClick}
+                            onAlbumClick={handleAlbumClick}
+                            accessToken={accessToken}/>
                     </div>
                 </footer>
             </div>

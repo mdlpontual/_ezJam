@@ -3,7 +3,7 @@ import IMG from "../../../../assets/images/ImagesHUB";
 import TrackDisplay from "./unit_components/TrackDisplay";
 import TrackVolume from "./unit_components/TrackVolume";
 
-function TrackPlayer({ isPaused, isActive, currentTrack, trackPosition, playTrack, pauseTrack, previousTrack, nextTrack, seekPosition, volumeControl }) {
+function TrackPlayer({ isPaused, isActive, currentTrack, trackPosition, playTrack, pauseTrack, previousTrack, nextTrack, seekPosition, volumeControl, onPlayButton, onArtistClick, onAlbumClick, accessToken }) {
     const [liveTrackPosition, setLiveTrackPosition] = useState(trackPosition); // Local track position
     const intervalRef = useRef(null); // Ref to store the interval
     const debounceRef = useRef(null); // Ref to store the debounce timeout
@@ -99,7 +99,7 @@ function TrackPlayer({ isPaused, isActive, currentTrack, trackPosition, playTrac
             <div id="track-player-container" className="container-fluid">
                 <div id="track-player-row" className="row">
                     <div id="col-track" className="col d-flex">
-                        <TrackDisplay currentTrack={currentTrack} />
+                        <TrackDisplay currentTrack={currentTrack} onPlayButton={onPlayButton} onArtistClick={onArtistClick} onAlbumClick={onAlbumClick} accessToken={accessToken} />
                     </div>
                     <div id="col-player" className="col d-flex flex-column">
                         <div id="track-butttons-row" className="row d-flex justify-content-center align-items-center">
