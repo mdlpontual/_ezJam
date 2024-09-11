@@ -1,11 +1,8 @@
 import React, { useState } from "react";
 import IMG from "../../../../assets/images/ImagesHUB";
-import useAdimSearchPage from "../../../../hooks/useAdimSearchPage";
 
-function SearchContainer({ onPlayButton, accessToken }) {
-    const [search, setSearch] = useState("");
-    const { activePage, goBack, goForward } = useAdimSearchPage(search, onPlayButton, accessToken);
-  
+function SearchContainer({ search, setSearch, activePage, goBack, goForward }) {
+    
     const disableEnter = (event) => {
       if (event.key === 'Enter') {
         event.preventDefault();

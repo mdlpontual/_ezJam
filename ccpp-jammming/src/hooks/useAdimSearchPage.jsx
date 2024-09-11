@@ -18,7 +18,7 @@ const debounce = (func, delay) => {
     };
 };
 
-function useAdimSearchPage(search, onPlayButton, accessToken) {
+function useAdimSearchPage(search, updateUri, accessToken) {
     const [activePage, setActivePage] = useState(emptyPage);
     const [history, setHistory] = useState([emptyPage]);
     const [currentHistoryIndex, setCurrentHistoryIndex] = useState(0);
@@ -56,7 +56,7 @@ function useAdimSearchPage(search, onPlayButton, accessToken) {
                     searchTrackResults={cachedResults.tracks}
                     onArtistClick={handleArtistClick}
                     onAlbumClick={handleAlbumClick}
-                    onPlayButton={onPlayButton}
+                    onPlayButton={updateUri}
                     accessToken={accessToken}
                 />
             );

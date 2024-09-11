@@ -5,19 +5,23 @@ import SearchContainer from "../../components/ui/home/search_container/SearchCon
 import TrackPlayer from "../../components/ui/home/track_player/TrackPlayer";
 import OpenPlaylist from "../../components/ui/home/playlists_container/open_playlist/OpenPlaylist";
 import useAdimPlaylistPage from "../../hooks/useAdimPlaylistPage";
+import useAdimSearchPage from "../../hooks/useAdimSearchPage";
 import useAuth from "../../hooks/useAuth";
 import usePlayTrack from "../../hooks/usePlayTrack";
 import usePlayerControls from "../../hooks/usePlayerControls";
 
 
 function HomePage({ code }) {
+    const [search, setSearch] = useState("");
+
     const { accessToken } = useAuth(code);
     const { uriTrack, uriQueue, updateUri } = usePlayTrack();
+    const { activePage, goBack, goForward } = useAdimSearchPage(search, updateUri, accessToken);
     const { isPaused, isActive, currentTrack, trackPosition, playTrack, pauseTrack, previousTrack, nextTrack, seekPosition, volumeControl } = usePlayerControls({uriTrack, uriQueue});
+
     const isPlaylistOpen = useAdimPlaylistPage();
 
     useEffect(() => {
-        // Assign the accessToken to a global variable when it's available
         if (accessToken) {
             window.spotifyAccessToken = accessToken;
         }
@@ -36,7 +40,7 @@ function HomePage({ code }) {
                         {isPlaylistOpen ? <OpenPlaylist /> : <UserPlaylists />}
                     </div>
                     <div id="search-col" className="col">
-                        <SearchContainer onPlayButton={updateUri} accessToken={accessToken}/>
+                        <SearchContainer search={search} setSearch={setSearch} activePage={activePage} goBack={goBack}  goForward={goForward} />
                     </div>
                 </main>
                 <footer id="footer-row" className="row">
