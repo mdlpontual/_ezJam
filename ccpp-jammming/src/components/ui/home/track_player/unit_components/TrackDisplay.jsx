@@ -24,7 +24,7 @@ function TrackDisplay({ currentTrack, onPlayButton, onArtistClick, onAlbumClick,
         <>
            <div id="col-cover" className="col-1 d-flex justify-content-center align-items-center">
                 <a id="display-cover" type="button" onClick={() => onAlbumClick(albumContent, onArtistClick, onAlbumClick, onPlayButton, accessToken)}>
-                    <img src={coverPicture} height="60px"/>
+                    <img src={coverPicture} height="75px"/>
                 </a>
             </div>
             <div id="col-title" className="col-auto d-flex flex-column justify-content-center align-items-start">

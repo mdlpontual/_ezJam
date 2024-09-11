@@ -3,11 +3,32 @@ import IMG from "../../../../assets/images/ImagesHUB";
 import TrackDisplay from "./unit_components/TrackDisplay";
 import TrackVolume from "./unit_components/TrackVolume";
 
-function TrackPlayer({ isPaused, isActive, currentTrack, trackPosition, playTrack, pauseTrack, previousTrack, nextTrack, seekPosition, volumeControl, onPlayButton, onArtistClick, onAlbumClick, accessToken }) {
+function TrackPlayer({ 
+        isPaused, 
+        isActive, 
+        currentTrack, 
+        trackPosition, 
+        playTrack, 
+        pauseTrack, 
+        previousTrack, 
+        nextTrack, 
+        seekPosition, 
+        volumeControl, 
+        onPlayButton, 
+        onArtistClick, 
+        onAlbumClick,
+        onPlayTrack, 
+        accessToken }) {
     const [liveTrackPosition, setLiveTrackPosition] = useState(trackPosition); // Local track position
     const intervalRef = useRef(null); // Ref to store the interval
     const debounceRef = useRef(null); // Ref to store the debounce timeout
     const previousTrackUriRef = useRef(null); // Ref to store the previous track's URI
+
+    useEffect(() => {
+        if (currentTrack?.uri) {
+            onPlayTrack(currentTrack.uri); // Notify the parent when a new track is played
+        }
+    }, [currentTrack, onPlayTrack, accessToken]);
 
     // Sync liveTrackPosition with trackPosition when the track is played or resumed
     useEffect(() => {
@@ -99,7 +120,12 @@ function TrackPlayer({ isPaused, isActive, currentTrack, trackPosition, playTrac
             <div id="track-player-container" className="container-fluid">
                 <div id="track-player-row" className="row">
                     <div id="col-track" className="col d-flex">
-                        <TrackDisplay currentTrack={currentTrack} onPlayButton={onPlayButton} onArtistClick={onArtistClick} onAlbumClick={onAlbumClick} accessToken={accessToken} />
+                        <TrackDisplay 
+                            currentTrack={currentTrack} 
+                            onPlayButton={onPlayButton} 
+                            onArtistClick={onArtistClick} 
+                            onAlbumClick={onAlbumClick} 
+                            accessToken={accessToken} />
                     </div>
                     <div id="col-player" className="col d-flex flex-column">
                         <div id="track-butttons-row" className="row d-flex justify-content-center align-items-center">

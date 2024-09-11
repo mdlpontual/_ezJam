@@ -23,6 +23,7 @@ const IMG = {
     previousPNG: new URL('./symbols/12_back-button.png', import.meta.url).href,
     nextPNG: new URL('./symbols/12_next-button.png', import.meta.url).href,
     pausePNG: new URL('./symbols/13_pause-button.png', import.meta.url).href,
+    pausePNG2: new URL('./symbols/13_pause-button2.png', import.meta.url).href,
     playPNG: new URL('./symbols/13_play-button.png', import.meta.url).href,
     play2PNG: new URL('./symbols/13_play-button2.png', import.meta.url).href,
     norepeatPNG: new URL('./symbols/14_repeat.png', import.meta.url).href,
