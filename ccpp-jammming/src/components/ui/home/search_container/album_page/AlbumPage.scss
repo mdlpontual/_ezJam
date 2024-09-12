@@ -255,7 +255,7 @@
                                     //border: $border-lime-dotted;
                                     @include box-reset-default;
                                     color: $primary;
-                                    visibility: hidden;
+                                    visibility: visible;
                                     position: relative;
                                 }
                             }

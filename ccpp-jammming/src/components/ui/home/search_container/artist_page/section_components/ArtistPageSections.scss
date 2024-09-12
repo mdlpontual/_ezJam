@@ -122,6 +122,122 @@
                     padding: 0 5px;
                 };  
             }
+            #songs-inner-row-green {
+                //border: $border-yellow-dashed;
+                @include box-reset-default;
+                color: $primary;
+                height: 50px;
+                padding-right: 5px;
+                margin-right: 10px;
+                #col-add {
+                    //border: $border-lime-dotted;
+                    @include box-reset-default;
+                    color: $primary;
+                    width: 30px;
+                    position: relative;
+                    p {
+                        //border: $border-lime-dotted;
+                        @include box-reset-default;
+                        color: $primary;
+                        position: absolute;
+                    }
+                    #play-button {
+                        //border: $border-lime-dotted;
+                        @include box-reset-default;
+                        color: $primary;
+                        position: absolute;
+                        #play-icon {
+                            //border: $border-lime-dotted;
+                            @include box-reset-default;
+                            color: $primary;
+                            visibility: visible;
+                            position: relative;
+                        }
+                    }
+                }
+                #col-cover {
+                    //border: $border-lime-dotted;
+                    @include box-reset-default;
+                    width: 50px;
+                    img {
+                        //border: $border-lime-dotted;
+                        @include box-reset-default;
+                    }
+                }
+                #col-title {
+                    //border: $border-lime-dotted;
+                    @include box-reset-default;
+                    color: $primary;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    flex-wrap: wrap;
+                    h5 {
+                        //border: $border-magenta-dotted;
+                        @include box-reset-default;
+                        color: $primary;
+                        text-overflow: ellipsis;
+                        overflow: hidden;
+                        width: 100%;
+                        margin-bottom: -3px;
+                    }
+                    p {
+                        //border: $border-magenta-dotted;
+                        @include box-reset-default;
+                        color: $primary;
+                        text-overflow: ellipsis;
+                        overflow: hidden;
+                        width: 100%;
+                        margin-top: -3px;
+                    }
+                }
+                #col-plus {
+                    //border: $border-cyan-dotted;
+                    @include box-reset-default;
+                    color: $primary;
+                    width: 40px;
+                    padding: 3px;
+                }
+                #col-minus {
+                    //border: $border-cyan-dotted;
+                    @include box-reset-default;
+                    color: $primary;
+                    width: 40px;
+                    padding: 3px;
+                }
+                #col-plays {
+                    //border: $border-lime-dotted;
+                    @include box-reset-default;
+                    color: $primary;
+                    white-space: nowrap;
+                    p {
+                        //border: $border-lime-dotted;
+                        @include box-reset-default;
+                        color: $primary;
+                        text-overflow: ellipsis;
+                        overflow: hidden;
+                    }
+                }
+                #col-duration {
+                    //border: $border-lime-dotted;
+                    @include box-reset-default;
+                    color: $primary;
+                    white-space: nowrap;
+                    width: 55px;
+                    p {
+                        //border: $border-lime-dotted;
+                        @include box-reset-default;
+                        color: $primary;
+                        text-overflow: ellipsis;
+                        overflow: hidden;
+                    }
+                }
+                #col-add, #col-cover, #col-title, 
+                #col-plays,#col-plus, #col-minus, #col-duration {
+                    height: 100%;
+                    padding: 0 5px;
+                };  
+            }
             #songs-inner-row:hover {
                 background-color: $primary;
                 border-radius: 10px;
@@ -147,6 +263,48 @@
                             visibility: visible;
                             position: relative;
                         }
+                    }
+                }
+            }
+            #songs-inner-row-green:hover {
+                background-color: $primary;
+                border-radius: 10px;
+                margin-right: 10px;
+                #col-add {
+                    //border: $border-lime-dotted;
+                    @include box-reset-default;
+                    width: 30px;
+                    position: relative;
+                    p {
+                        //border: $border-lime-dotted;
+                        @include box-reset-default;
+                        visibility: hidden;
+                        position: absolute;
+                    }
+                    #play-button {
+                        //border: $border-lime-dotted;
+                        background-color: black;
+                        border-radius: 25%;
+                        @include box-reset-default;
+                        position: absolute;
+                        height: 40px;
+                        width: 25px;
+                        #play-icon {
+                            //border: $border-lime-dotted;
+                            @include box-reset-default;
+                            visibility: visible;
+                            position: relative;
+                        }
+                    }
+                }
+                #col-title {
+                    h5{
+                        color: black
+                    }
+                }
+                #col-duration {
+                    p{
+                        color: black
                     }
                 }
             }

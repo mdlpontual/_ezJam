@@ -1,23 +1,25 @@
 // src/contexts/TrackContext.js
 import React, { createContext, useState, useContext } from 'react';
 
-// Create the TrackContext
 const TrackContext = createContext();
 
-// Create a provider component
 export const TrackProvider = ({ children }) => {
-  const [currentTrackUri, setCurrentTrackUri] = useState(null);
+    const [currentTrackUri, setCurrentTrackUri] = useState(null);
+    const [isPaused, setIsPaused] = useState(true);
 
-  const updateCurrentTrackUri = (uri) => {
-    setCurrentTrackUri(uri);
-  };
+    const updateCurrentTrackUri = (uri) => {
+        setCurrentTrackUri(uri);
+    };
 
-  return (
-    <TrackContext.Provider value={{ currentTrackUri, updateCurrentTrackUri }}>
-      {children}
-    </TrackContext.Provider>
-  );
+    const togglePausePlay = (paused) => {
+        setIsPaused(paused);
+    };
+
+    return (
+        <TrackContext.Provider value={{ currentTrackUri, isPaused, updateCurrentTrackUri, togglePausePlay }}>
+            {children}
+        </TrackContext.Provider>
+    );
 };
 
-// Custom hook to use the TrackContext in any component
 export const useTrack = () => useContext(TrackContext);

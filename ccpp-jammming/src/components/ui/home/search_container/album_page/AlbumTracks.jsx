@@ -3,7 +3,7 @@ import IMG from "../../../../../assets/images/ImagesHUB";
 import { useTrack } from "../../../../../hooks/TrackContext";
 
 function AlbumTracks({ trackContent, fetchedAlbumTracksArray, onPlayButton }) {
-    const { currentTrackUri } = useTrack(); 
+    const { currentTrackUri, isPaused } = useTrack(); 
 
     const uriTrack = trackContent.trackUri;
     let uriQueue = [];
@@ -45,9 +45,8 @@ function AlbumTracks({ trackContent, fetchedAlbumTracksArray, onPlayButton }) {
         <>
             <div id="songs-inner-row-green" className="row">
                 <div id="col-num" className="col-1 d-flex justify-content-center align-items-center">
-                    <h5 id="number-icon">{trackContent.trackNumber}</h5>
                     <a id="play-button" type="button" onClick={() => onPlayButton(uriTrack, uriQueue)}>
-                        <img id="play-icon" src={IMG.play2PNG} alt="play icon" width="20px"/>
+                        <img id="play-icon" src={isPaused ? IMG.playPNG2Green : IMG.pausePNG2Green} alt="play icon" width="20px"/>
                     </a>
                 </div>
                 <div id="col-title" className="col d-flex justify-content-start align-items-center">
