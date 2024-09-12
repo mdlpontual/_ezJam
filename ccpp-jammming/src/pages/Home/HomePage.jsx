@@ -9,12 +9,12 @@ import useAdimSearchPage from "../../hooks/useAdimSearchPage";
 import useAuth from "../../hooks/useAuth";
 import usePlayTrack from "../../hooks/usePlayTrack";
 import usePlayerControls from "../../hooks/usePlayerControls";
-import { useTrack } from "../../hooks/TrackContext"; // Import the context hook
+import { useTrack } from "../../hooks/TrackContext"; 
 
 function HomePage({ code }) {
     const [search, setSearch] = useState("");
     
-    const { currentTrackUri, updateCurrentTrackUri } = useTrack(); // Get the global currentTrackUri and updater
+    const { currentTrackUri, updateCurrentTrackUri } = useTrack(); 
 
     const { accessToken } = useAuth(code);
     const { uriTrack, uriQueue, updateUri } = usePlayTrack();
