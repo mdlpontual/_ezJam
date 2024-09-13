@@ -2,7 +2,7 @@ import React from "react";
 import IMG from "../../../../../../../assets/images/ImagesHUB";
 import { useTrack } from "../../../../../../../hooks/TrackContext";
 
-function TopTrack({ topTrack, order, onPlayButton, fetchedArtistTopTracksArray }) {
+function TopTrack({ topTrack, order, onPlayButton, playTrack, pauseTrack, fetchedArtistTopTracksArray }) {
     const { currentTrackUri, isPaused } = useTrack(); 
 
     const uriTrack = topTrack.trackUri;
@@ -15,6 +15,15 @@ function TopTrack({ topTrack, order, onPlayButton, fetchedArtistTopTracksArray }
     } else {
         cover = IMG.placeHolders;
     }
+    
+    // Handle play/pause toggle
+    const handleTogglePlay = () => {
+        if (isPaused) {
+            playTrack(); // Play the track
+        } else {
+            pauseTrack(); // Pause the track
+        }
+    };
 
     function millisToMinutesAndSeconds(millis) {
         const minutes = Math.floor(millis / 60000);
@@ -55,7 +64,7 @@ function TopTrack({ topTrack, order, onPlayButton, fetchedArtistTopTracksArray }
         <>
             <div id="songs-inner-row-green" className="row">
                     <div id="col-add" className="col-1 d-flex justify-content-center align-items-center">
-                    <a id="play-button" className="d-flex justify-content-center align-items-center" type="button" onClick={() => onPlayButton(uriTrack, uriQueue)}>
+                    <a id="play-button" className="d-flex justify-content-center align-items-center" type="button" onClick={handleTogglePlay}>
                         <img id="play-icon" className="d-flex justify-content-center align-items-center" src={isPaused ? IMG.playPNG2Green : IMG.pausePNG2Green} alt="play icon" width="20px"/>
                     </a>
                     </div>

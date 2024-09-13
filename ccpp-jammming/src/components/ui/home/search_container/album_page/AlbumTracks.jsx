@@ -2,7 +2,7 @@ import React from "react";
 import IMG from "../../../../../assets/images/ImagesHUB";
 import { useTrack } from "../../../../../hooks/TrackContext";
 
-function AlbumTracks({ trackContent, fetchedAlbumTracksArray, onPlayButton }) {
+function AlbumTracks({ trackContent, fetchedAlbumTracksArray, onPlayButton, playTrack, pauseTrack }) {
     const { currentTrackUri, isPaused } = useTrack(); 
 
     const uriTrack = trackContent.trackUri;
@@ -14,6 +14,15 @@ function AlbumTracks({ trackContent, fetchedAlbumTracksArray, onPlayButton }) {
         const seconds = ((millis % 60000) / 1000).toFixed(0);
         return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
     }
+    
+    // Handle play/pause toggle
+    const handleTogglePlay = () => {
+        if (isPaused) {
+            playTrack(); // Play the track
+        } else {
+            pauseTrack(); // Pause the track
+        }
+    };
     
     if(currentTrackUri !== uriTrack) {
         return (
@@ -45,7 +54,7 @@ function AlbumTracks({ trackContent, fetchedAlbumTracksArray, onPlayButton }) {
         <>
             <div id="songs-inner-row-green" className="row">
                 <div id="col-num" className="col-1 d-flex justify-content-center align-items-center">
-                    <a id="play-button" type="button" onClick={() => onPlayButton(uriTrack, uriQueue)}>
+                    <a id="play-button" type="button" onClick={handleTogglePlay}>
                         <img id="play-icon" src={isPaused ? IMG.playPNG2Green : IMG.pausePNG2Green} alt="play icon" width="20px"/>
                     </a>
                 </div>

@@ -18,7 +18,7 @@ const debounce = (func, delay) => {
     };
 };
 
-function useAdimSearchPage(search, updateUri, accessToken) {
+function useAdimSearchPage(search, updateUri, playTrack, pauseTrack, accessToken) {
     const [activePage, setActivePage] = useState(emptyPage);
     const [history, setHistory] = useState([emptyPage]);
     const [currentHistoryIndex, setCurrentHistoryIndex] = useState(0);
@@ -57,6 +57,8 @@ function useAdimSearchPage(search, updateUri, accessToken) {
                     onArtistClick={handleArtistClick}
                     onAlbumClick={handleAlbumClick}
                     onPlayButton={updateUri}
+                    playTrack={playTrack}
+                    pauseTrack={pauseTrack}
                     accessToken={accessToken}
                 />
             );
@@ -95,6 +97,8 @@ function useAdimSearchPage(search, updateUri, accessToken) {
                 onArtistClick={onArtistClick}
                 onAlbumClick={onAlbumClick} 
                 onPlayButton={onPlayButton}
+                playTrack={playTrack}
+                pauseTrack={pauseTrack}
                 accessToken={accessToken}/>
         );
         setActivePage(newPage);
@@ -110,6 +114,8 @@ function useAdimSearchPage(search, updateUri, accessToken) {
                 onArtistClick={onArtistClick}
                 onAlbumClick={onAlbumClick} 
                 onPlayButton={onPlayButton}
+                playTrack={playTrack}
+                pauseTrack={pauseTrack}
                 accessToken={accessToken}/>
         );
         setActivePage(newPage);
