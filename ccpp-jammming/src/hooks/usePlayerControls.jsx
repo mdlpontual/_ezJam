@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 // Default track structure
 const defaultTrack = {
@@ -7,11 +7,12 @@ const defaultTrack = {
     artists: [{ name: "" }],
 };
 
-function usePlayerControls(uriTrack) {
+function usePlayerControls({ uriTrack, uriQueue }) {
     const [isPaused, setIsPaused] = useState(true); // Initial state for pause/play
     const [isActive, setIsActive] = useState(false); // If the player is active
-    const [player, setPlayer] = useState(null); // Spotify player instance
     const [currentTrack, setCurrentTrack] = useState(defaultTrack); // Current track details
+    const [trackPosition, setTrackPosition] = useState(0);
+    const playerInstanceRef = useRef(null); // Ref to track the player instance
 
     // Initialize Spotify SDK
     useEffect(() => {
@@ -22,51 +23,72 @@ function usePlayerControls(uriTrack) {
             document.body.appendChild(script);
 
             script.onload = () => {
-                window.onSpotifyWebPlaybackSDKReady = () => {
-                    const player = new window.Spotify.Player({
-                        name: 'Jammming Track Player',
-                        getOAuthToken: cb => { cb(window.spotifyAccessToken); }, // Use access token from global scope
-                        volume: 0.5,
-                    });
+                if (!window.onSpotifyWebPlaybackSDKReady) {
+                    window.onSpotifyWebPlaybackSDKReady = () => {
+                        if (playerInstanceRef.current) return; // Prevent re-initialization
 
-                    setPlayer(player);
-
-                    player.addListener('ready', ({ device_id }) => {
-                        console.log("Ready with Device ID", device_id);
-                    });
-
-                    player.addListener('not_ready', ({ device_id }) => {
-                        console.log("Device ID has gone offline", device_id);
-                    });
-
-                    player.addListener('player_state_changed', state => {
-                        if (!state) return;
-                        setCurrentTrack(state.track_window.current_track); // Update current track
-                        setIsPaused(state.paused); // Update paused state
-                        player.getCurrentState().then(state => {
-                            setIsActive(!!state); // Update active state
+                        const player = new window.Spotify.Player({
+                            name: 'Jammming Track Player',
+                            getOAuthToken: cb => { cb(window.spotifyAccessToken); }, // Use access token from global scope
+                            volume: 0.5,
                         });
-                    });
 
-                    player.connect();
-                };
+                        playerInstanceRef.current = player; // Store the player instance
+
+                        player.addListener('ready', ({ device_id }) => {
+                            console.log("Ready with Device ID", device_id);
+                        });
+
+                        player.addListener('not_ready', ({ device_id }) => {
+                            console.log("Device ID has gone offline", device_id);
+                        });
+
+                        // Use player_state_changed to capture track changes and update state immediately
+                        player.addListener('player_state_changed', state => {
+                            if (!state) return;
+
+                            // Update the current track details, paused state, and position
+                            setCurrentTrack(state.track_window.current_track);
+                            setIsPaused(state.paused);
+                            setTrackPosition(state.position);
+                            setIsActive(true);
+                        });
+
+                        player.connect();
+                    };
+                }
             };
         };
 
-        if (!window.Spotify) {
+        // Only load the SDK if the Spotify object doesn't exist or the player hasn't been initialized
+        if (!window.Spotify && !playerInstanceRef.current) {
             loadSpotifyPlayer();
-        } else if (window.Spotify.Player) {
+        } else if (window.Spotify.Player && !playerInstanceRef.current) {
             window.onSpotifyWebPlaybackSDKReady();
         }
+
+        // Cleanup function to disconnect the player when the component unmounts
+        return () => {
+            if (playerInstanceRef.current) {
+                playerInstanceRef.current.disconnect();
+                playerInstanceRef.current = null; // Clear the ref to avoid memory leaks
+            }
+        };
     }, []);
 
-    // Play a new track when uriTrack changes
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    // Play a new track when uriTrack changes and set the whole queue
     useEffect(() => {
-        if (player && uriTrack) {
+        const player = playerInstanceRef.current;
+        if (player && uriTrack && uriQueue) {
             player._options.getOAuthToken(access_token => {
                 fetch(`https://api.spotify.com/v1/me/player/play`, {
                     method: 'PUT',
-                    body: JSON.stringify({ uris: [uriTrack] }),
+                    body: JSON.stringify({
+                        uris: uriQueue,  // Set the entire queue
+                        offset: { uri: uriTrack }, // Start from the current track
+                    }),
                     headers: {
                         'Content-Type': 'application/json',
                         Authorization: `Bearer ${access_token}`,
@@ -74,10 +96,11 @@ function usePlayerControls(uriTrack) {
                 });
             });
         }
-    }, [uriTrack, player]);
+    }, [uriTrack, uriQueue]);
 
     // Function to play track
     const playTrack = () => {
+        const player = playerInstanceRef.current;
         if (player) {
             player._options.getOAuthToken(access_token => {
                 fetch(`https://api.spotify.com/v1/me/player/play`, {
@@ -95,6 +118,7 @@ function usePlayerControls(uriTrack) {
 
     // Function to pause track
     const pauseTrack = () => {
+        const player = playerInstanceRef.current;
         if (player) {
             player._options.getOAuthToken(access_token => {
                 fetch(`https://api.spotify.com/v1/me/player/pause`, {
@@ -110,247 +134,98 @@ function usePlayerControls(uriTrack) {
         }
     };
 
-    return { isPaused, isActive, currentTrack, playTrack, pauseTrack };
-}
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-export default usePlayerControls;
-
-
-/* import React, { useState, useEffect } from "react";
-
-const track = {
-    name: "",
-    album: {
-        images: [{ url: "" }],
-    },
-    artists: [{ name: "" }],
-};
-
-function usePlayerControls(uriTrack) {
-    const [isPaused, setIsPaused] = useState(false);
-    const [isActive, setIsActive] = useState(false);
-    const [player, setPlayer] = useState(undefined);
-    const [currentTrack, setCurrentTrack] = useState(track);
-
-    useEffect(() => {
-        const loadSpotifyPlayer = () => {
-            const script = document.createElement("script");
-            script.src = "https://sdk.scdn.co/spotify-player.js";
-            script.async = true;
-            document.body.appendChild(script);
-
-            script.onload = () => {
-                window.onSpotifyWebPlaybackSDKReady = () => {
-                    const player = new window.Spotify.Player({
-                        name: 'Jammming Track Player',
-                        getOAuthToken: (cb) => { cb(window.spotifyAccessToken); },
-                        volume: 0.5,
-                    });
-
-                    setPlayer(player);
-
-                    player.addListener("ready", ({ device_id }) => {
-                        console.log("Ready with Device ID", device_id);
-                    });
-
-                    player.addListener("not_ready", ({ device_id }) => {
-                        console.log("Device ID has gone offline", device_id);
-                    });
-
-                    player.addListener("player_state_changed", (state) => {
-                        if (!state) return;
-
-                        setCurrentTrack(state.track_window.currentTrack);
-                        setIsPaused(state.paused);
-
-                        player.getCurrentState().then((state) => {
-                            setIsActive(!!state);
-                        });
-                    });
-
-                    player.connect();
-                };
-            };
+    // Use debouncing technique to prevent multiple re-renders
+    const debounceFetchState = (func, delay) => {
+        let debounceTimeout;
+        return (...args) => {
+            if (debounceTimeout) clearTimeout(debounceTimeout);
+            debounceTimeout = setTimeout(() => func(...args), delay);
         };
+    };
 
-        if (!window.Spotify) {
-            loadSpotifyPlayer();
-        } else if (window.Spotify.Player) {
-            // If Spotify already exists in the window object, initialize the player directly
-            window.onSpotifyWebPlaybackSDKReady();
-        }
-
-    }, []);
-
-    // Play the new track when uriTrack changes
-    useEffect(() => {
-        if (player && uriTrack) {
-            player._options.getOAuthToken((access_token) => {
-                fetch(`https://api.spotify.com/v1/me/player/play`, {
-                    method: 'PUT',
-                    body: JSON.stringify({ uris: [uriTrack] }),
+    // Skip to previous track
+    const previousTrack = () => {
+        const player = playerInstanceRef.current;
+        if (player) {
+            player._options.getOAuthToken(access_token => {
+                fetch(`https://api.spotify.com/v1/me/player/previous`, {
+                    method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                         Authorization: `Bearer ${access_token}`,
                     },
+                }).catch((error) => {
+                    console.error('Failed to move to previous track:', error);
                 });
             });
         }
-    }, [uriTrack, player]);
+    };
 
-    return { isPaused, isActive, player, currentTrack };
-}
-
-export default usePlayerControls; */
-
-
-/* import React, { useState, useEffect } from "react";
-
-const track = {
-    name: "",
-    album: {
-        images: [{ url: "" }],
-    },
-    artists: [{ name: "" }],
-};
-
-function usePlayerControls() {
-    const [isPaused, setIsPaused] = useState(false);
-    const [isActive, setIsActive] = useState(false);
-    const [player, setPlayer] = useState(undefined);
-    const [currentTrack, setCurrentTrack] = useState(track);
-
-    useEffect(() => {
-        const initializePlayer = async () => {
-            while (!window.spotifyAccessToken) {
-                await new Promise(resolve => setTimeout(resolve, 100));
-            }
-
-            const script = document.createElement("script");
-            script.src = "https://sdk.scdn.co/spotify-player.js";
-            script.async = true;
-            document.body.appendChild(script);
-
-            script.onload = () => {
-                window.onSpotifyWebPlaybackSDKReady = () => {
-                    const player = new window.Spotify.Player({
-                        name: 'Jammming Track Player',
-                        getOAuthToken: (cb) => { cb(window.spotifyAccessToken); },
-                        volume: 0.5,
-                    });
-
-                    setPlayer(player);
-
-                    player.addListener("ready", ({ device_id }) => {
-                        console.log("Ready with Device ID", device_id);
-                    });
-
-                    player.addListener("not_ready", ({ device_id }) => {
-                        console.log("Device ID has gone offline", device_id);
-                    });
-
-                    player.addListener("player_state_changed", (state) => {
-                        if (!state) return;
-
-                        setCurrentTrack(state.track_window.currentTrack);
-                        setIsPaused(state.paused);
-
-                        player.getCurrentState().then((state) => {
-                            setIsActive(!!state);
-                        });
-                    });
-
-                    player.connect();
-                };
-            };
-        };
-
-        initializePlayer();
-    }, []);
-
-    return { isPaused, isActive, player, currentTrack };
-}
-
-export default usePlayerControls; */
-
-
-/* import React, { useState, useEffect } from "react";
-
-const track = {
-    name: "",
-    album: {
-        images: [
-            { url: "" }
-        ]
-    },
-    artists: [
-        { name: "" }
-    ]
-}
-
-function usePlayerControls() {
-    const [isPaused, setIsPaused] = useState(false);
-    const [isActive, setIsActive] = useState(false);
-    const [player, setPlayer] = useState(undefined);
-    const [currentTrack, set] = useState(track);
-
-    useEffect(() => {
-
-        const script = document.createElement("script");
-        script.src = "https://sdk.scdn.co/spotify-player.js";
-        script.async = true;
-
-        document.body.appendChild(script);
-
-        //-------------------------------------------------------------------------------------------------------------------------------------------------------
-
-        window.onSpotifyWebPlaybackSDKReady = () => {
-            const player = new window.Spotify.Player({
-                name: 'Jammming Track Player',
-                getOAuthToken: cb => { cb(window.spotifyAccessToken); },
-                volume: 0.5
-            });
-
-            setPlayer(player);
-
-            //--------------------------------------------------------------------------------------------------------------
-
-            player.addListener('ready', ({ deviceId }) => {
-                console.log('Ready with Device ID', deviceId);
-            });
-
-            //--------------------------------------------------------------------------------------------------------------
-
-            player.addListener('not_ready', ({ deviceId }) => {
-                console.log('Device ID has gone offline', deviceId);
-            });
-
-            //--------------------------------------------------------------------------------------------------------------
-
-            player.addListener('player_state_changed', ( state => {
-
-                if (!state) {
-                    return;
-                }
-
-                set(state.track_window.currentTrack);
-                setIsPaused(state.paused);
-
-                player.getCurrentState().then( state => { 
-                    (!state)? setIsActive(false) : setIsActive(true) 
+    // Skip to next track
+    const nextTrack = () => {
+        const player = playerInstanceRef.current;
+        if (player) {
+            player._options.getOAuthToken(access_token => {
+                fetch(`https://api.spotify.com/v1/me/player/next`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${access_token}`,
+                    },
+                }).catch((error) => {
+                    console.error('Failed to move to next track:', error);
                 });
+            });
+        }
+    };
 
-            }));
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-            //--------------------------------------------------------------------------------------------------------------
+    // Function to seek to a specific position
+    const seekPosition = debounceFetchState((pos) => {
+        const player = playerInstanceRef.current;
+        if (player) {
+            player._options.getOAuthToken(access_token => {
+                // Make a PUT request to seek to the new position
+                fetch(`https://api.spotify.com/v1/me/player/seek?position_ms=${pos}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${access_token}`,
+                    },
+                }).then(() => {
+                    console.log(`Successfully moved to ${pos} ms`);
+                }).catch((error) => {
+                    console.error('Failed to seek:', error);
+                });
+            });
+        }
+    }, 300); // Debounce delay of 300ms
 
-            player.connect();
+    // Function to control volume
+    const volumeControl = (vol) => {
+        const player = playerInstanceRef.current;
+        if (player) {
+            player._options.getOAuthToken(access_token => {
+                // Make a PUT request to seek the volume value
+                fetch(`https://api.spotify.com/v1/me/player/volume?volume_percent=${vol * 100}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${access_token}`,
+                    },
+                }).then(() => {
+                    console.log(`Successfully changed volume to ${vol}`);
+                }).catch((error) => {
+                    console.error('Failed to change volume:', error);
+                });
+            });
+        }
+    };
 
-        };
-    }, []);
-
-    return { isPaused, isActive, player, currentTrack };
+    return { isPaused, isActive, currentTrack, trackPosition, playTrack, pauseTrack, previousTrack, nextTrack, seekPosition, volumeControl };
 }
 
 export default usePlayerControls;
- */

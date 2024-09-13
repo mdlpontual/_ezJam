@@ -197,7 +197,7 @@
                     width: 150px;
                     padding: 10px;
                     padding-right: 25px;
-                    #volume-bar {
+                    #progress-bar {
                         //border: $border-lime-dotted;
                         @include box-reset-default;
                         appearance: none;
@@ -209,7 +209,7 @@
                         overflow: hidden;
                         background-color: gray;
                     }
-                    #volume-bar::-webkit-slider-thumb {
+                    #progress-bar::-webkit-slider-thumb {
                         appearance: none;
                         width: 0;
                         height: 10px;
@@ -224,7 +224,7 @@
                     width: 150px;
                     padding: 10px;
                     padding-right: 25px;
-                    #volume-bar {
+                    #progress-bar {
                         //border: $border-lime-dotted;
                         @include box-reset-default;
                         appearance: none;
@@ -235,7 +235,7 @@
                         overflow: hidden;
                         background-color: gray;
                     }
-                    #volume-bar::-webkit-slider-thumb {
+                    #progress-bar::-webkit-slider-thumb {
                         appearance: none;
                         width: 0;
                         height: 10px;

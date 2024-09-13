@@ -18,7 +18,7 @@ const debounce = (func, delay) => {
     };
 };
 
-function useAdimSearchPage(search, onPlayButton, accessToken) {
+function useAdimSearchPage(search, updateUri, playTrack, pauseTrack, accessToken) {
     const [activePage, setActivePage] = useState(emptyPage);
     const [history, setHistory] = useState([emptyPage]);
     const [currentHistoryIndex, setCurrentHistoryIndex] = useState(0);
@@ -56,7 +56,9 @@ function useAdimSearchPage(search, onPlayButton, accessToken) {
                     searchTrackResults={cachedResults.tracks}
                     onArtistClick={handleArtistClick}
                     onAlbumClick={handleAlbumClick}
-                    onPlayButton={onPlayButton}
+                    onPlayButton={updateUri}
+                    playTrack={playTrack}
+                    pauseTrack={pauseTrack}
                     accessToken={accessToken}
                 />
             );
@@ -95,6 +97,8 @@ function useAdimSearchPage(search, onPlayButton, accessToken) {
                 onArtistClick={onArtistClick}
                 onAlbumClick={onAlbumClick} 
                 onPlayButton={onPlayButton}
+                playTrack={playTrack}
+                pauseTrack={pauseTrack}
                 accessToken={accessToken}/>
         );
         setActivePage(newPage);
@@ -110,6 +114,8 @@ function useAdimSearchPage(search, onPlayButton, accessToken) {
                 onArtistClick={onArtistClick}
                 onAlbumClick={onAlbumClick} 
                 onPlayButton={onPlayButton}
+                playTrack={playTrack}
+                pauseTrack={pauseTrack}
                 accessToken={accessToken}/>
         );
         setActivePage(newPage);
@@ -135,7 +141,7 @@ function useAdimSearchPage(search, onPlayButton, accessToken) {
         }
     }, [currentHistoryIndex, history]);
 
-    return { activePage, goBack, goForward };
+    return { activePage, goBack, goForward, handleArtistClick, handleAlbumClick };
 }
 
 export default useAdimSearchPage;

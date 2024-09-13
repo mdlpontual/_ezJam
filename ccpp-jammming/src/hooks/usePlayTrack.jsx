@@ -3,13 +3,15 @@ import { useState, useCallback } from 'react';
 // Custom Hook
 function usePlayTrack() {
   const [uriTrack, setUriTrack] = useState(null);
+  const [uriQueue, setUriQueue] = useState(null);
 
   // Function to update the shared variable
-  const updateUriTrack = useCallback((newValue) => {
-    setUriTrack(newValue);
+  const updateUri = useCallback((newUriTrack, newUriQueue) => {
+    setUriTrack(newUriTrack);
+    setUriQueue(newUriQueue);
   }, []);
 
-  return { uriTrack, updateUriTrack };
+  return { uriTrack, uriQueue, updateUri };
 }
 
 export default usePlayTrack;

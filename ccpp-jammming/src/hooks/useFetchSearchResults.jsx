@@ -116,7 +116,7 @@ function useFetchSearchResults({ searchArtistResults, searchAlbumResults, search
           trackNumber: track.track_number,
           trackDiscNumber: track.disc_number,
           trackExplicit: track.explicit,
-          ptrackPeviewUrl: track.preview_url,
+          trackPeviewUrl: track.preview_url,
           trackExternalIds: track.external_ids,
         }));
 
