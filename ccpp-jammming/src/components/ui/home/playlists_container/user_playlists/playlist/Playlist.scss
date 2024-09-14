@@ -17,7 +17,7 @@
                 //border: $border-lime-dashed;
                 @include box-reset-default;
             }
-            #saved-icon {
+            #playlist-cover {
                 visibility: visible;
                 position: absolute;
             }
@@ -94,7 +94,7 @@
                 //border: $border-lime-dashed;
                 @include box-reset-default;
             }
-            #saved-icon {
+            #playlist-cover {
                 visibility: hidden;
                 position: absolute;
             }

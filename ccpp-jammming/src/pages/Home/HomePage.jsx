@@ -44,7 +44,7 @@ function HomePage({ code }) {
                 </header>
                 <main id="main-row" className="row flex-grow-1">
                     <div id="playlists-col" className="col">  
-                        {isPlaylistOpen ? <OpenPlaylist /> : <UserPlaylists />}
+                        {isPlaylistOpen ? <OpenPlaylist /> : <UserPlaylists accessToken={accessToken}/>}
                     </div>
                     <div id="search-col" className="col">
                         <SearchContainer search={search} setSearch={setSearch} activePage={activePage} goBack={goBack} goForward={goForward} />

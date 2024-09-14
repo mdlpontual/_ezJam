@@ -1,19 +1,25 @@
 import React, { useState, useEffect } from "react";
 import IMG from "../../../../../../assets/images/ImagesHUB";
 
-function Playlist() {
+function Playlist({ playlist }) {
+    let cover;
+    if (playlist.playlistCover) {
+        cover = playlist.playlistCover;
+    } else {
+        cover = IMG.placeHolders;
+    }
 
     return (
         <>
             <div id="single-pl-container" className="container-fluid">
                 <div id="single-pl-row" className="row">
                     <div id="checkmark-col" className="col-1 d-flex flex-column justify-content-center align-items-center">
-                        <img id="saved-icon" src={IMG.savedPNG} alt="saved icon" width="22px"/>
+                        <img id="playlist-cover" src={cover} alt="saved icon" width="35px"/>
                         <img id="play-icon" src={IMG.play2PNG} alt="play icon" width="22px"/>
                     </div>
                     <div id="pl-title-col" className="col d-flex flex-column justify-content-center align-items-start">
                         <h4 className="d-flex align-items-center">
-                            <a id="pl-name" type="button">Progorola</a>
+                            <a id="pl-name" type="button">{playlist.playlistTitle}</a>
                         </h4>
                     </div>
                     <div id="edit-button-col" className="col-auto d-flex flex-column justify-content-center align-items-center">
