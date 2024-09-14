@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
 
 function useAdimPlaylistPage() {
-    const [isPlaylistOpen, setIsPlaylistOpen] = useState(false);
+    
+};
+
+export default useAdimPlaylistPage;
+
+/* const [isPlaylistOpen, setIsPlaylistOpen] = useState(false);
 
     useEffect(() => {
         const handlePlaylistClick = () => {
@@ -33,7 +38,4 @@ function useAdimPlaylistPage() {
         };
     }, [isPlaylistOpen]);
 
-  return isPlaylistOpen;
-};
-
-export default useAdimPlaylistPage;
+  return isPlaylistOpen; */

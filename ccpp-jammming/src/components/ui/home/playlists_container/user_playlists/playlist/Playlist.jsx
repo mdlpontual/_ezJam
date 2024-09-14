@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import IMG from "../../../../../../assets/images/ImagesHUB";
 
-function Playlist({ playlist }) {
+function Playlist({ playlistData }) {
     let cover;
-    if (playlist.playlistCover) {
-        cover = playlist.playlistCover;
+    if (playlistData.playlistCover) {
+        cover = playlistData.playlistCover;
     } else {
         cover = IMG.placeHolders;
     }
@@ -14,12 +14,12 @@ function Playlist({ playlist }) {
             <div id="single-pl-container" className="container-fluid">
                 <div id="single-pl-row" className="row">
                     <div id="checkmark-col" className="col-1 d-flex flex-column justify-content-center align-items-center">
-                        <img id="playlist-cover" src={cover} alt="saved icon" width="35px"/>
+                        <img id="playlist-cover" src={cover} alt="saved icon" width="60px"/>
                         <img id="play-icon" src={IMG.play2PNG} alt="play icon" width="22px"/>
                     </div>
                     <div id="pl-title-col" className="col d-flex flex-column justify-content-center align-items-start">
                         <h4 className="d-flex align-items-center">
-                            <a id="pl-name" type="button">{playlist.playlistTitle}</a>
+                            <a id="pl-name" type="button">{playlistData.playlistTitle}</a>
                         </h4>
                     </div>
                     <div id="edit-button-col" className="col-auto d-flex flex-column justify-content-center align-items-center">

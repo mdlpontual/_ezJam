@@ -21,7 +21,7 @@ function UserPlaylists(accessToken) {
                     <div id="pl-body-col" className="col" >
                         {userPlaylistsArr.map((playlist) => (
                             <Playlist 
-                                playlist={playlist}
+                                playlistData={playlist}
                                 key={playlist.playlistUri}/>
                         ))}
                     </div>
