@@ -1,8 +1,11 @@
-import React, { useState, useEffect, createContext } from "react";
+import React, { useState, useEffect } from "react";
 import IMG from "../../../../../assets/images/ImagesHUB";
+import usePlaylistInfo from "../../../../../hooks/user_hooks/usePlaylistInfo"
 import PlaylistTrack from "./track/PlaylistTrack";
 
 function OpenPlaylist({ playlistData, offPlaylistClick, accessToken }) {
+    const { playlistTracksArr } = usePlaylistInfo({ playlistData, accessToken });
+
     return (
         <>
             <div id="open-pl-container" className="container-fluid d-flex flex-column">
@@ -13,7 +16,7 @@ function OpenPlaylist({ playlistData, offPlaylistClick, accessToken }) {
                         </a>
                     </div>
                     <div id="title-col" className="col d-flex flex-column justify-content-center align-items-start">
-                        <h4 className="align-items-center">{playlistData.playlistTitle}</h4>
+                        <h3 className="align-items-center">{playlistData.playlistTitle}</h3>
                     </div>
                     <div id="checkmark-col" className="col-auto d-flex flex-column justify-content-center align-items-center">
                         <img id="saved-icon" src={IMG.savedPNG} alt="saved icon" width="27px"/>
@@ -52,7 +55,13 @@ function OpenPlaylist({ playlistData, offPlaylistClick, accessToken }) {
                         </div>
                         <div id="tracks-list" className="row flex-grow-1">
                             <div id="tracks-list-col" className="col">
-                                <PlaylistTrack/>
+                                {playlistTracksArr.map((track, i) => (
+                                    <PlaylistTrack 
+                                        playlistTrack={track}
+                                        order={i} 
+                                        accessToken={accessToken}
+                                        key={track.trackUri} />
+                                ))}
                             </div>
                         </div>
                     </div>

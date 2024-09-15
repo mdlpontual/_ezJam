@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-function useUser({ accessToken, limit = 50, offset = 0 }) {
+function useUserInfo({ accessToken, limit = 50, offset = 0 }) {
     const [userInfo, setUserInfo] = useState({});
     const [userPlaylistsArr, setUserPlaylistsArr] = useState([]);
 
@@ -67,4 +67,4 @@ function useUser({ accessToken, limit = 50, offset = 0 }) {
     return { userInfo, userPlaylistsArr };
 };
 
-export default useUser;
+export default useUserInfo;

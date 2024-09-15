@@ -5,6 +5,7 @@
         //border: $border-yellow-dotted;
         @include box-reset-default;
         height: 50px;
+        padding-right: 10px;
         #col-num {
             //border: $border-cyan-dotted;
             @include box-reset-default;

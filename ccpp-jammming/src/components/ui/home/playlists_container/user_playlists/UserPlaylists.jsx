@@ -1,10 +1,10 @@
 import React from "react";
 import IMG from "../../../../../assets/images/ImagesHUB";
 import Playlist from "./playlist/Playlist";
-import useUser from "../../../../../hooks/user_hooks/useUser";
+import useUserInfo from "../../../../../hooks/user_hooks/useUserInfo";
 
 function UserPlaylists({onPlaylistClick, offPlaylistClick, accessToken}) {
-    const { userInfo, userPlaylistsArr } = useUser({accessToken});
+    const { userInfo, userPlaylistsArr } = useUserInfo({accessToken});
 
     return (
         <>
