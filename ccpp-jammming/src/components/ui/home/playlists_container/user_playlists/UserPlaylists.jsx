@@ -3,8 +3,8 @@ import IMG from "../../../../../assets/images/ImagesHUB";
 import Playlist from "./playlist/Playlist";
 import useUser from "../../../../../hooks/user_hooks/useUser";
 
-function UserPlaylists(accessToken) {
-    const { userInfo, userPlaylistsArr } = useUser(accessToken);
+function UserPlaylists({onPlaylistClick, offPlaylistClick, accessToken}) {
+    const { userInfo, userPlaylistsArr } = useUser({accessToken});
 
     return (
         <>
@@ -22,6 +22,9 @@ function UserPlaylists(accessToken) {
                         {userPlaylistsArr.map((playlist) => (
                             <Playlist 
                                 playlistData={playlist}
+                                onPlaylistClick={onPlaylistClick}
+                                offPlaylistClick={offPlaylistClick}
+                                accessToken={accessToken}
                                 key={playlist.playlistUri}/>
                         ))}
                     </div>

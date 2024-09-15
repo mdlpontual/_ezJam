@@ -2,18 +2,18 @@ import React, { useState, useEffect, createContext } from "react";
 import IMG from "../../../../../assets/images/ImagesHUB";
 import PlaylistTrack from "./track/PlaylistTrack";
 
-function OpenPlaylist() {
+function OpenPlaylist({ playlistData, offPlaylistClick, accessToken }) {
     return (
         <>
             <div id="open-pl-container" className="container-fluid d-flex flex-column">
                 <header id="open-pl-header" className="row">
                     <div id="go-back-col" className="col-auto d-flex flex-column justify-content-center align-items-start">
-                        <a id="back-to-playlists" type="button">
+                        <a id="back-to-playlists" type="button" onClick={() => offPlaylistClick(accessToken)}>
                             <img src={IMG.gobackPNG} alt="go back button" width="22px"/>
                         </a>
                     </div>
                     <div id="title-col" className="col d-flex flex-column justify-content-center align-items-start">
-                        <h4 className="align-items-center">Progorola</h4>
+                        <h4 className="align-items-center">{playlistData.playlistTitle}</h4>
                     </div>
                     <div id="checkmark-col" className="col-auto d-flex flex-column justify-content-center align-items-center">
                         <img id="saved-icon" src={IMG.savedPNG} alt="saved icon" width="27px"/>

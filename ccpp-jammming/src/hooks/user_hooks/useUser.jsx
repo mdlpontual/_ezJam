@@ -64,8 +64,6 @@ function useUser({ accessToken, limit = 50, offset = 0 }) {
 
     //-------------------------------------------------------------------------------------------------------------------------------------------
 
-    console.log("userPlaylists", userPlaylistsArr)
-
     return { userInfo, userPlaylistsArr };
 };
 
