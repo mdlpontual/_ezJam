@@ -18,7 +18,7 @@ function HomePage({ code }) {
     const { uriTrack, uriQueue, updateUri } = usePlayTrack();
     const { isPaused, isActive, currentTrack, trackPosition, playTrack, pauseTrack, previousTrack, nextTrack, seekPosition, volumeControl } = usePlayerControls({uriTrack, uriQueue});
     const { activePage, goBack, goForward, handleArtistClick, handleAlbumClick } = useAdimSearchPage(search, updateUri, playTrack, pauseTrack, accessToken);
-    const { activePlaylistPage } = useAdimPlaylistPage(updateUri, playTrack, pauseTrack, accessToken);
+    const { activePlaylistPage } = useAdimPlaylistPage(updateUri, playTrack, pauseTrack, handleArtistClick, handleAlbumClick, accessToken);
 
     // Function to handle when a new track is played
     const handlePlayTrack = () => {

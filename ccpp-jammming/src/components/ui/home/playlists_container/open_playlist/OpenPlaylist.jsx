@@ -3,7 +3,7 @@ import IMG from "../../../../../assets/images/ImagesHUB";
 import usePlaylistInfo from "../../../../../hooks/user_hooks/usePlaylistInfo"
 import PlaylistTrack from "./track/PlaylistTrack";
 
-function OpenPlaylist({ playlistData, offPlaylistClick, accessToken }) {
+function OpenPlaylist({ playlistData, offPlaylistClick, onPlayButton, onArtistClick, onAlbumClick, playTrack, pauseTrack, accessToken }) {
     const { playlistTracksArr } = usePlaylistInfo({ playlistData, accessToken });
 
     return (
@@ -11,7 +11,7 @@ function OpenPlaylist({ playlistData, offPlaylistClick, accessToken }) {
             <div id="open-pl-container" className="container-fluid d-flex flex-column">
                 <header id="open-pl-header" className="row">
                     <div id="go-back-col" className="col-auto d-flex flex-column justify-content-center align-items-start">
-                        <a id="back-to-playlists" type="button" onClick={() => offPlaylistClick(accessToken)}>
+                        <a id="back-to-playlists" type="button" onClick={() => offPlaylistClick(playlistData, offPlaylistClick, onPlayButton, onArtistClick, onAlbumClick, playTrack, pauseTrack, accessToken)}>
                             <img src={IMG.gobackPNG} alt="go back button" width="22px"/>
                         </a>
                     </div>
@@ -57,8 +57,14 @@ function OpenPlaylist({ playlistData, offPlaylistClick, accessToken }) {
                             <div id="tracks-list-col" className="col">
                                 {playlistTracksArr.map((track, i) => (
                                     <PlaylistTrack 
-                                        playlistTrack={track}
                                         order={i} 
+                                        playlistTrack={track}
+                                        playlistTracksArr={playlistTracksArr}
+                                        onPlayButton={onPlayButton} 
+                                        onArtistClick={onArtistClick}
+                                        onAlbumClick={onAlbumClick}
+                                        playTrack={playTrack}
+                                        pauseTrack={pauseTrack}
                                         accessToken={accessToken}
                                         key={track.trackUri} />
                                 ))}

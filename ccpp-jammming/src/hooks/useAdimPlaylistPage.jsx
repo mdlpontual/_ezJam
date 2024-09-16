@@ -13,7 +13,7 @@ const debounce = (func, delay) => {
     };
 };
 
-function useAdimPlaylistPage(updateUri, playTrack, pauseTrack, accessToken) {
+function useAdimPlaylistPage(updateUri, playTrack, pauseTrack, handleArtistClick, handleAlbumClick, accessToken) {
     const [activePlaylistPage, setActivePlaylistPage] = useState();
 
     // Debounced function for setting the page
@@ -32,6 +32,11 @@ function useAdimPlaylistPage(updateUri, playTrack, pauseTrack, accessToken) {
                 <UserPlaylists
                     onPlaylistClick={handleClickToOpenPlaylist}
                     offPlaylistClick={handleClickToClosePlaylist}
+                    onPlayButton={updateUri} 
+                    onArtistClick={handleArtistClick}
+                    onAlbumClick={handleAlbumClick}
+                    playTrack={playTrack}
+                    pauseTrack={pauseTrack}
                     accessToken={accessToken}/>
             )
             debouncedSetPage(newPage);
@@ -41,21 +46,32 @@ function useAdimPlaylistPage(updateUri, playTrack, pauseTrack, accessToken) {
     //----------------------------------------------------------------------------------------------------------------------------------------------
     //----------------------------------------------------------------------------------------------------------------------------------------------
 
-    const handleClickToOpenPlaylist = useCallback((playlistData, offPlaylistClick, accessToken) => {
+    const handleClickToOpenPlaylist = useCallback((playlistData, offPlaylistClick, onPlayButton, onArtistClick, onAlbumClick, playTrack, pauseTrack, accessToken) => {
         const newPage = (
             <OpenPlaylist 
                 playlistData={playlistData}
                 offPlaylistClick={offPlaylistClick}
+                onPlayButton={onPlayButton} 
+                onArtistClick={onArtistClick}
+                onAlbumClick={onAlbumClick}
+                playTrack={playTrack}
+                pauseTrack={pauseTrack}
                 accessToken={accessToken}/>
         );
         setActivePlaylistPage(newPage);
     }, []);
 
-    const handleClickToClosePlaylist = useCallback((accessToken) => {
+    const handleClickToClosePlaylist = useCallback((playlistData, offPlaylistClick, onPlayButton, onArtistClick, onAlbumClick, playTrack, pauseTrack, accessToken) => {
         const newPage = (
             <UserPlaylists
                 onPlaylistClick={handleClickToOpenPlaylist}
                 offPlaylistClick={handleClickToClosePlaylist}
+                playlistData={playlistData}
+                onPlayButton={onPlayButton} 
+                onArtistClick={onArtistClick}
+                onAlbumClick={onAlbumClick}
+                playTrack={playTrack}
+                pauseTrack={pauseTrack}
                 accessToken={accessToken}/>
         );
         setActivePlaylistPage(newPage);

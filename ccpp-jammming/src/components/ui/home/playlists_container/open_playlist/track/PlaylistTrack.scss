@@ -18,11 +18,15 @@
                 overflow: hidden;
                 position: absolute;
             }
-            #play-icon {
+            #play-button {
                 //border: $border-lime-dotted;
                 @include box-reset-default;
-                visibility: hidden;
-                position: absolute;
+                #play-icon {
+                    //border: $border-lime-dotted;
+                    @include box-reset-default;
+                    visibility: hidden;
+                    position: absolute;
+                }
             }
         };
         #col-cover {
@@ -113,7 +117,129 @@
         };   
     }
 }
-
+#single-track-container-green { 
+    //border: $border-red-dotted;
+    @include box-reset-default;
+    color: $primary;
+    #single-track-row {
+        //border: $border-yellow-dotted;
+        @include box-reset-default;
+        color: $primary;
+        height: 50px;
+        padding-right: 10px;
+        #col-num {
+            //border: $border-cyan-dotted;
+            @include box-reset-default;
+            color: $primary;
+            width: 40px;
+            position: relative;
+            #play-button {
+                //border: $border-lime-dotted;
+                @include box-reset-default;
+                position: absolute;
+                #play-icon {
+                    //border: $border-lime-dotted;
+                    @include box-reset-default;
+                    visibility: visible;
+                    position: relative;
+                }
+            }
+        };
+        #col-cover {
+            //border: $border-cyan-dotted;
+            @include box-reset-default;
+            width: 50px;
+            img {
+                //border: $border-lime-dotted;
+                @include box-reset-default;
+            }
+        };
+        #col-title {
+            //border: $border-cyan-dotted;
+            @include box-reset-default;
+            color: $primary;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            flex-wrap: wrap;
+            h5 {
+                //border: $border-lime-dotted;
+                @include box-reset-default;
+                color: $primary;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                width: 100%;
+                margin-bottom: -3px;
+            }
+            p {
+                //border: $border-lime-dotted;
+                @include box-reset-default;
+                color: $primary;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                width: 100%;
+                margin-top: -3px;
+            }
+        };
+        #col-saved {
+            //border: $border-cyan-dotted;
+            @include box-reset-default;
+            white-space: nowrap;
+            width: 25px;
+            position: relative;
+            #saved-icon {
+                //border: $border-lime-dotted;
+                @include box-reset-default;
+                position: absolute;
+            }
+        };
+        #col-album {
+            //border: $border-cyan-dotted;
+            @include box-reset-default;
+            color: $primary;
+            white-space: nowrap;
+            p {
+                //border: $border-lime-dotted;
+                @include box-reset-default;
+                color: $primary;
+                text-overflow: ellipsis;
+                overflow: hidden;
+            }
+        };
+        #col-duration {
+            //border: $border-cyan-dotted;
+            @include box-reset-default;
+            color: $primary;
+            white-space: nowrap;
+            width: 55px;
+            p {
+                //border: $border-lime-dotted;
+                @include box-reset-default;
+                color: $primary;
+                text-overflow: ellipsis;
+                overflow: hidden;
+            }
+        };
+        #col-plus {
+            //border: $border-cyan-dotted;
+            @include box-reset-default;
+            width: 40px;
+            padding: 3px;
+        }
+        #col-minus {
+            //border: $border-cyan-dotted;
+            @include box-reset-default;
+            width: 40px;
+            padding: 3px;
+        }
+        #col-num, #col-cover, #col-title, 
+        #col-saved, #col-album, #col-duration,
+        #col-plus, #col-minus {
+            height: 100%;
+            padding: 0 5px;
+        };   
+    }
+}
 #single-track-container { 
     #single-track-row:hover {
         background-color: $bg-transparent;
@@ -131,11 +257,39 @@
                 visibility: hidden;
                 position: absolute;
             }
-            #play-icon {
+            #play-button {
                 //border: $border-lime-dotted;
                 @include box-reset-default;
-                visibility: visible;
                 position: absolute;
+                #play-icon {
+                    //border: $border-lime-dotted;
+                    @include box-reset-default;
+                    visibility: visible;
+                    position: relative;
+                }
+            }
+        }
+    }
+}
+#single-track-container-green { 
+    #single-track-row:hover {
+        background-color: $bg-transparent;
+        border-radius: 10px;
+        #col-num {
+            //border: $border-cyan-dotted;
+            @include box-reset-default;
+            width: 40px;
+            position: relative;
+            #play-button {
+                //border: $border-lime-dotted;
+                @include box-reset-default;
+                position: absolute;
+                #play-icon {
+                    //border: $border-lime-dotted;
+                    @include box-reset-default;
+                    visibility: visible;
+                    position: relative;
+                }
             }
         }
     }
