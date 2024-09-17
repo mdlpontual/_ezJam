@@ -11,7 +11,7 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
             <div id="open-pl-container" className="container-fluid d-flex flex-column">
                 <header id="open-pl-header" className="row">
                     <div id="go-back-col" className="col-auto d-flex flex-column justify-content-center align-items-start">
-                        <a id="back-to-playlists" type="button" onClick={() => onBackClick(playlistData, offPlaylistClick, onPlayButton, onArtistClick, onAlbumClick, playTrack, pauseTrack, accessToken)}>
+                        <a id="back-to-playlists" type="button" onClick={() => onBackClick()}>
                             <img src={IMG.gobackPNG} alt="go back button" width="22px"/>
                         </a>
                     </div>

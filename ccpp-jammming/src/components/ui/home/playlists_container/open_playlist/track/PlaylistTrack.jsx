@@ -1,24 +1,16 @@
-import React from 'react';
+import React from "react";
 import IMG from "../../../../../../assets/images/ImagesHUB";
-import { useTrack } from "../../../../../../hooks/TrackContext";
-import useFetchId from "../../../../../../hooks/useFetchId";
-import useFetchSearchResults from "../../../../../../hooks/useFetchSearchResults";
+import { useTrack } from "../../../../../../hooks/TrackContext"; 
 
 function PlaylistTrack({ order, playlistTrack, playlistTracksArr, onPlayButton, onArtistClick, onAlbumClick, playTrack, pauseTrack, accessToken }) {
-    const { currentTrackUri, isPaused } = useTrack(); 
+    const { currentTrackUri, currentTrackTitle, currentTrackArtist, currentTrackAlbum, isPaused } = useTrack(); 
 
     const uriTrack = playlistTrack.trackUri;
     let uriQueue = [];
-    playlistTracksArr.map(track => uriQueue.push(track.trackUri));
+    playlistTracksArr.forEach(track => uriQueue.push(track.trackUri));
 
-    let cover;
-    if (playlistTrack.trackCover) {
-        cover = playlistTrack.trackCover;
-    } else {
-        cover = IMG.placeHolders;
-    }
+    const cover = playlistTrack.trackCover || IMG.placeHolders;
 
-    // Handle play/pause toggle
     const handleTogglePlay = () => {
         if (isPaused) {
             playTrack(); // Play the track
@@ -27,26 +19,18 @@ function PlaylistTrack({ order, playlistTrack, playlistTracksArr, onPlayButton, 
         }
     };
 
-    function millisToMinutesAndSeconds(millis) {
+    const millisToMinutesAndSeconds = (millis) => {
         const minutes = Math.floor(millis / 60000);
         const seconds = ((millis % 60000) / 1000).toFixed(0);
         return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
-    }
+    };
 
-    //---------------------------------------------------------------------------------------------------------
+    console.log("playlistTracksArr", playlistTracksArr.indexOf(playlistTrack))
+    console.log("order", order)
 
-    const search = playlistTrack.trackAuthor;
-    const albumCurrent = playlistTrack.trackAlbum;
+    let isTrackPlaying = (currentTrackUri === playlistTrack.trackTitle) || (currentTrackTitle === playlistTrack.trackTitle)
 
-    const { searchArtistResults, searchAlbumResults } = useFetchId({ search, accessToken });
-    const { fetchedArtistsArray, fetchedAlbumsArray } = useFetchSearchResults({ searchArtistResults, searchAlbumResults, accessToken });
-
-    const artistContent = fetchedArtistsArray.find(artist => artist.artistName === search);
-    const albumContent = fetchedAlbumsArray.find(album => album.albumTitle === albumCurrent);
-
-    //---------------------------------------------------------------------------------------------------------
-    
-    if(currentTrackUri !== uriTrack) {
+    if(!isTrackPlaying) {
         return (
             <>
                 <div id="single-track-container" className="container-fluid">
@@ -65,7 +49,7 @@ function PlaylistTrack({ order, playlistTrack, playlistTracksArr, onPlayButton, 
                         <div id="col-title" className="col d-flex justify-content-start align-items-center">
                             <h5>{playlistTrack.trackTitle}</h5>
                             <p>
-                                <a id="open-artist-page" type="button" onClick={() => onArtistClick(artistContent, onArtistClick, onAlbumClick, onPlayButton, accessToken)}>
+                                <a id="open-artist-page" type="button" onClick={() => playlistTrack.artistId && onArtistClick(playlistTrack, onArtistClick, onAlbumClick, onPlayButton, accessToken)}>
                                     {playlistTrack.trackAuthor}
                                 </a>
                             </p>
@@ -78,7 +62,7 @@ function PlaylistTrack({ order, playlistTrack, playlistTracksArr, onPlayButton, 
                         </div>
                         <div id="col-album" className="col-2 d-flex justify-content-start align-items-center">
                             <p>
-                                <a id="open-album-page" type="button" onClick={() => onAlbumClick(albumContent, onArtistClick, onAlbumClick, onPlayButton, accessToken)}>
+                                <a id="open-album-page" type="button" onClick={() => playlistTrack.albumId && onAlbumClick(playlistTrack, onArtistClick, onAlbumClick, onPlayButton, accessToken)}>
                                     {playlistTrack.trackAlbum}
                                 </a>
                             </p>
@@ -111,7 +95,7 @@ function PlaylistTrack({ order, playlistTrack, playlistTracksArr, onPlayButton, 
                     <div id="col-title" className="col d-flex justify-content-start align-items-center">
                         <h5>{playlistTrack.trackTitle}</h5>
                         <p>
-                            <a id="open-artist-page" type="button" onClick={() => onArtistClick(artistContent, onArtistClick, onAlbumClick, onPlayButton, accessToken)}>
+                            <a id="open-artist-page" type="button" onClick={() => playlistTrack.artistId && onArtistClick(playlistTrack, onArtistClick, onAlbumClick, onPlayButton, accessToken)}>
                                 {playlistTrack.trackAuthor}
                             </a>
                         </p>
@@ -124,7 +108,7 @@ function PlaylistTrack({ order, playlistTrack, playlistTracksArr, onPlayButton, 
                     </div>
                     <div id="col-album" className="col-2 d-flex justify-content-start align-items-center">
                         <p>
-                            <a id="open-album-page" type="button" onClick={() => onAlbumClick(albumContent, onArtistClick, onAlbumClick, onPlayButton, accessToken)}>
+                            <a id="open-album-page" type="button" onClick={() => playlistTrack.albumId && onAlbumClick(playlistTrack, onArtistClick, onAlbumClick, onPlayButton, accessToken)}>
                                 {playlistTrack.trackAlbum}
                             </a>
                         </p>
@@ -140,7 +124,5 @@ function PlaylistTrack({ order, playlistTrack, playlistTracksArr, onPlayButton, 
         </>
     );
 }
-
-    
 
 export default PlaylistTrack;

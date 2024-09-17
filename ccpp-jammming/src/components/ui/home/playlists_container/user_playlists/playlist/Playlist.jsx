@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import IMG from "../../../../../../assets/images/ImagesHUB";
 
-function Playlist({ playlistData, onPlaylistClick, offPlaylistClick, onPlayButton, onArtistClick, onAlbumClick, playTrack, pauseTrack, accessToken }) {
+function Playlist({ playlistData, onPlaylistClick, onBackClick, onPlayButton, onArtistClick, onAlbumClick, playTrack, pauseTrack, accessToken }) {
     let cover;
     if (playlistData.playlistCover) {
         cover = playlistData.playlistCover;
@@ -18,7 +18,7 @@ function Playlist({ playlistData, onPlaylistClick, offPlaylistClick, onPlayButto
                         <img id="play-icon" src={IMG.play2PNG} alt="play icon" width="22px"/>
                     </div>
                     <div id="pl-title-col" className="col d-flex flex-column justify-content-center align-items-start">
-                        <a id="pl-name" type="button" onClick={() => onPlaylistClick(playlistData, offPlaylistClick, onPlayButton, onArtistClick, onAlbumClick, playTrack, pauseTrack, accessToken)}>
+                        <a id="pl-name" type="button" onClick={() => onPlaylistClick(playlistData, onBackClick, onPlayButton, onArtistClick, onAlbumClick, playTrack, pauseTrack, accessToken)}>
                             <h4 className="d-flex align-items-center">{playlistData.playlistTitle}</h4>
                         </a>
                     </div>
