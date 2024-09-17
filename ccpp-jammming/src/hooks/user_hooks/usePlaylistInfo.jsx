@@ -50,8 +50,9 @@ function usePlaylistInfo({ playlistData, accessToken }) {
                     artistBanner: artistBanners[track.track.artists[0]?.id] || null,
                      
                     albumId: track.track.album?.id || null, 
-                    artistName: track.track.album.name,
-                    albumCover: track.track.album.images[track.track.album.images.length - 1]?.url || null,
+                    albumTitle: track.track.album.name,
+                    albumType: track.track.album.album_type,
+                    albumCover: track.track.album.images[0]?.url || null,
                 }));
 
                 setPlaylistTracksArr(tracks);
