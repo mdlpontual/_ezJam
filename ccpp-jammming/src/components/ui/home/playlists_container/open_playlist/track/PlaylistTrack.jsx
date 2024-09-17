@@ -25,10 +25,23 @@ function PlaylistTrack({ order, playlistTrack, playlistTracksArr, onPlayButton, 
         return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
     };
 
-    console.log("playlistTracksArr", playlistTracksArr.indexOf(playlistTrack))
-    console.log("order", order)
+    let isTrackPlaying = false;
 
-    let isTrackPlaying = (currentTrackUri === playlistTrack.trackTitle) || (currentTrackTitle === playlistTrack.trackTitle)
+    if (!currentTrackUri || !currentTrackTitle || !currentTrackArtist || !currentTrackAlbum) {
+        isTrackPlaying = false;
+    }  
+    
+    else if (currentTrackUri === uriTrack) {
+        isTrackPlaying = true;
+    }
+
+    else if (currentTrackTitle === playlistTrack.trackTitle) {
+        isTrackPlaying = true;
+    }
+
+    else if (currentTrackTitle.slice(0, 15) === playlistTrack.trackTitle.slice(0, 15) && currentTrackArtist === playlistTrack.trackAuthor) {
+        isTrackPlaying = true;
+    }
 
     if(!isTrackPlaying) {
         return (

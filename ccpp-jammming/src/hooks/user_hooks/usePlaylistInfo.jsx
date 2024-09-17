@@ -44,10 +44,13 @@ function usePlaylistInfo({ playlistData, accessToken }) {
                     trackCover: track.track.album.images[track.track.album.images.length - 1]?.url || null,
                     trackUri: track.track.uri,
                     trackDuration: track.track.duration_ms,
+
                     artistId: track.track.artists[0]?.id || null, 
                     artistName: track.track.artists[0]?.name || "Unknown Artist",
-                    artistBanner: artistBanners[track.track.artists[0]?.id] || null, 
+                    artistBanner: artistBanners[track.track.artists[0]?.id] || null,
+                     
                     albumId: track.track.album?.id || null, 
+                    artistName: track.track.album.name,
                     albumCover: track.track.album.images[track.track.album.images.length - 1]?.url || null,
                 }));
 
