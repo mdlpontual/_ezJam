@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 import HomeHeader from "../../components/ui/home/header/HomeHeader";
-import UserPlaylists from "../../components/ui/home/playlists_container/user_playlists/UserPlaylists";
 import SearchContainer from "../../components/ui/home/search_container/SearchContainer";
+import PlaylistsContainer from "../../components/ui/home/playlists_container/PlaylistsContainer";
 import TrackPlayer from "../../components/ui/home/track_player/TrackPlayer";
-import OpenPlaylist from "../../components/ui/home/playlists_container/open_playlist/OpenPlaylist";
-import useAdimPlaylistPage from "../../hooks/useAdimPlaylistPage";
 import useAdimSearchPage from "../../hooks/useAdimSearchPage";
 import useAuth from "../../hooks/useAuth";
 import usePlayTrack from "../../hooks/usePlayTrack";
@@ -14,18 +12,19 @@ import { useTrack } from "../../hooks/TrackContext";
 function HomePage({ code }) {
     const [search, setSearch] = useState("");
     
-    const { currentTrackUri, updateCurrentTrackUri } = useTrack(); 
+    const { currentTrackUri, updateCurrentTrackUri, updateCurrentTrackTitle, updateCurrentTrackArtist, updateCurrentTrackAlbum } = useTrack(); 
 
     const { accessToken } = useAuth(code);
     const { uriTrack, uriQueue, updateUri } = usePlayTrack();
     const { isPaused, isActive, currentTrack, trackPosition, playTrack, pauseTrack, previousTrack, nextTrack, seekPosition, volumeControl } = usePlayerControls({uriTrack, uriQueue});
     const { activePage, goBack, goForward, handleArtistClick, handleAlbumClick } = useAdimSearchPage(search, updateUri, playTrack, pauseTrack, accessToken);
-
-    const isPlaylistOpen = useAdimPlaylistPage();
-
+    
     // Function to handle when a new track is played
     const handlePlayTrack = () => {
-        updateCurrentTrackUri(currentTrack.uri); // Update the global currentTrackUri
+        updateCurrentTrackUri(currentTrack.uri);  // Update the URI
+        updateCurrentTrackTitle(currentTrack.name);  // Update the track title
+        updateCurrentTrackArtist(currentTrack.artists[0].name);  // Update the artist
+        updateCurrentTrackAlbum(currentTrack.album.name);  // Update the album 
     };
 
     useEffect(() => {
@@ -44,10 +43,21 @@ function HomePage({ code }) {
                 </header>
                 <main id="main-row" className="row flex-grow-1">
                     <div id="playlists-col" className="col">  
-                        {isPlaylistOpen ? <OpenPlaylist /> : <UserPlaylists />}
+                        <PlaylistsContainer
+                            onPlayButton={updateUri} 
+                            onArtistClick={handleArtistClick}
+                            onAlbumClick={handleAlbumClick}
+                            playTrack={playTrack}
+                            pauseTrack={pauseTrack}
+                            accessToken={accessToken}/>
                     </div>
                     <div id="search-col" className="col">
-                        <SearchContainer search={search} setSearch={setSearch} activePage={activePage} goBack={goBack} goForward={goForward} />
+                        <SearchContainer 
+                            search={search} 
+                            setSearch={setSearch} 
+                            activePage={activePage} 
+                            goBack={goBack} 
+                            goForward={goForward}/>
                     </div>
                 </main>
                 <footer id="footer-row" className="row">
@@ -67,7 +77,7 @@ function HomePage({ code }) {
                             onArtistClick={handleArtistClick}
                             onAlbumClick={handleAlbumClick}
                             onPlayTrack={handlePlayTrack}
-                            currentTrackUri={currentTrackUri} // Now this comes from context
+                            currentTrackUri={currentTrackUri} 
                             accessToken={accessToken}/>
                     </div>
                 </footer>
@@ -77,3 +87,98 @@ function HomePage({ code }) {
 }
 
 export default HomePage;
+
+
+/* import React, { useState, useEffect } from "react";
+import HomeHeader from "../../components/ui/home/header/HomeHeader";
+import SearchContainer from "../../components/ui/home/search_container/SearchContainer";
+import PlaylistsContainer from "../../components/ui/home/playlists_container/PlaylistsContainer";
+import TrackPlayer from "../../components/ui/home/track_player/TrackPlayer";
+import useAdimSearchPage from "../../hooks/useAdimSearchPage";
+import useAuth from "../../hooks/useAuth";
+import usePlayTrack from "../../hooks/usePlayTrack";
+import usePlayerControls from "../../hooks/usePlayerControls";
+import { useTrack } from "../../hooks/TrackContext"; 
+
+function HomePage({ code }) {
+    const [search, setSearch] = useState("");
+    
+    const { currentTrackUri, 
+            updateCurrentTrackUri, 
+            updateCurrentTrackTitle, 
+            updateCurrentTrackArtist,
+            updateCurrentTrackAlbum 
+        } = useTrack(); 
+
+    const { accessToken } = useAuth(code);
+    const { uriTrack, uriQueue, updateUri } = usePlayTrack();
+    const { isPaused, isActive, currentTrack, trackPosition, playTrack, pauseTrack, previousTrack, nextTrack, seekPosition, volumeControl } = usePlayerControls({uriTrack, uriQueue});
+    const { activePage, goBack, goForward, handleArtistClick, handleAlbumClick } = useAdimSearchPage(search, updateUri, playTrack, pauseTrack, accessToken);
+    
+    const handlePlayTrack = (track) => {
+        updateCurrentTrackUri(track.uri);
+        updateCurrentTrackTitle(track.title);
+        updateCurrentTrackArtist(track.artist);
+        updateCurrentTrackAlbum(track.album);
+    };
+
+    useEffect(() => {
+        if (accessToken) {
+            window.spotifyAccessToken = accessToken;
+        }
+    }, [accessToken]);
+
+    return (
+        <>
+            <div id="home-page-container" className="container-fluid d-flex flex-column">
+                <header id="header-row" className="row">
+                    <div id="header-col" className="col">
+                        <HomeHeader/>
+                    </div>
+                </header>
+                <main id="main-row" className="row flex-grow-1">
+                    <div id="playlists-col" className="col">  
+                        <PlaylistsContainer
+                            onPlayButton={updateUri} 
+                            onArtistClick={handleArtistClick}
+                            onAlbumClick={handleAlbumClick}
+                            playTrack={playTrack}
+                            pauseTrack={pauseTrack}
+                            accessToken={accessToken}/>
+                    </div>
+                    <div id="search-col" className="col">
+                        <SearchContainer 
+                            search={search} 
+                            setSearch={setSearch} 
+                            activePage={activePage} 
+                            goBack={goBack} 
+                            goForward={goForward}/>
+                    </div>
+                </main>
+                <footer id="footer-row" className="row">
+                    <div id="footer-col" className="col">
+                        <TrackPlayer 
+                            isPaused={isPaused}
+                            isActive={isActive}
+                            currentTrack={currentTrack}
+                            trackPosition={trackPosition}
+                            playTrack={playTrack}
+                            pauseTrack={pauseTrack}
+                            previousTrack={previousTrack}
+                            nextTrack={nextTrack}
+                            seekPosition={seekPosition}
+                            volumeControl={volumeControl}
+                            onPlayButton={updateUri}
+                            onArtistClick={handleArtistClick}
+                            onAlbumClick={handleAlbumClick}
+                            onPlayTrack={handlePlayTrack}
+                            currentTrackUri={currentTrackUri} 
+                            accessToken={accessToken}/>
+                    </div>
+                </footer>
+            </div>
+        </>
+    );
+}
+
+export default HomePage; */

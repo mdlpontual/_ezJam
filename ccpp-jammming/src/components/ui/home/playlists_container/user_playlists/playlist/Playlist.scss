@@ -1,7 +1,7 @@
 #single-pl-container {
     //border: $border-red-solid;
     @include box-reset-default;
-    height: 50px;
+    height: 75px;
     padding-right: 10px;
     margin-right: 5px;
     #single-pl-row {
@@ -12,12 +12,13 @@
             //border: $border-cyan-solid;
             @include box-reset-default;
             position: relative;
-            width: 40px;
+            width: 75px;
             img {
                 //border: $border-lime-dashed;
                 @include box-reset-default;
             }
-            #saved-icon {
+            #playlist-cover {
+                border-radius: 5px;
                 visibility: visible;
                 position: absolute;
             }
@@ -38,6 +39,7 @@
                 text-overflow: ellipsis;
                 max-width: 100%;
                 height: 100%;
+                margin-left: 5px;
             }
         }
         #edit-button-col {
@@ -80,12 +82,10 @@
     @include box-reset-default;
     background-color: $bg-transparent;
     border-radius: 10px;
-    height: 50px;
-    padding-right: 10px;
+    margin-right: 10px;
     #single-pl-row {
         //border: $border-yellow-solid;
         @include box-reset-default;
-        height: 100%;
         #checkmark-col {
             //border: $border-cyan-solid;
             @include box-reset-default;
@@ -94,7 +94,7 @@
                 //border: $border-lime-dashed;
                 @include box-reset-default;
             }
-            #saved-icon {
+            #playlist-cover {
                 visibility: hidden;
                 position: absolute;
             }
@@ -109,6 +109,7 @@
             h4 {
                 //border: $border-lime-dashed;
                 @include box-reset-default;
+                margin-left: 5px;
             }
         }
         #edit-button-col {
@@ -134,7 +135,7 @@
         #delete-button-col {
             //border: $border-cyan-solid;
             @include box-reset-default;
-            padding: 0px 5px;
+            padding: 0px 10px;
             img {
                 //border: $border-lime-dashed;
                 @include box-reset-default;
