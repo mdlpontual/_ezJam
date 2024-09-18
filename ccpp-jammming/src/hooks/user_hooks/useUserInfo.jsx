@@ -15,8 +15,8 @@ function useUserInfo({ accessToken, limit = 50, offset = 0 }) {
                         Authorization: `Bearer ${accessToken}`,
                     },
                     params: {
-                        limit,
-                        offset
+                        limit: limit,    // Specify the number of albums to fetch
+                        offset: offset,  // Specify the offset for pagination
                     },
                 });
 

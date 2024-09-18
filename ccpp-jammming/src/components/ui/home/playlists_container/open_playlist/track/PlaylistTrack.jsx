@@ -25,6 +25,8 @@ function PlaylistTrack({ order, playlistTrack, playlistTracksArr, onPlayButton, 
         return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
     };
 
+    //---------------------------------------------------------------------------------------------------------------------------------------------------
+
     let isTrackPlaying = false;
 
     if (!currentTrackUri || !currentTrackTitle || !currentTrackArtist || !currentTrackAlbum) {
@@ -39,9 +41,15 @@ function PlaylistTrack({ order, playlistTrack, playlistTracksArr, onPlayButton, 
         isTrackPlaying = true;
     }
 
-    else if (currentTrackTitle.slice(0, 15) === playlistTrack.trackTitle.slice(0, 15) && currentTrackArtist === playlistTrack.trackAuthor) {
+    else if (currentTrackTitle.slice(0, 15) === playlistTrack.trackTitle.slice(0, 15)) {
         isTrackPlaying = true;
     }
+
+    else if (currentTrackTitle.toLowerCase() === playlistTrack.trackTitle.toLowerCase()) {
+        isTrackPlaying = true;
+    }
+
+    //---------------------------------------------------------------------------------------------------------------------------------------------------
 
     if(!isTrackPlaying) {
         return (
