@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 
-function useFetchSearchResults({ searchArtistResults, searchAlbumResults, searchTrackResults, accessToken }) {
+function useFetchSearchResults({ searchArtistResults, searchAlbumResults, searchTrackResults, accessToken, market = 'US' }) {
   const [fetchedArtistsArray, setFetchedArtistsArray] = useState([]);
   const [fetchedAlbumsArray, setFetchedAlbumsArray] = useState([]);
   const [fetchedTracksArray, setFetchedTracksArray] = useState([]);
@@ -23,6 +23,9 @@ function useFetchSearchResults({ searchArtistResults, searchAlbumResults, search
         const res = await axios.get(`https://api.spotify.com/v1/artists?ids=${joinedArtistsIds}`, {
           headers: {
             Authorization: `Bearer ${accessToken}`,
+          },
+          params: {
+            market: market,  // Specify the market for albums
           },
         });
 
@@ -61,6 +64,9 @@ function useFetchSearchResults({ searchArtistResults, searchAlbumResults, search
         const res = await axios.get(`https://api.spotify.com/v1/albums?ids=${joinedAlbumsIds}`, {
           headers: {
             Authorization: `Bearer ${accessToken}`,
+          },
+          params: {
+            market: market,  // Specify the market for albums
           },
         });
 
@@ -102,6 +108,9 @@ function useFetchSearchResults({ searchArtistResults, searchAlbumResults, search
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
+          params: {
+            market: market,  // Specify the market for albums
+          },
         });
 
         const tracks = res.data.tracks.map((track) => ({
@@ -142,6 +151,9 @@ function useFetchSearchResults({ searchArtistResults, searchAlbumResults, search
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
+          params: {
+            market: market,  // Specify the market for albums
+          },
         }
       );
 
@@ -180,6 +192,9 @@ function useFetchSearchResults({ searchArtistResults, searchAlbumResults, search
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
+          },
+          params: {
+            market: market,  // Specify the market for albums
           },
         }
       );
