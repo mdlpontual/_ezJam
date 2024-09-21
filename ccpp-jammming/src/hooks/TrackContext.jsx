@@ -8,6 +8,7 @@ export const TrackProvider = ({ children }) => {
     const [currentTrackTitle, setCurrentTrackTitle] = useState(null);
     const [currentTrackArtist, setCurrentTrackArtist] = useState(null);
     const [currentTrackAlbum, setCurrentTrackAlbum] = useState(null);
+    const [currentQueueUri, setCurrentQueueUri] = useState(null);
     const [isPaused, setIsPaused] = useState(true);
 
     const updateCurrentTrackUri = (uri) => {
@@ -26,6 +27,10 @@ export const TrackProvider = ({ children }) => {
         setCurrentTrackAlbum(album);
     };
 
+    const updateCurrentQueueUri = (uriQueue) => {
+        setCurrentQueueUri(uriQueue);
+    };
+
     const togglePausePlay = (paused) => {
         setIsPaused(paused);
     };
@@ -36,11 +41,13 @@ export const TrackProvider = ({ children }) => {
             currentTrackTitle,
             currentTrackArtist,
             currentTrackAlbum,
+            currentQueueUri,
             isPaused, 
             updateCurrentTrackUri, 
             updateCurrentTrackTitle, 
             updateCurrentTrackArtist,
             updateCurrentTrackAlbum,
+            updateCurrentQueueUri,
             togglePausePlay }}>
 
             {children}

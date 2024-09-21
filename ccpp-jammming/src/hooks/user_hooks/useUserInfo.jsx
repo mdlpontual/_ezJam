@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-function useUserInfo({ accessToken, limit = 50, offset = 0 }) {
+function useUserInfo({ accessToken, limit = 50, offset = 0, market = 'US' }) {
     const [userInfo, setUserInfo] = useState({});
     const [userPlaylistsArr, setUserPlaylistsArr] = useState([]);
 
@@ -17,6 +17,7 @@ function useUserInfo({ accessToken, limit = 50, offset = 0 }) {
                     params: {
                         limit: limit,    // Specify the number of albums to fetch
                         offset: offset,  // Specify the offset for pagination
+                        market: market,  // Specify the market for albums
                     },
                 });
 

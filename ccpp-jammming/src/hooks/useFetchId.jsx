@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-function useFetchId({ search, accessToken }) {
+function useFetchId({ search, accessToken, market = 'US' }) {
   const [searchArtistResults, setSearchArtistResults] = useState([]);
   const [searchAlbumResults, setSearchAlbumResults] = useState([]);
   const [searchTrackResults, setSearchTrackResults] = useState([]);
@@ -19,6 +19,9 @@ function useFetchId({ search, accessToken }) {
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
+            },
+            params: {
+              market: market,  // Specify the market for albums
             },
             cancelToken: cancelToken.token,
           }
@@ -55,6 +58,9 @@ function useFetchId({ search, accessToken }) {
             headers: {
               Authorization: `Bearer ${accessToken}`,
             },
+            params: {
+              market: market,  // Specify the market for albums
+            },
             cancelToken: cancelToken.token,
           }
         );
@@ -89,6 +95,9 @@ function useFetchId({ search, accessToken }) {
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
+            },
+            params: {
+              market: market,  // Specify the market for albums
             },
             cancelToken: cancelToken.token,
           }

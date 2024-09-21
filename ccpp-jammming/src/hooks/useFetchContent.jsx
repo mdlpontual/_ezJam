@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-function useFetchContent({ idArtist, idAlbum, accessToken, limit = 50, offset = 0 }) {
+function useFetchContent({ idArtist, idAlbum, accessToken, limit = 50, offset = 0, market = 'US' }) {
   const [fetchedArtistDiscographyArray, setFetchedArtistDiscographyArray] = useState([]);
   const [fetchedArtistTopTracksArray, setFetchedArtistTopTracksArray] = useState([]);
   const [fetchedAlbumTracksArray, setFetchedAlbumTracksArray] = useState([]);
@@ -22,6 +22,7 @@ function useFetchContent({ idArtist, idAlbum, accessToken, limit = 50, offset = 
           params: {
             limit: limit,    // Specify the number of albums to fetch
             offset: offset,  // Specify the offset for pagination
+            market: market,  // Specify the market for albums
           },
         });
 
@@ -57,6 +58,11 @@ function useFetchContent({ idArtist, idAlbum, accessToken, limit = 50, offset = 
         const res = await axios.get(`https://api.spotify.com/v1/artists/${idArtist}/top-tracks`, {
           headers: {
             Authorization: `Bearer ${accessToken}`,
+          },
+          params: {
+            limit: limit,    // Specify the number of albums to fetch
+            offset: offset,  // Specify the offset for pagination
+            market: market,  // Specify the market for albums
           },
         });
 
@@ -96,6 +102,11 @@ function useFetchContent({ idArtist, idAlbum, accessToken, limit = 50, offset = 
         const res = await axios.get(`https://api.spotify.com/v1/albums/${idAlbum}/tracks`, {
           headers: {
             Authorization: `Bearer ${accessToken}`,
+          },
+          params: {
+            limit: limit,    // Specify the number of albums to fetch
+            offset: offset,  // Specify the offset for pagination
+            market: market,  // Specify the market for albums
           },
         });
 
