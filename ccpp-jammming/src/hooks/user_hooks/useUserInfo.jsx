@@ -21,7 +21,7 @@ function useUserInfo({ accessToken, limit = 50, offset = 0, market = 'US' }) {
                     },
                 });
 
-                const playlists = res.data.items.filter((playlist) => playlist.owner.display_name === "m").map((playlist) => ({
+                const playlists = res.data.items.filter((playlist) => playlist.owner.display_name === "mdl.al").map((playlist) => ({
                     playlistId: playlist.id,
                     playlistTitle: playlist.name,
                     playlistUri: playlist.uri,
