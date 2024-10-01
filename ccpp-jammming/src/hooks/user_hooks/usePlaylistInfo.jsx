@@ -1,6 +1,70 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
+const playlistTracksCache = {}; // Cache for playlist tracks by playlist ID
+
+function usePlaylistInfo({ playlistData, accessToken, trackLimit = 100, offset = 0 }) {
+    const [playlistTracksArr, setPlaylistTracksArr] = useState([]);
+    const idPlaylist = playlistData.playlistId;
+
+    useEffect(() => {
+        const fetchPlaylistTracks = async () => {
+            if (!idPlaylist || !accessToken) return;
+
+            // Check cache for this playlist
+            if (playlistTracksCache[idPlaylist]) {
+                setPlaylistTracksArr(playlistTracksCache[idPlaylist]); // Use cached tracks
+                return;
+            }
+
+            try {
+                const res = await axios.get(`https://api.spotify.com/v1/playlists/${idPlaylist}/tracks`, {
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`,
+                    },
+                    params: {
+                        limit: trackLimit, // Fetch up to 100 tracks
+                        offset: offset,  
+                    },
+                });
+
+                const tracks = res.data.items.map((track) => ({
+                    trackId: track.track.id,
+                    trackTitle: track.track.name,
+                    trackAuthor: track.track.artists[0]?.name || "Unknown Artist", 
+                    trackAlbum: track.track.album.name,
+                    trackCover: track.track.album.images[track.track.album.images.length - 1]?.url || null,
+                    trackUri: track.track.uri,
+                    trackDuration: track.track.duration_ms,
+                }));
+
+                // Cache the tracks for this playlist
+                playlistTracksCache[idPlaylist] = tracks;
+                setPlaylistTracksArr(tracks);
+            } catch (error) {
+                console.error("Error fetching playlist content:", error);
+            }
+        };
+
+        fetchPlaylistTracks();
+    }, [idPlaylist, accessToken, trackLimit, offset]);
+
+    // Optionally, create a way to clear cache for specific playlist if needed
+    const clearPlaylistCache = (playlistId) => {
+        if (playlistTracksCache[playlistId]) {
+            delete playlistTracksCache[playlistId];
+        }
+    };
+
+    return { playlistTracksArr, clearPlaylistCache };
+}
+
+export default usePlaylistInfo;
+
+
+/* import React, { useState, useEffect } from "react";
+import axios from "axios";
+
 function usePlaylistInfo({ playlistData, accessToken, trackLimit = 100, artistLimit = 50, offset = 0 }) {
     const [playlistTracksArr, setPlaylistTracksArr] = useState([]);
     const idPlaylist = playlistData.playlistId;
@@ -80,3 +144,4 @@ function usePlaylistInfo({ playlistData, accessToken, trackLimit = 100, artistLi
 }
 
 export default usePlaylistInfo;
+ */

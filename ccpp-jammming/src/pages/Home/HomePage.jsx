@@ -21,10 +21,10 @@ function HomePage({ code }) {
 
     // Function to handle when a new track is played
     const handlePlayTrack = () => {
-        updateCurrentTrackUri(currentTrack.uri);  // Update the URI
-        updateCurrentTrackTitle(currentTrack.name);  // Update the track title
-        updateCurrentTrackArtist(currentTrack.artists[0].name);  // Update the artist
-        updateCurrentTrackAlbum(currentTrack.album.name);  // Update the album 
+        updateCurrentTrackUri(currentTrack.uri);
+        updateCurrentTrackTitle(currentTrack.name);
+        updateCurrentTrackArtist(currentTrack.artists[0].name);
+        updateCurrentTrackAlbum(currentTrack.album.name);
         updateCurrentQueueUri(uriQueue);
     };
 
