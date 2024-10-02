@@ -1,156 +1,94 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import IMG from "../../assets/images/ImagesHUB";
 
-let playlistsCache = null; // In-memory cache for playlists
-let userInfoCache = null;  // In-memory cache for user info
+// Cache and dirty flag for playlists
+let playlistsCache = null;
+let lastFetchTime = null;
+let isDirty = false;
+
+// Cache for user info
+let userInfoCache = null;
 
 function useUserInfo({ accessToken, limit = 50, offset = 0, market = 'US' }) {
     const [userInfo, setUserInfo] = useState({});
     const [userPlaylistsArr, setUserPlaylistsArr] = useState([]);
 
     useEffect(() => {
-        const fetchUserPlaylists = async () => {
-            if (!accessToken) return;
+        if (!isDirty && playlistsCache) {
+            setUserPlaylistsArr(playlistsCache); // Use cached playlists if not dirty
+        } else {
+            fetchUserPlaylists(); // Fetch fresh data if dirty or no cache exists
+        }
+    }, [accessToken]);
 
-            // Check cache first
-            if (playlistsCache) {
-                setUserPlaylistsArr(playlistsCache); // Use cached playlists
-                return;
-            }
+    const fetchUserPlaylists = async () => {
+        if (!accessToken) return;
 
-            try {
-                const res = await axios.get(`https://api.spotify.com/v1/me/playlists`, {
-                    headers: {
-                        Authorization: `Bearer ${accessToken}`,
-                    },
-                    params: {
-                        limit: limit,    // Specify the number of albums to fetch
-                        offset: offset,  // Specify the offset for pagination
-                        market: market,  // Specify the market for albums
-                    },
-                });
+        try {
+            const res = await axios.get(`https://api.spotify.com/v1/me/playlists`, {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                },
+                params: {
+                    limit: limit,
+                    offset: offset,
+                    market: market,
+                },
+            });
 
-                const playlists = res.data.items.filter((playlist) => playlist.owner.display_name === "mdl.al").map((playlist) => ({
-                    playlistId: playlist.id,
-                    playlistTitle: playlist.name,
-                    playlistUri: playlist.uri,
-                    playlistCover: playlist.images[playlist.images.length - 1]?.url || IMG.placeHolders,
-                }));
+            const playlists = res.data.items.filter((playlist) => playlist.owner.display_name === "mdl.al").map((playlist) => ({
+                playlistId: playlist.id,
+                playlistTitle: playlist.name,
+                playlistUri: playlist.uri,
+                playlistCover: playlist.images && playlist.images.length > 0 
+                    ? playlist.images[playlist.images.length - 1].url 
+                    : IMG.placeHolders,  // Use placeholder if no image is available
+            }));
 
-                // Cache the fetched playlists
-                playlistsCache = playlists;
-                setUserPlaylistsArr(playlists);
-            } catch (error) {
-                console.error("Error fetching playlists:", error);
-            }
-        };
+            setUserPlaylistsArr(playlists); // Update the playlists in state
+            playlistsCache = playlists; // Store playlists in cache
+            lastFetchTime = Date.now(); // Update fetch time
+            isDirty = false; // Reset dirty flag
+        } catch (error) {
+            console.error("Error fetching playlists:", error);
+        }
+    };
 
-        fetchUserPlaylists();
-    }, [accessToken, limit, offset]);
+    const refetchPlaylists = async () => {
+        // Mark the cache as dirty, forcing a refresh
+        isDirty = true;
+        await fetchUserPlaylists();
+    };
+
+    const fetchUserInfo = async () => {
+        if (!accessToken) return;
+
+        // Check cache for user info
+        if (userInfoCache) {
+            setUserInfo(userInfoCache); // Use cached user info if available
+            return;
+        }
+
+        try {
+            const res = await axios.get(`https://api.spotify.com/v1/me`, {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                },
+            });
+
+            userInfoCache = res.data; // Cache user info
+            setUserInfo(res.data);
+        } catch (error) {
+            console.error("Error fetching user info:", error);
+        }
+    };
 
     useEffect(() => {
-        const fetchUserInfo = async () => {
-            if (!accessToken) return;
-
-            // Check cache first
-            if (userInfoCache) {
-                setUserInfo(userInfoCache); // Use cached user info
-                return;
-            }
-
-            try {
-                const res = await axios.get(`https://api.spotify.com/v1/me`, {
-                    headers: {
-                        Authorization: `Bearer ${accessToken}`,
-                    },
-                });
-
-                // Cache and set the user info
-                userInfoCache = res.data;
-                setUserInfo(res.data);
-            } catch (error) {
-                console.error("Error fetching user info:", error);
-            }
-        };
-
         fetchUserInfo();
     }, [accessToken]);
 
-    // Optionally, create a way to clear the cache when necessary
-    const clearPlaylistsCache = () => {
-        playlistsCache = null;
-    };
-
-    const clearUserInfoCache = () => {
-        userInfoCache = null;
-    };
-
-    return { userInfo, userPlaylistsArr, clearPlaylistsCache, clearUserInfoCache };
+    return { userInfo, userPlaylistsArr, refetchPlaylists };
 }
 
 export default useUserInfo;
-
-
-/* import React, { useState, useEffect } from "react";
-import axios from "axios";
-
-function useUserInfo({ accessToken, limit = 50, offset = 0, market = 'US' }) {
-    const [userInfo, setUserInfo] = useState({});
-    const [userPlaylistsArr, setUserPlaylistsArr] = useState([]);
-
-    useEffect(() => {
-        const fetchUserPlaylists = async () => {
-            if (!accessToken) return;
-
-            try {
-                const res = await axios.get(`https://api.spotify.com/v1/me/playlists`, {
-                    headers: {
-                        Authorization: `Bearer ${accessToken}`,
-                    },
-                    params: {
-                        limit: limit,    // Specify the number of albums to fetch
-                        offset: offset,  // Specify the offset for pagination
-                        market: market,  // Specify the market for albums
-                    },
-                });
-
-                const playlists = res.data.items.filter((playlist) => playlist.owner.display_name === "mdl.al").map((playlist) => ({
-                    playlistId: playlist.id,
-                    playlistTitle: playlist.name,
-                    playlistUri: playlist.uri,
-                    playlistCover: playlist.images[playlist.images.length - 1]?.url || IMG.placeHolders,
-                }));
-
-                setUserPlaylistsArr(playlists);
-            } catch (error) {
-                console.error("Error fetching playlists:", error);
-            }
-        };
-
-        fetchUserPlaylists();
-    }, [accessToken, limit, offset]);
-
-    useEffect(() => {
-        const fetchUserInfo = async () => {
-            if (!accessToken) return;
-
-            try {
-                const res = await axios.get(`https://api.spotify.com/v1/me`, {
-                    headers: {
-                        Authorization: `Bearer ${accessToken}`,
-                    },
-                });
-
-                setUserInfo(res.data);
-            } catch (error) {
-                console.error("Error fetching user info:", error);
-            }
-        };
-
-        fetchUserInfo();
-    }, [accessToken]);
-
-    return { userInfo, userPlaylistsArr };
-}
-
-export default useUserInfo; */
