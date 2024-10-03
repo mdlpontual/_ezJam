@@ -88,7 +88,7 @@ function useUserInfo({ accessToken, limit = 50, offset = 0, market = 'US' }) {
         fetchUserInfo();
     }, [accessToken]);
 
-    return { userInfo, userPlaylistsArr, refetchPlaylists };
+    return { userInfo, userPlaylistsArr, setUserPlaylistsArr, refetchPlaylists };
 }
 
 export default useUserInfo;

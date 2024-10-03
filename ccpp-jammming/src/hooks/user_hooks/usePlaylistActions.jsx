@@ -31,7 +31,30 @@ function usePlaylistActions({ accessToken, userId }) {
         }
     };
 
-    return { createPlaylist, newPlaylist, error };
+    // Function to edit an existing playlist name
+    const editPlaylistName = async (playlistId, newPlaylistName) => {
+        if (!accessToken || !playlistId) {
+            setError("Missing access token or playlist ID.");
+            return;
+        }
+
+        try {
+            const res = await axios.put(`https://api.spotify.com/v1/playlists/${playlistId}`, {
+                name: newPlaylistName,
+            }, {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`
+                }
+            });
+
+            return res.data;
+        } catch (err) {
+            console.error("Error updating playlist name:", err);
+            setError(err);
+        }
+    };
+
+    return { createPlaylist, editPlaylistName, newPlaylist, error };
 }
 
 export default usePlaylistActions;

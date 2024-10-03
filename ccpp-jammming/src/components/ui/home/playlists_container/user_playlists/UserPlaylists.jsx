@@ -5,12 +5,12 @@ import useUserInfo from "../../../../../hooks/user_hooks/useUserInfo";
 import usePlaylistActions from "../../../../../hooks/user_hooks/usePlaylistActions";
 
 function UserPlaylists({onPlaylistClick, onBackClick, onPlayButton, onArtistClick, onAlbumClick, playTrack, pauseTrack, accessToken}) {          
-    const { userInfo, userPlaylistsArr, refetchPlaylists } = useUserInfo({accessToken});
+    const { userInfo, userPlaylistsArr, setUserPlaylistsArr, refetchPlaylists } = useUserInfo({accessToken});
     const userId = userInfo.id;
     const { createPlaylist } = usePlaylistActions({ accessToken, userId });
 
     const handleCreatePlaylist = async () => {
-        const playlistName = prompt("Type the new playlist name:");
+        const playlistName = prompt("Type your new playlist's name:");
         if (!playlistName || playlistName.trim() === "") {
             alert("Playlist name is required.");
             return;
@@ -48,6 +48,7 @@ function UserPlaylists({onPlaylistClick, onBackClick, onPlayButton, onArtistClic
                                 onAlbumClick={onAlbumClick}
                                 playTrack={playTrack}
                                 pauseTrack={pauseTrack}
+                                setUserPlaylistsArr={setUserPlaylistsArr}
                                 accessToken={accessToken}
                                 key={playlist.playlistUri}/>
                         ))}
