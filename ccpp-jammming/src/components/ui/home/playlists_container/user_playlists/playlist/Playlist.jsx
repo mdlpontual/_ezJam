@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import IMG from "../../../../../../assets/images/ImagesHUB";
 import { useTrack } from "../../../../../../hooks/TrackContext"; 
 import useReducePlaylistInfo from "../../../../../../hooks/user_hooks/useReducePlaylistInfo";
+import usePlaylistActions from "../../../../../../hooks/user_hooks/usePlaylistActions";
 
-function Playlist({ playlistData, onPlaylistClick, onBackClick, onPlayButton, onArtistClick, onAlbumClick, playTrack, pauseTrack, accessToken }) {
+function Playlist({ playlistData, onPlaylistClick, onBackClick, onPlayButton, onArtistClick, onAlbumClick, playTrack, pauseTrack, refetchPlaylists, setUserPlaylistsArr, accessToken }) {
     const { currentQueueUri, isPaused } = useTrack(); 
     const { reducedPlaylistTracksArr } = useReducePlaylistInfo({ playlistData, accessToken });
+    const { editPlaylistName, unfollowPlaylist } = usePlaylistActions({ accessToken });
 
     const reducedUriQueue = reducedPlaylistTracksArr.map(track => track.trackUri);
     const firstUriTrack = reducedUriQueue[0];
@@ -17,6 +19,61 @@ function Playlist({ playlistData, onPlaylistClick, onBackClick, onPlayButton, on
             playTrack(); // Play the track
         } else {
             pauseTrack(); // Pause the track
+        }
+    };
+
+    const handleEditPlaylist = async () => {
+        const newPlaylistName = prompt("Enter the new playlist name:", playlistData.playlistTitle);
+        if (newPlaylistName && newPlaylistName.trim() !== "") {
+            try {
+                // Call the API to update the playlist name
+                await editPlaylistName(playlistData.playlistId, newPlaylistName);
+
+                // Immediately update the playlist name locally in userPlaylistsArr
+                setUserPlaylistsArr((prevPlaylists) =>
+                    prevPlaylists.map((playlist) =>
+                        playlist.playlistId === playlistData.playlistId
+                            ? { ...playlist, playlistTitle: newPlaylistName }
+                            : playlist
+                    )
+                );
+
+                await refetchPlaylists(newPlaylistName, playlistData.playlistId);
+
+            } catch (error) {
+                console.error("Error updating playlist or re-fetching:", error);
+            }
+        }
+    };
+
+    // Function to handle sharing the playlist URL
+    const handleSharePlaylist = () => {
+        const playlistUrl = `https://open.spotify.com/playlist/${playlistData.playlistId}`;
+        navigator.clipboard.writeText(playlistUrl)
+            .then(() => {
+                alert(`Playlist URL copied to clipboard!`);
+            })
+            .catch((error) => {
+                console.error("Error copying playlist URL:", error);
+            });
+    };
+
+    const handleUnfollowPlaylist = async () => {
+        const confirmUnfollow = window.confirm("Are you sure you want to unfollow this playlist?");
+        if (confirmUnfollow) {
+            try {
+                await unfollowPlaylist(playlistData.playlistId);
+
+                // Remove the unfollowed playlist locally
+                setUserPlaylistsArr((prevPlaylists) =>
+                    prevPlaylists.filter(playlist => playlist.playlistId !== playlistData.playlistId)
+                );
+
+                await refetchPlaylists(); 
+
+            } catch (error) {
+                console.error("Error unfollowing playlist:", error);
+            }
         }
     };
 
@@ -67,6 +124,41 @@ function Playlist({ playlistData, onPlaylistClick, onBackClick, onPlayButton, on
 
     //---------------------------------------------------------------------------------------------------------------------------------------------------
 
+    if (reducedPlaylistTracksArr.length === 0) {
+        return (
+            <div id="single-pl-container" className="container-fluid">
+                <div id="single-pl-row" className="row">
+                    <div id="checkmark-col" className="col-1 d-flex flex-column justify-content-center align-items-center">
+                        <img id="playlist-cover" src={cover} alt="saved icon" width="60px" />
+                        <a id="play-button">
+                            <img id="play-icon" src={cover} alt="play icon" width="60px" />
+                        </a>
+                    </div>
+                    <div id="pl-title-col" className="col d-flex flex-column justify-content-center align-items-start">
+                        <a id="pl-name" type="button" onClick={() => onPlaylistClick(playlistData, onBackClick, onPlayButton, onArtistClick, onAlbumClick, playTrack, pauseTrack, accessToken)}>
+                            <h4 className="d-flex align-items-center">{playlistData.playlistTitle}</h4>
+                        </a>
+                    </div>
+                    <div id="edit-button-col" className="col-auto d-flex flex-column justify-content-center align-items-center">
+                        <a id="edit-pl-button" type="button" onClick={handleEditPlaylist}>
+                            <img src={IMG.pencilPNG} alt="edit icon" width="27px" />
+                        </a>
+                    </div>
+                    <div id="share-button-col" className="col-auto d-flex flex-column justify-content-center align-items-center">
+                        <a id="share-pl-button" type="button" onClick={handleSharePlaylist}>
+                            <img src={IMG.sharePNG} alt="share icon" width="27px" />
+                        </a>
+                    </div>
+                    <div id="delete-button-col" className="col-auto d-flex flex-column justify-content-center align-items-center">
+                        <a id="delete-pl-button" type="button" onClick={handleUnfollowPlaylist}>
+                            <img src={IMG.trashBinPNG} alt="delete icon" width="27px" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+        );
+    } 
+    
     if (!isTrackPlaying) {
         return (
             <div id="single-pl-container" className="container-fluid">
@@ -83,13 +175,19 @@ function Playlist({ playlistData, onPlaylistClick, onBackClick, onPlayButton, on
                         </a>
                     </div>
                     <div id="edit-button-col" className="col-auto d-flex flex-column justify-content-center align-items-center">
-                        <img src={IMG.pencilPNG} alt="edit icon" width="27px" />
+                        <a id="edit-pl-button" type="button" onClick={handleEditPlaylist}>
+                            <img src={IMG.pencilPNG} alt="edit icon" width="27px" />
+                        </a>
                     </div>
                     <div id="share-button-col" className="col-auto d-flex flex-column justify-content-center align-items-center">
-                        <img src={IMG.sharePNG} alt="share icon" width="27px" />
+                        <a id="share-pl-button" type="button" onClick={handleSharePlaylist}>
+                            <img src={IMG.sharePNG} alt="share icon" width="27px" />
+                        </a>
                     </div>
                     <div id="delete-button-col" className="col-auto d-flex flex-column justify-content-center align-items-center">
-                        <img src={IMG.trashBinPNG} alt="delete icon" width="27px" />
+                        <a id="delete-pl-button" type="button" onClick={handleUnfollowPlaylist}>
+                            <img src={IMG.trashBinPNG} alt="delete icon" width="27px" />
+                        </a>
                     </div>
                 </div>
             </div>
@@ -111,13 +209,19 @@ function Playlist({ playlistData, onPlaylistClick, onBackClick, onPlayButton, on
                     </a>
                 </div>
                 <div id="edit-button-col" className="col-auto d-flex flex-column justify-content-center align-items-center">
-                    <img src={IMG.pencilPNG} alt="edit icon" width="27px" />
+                    <a id="edit-pl-button" type="button" onClick={handleEditPlaylist}>
+                        <img src={IMG.pencilPNG} alt="edit icon" width="27px" />
+                    </a>
                 </div>
                 <div id="share-button-col" className="col-auto d-flex flex-column justify-content-center align-items-center">
-                    <img src={IMG.sharePNG} alt="share icon" width="27px" />
+                    <a id="share-pl-button" type="button" onClick={handleSharePlaylist}>
+                        <img src={IMG.sharePNG} alt="share icon" width="27px" />
+                    </a>
                 </div>
                 <div id="delete-button-col" className="col-auto d-flex flex-column justify-content-center align-items-center">
-                    <img src={IMG.trashBinPNG} alt="delete icon" width="27px" />
+                    <a id="delete-pl-button" type="button" onClick={handleUnfollowPlaylist}>
+                        <img src={IMG.trashBinPNG} alt="delete icon" width="27px" />
+                    </a>
                 </div>
             </div>
         </div>

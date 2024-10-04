@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
+// In-memory cache for playlist tracks, keyed by playlist ID
+const playlistTracksCache = {};
+
 function usePlaylistInfo({ playlistData, accessToken, trackLimit = 100, artistLimit = 50, offset = 0 }) {
     const [playlistTracksArr, setPlaylistTracksArr] = useState([]);
     const idPlaylist = playlistData.playlistId;
@@ -8,6 +11,12 @@ function usePlaylistInfo({ playlistData, accessToken, trackLimit = 100, artistLi
     useEffect(() => {
         const fetchPlaylist = async () => {
             if (!idPlaylist || !accessToken) return;
+
+            // Check if the tracks for this playlist are already cached
+            if (playlistTracksCache[idPlaylist]) {
+                setPlaylistTracksArr(playlistTracksCache[idPlaylist]); // Use cached tracks
+                return;
+            }
 
             try {
                 // Fetch the playlist tracks with a limit of 100
@@ -67,6 +76,8 @@ function usePlaylistInfo({ playlistData, accessToken, trackLimit = 100, artistLi
                     albumCover: track.track.album.images[0]?.url || null,
                 }));
 
+                // Cache the playlist tracks for this playlist ID
+                playlistTracksCache[idPlaylist] = tracks;
                 setPlaylistTracksArr(tracks);
             } catch (error) {
                 console.error("Error fetching playlist content:", error);
@@ -76,7 +87,14 @@ function usePlaylistInfo({ playlistData, accessToken, trackLimit = 100, artistLi
         fetchPlaylist();
     }, [idPlaylist, accessToken, trackLimit, artistLimit, offset]);
 
-    return { playlistTracksArr };
+    // Function to clear the cache for a specific playlist
+    const clearPlaylistCache = (playlistId) => {
+        if (playlistTracksCache[playlistId]) {
+            delete playlistTracksCache[playlistId];
+        }
+    };
+
+    return { playlistTracksArr, clearPlaylistCache };
 }
 
 export default usePlaylistInfo;
