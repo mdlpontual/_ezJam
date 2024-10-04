@@ -24,7 +24,6 @@ function useCreatePlaylist({ accessToken, userId }) {
             });
 
             setNewPlaylist(res.data); // Store the created playlist data
-            setEditedPlaylistName(playlistName)
             return res.data;
         } catch (err) {
             console.error("Error creating playlist:", err);

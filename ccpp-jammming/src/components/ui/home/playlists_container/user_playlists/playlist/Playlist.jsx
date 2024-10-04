@@ -4,10 +4,10 @@ import { useTrack } from "../../../../../../hooks/TrackContext";
 import useReducePlaylistInfo from "../../../../../../hooks/user_hooks/useReducePlaylistInfo";
 import usePlaylistActions from "../../../../../../hooks/user_hooks/usePlaylistActions";
 
-function Playlist({ playlistData, onPlaylistClick, onBackClick, onPlayButton, onArtistClick, onAlbumClick, playTrack, pauseTrack, editOrDeletePlaylist, setUserPlaylistsArr, accessToken }) {
+function Playlist({ playlistData, onPlaylistClick, onBackClick, onPlayButton, onArtistClick, onAlbumClick, playTrack, pauseTrack, refetchPlaylists, editPlaylists, setUserPlaylistsArr, accessToken }) {
     const { currentQueueUri, isPaused } = useTrack(); 
     const { reducedPlaylistTracksArr } = useReducePlaylistInfo({ playlistData, accessToken });
-    const { editPlaylistName, unfollowPlaylist } = usePlaylistActions({ accessToken });
+    const { handleEditPlaylist, handleSharePlaylist, handleUnfollowPlaylist } = usePlaylistActions({ playlistData, editPlaylists, refetchPlaylists, setUserPlaylistsArr, accessToken });
 
     const reducedUriQueue = reducedPlaylistTracksArr.map(track => track.trackUri);
     const firstUriTrack = reducedUriQueue[0];
@@ -19,61 +19,6 @@ function Playlist({ playlistData, onPlaylistClick, onBackClick, onPlayButton, on
             playTrack(); // Play the track
         } else {
             pauseTrack(); // Pause the track
-        }
-    };
-
-    const handleEditPlaylist = async () => {
-        const newPlaylistName = prompt("Enter the new playlist name:", playlistData.playlistTitle);
-        if (newPlaylistName && newPlaylistName.trim() !== "") {
-            try {
-                // Call the API to update the playlist name
-                await editPlaylistName(playlistData.playlistId, newPlaylistName);
-
-                // Immediately update the playlist name locally in userPlaylistsArr
-                setUserPlaylistsArr((prevPlaylists) =>
-                    prevPlaylists.map((playlist) =>
-                        playlist.playlistId === playlistData.playlistId
-                            ? { ...playlist, playlistTitle: newPlaylistName }
-                            : playlist
-                    )
-                );
-
-                await editOrDeletePlaylist(newPlaylistName, playlistData.playlistId);
-
-            } catch (error) {
-                console.error("Error updating playlist or re-fetching:", error);
-            }
-        }
-    };
-
-    // Function to handle sharing the playlist URL
-    const handleSharePlaylist = () => {
-        const playlistUrl = `https://open.spotify.com/playlist/${playlistData.playlistId}`;
-        navigator.clipboard.writeText(playlistUrl)
-            .then(() => {
-                alert(`Playlist URL copied to clipboard!`);
-            })
-            .catch((error) => {
-                console.error("Error copying playlist URL:", error);
-            });
-    };
-
-    const handleUnfollowPlaylist = async () => {
-        const confirmUnfollow = window.confirm("Are you sure you want to unfollow this playlist?");
-        if (confirmUnfollow) {
-            try {
-                await unfollowPlaylist(playlistData.playlistId);
-
-                // Remove the unfollowed playlist locally
-                setUserPlaylistsArr((prevPlaylists) =>
-                    prevPlaylists.filter(playlist => playlist.playlistId !== playlistData.playlistId)
-                );
-
-                await refetchPlaylists(); 
-
-            } catch (error) {
-                console.error("Error unfollowing playlist:", error);
-            }
         }
     };
 
