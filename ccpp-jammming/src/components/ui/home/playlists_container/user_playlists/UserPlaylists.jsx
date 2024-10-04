@@ -2,12 +2,12 @@ import React from "react";
 import IMG from "../../../../../assets/images/ImagesHUB";
 import Playlist from "./playlist/Playlist";
 import useUserInfo from "../../../../../hooks/user_hooks/useUserInfo";
-import usePlaylistActions from "../../../../../hooks/user_hooks/usePlaylistActions";
+import useCreatePlaylist from "../../../../../hooks/user_hooks/useCreatePlaylist";
 
 function UserPlaylists({onPlaylistClick, onBackClick, onPlayButton, onArtistClick, onAlbumClick, playTrack, pauseTrack, accessToken}) {          
     const { userInfo, userPlaylistsArr, setUserPlaylistsArr, refetchPlaylists } = useUserInfo({accessToken});
     const userId = userInfo.id;
-    const { createPlaylist } = usePlaylistActions({ accessToken, userId });
+    const { createPlaylist } = useCreatePlaylist({ accessToken, userId });
 
     const handleCreatePlaylist = async () => {
         const playlistName = prompt("Type your new playlist's name:");
@@ -48,6 +48,7 @@ function UserPlaylists({onPlaylistClick, onBackClick, onPlayButton, onArtistClic
                                 onAlbumClick={onAlbumClick}
                                 playTrack={playTrack}
                                 pauseTrack={pauseTrack}
+                                refetchPlaylists={refetchPlaylists}
                                 setUserPlaylistsArr={setUserPlaylistsArr}
                                 accessToken={accessToken}
                                 key={playlist.playlistUri}/>

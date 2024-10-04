@@ -4,12 +4,10 @@ import { useTrack } from "../../../../../../hooks/TrackContext";
 import useReducePlaylistInfo from "../../../../../../hooks/user_hooks/useReducePlaylistInfo";
 import usePlaylistActions from "../../../../../../hooks/user_hooks/usePlaylistActions";
 
-function Playlist({ playlistData, onPlaylistClick, onBackClick, onPlayButton, onArtistClick, onAlbumClick, playTrack, pauseTrack, setUserPlaylistsArr, accessToken }) {
+function Playlist({ playlistData, onPlaylistClick, onBackClick, onPlayButton, onArtistClick, onAlbumClick, playTrack, pauseTrack, refetchPlaylists, setUserPlaylistsArr, accessToken }) {
     const { currentQueueUri, isPaused } = useTrack(); 
     const { reducedPlaylistTracksArr } = useReducePlaylistInfo({ playlistData, accessToken });
-    const { editPlaylistName } = usePlaylistActions({ accessToken });
-
-    console.log(reducedPlaylistTracksArr)
+    const { editPlaylistName, unfollowPlaylist } = usePlaylistActions({ accessToken });
 
     const reducedUriQueue = reducedPlaylistTracksArr.map(track => track.trackUri);
     const firstUriTrack = reducedUriQueue[0];
@@ -40,6 +38,8 @@ function Playlist({ playlistData, onPlaylistClick, onBackClick, onPlayButton, on
                     )
                 );
 
+                await refetchPlaylists(newPlaylistName, playlistData.playlistId);
+
             } catch (error) {
                 console.error("Error updating playlist or re-fetching:", error);
             }
@@ -51,11 +51,30 @@ function Playlist({ playlistData, onPlaylistClick, onBackClick, onPlayButton, on
         const playlistUrl = `https://open.spotify.com/playlist/${playlistData.playlistId}`;
         navigator.clipboard.writeText(playlistUrl)
             .then(() => {
-                alert(`Playlist URL copied to clipboard: ${playlistUrl}`);
+                alert(`Playlist URL copied to clipboard!`);
             })
             .catch((error) => {
                 console.error("Error copying playlist URL:", error);
             });
+    };
+
+    const handleUnfollowPlaylist = async () => {
+        const confirmUnfollow = window.confirm("Are you sure you want to unfollow this playlist?");
+        if (confirmUnfollow) {
+            try {
+                await unfollowPlaylist(playlistData.playlistId);
+
+                // Remove the unfollowed playlist locally
+                setUserPlaylistsArr((prevPlaylists) =>
+                    prevPlaylists.filter(playlist => playlist.playlistId !== playlistData.playlistId)
+                );
+
+                await refetchPlaylists(); 
+
+            } catch (error) {
+                console.error("Error unfollowing playlist:", error);
+            }
+        }
     };
 
     //---------------------------------------------------------------------------------------------------------------------------------------------------
@@ -131,7 +150,7 @@ function Playlist({ playlistData, onPlaylistClick, onBackClick, onPlayButton, on
                         </a>
                     </div>
                     <div id="delete-button-col" className="col-auto d-flex flex-column justify-content-center align-items-center">
-                        <a id="delete-pl-button" type="button">
+                        <a id="delete-pl-button" type="button" onClick={handleUnfollowPlaylist}>
                             <img src={IMG.trashBinPNG} alt="delete icon" width="27px" />
                         </a>
                     </div>
@@ -166,7 +185,7 @@ function Playlist({ playlistData, onPlaylistClick, onBackClick, onPlayButton, on
                         </a>
                     </div>
                     <div id="delete-button-col" className="col-auto d-flex flex-column justify-content-center align-items-center">
-                        <a id="delete-pl-button" type="button">
+                        <a id="delete-pl-button" type="button" onClick={handleUnfollowPlaylist}>
                             <img src={IMG.trashBinPNG} alt="delete icon" width="27px" />
                         </a>
                     </div>
@@ -200,7 +219,7 @@ function Playlist({ playlistData, onPlaylistClick, onBackClick, onPlayButton, on
                     </a>
                 </div>
                 <div id="delete-button-col" className="col-auto d-flex flex-column justify-content-center align-items-center">
-                    <a id="delete-pl-button" type="button">
+                    <a id="delete-pl-button" type="button" onClick={handleUnfollowPlaylist}>
                         <img src={IMG.trashBinPNG} alt="delete icon" width="27px" />
                     </a>
                 </div>

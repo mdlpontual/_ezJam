@@ -1,36 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
 
-function usePlaylistActions({ accessToken, userId }) {
-    const [newPlaylist, setNewPlaylist] = useState(null);
-    const [error, setError] = useState(null);
-
-    // Function to create a new playlist
-    const createPlaylist = async (playlistName, description = "", isPublic = true) => {
-        if (!accessToken || !userId) {
-            setError("Missing access token or user ID.");
-            return;
-        }
-
-        try {
-            const res = await axios.post(`https://api.spotify.com/v1/users/${userId}/playlists`, {
-                name: playlistName,
-                description: description,
-                public: isPublic
-            }, {
-                headers: {
-                    Authorization: `Bearer ${accessToken}`
-                }
-            });
-
-            setNewPlaylist(res.data); // Store the created playlist data
-            return res.data;
-        } catch (err) {
-            console.error("Error creating playlist:", err);
-            setError(err);
-        }
-    };
-
+function usePlaylistActions({ accessToken }) {
+    
     // Function to edit an existing playlist name
     const editPlaylistName = async (playlistId, newPlaylistName) => {
         if (!accessToken || !playlistId) {
@@ -54,7 +26,26 @@ function usePlaylistActions({ accessToken, userId }) {
         }
     };
 
-    return { createPlaylist, editPlaylistName, newPlaylist, error };
+    // Function to unfollow a playlist
+    const unfollowPlaylist = async (playlistId) => {
+        if (!accessToken || !playlistId) {
+            setError("Missing access token or playlist ID.");
+            return;
+        }
+
+        try {
+            await axios.delete(`https://api.spotify.com/v1/playlists/${playlistId}/followers`, {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`
+                }
+            });
+        } catch (err) {
+            console.error("Error unfollowing playlist:", err);
+            setError(err);
+        }
+    };
+
+    return { editPlaylistName, unfollowPlaylist };
 }
 
 export default usePlaylistActions;
