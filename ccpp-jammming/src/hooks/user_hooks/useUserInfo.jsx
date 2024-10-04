@@ -9,7 +9,7 @@ let isEdited = false;
 
 let userInfoCache = null; // Cache for user info
 
-function useUserInfo({ accessToken, limit = 50, offset = 0, market = 'US', pollInterval = 60000 }) {
+function useUserInfo({ accessToken, limit = 50, offset = 0, market = 'US', pollInterval = 120000 }) {
     const [userInfo, setUserInfo] = useState({});
     const [userPlaylistsArr, setUserPlaylistsArr] = useState([]);
 
@@ -65,7 +65,12 @@ function useUserInfo({ accessToken, limit = 50, offset = 0, market = 'US', pollI
         }
     };
 
-    const refetchPlaylists = async (newPlaylistName = "", playlistId = "") => {
+    const refetchPlaylists = async () => {
+        isDirty = true;
+        await fetchUserPlaylists();
+    }
+
+    const editOrDeletePlaylist = async (newPlaylistName = "", playlistId = "") => {
         isEdited = true; // Mark the cache as edited
 
         if (newPlaylistName && playlistId) {
@@ -79,9 +84,6 @@ function useUserInfo({ accessToken, limit = 50, offset = 0, market = 'US', pollI
             // Set the updated cache to state
             setUserPlaylistsArr(playlistsCache);
         }
-
-        // You can optionally call fetchUserPlaylists again to ensure the cache stays updated
-        //await fetchUserPlaylists();
     };
 
     const fetchUserInfo = async () => {
@@ -110,7 +112,7 @@ function useUserInfo({ accessToken, limit = 50, offset = 0, market = 'US', pollI
         fetchUserInfo();
     }, [accessToken]);
 
-    return { userInfo, userPlaylistsArr, setUserPlaylistsArr, refetchPlaylists };
+    return { userInfo, userPlaylistsArr, setUserPlaylistsArr, refetchPlaylists, editOrDeletePlaylist };
 }
 
 export default useUserInfo;

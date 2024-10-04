@@ -4,7 +4,7 @@ import { useTrack } from "../../../../../../hooks/TrackContext";
 import useReducePlaylistInfo from "../../../../../../hooks/user_hooks/useReducePlaylistInfo";
 import usePlaylistActions from "../../../../../../hooks/user_hooks/usePlaylistActions";
 
-function Playlist({ playlistData, onPlaylistClick, onBackClick, onPlayButton, onArtistClick, onAlbumClick, playTrack, pauseTrack, refetchPlaylists, setUserPlaylistsArr, accessToken }) {
+function Playlist({ playlistData, onPlaylistClick, onBackClick, onPlayButton, onArtistClick, onAlbumClick, playTrack, pauseTrack, editOrDeletePlaylist, setUserPlaylistsArr, accessToken }) {
     const { currentQueueUri, isPaused } = useTrack(); 
     const { reducedPlaylistTracksArr } = useReducePlaylistInfo({ playlistData, accessToken });
     const { editPlaylistName, unfollowPlaylist } = usePlaylistActions({ accessToken });
@@ -38,7 +38,7 @@ function Playlist({ playlistData, onPlaylistClick, onBackClick, onPlayButton, on
                     )
                 );
 
-                await refetchPlaylists(newPlaylistName, playlistData.playlistId);
+                await editOrDeletePlaylist(newPlaylistName, playlistData.playlistId);
 
             } catch (error) {
                 console.error("Error updating playlist or re-fetching:", error);

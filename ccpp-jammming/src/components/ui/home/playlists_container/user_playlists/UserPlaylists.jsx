@@ -5,7 +5,7 @@ import useUserInfo from "../../../../../hooks/user_hooks/useUserInfo";
 import useCreatePlaylist from "../../../../../hooks/user_hooks/useCreatePlaylist";
 
 function UserPlaylists({onPlaylistClick, onBackClick, onPlayButton, onArtistClick, onAlbumClick, playTrack, pauseTrack, accessToken}) {          
-    const { userInfo, userPlaylistsArr, setUserPlaylistsArr, refetchPlaylists } = useUserInfo({accessToken});
+    const { userInfo, userPlaylistsArr, setUserPlaylistsArr, refetchPlaylists, editOrDeletePlaylist } = useUserInfo({accessToken});
     const userId = userInfo.id;
     const { createPlaylist } = useCreatePlaylist({ accessToken, userId });
 
@@ -48,7 +48,7 @@ function UserPlaylists({onPlaylistClick, onBackClick, onPlayButton, onArtistClic
                                 onAlbumClick={onAlbumClick}
                                 playTrack={playTrack}
                                 pauseTrack={pauseTrack}
-                                refetchPlaylists={refetchPlaylists}
+                                editOrDeletePlaylist={editOrDeletePlaylist}
                                 setUserPlaylistsArr={setUserPlaylistsArr}
                                 accessToken={accessToken}
                                 key={playlist.playlistUri}/>

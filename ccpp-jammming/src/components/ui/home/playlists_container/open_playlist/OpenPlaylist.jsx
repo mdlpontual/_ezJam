@@ -2,9 +2,66 @@ import React, { useState, useEffect } from "react";
 import IMG from "../../../../../assets/images/ImagesHUB";
 import usePlaylistInfo from "../../../../../hooks/user_hooks/usePlaylistInfo"
 import PlaylistTrack from "./track/PlaylistTrack";
+import usePlaylistActions from "../../../../../hooks/user_hooks/usePlaylistActions";
 
 function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, onAlbumClick, playTrack, pauseTrack, accessToken }) {
     const { playlistTracksArr } = usePlaylistInfo({ playlistData, accessToken });
+    const { editPlaylistName, unfollowPlaylist } = usePlaylistActions({ accessToken });
+
+    const handleEditPlaylist = async () => {
+        const newPlaylistName = prompt("Enter the new playlist name:", playlistData.playlistTitle);
+        if (newPlaylistName && newPlaylistName.trim() !== "") {
+            try {
+                // Call the API to update the playlist name
+                await editPlaylistName(playlistData.playlistId, newPlaylistName);
+
+                // Immediately update the playlist name locally in userPlaylistsArr
+                setUserPlaylistsArr((prevPlaylists) =>
+                    prevPlaylists.map((playlist) =>
+                        playlist.playlistId === playlistData.playlistId
+                            ? { ...playlist, playlistTitle: newPlaylistName }
+                            : playlist
+                    )
+                );
+
+                await refetchPlaylists(newPlaylistName, playlistData.playlistId);
+
+            } catch (error) {
+                console.error("Error updating playlist or re-fetching:", error);
+            }
+        }
+    };
+
+    // Function to handle sharing the playlist URL
+    const handleSharePlaylist = () => {
+        const playlistUrl = `https://open.spotify.com/playlist/${playlistData.playlistId}`;
+        navigator.clipboard.writeText(playlistUrl)
+            .then(() => {
+                alert(`Playlist URL copied to clipboard!`);
+            })
+            .catch((error) => {
+                console.error("Error copying playlist URL:", error);
+            });
+    };
+
+    const handleUnfollowPlaylist = async () => {
+        const confirmUnfollow = window.confirm("Are you sure you want to unfollow this playlist?");
+        if (confirmUnfollow) {
+            try {
+                await unfollowPlaylist(playlistData.playlistId);
+
+                // Remove the unfollowed playlist locally
+                setUserPlaylistsArr((prevPlaylists) =>
+                    prevPlaylists.filter(playlist => playlist.playlistId !== playlistData.playlistId)
+                );
+
+                await refetchPlaylists(); 
+
+            } catch (error) {
+                console.error("Error unfollowing playlist:", error);
+            }
+        }
+    };
 
     return (
         <>
@@ -22,13 +79,19 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
                         <img id="saved-icon" src={IMG.savedPNG} alt="saved icon" width="27px"/>
                     </div>
                     <div id="edit-button-col" className="col-auto d-flex flex-column justify-content-center align-items-center">
-                        <img src={IMG.pencilPNG} alt="saved icon" width="27px"/>
+                        <a id="edit-button" type="button" onClick={handleSharePlaylist}>
+                            <img src={IMG.pencilPNG} alt="saved icon" width="27px"/>
+                        </a>
                     </div>
                     <div id="share-button-col" className="col-auto d-flex flex-column justify-content-center align-items-center">
-                        <img src={IMG.sharePNG} alt="saved icon" width="27px"/>
+                        <a id="share-button" type="button" onClick={handleSharePlaylist}>
+                            <img src={IMG.sharePNG} alt="saved icon" width="27px"/>
+                        </a>
                     </div>
                     <div id="delete-button-col" className="col-auto d-flex flex-column justify-content-center align-items-center">
-                        <img src={IMG.trashBinPNG} alt="saved icon" width="27px"/>
+                        <a id="delete-button" type="button" onClick={handleUnfollowPlaylist}>
+                            <img src={IMG.trashBinPNG} alt="saved icon" width="27px"/>
+                        </a>
                     </div>
                 </header>
                 <main id="open-pl-main" className="row flex-grow-1">
