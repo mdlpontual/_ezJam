@@ -297,6 +297,7 @@
             .drag {
                 @include box-reset-default;
                 position: absolute;
+                cursor: grab;
                 img {
                     //border: $border-lime-dotted;
                     @include box-reset-default;
@@ -352,6 +353,7 @@
             }
             .drag {
                 position: absolute;
+                cursor: grab;
                 img {
                     //border: $border-lime-dotted;
                     @include box-reset-default;

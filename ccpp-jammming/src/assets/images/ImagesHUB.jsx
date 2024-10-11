@@ -13,6 +13,7 @@ const IMG = {
     sharePNG: new URL('./symbols/05_share.png', import.meta.url).href,
     trashBinPNG: new URL('./symbols/06_bin-symbol.png', import.meta.url).href,
     dragPNG: new URL('./symbols/01_drag.png', import.meta.url).href,
+    greenDragPNG: new URL('./symbols/01_green-drag.png', import.meta.url).href,
     optionsPNG: new URL('./symbols/01_interface.png', import.meta.url).href,
     searchPNG: new URL('./symbols/03_search.png', import.meta.url).href,
     clockPNG: new URL('./symbols/10_clock.png', import.meta.url).href,

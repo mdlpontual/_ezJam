@@ -94,7 +94,7 @@ function usePlaylistInfo({ playlistData, accessToken, trackLimit = 100, artistLi
         }
     };
 
-    return { playlistTracksArr, clearPlaylistCache };
+    return { playlistTracksArr, setPlaylistTracksArr, clearPlaylistCache };
 }
 
 export default usePlaylistInfo;
