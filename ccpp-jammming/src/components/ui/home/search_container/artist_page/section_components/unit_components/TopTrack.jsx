@@ -1,6 +1,7 @@
 import React from "react";
 import IMG from "../../../../../../../assets/images/ImagesHUB";
 import { useTrack } from "../../../../../../../hooks/TrackContext";
+import Equalizer from "../../../../../../../utils/Equalizer"
 
 function TopTrack({ topTrack, order, onPlayButton, playTrack, pauseTrack, fetchedArtistTopTracksArray }) {
     const { currentTrackUri, isPaused } = useTrack(); 
@@ -64,8 +65,10 @@ function TopTrack({ topTrack, order, onPlayButton, playTrack, pauseTrack, fetche
         <>
             <div id="songs-inner-row-green" className="row">
                 <div id="col-add" className="col-1 d-flex justify-content-center align-items-center">
-                    <a id="play-button" className="d-flex justify-content-center align-items-center" type="button" onClick={handleTogglePlay}>
-                        <img id="play-icon" className="d-flex justify-content-center align-items-center" src={isPaused ? IMG.playPNG2Green : IMG.pausePNG2Green} alt="play icon" width="20px"/>
+                    <a className="col-1 d-flex justify-content-center align-items-center" id="play-button" type="button" onClick={() => onPlayButton(handleTogglePlay)}>
+                        <div className="d-flex justify-content-center align-items-center" id="play-icon">
+                            {isPaused ? <img src={IMG.playPNG2Green} alt="play icon" width="22px" /> : <Equalizer />}
+                        </div>
                     </a>
                 </div>
                 <div id="col-cover" className="col-1 d-flex justify-content-center align-items-center">

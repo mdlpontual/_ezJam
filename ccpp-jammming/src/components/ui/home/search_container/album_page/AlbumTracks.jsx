@@ -1,6 +1,7 @@
 import React from "react";
 import IMG from "../../../../../assets/images/ImagesHUB";
 import { useTrack } from "../../../../../hooks/TrackContext";
+import Equalizer from "../../../../../utils/Equalizer";
 
 function AlbumTracks({ trackContent, fetchedAlbumTracksArray, onPlayButton, playTrack, pauseTrack }) {
     const { currentTrackUri, isPaused } = useTrack(); 
@@ -54,8 +55,10 @@ function AlbumTracks({ trackContent, fetchedAlbumTracksArray, onPlayButton, play
         <>
             <div id="songs-inner-row-green" className="row">
                 <div id="col-num" className="col-1 d-flex justify-content-center align-items-center">
-                    <a id="play-button" type="button" onClick={handleTogglePlay}>
-                        <img id="play-icon" src={isPaused ? IMG.playPNG2Green : IMG.pausePNG2Green} alt="play icon" width="20px"/>
+                    <a className="col-1 d-flex justify-content-center align-items-center" id="play-button" type="button" onClick={() => onPlayButton(handleTogglePlay)}>
+                        <div className="d-flex justify-content-center align-items-center" id="play-icon">
+                            {isPaused ? <img src={IMG.playPNG2Green} alt="play icon" width="22px" /> : <Equalizer />}
+                        </div>
                     </a>
                 </div>
                 <div id="col-title" className="col d-flex justify-content-start align-items-center">
