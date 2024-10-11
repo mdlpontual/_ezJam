@@ -3,6 +3,7 @@ import IMG from "../../../../../../assets/images/ImagesHUB";
 import { useTrack } from "../../../../../../hooks/TrackContext"; 
 import useReducePlaylistInfo from "../../../../../../hooks/user_hooks/useReducePlaylistInfo";
 import usePlaylistActions from "../../../../../../hooks/user_hooks/usePlaylistActions";
+import Equalizer from '../../../../../../utils/Equalizer';
 
 function Playlist({ playlistData, onPlaylistClick, onBackClick, onPlayButton, onArtistClick, onAlbumClick, playTrack, pauseTrack, refetchPlaylists, editPlaylists, setUserPlaylistsArr, accessToken }) {
     const { currentQueueUri, isPaused } = useTrack(); 
@@ -144,8 +145,8 @@ function Playlist({ playlistData, onPlaylistClick, onBackClick, onPlayButton, on
             <div id="single-pl-row" className="row">
                 <div id="checkmark-col" className="col-1 d-flex flex-column justify-content-center align-items-center">
                     <img id="playlist-cover" src={cover} alt="saved icon" width="60px" />
-                    <a id="play-button" type="button" onClick={handleTogglePlay}>
-                        <img id="play-icon" src={isPaused ? IMG.playPNG2Green : IMG.pausePNG2Green} alt="play/pause icon" width="30px" />
+                    <a className="d-flex justify-content-center align-items-center" id="play-button" type="button" onClick={handleTogglePlay}>
+                        {isPaused ? <img id="play-icon" src={IMG.playPNG2Green} alt="play icon" width="30px"/> : <Equalizer />}
                     </a>
                 </div>
                 <div id="pl-title-col" className="col d-flex flex-column justify-content-center align-items-start">

@@ -8,6 +8,7 @@ const IMG = {
     minus2PNG: new URL('./symbols/02_minus2-symbol.png', import.meta.url).href,
     gobackPNG: new URL('./symbols/01_arrow-symbol.png', import.meta.url).href,
     gofowardPNG: new URL('./symbols/01_right-arrow.png', import.meta.url).href,
+    upAndDownPNG: new URL('./symbols/01_up-and-down.png', import.meta.url).href,
     pencilPNG: new URL('./symbols/04_pencil.png', import.meta.url).href,
     sharePNG: new URL('./symbols/05_share.png', import.meta.url).href,
     trashBinPNG: new URL('./symbols/06_bin-symbol.png', import.meta.url).href,

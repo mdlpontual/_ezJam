@@ -9,7 +9,7 @@ let isEdited = false;
 
 let userInfoCache = null; // Cache for user info
 
-function useUserInfo({ accessToken, limit = 50, offset = 0, market = 'US', pollInterval = 120000 }) {
+function useUserInfo({ accessToken, limit = 50, offset = 0, market = 'US', pollInterval = 60000 }) {
     const [userInfo, setUserInfo] = useState({});
     const [userPlaylistsArr, setUserPlaylistsArr] = useState([]);
 

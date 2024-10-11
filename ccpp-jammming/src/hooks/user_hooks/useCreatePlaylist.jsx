@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 
-function useCreatePlaylist({ accessToken, userId }) {
+function useCreatePlaylist({ accessToken, userId, refetchPlaylists }) {
     const [newPlaylist, setNewPlaylist] = useState(null);
     const [error, setError] = useState(null);
 
@@ -31,7 +31,21 @@ function useCreatePlaylist({ accessToken, userId }) {
         }
     };
 
-    return { createPlaylist, newPlaylist, error };
+    const handleCreatePlaylist = async () => {
+        const playlistName = prompt("Type your new playlist's name:");
+        if (!playlistName || playlistName.trim() === "") {
+            alert("Playlist name is required.");
+            return;
+        }
+
+        // Create the new playlist
+        await createPlaylist(playlistName, "", true);
+
+        // Re-fetch playlists to include the newly created one
+        await refetchPlaylists();
+    };
+
+    return { handleCreatePlaylist };
 }
 
 export default useCreatePlaylist;

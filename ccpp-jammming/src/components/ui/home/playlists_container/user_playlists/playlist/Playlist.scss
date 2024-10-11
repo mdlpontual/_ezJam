@@ -107,6 +107,7 @@
                 border-radius: 5px;
                 visibility: visible;
                 position: absolute;
+                opacity: 0.5;
             }
             #play-button {
                 //border: $border-lime-dashed;
@@ -115,7 +116,7 @@
                 #play-icon {
                     //border: $border-lime-dashed;
                     @include box-reset-default;
-                    visibility: hidden;
+                    visibility: visible;
                     position: relative;
                 }
             }
@@ -190,8 +191,9 @@
                 @include box-reset-default;
             }
             #playlist-cover {
-                visibility: hidden;
+                visibility: visible;
                 position: absolute;
+                opacity: 0.25;
             }
             #play-button {
                 //border: $border-lime-dashed;
