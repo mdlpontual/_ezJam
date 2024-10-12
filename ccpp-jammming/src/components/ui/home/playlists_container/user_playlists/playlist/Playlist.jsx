@@ -100,6 +100,13 @@ function Playlist({ playlistData, onPlaylistClick, onBackClick, onPlayButton, on
                             <img src={IMG.trashBinPNG} alt="delete icon" width="27px" />
                         </a>
                     </div>
+                    <div id="col-saved" className="col-auto d-flex justify-content-center align-items-center">
+                        <img 
+                            id="saved-icon" 
+                            src={IMG.savedPNG}
+                            height="27px" 
+                        />
+                    </div>
                 </div>
             </div>
         );
@@ -135,6 +142,13 @@ function Playlist({ playlistData, onPlaylistClick, onBackClick, onPlayButton, on
                             <img src={IMG.trashBinPNG} alt="delete icon" width="27px" />
                         </a>
                     </div>
+                    <div id="col-saved" className="col-auto d-flex justify-content-center align-items-center">
+                        <img 
+                            id="saved-icon" 
+                            src={IMG.savedPNG}
+                            height="27px" 
+                        />
+                    </div>
                 </div>
             </div>
         );
@@ -169,6 +183,13 @@ function Playlist({ playlistData, onPlaylistClick, onBackClick, onPlayButton, on
                         <img src={IMG.trashBinPNG} alt="delete icon" width="27px" />
                     </a>
                 </div>
+                <div id="col-saved" className="col-auto d-flex justify-content-center align-items-center">
+                        <img 
+                            id="saved-icon" 
+                            src={IMG.savedPNG}
+                            height="27px" 
+                        />
+                    </div>
             </div>
         </div>
     );

@@ -1,3 +1,94 @@
+/* import React, { useState, useEffect } from "react";
+import axios from "axios";
+import IMG from "../../assets/images/ImagesHUB";
+
+function useUserInfo({ accessToken, limit = 50, offset = 0, market = 'US', pollInterval = 60000 }) {
+    const [userInfo, setUserInfo] = useState({});
+    const [userPlaylistsArr, setUserPlaylistsArr] = useState([]);
+
+    useEffect(() => {
+        fetchUserPlaylists();
+
+        const interval = setInterval(() => {
+            fetchUserPlaylists();
+        }, pollInterval);
+
+        return () => clearInterval(interval);
+    }, [accessToken]);
+
+    const fetchUserPlaylists = async () => {
+        if (!accessToken) return;
+
+        try {
+            const res = await axios.get(`https://api.spotify.com/v1/me/playlists`, {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                },
+                params: {
+                    limit: limit,
+                    offset: offset,
+                    market: market,
+                },
+            });
+
+            const playlists = res.data.items.filter((playlist) => playlist.owner.display_name === "mdl.al").map((playlist) => ({
+                playlistId: playlist.id,
+                playlistTitle: playlist.name,
+                playlistUri: playlist.uri,
+                playlistCover: playlist.images && playlist.images.length > 0 
+                    ? playlist.images[playlist.images.length - 1].url 
+                    : IMG.placeHolders,
+            }));
+
+            setUserPlaylistsArr(playlists);
+
+        } catch (error) {
+            console.error("Error fetching playlists:", error);
+        }
+    };
+
+    const refetchPlaylists = async () => {
+        await fetchUserPlaylists();
+    }
+
+    const editPlaylists = async (newPlaylistName = "", playlistId = "") => {
+        if (newPlaylistName && playlistId) {
+            setUserPlaylistsArr(prevPlaylists => 
+                prevPlaylists.map((playlist) => 
+                    playlist.playlistId === playlistId
+                        ? { ...playlist, playlistTitle: newPlaylistName }
+                        : playlist
+                )
+            );
+        }
+    };
+
+    const fetchUserInfo = async () => {
+        if (!accessToken) return;
+
+        try {
+            const res = await axios.get(`https://api.spotify.com/v1/me`, {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                },
+            });
+
+            setUserInfo(res.data);
+        } catch (error) {
+            console.error("Error fetching user info:", error);
+        }
+    };
+
+    useEffect(() => {
+        fetchUserInfo();
+    }, [accessToken]);
+
+    return { userInfo, userPlaylistsArr, setUserPlaylistsArr, refetchPlaylists, editPlaylists };
+}
+
+export default useUserInfo;
+ */
+
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import IMG from "../../assets/images/ImagesHUB";
