@@ -81,13 +81,6 @@ function PlaylistTrack({ order, playlistTrack, playlistTracksArr, onPlayButton, 
                             </a>
                         </p>
                     </div>
-                    <div id="col-saved" className="col-1 d-flex justify-content-center align-items-center">
-                        <img 
-                            id="saved-icon" 
-                            src={isSaved ? IMG.savedPNG : IMG.unsavedPNG}  // Show saved or unsaved icon based on state
-                            height="25px" 
-                        />
-                    </div>
                     <div id="col-album" className="col-2 d-flex justify-content-start align-items-center">
                         <p>
                             <a id="open-album-page" type="button" onClick={() => playlistTrack.albumId && onAlbumClick(playlistTrack, onArtistClick, onAlbumClick, onPlayButton, accessToken)}>
@@ -97,6 +90,13 @@ function PlaylistTrack({ order, playlistTrack, playlistTracksArr, onPlayButton, 
                     </div>
                     <div id="col-duration" className="col-1 d-flex justify-content-center align-items-center">
                         <p>{millisToMinutesAndSeconds(playlistTrack.trackDuration)}</p>
+                    </div>
+                    <div id="col-saved" className="col-1 d-flex justify-content-center align-items-center">
+                        <img 
+                            id="saved-icon" 
+                            src={isSaved ? IMG.savedPNG : IMG.unsavedPNG}  // Show saved or unsaved icon based on state
+                            height="25px" 
+                        />
                     </div>
                     <div id="col-minus" className="col-1 d-flex justify-content-center align-items-center">
                         <img id="minus-icon" src={IMG.minus2PNG} alt="minus icon" width="25px" />
@@ -134,13 +134,6 @@ function PlaylistTrack({ order, playlistTrack, playlistTracksArr, onPlayButton, 
                         </a>
                     </p>
                 </div>
-                <div id="col-saved" className="col-1 d-flex justify-content-center align-items-center">
-                    <img 
-                        id="saved-icon" 
-                        src={isSaved ? IMG.savedPNG : IMG.unsavedPNG}  // Show saved or unsaved icon based on state
-                        height="25px" 
-                    />
-                </div>
                 <div id="col-album" className="col-2 d-flex justify-content-start align-items-center">
                     <p>
                         <a id="open-album-page" type="button" onClick={() => playlistTrack.albumId && onAlbumClick(playlistTrack, onArtistClick, onAlbumClick, onPlayButton, accessToken)}>
@@ -150,6 +143,13 @@ function PlaylistTrack({ order, playlistTrack, playlistTracksArr, onPlayButton, 
                 </div>
                 <div id="col-duration" className="col-1 d-flex justify-content-center align-items-center">
                     <p>{millisToMinutesAndSeconds(playlistTrack.trackDuration)}</p>
+                </div>
+                <div id="col-saved" className="col-1 d-flex justify-content-center align-items-center">
+                    <img 
+                        id="saved-icon" 
+                        src={isSaved ? IMG.savedPNG : IMG.unsavedPNG}  // Show saved or unsaved icon based on state
+                        height="25px" 
+                    />
                 </div>
                 <div id="col-minus" className="col-1 d-flex justify-content-center align-items-center">
                     <img id="minus-icon" src={IMG.minus2PNG} alt="minus icon" width="25px" />

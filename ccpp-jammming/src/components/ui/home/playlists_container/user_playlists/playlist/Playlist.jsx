@@ -184,12 +184,12 @@ function Playlist({ playlistData, onPlaylistClick, onBackClick, onPlayButton, on
                     </a>
                 </div>
                 <div id="col-saved" className="col-auto d-flex justify-content-center align-items-center">
-                        <img 
-                            id="saved-icon" 
-                            src={IMG.savedPNG}
-                            height="27px" 
-                        />
-                    </div>
+                    <img 
+                        id="saved-icon" 
+                        src={IMG.savedPNG}
+                        height="27px" 
+                    />
+                </div>
             </div>
         </div>
     );
