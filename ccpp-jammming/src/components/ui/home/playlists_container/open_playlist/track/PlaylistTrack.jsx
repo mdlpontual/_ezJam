@@ -91,14 +91,7 @@ function PlaylistTrack({ order, playlistTrack, playlistTracksArr, onPlayButton, 
                     <div id="col-duration" className="col-1 d-flex justify-content-center align-items-center">
                         <p>{millisToMinutesAndSeconds(playlistTrack.trackDuration)}</p>
                     </div>
-                    <div id="col-saved" className="col-1 d-flex justify-content-center align-items-center">
-                        <img 
-                            id="saved-icon" 
-                            src={isSaved ? IMG.savedPNG : IMG.unsavedPNG}  // Show saved or unsaved icon based on state
-                            height="25px" 
-                        />
-                    </div>
-                    <div id="col-minus" className="col-1 d-flex justify-content-center align-items-center">
+                    <div id="col-minus" className="col-1 d-flex justify-content-end align-items-center">
                         <img id="minus-icon" src={IMG.minus2PNG} alt="minus icon" width="25px" />
                     </div>
                 </div>
@@ -144,14 +137,7 @@ function PlaylistTrack({ order, playlistTrack, playlistTracksArr, onPlayButton, 
                 <div id="col-duration" className="col-1 d-flex justify-content-center align-items-center">
                     <p>{millisToMinutesAndSeconds(playlistTrack.trackDuration)}</p>
                 </div>
-                <div id="col-saved" className="col-1 d-flex justify-content-center align-items-center">
-                    <img 
-                        id="saved-icon" 
-                        src={isSaved ? IMG.savedPNG : IMG.unsavedPNG}  // Show saved or unsaved icon based on state
-                        height="25px" 
-                    />
-                </div>
-                <div id="col-minus" className="col-1 d-flex justify-content-center align-items-center">
+                <div id="col-minus" className="col-1 d-flex justify-content-end align-items-center">
                     <img id="minus-icon" src={IMG.minus2PNG} alt="minus icon" width="25px" />
                 </div>
             </div>

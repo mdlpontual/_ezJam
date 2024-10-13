@@ -4,6 +4,7 @@ import { useTrack } from "../../../../../../hooks/TrackContext";
 import useReducePlaylistInfo from "../../../../../../hooks/user_hooks/useReducePlaylistInfo";
 import usePlaylistActions from "../../../../../../hooks/user_hooks/usePlaylistActions";
 import Equalizer from '../../../../../../utils/Equalizer';
+import { useSave } from "../../../../../../hooks/user_hooks/SaveContext"; // Import the Save context
 
 function Playlist({ playlistData, onPlaylistClick, onBackClick, onPlayButton, onArtistClick, onAlbumClick, playTrack, pauseTrack, refetchPlaylists, editPlaylists, setUserPlaylistsArr, accessToken }) {
     const { currentQueueUri, isPaused } = useTrack(); 
@@ -15,6 +16,10 @@ function Playlist({ playlistData, onPlaylistClick, onBackClick, onPlayButton, on
 
     const cover = playlistData.playlistCover || IMG.placeHolders;
 
+    // Use the save context to get the save state for this specific playlist
+    const { getIsSaved } = useSave();
+    const isSaved = getIsSaved(playlistData.playlistId); // Get the saved state for this playlist
+
     const handleTogglePlay = () => {
         if (isPaused) {
             playTrack(); // Play the track
@@ -22,8 +27,6 @@ function Playlist({ playlistData, onPlaylistClick, onBackClick, onPlayButton, on
             pauseTrack(); // Pause the track
         }
     };
-
-    //---------------------------------------------------------------------------------------------------------------------------------------------------
 
     function arraysAreEqual(arr1, arr2) {
         // First ensure both arrays have the same length
@@ -68,8 +71,6 @@ function Playlist({ playlistData, onPlaylistClick, onBackClick, onPlayButton, on
             isTrackPlaying = true;
     }
 
-    //---------------------------------------------------------------------------------------------------------------------------------------------------
-
     if (reducedPlaylistTracksArr.length === 0) {
         return (
             <div id="single-pl-container" className="container-fluid">
@@ -103,7 +104,7 @@ function Playlist({ playlistData, onPlaylistClick, onBackClick, onPlayButton, on
                     <div id="col-saved" className="col-auto d-flex justify-content-center align-items-center">
                         <img 
                             id="saved-icon" 
-                            src={IMG.savedPNG}
+                            src={isSaved ? IMG.savedPNG : IMG.unsavedPNG}  // Sync saved state from global state
                             height="27px" 
                         />
                     </div>
@@ -145,7 +146,7 @@ function Playlist({ playlistData, onPlaylistClick, onBackClick, onPlayButton, on
                     <div id="col-saved" className="col-auto d-flex justify-content-center align-items-center">
                         <img 
                             id="saved-icon" 
-                            src={IMG.savedPNG}
+                            src={isSaved ? IMG.savedPNG : IMG.unsavedPNG}  // Sync saved state from global state
                             height="27px" 
                         />
                     </div>
@@ -186,7 +187,7 @@ function Playlist({ playlistData, onPlaylistClick, onBackClick, onPlayButton, on
                 <div id="col-saved" className="col-auto d-flex justify-content-center align-items-center">
                     <img 
                         id="saved-icon" 
-                        src={IMG.savedPNG}
+                        src={isSaved ? IMG.savedPNG : IMG.unsavedPNG}  // Sync saved state from global state
                         height="27px" 
                     />
                 </div>
