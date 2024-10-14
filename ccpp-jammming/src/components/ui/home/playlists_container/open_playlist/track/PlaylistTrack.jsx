@@ -5,16 +5,15 @@ import { useTrack } from "../../../../../../hooks/TrackContext";
 import { useSortable } from '@dnd-kit/sortable'; // Importing dnd-kit sortable
 import { CSS } from '@dnd-kit/utilities'; // Utility for CSS transformation
 
-function PlaylistTrack({ order, playlistTrack, playlistTracksArr, onPlayButton, onArtistClick, onAlbumClick, playTrack, pauseTrack, accessToken, resetTrackSaved }) {
-    const { currentTrackUri, currentTrackTitle, currentTrackArtist, currentTrackAlbum, isPaused } = useTrack();
+function PlaylistTrack({ order, playlistTrack, playlistTracksArr, setPlaylistTracksArr, onPlayButton, onArtistClick, onAlbumClick, playTrack, pauseTrack, preDeleteTrack, accessToken, resetTrackSaved }) {
+    const { currentTrackUri, isPaused } = useTrack();
+    const [isSaved, setIsSaved] = useState(true);  // Track whether the current track is saved
 
     const uriTrack = playlistTrack.trackUri;
     let uriQueue = [];
     playlistTracksArr.forEach(track => uriQueue.push(track.trackUri));
 
     const cover = playlistTrack.trackCover || IMG.placeHolders;
-
-    const [isSaved, setIsSaved] = useState(true);  // Track whether the current track is saved
 
     // Use the sortable hook for drag-and-drop
     const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: playlistTrack.trackUri });
@@ -92,7 +91,9 @@ function PlaylistTrack({ order, playlistTrack, playlistTracksArr, onPlayButton, 
                         <p>{millisToMinutesAndSeconds(playlistTrack.trackDuration)}</p>
                     </div>
                     <div id="col-minus" className="col-1 d-flex justify-content-end align-items-center">
-                        <img id="minus-icon" src={IMG.minus2PNG} alt="minus icon" width="25px" />
+                        <a id="delete-track" type="button" onClick={() => preDeleteTrack(uriTrack)}>
+                            <img id="minus-icon" src={IMG.minus2PNG} alt="minus icon" width="25px" />
+                        </a>
                     </div>
                 </div>
             </div>
@@ -112,7 +113,7 @@ function PlaylistTrack({ order, playlistTrack, playlistTracksArr, onPlayButton, 
                     <div className="cover">
                         <img src={cover} height="40px" />
                     </div>
-                    <a className="col-1 d-flex justify-content-center align-items-center" id="play-button" type="button" onClick={handleTogglePlay}>
+                    <a className="col-1 d-flex justify-content-center align-items-center" id="play-button" type="button" onClick={handleTogglePlay(uriTrack)}>
                         <div className="d-flex justify-content-center align-items-center" id="play-icon">
                             {isPaused ? <img src={IMG.playPNG2Green} alt="play icon" width="22px" /> : <Equalizer />}
                         </div>
@@ -138,7 +139,9 @@ function PlaylistTrack({ order, playlistTrack, playlistTracksArr, onPlayButton, 
                     <p>{millisToMinutesAndSeconds(playlistTrack.trackDuration)}</p>
                 </div>
                 <div id="col-minus" className="col-1 d-flex justify-content-end align-items-center">
-                    <img id="minus-icon" src={IMG.minus2PNG} alt="minus icon" width="25px" />
+                    <a id="delete-track" type="button" onClick={() => preDeleteTrack(uriTrack)}>
+                        <img id="minus-icon" src={IMG.minus2PNG} alt="minus icon" width="25px" />
+                    </a>
                 </div>
             </div>
         </div>
