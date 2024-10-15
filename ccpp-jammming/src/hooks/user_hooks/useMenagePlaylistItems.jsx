@@ -14,7 +14,8 @@ function useMenagePlaylistItems({ playlistData, playlistTracksArr, setPlaylistTr
 
         try {
             // Make the DELETE request to remove the track from the playlist
-            await axios.delete(`https://api.spotify.com/v1/playlists/${idPlaylist}/tracks`, {
+            await axios.delete(
+                `https://api.spotify.com/v1/playlists/${idPlaylist}/tracks`, {
                 headers: {
                     Authorization: `Bearer ${accessToken}`,
                 },
