@@ -1,17 +1,18 @@
 import React from "react";
 import IMG from "../../../../../../../assets/images/ImagesHUB";
 import { useTrack } from "../../../../../../../hooks/TrackContext";
+import { useAddTrack } from "../../../../../../../hooks/user_hooks/AddTrackContext";
 import Equalizer from "../../../../../../../utils/Equalizer";
 import useUserInfo from "../../../../../../../hooks/user_hooks/useUserInfo";
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 function TrackResultItem({ artistContent, albumContent, trackContent, fetchedTracksArray, onArtistClick, onAlbumClick, onPlayButton, playTrack, pauseTrack, accessToken }) {
     const { currentTrackUri, isPaused } = useTrack(); 
+    const { updateTrackToAdd } = useAddTrack();
     const { userPlaylistsArr } = useUserInfo({accessToken});
-
-    console.log(userPlaylistsArr)
     
     const uriTrack = trackContent.trackUri;
+    const idTrack = trackContent.trackId;
     let uriQueue = [];
     fetchedTracksArray.map(track => uriQueue.push(track.trackUri));
 
@@ -68,7 +69,11 @@ function TrackResultItem({ artistContent, albumContent, trackContent, fetchedTra
                                 <li><h5 id="dd-top-text" className="dropdown-item">Select a playlist to add this track:</h5></li>
                                 <li><hr className="dropdown-divider"></hr></li>
                                 {userPlaylistsArr.map((playlist) => (
-                                    <li key={playlist.playlistId}><a id="dd-item" className="dropdown-item" href="#">{playlist.playlistTitle}</a></li>
+                                    <li key={playlist.playlistId}>
+                                        <a id="dd-item" className="dropdown-item" type="button"onClick={() => updateTrackToAdd(uriTrack, idTrack, playlist, accessToken)}>
+                                            {playlist.playlistTitle}
+                                        </a>
+                                    </li>
                                 ))}
                             </ul>
                         </div>
@@ -109,7 +114,11 @@ function TrackResultItem({ artistContent, albumContent, trackContent, fetchedTra
                                 <li><h6 className="dropdown-item">Select a playlist to add this track:</h6></li>
                                 <li><hr className="dropdown-divider"></hr></li>
                                 {userPlaylistsArr.map((playlist) => (
-                                    <li key={playlist.id}><a className="dropdown-item" href="#">{playlist.playlistTitle}</a></li>
+                                    <li key={playlist.playlistId}>
+                                        <a className="dropdown-item" type="button"onClick={() => updateTrackToAdd(uriTrack, idTrack, playlist, accessToken)}>
+                                            {playlist.playlistTitle}
+                                        </a>
+                                    </li>
                                 ))}
                             </ul>
                         </div>

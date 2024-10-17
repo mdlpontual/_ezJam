@@ -7,7 +7,7 @@ import usePlaylistActions from "../../../../../hooks/user_hooks/usePlaylistActio
 import useUserInfo from "../../../../../hooks/user_hooks/useUserInfo";
 import { DndContext } from '@dnd-kit/core';
 import { SortableContext, arrayMove, verticalListSortingStrategy } from '@dnd-kit/sortable';
-import useMenagePlaylistItems from '../../../../../hooks/user_hooks/useMenagePlaylistItems';
+import { useAddTrack } from "../../../../../hooks/user_hooks/AddTrackContext";
 
 // Separate cache for OpenPlaylist state (tracks, saved status, etc.)
 const playlistStateCache = {};
@@ -17,13 +17,15 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
     const { playlistTracksArr, setPlaylistTracksArr, handleTrackChange, clearPlaylistCache } = usePlaylistInfo({ playlistData, accessToken });
     const { setUserPlaylistsArr, refetchPlaylists, editPlaylists } = useUserInfo({ accessToken });
     const { handleEditPlaylist, handleSharePlaylist, handleUnfollowPlaylist, reorderTracksInPlaylist, newEditedName } = usePlaylistActions({ playlistData, editPlaylists, refetchPlaylists, setUserPlaylistsArr, accessToken });
-    const { handleDeleteTrack } = useMenagePlaylistItems({ playlistData, playlistTracksArr, setPlaylistTracksArr, clearPlaylistCache, accessToken });
+    const { trackUriToAdd, trackIdToAdd, playlistToAddTrack, trackToAddContent, token } = useAddTrack();
 
     // Separate local states for tracks, reset state, and initialization flag
     const [localTracks, setLocalTracks] = useState([]);
     const [resetTrackSaved, setResetTrackSaved] = useState(false);
     const [isInitialized, setIsInitialized] = useState(false);
     const [timeoutId, setTimeoutId] = useState(null);  // State to store timeout ID
+
+    console.log(localTracks);
 
     // Import the save context functions for this playlist
     const { getIsSaved, setIsSaved } = useSave();
@@ -110,6 +112,25 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
             handleTrackChange();  // Clear the cache for the playlist to force refresh
         }
     };
+    
+    useEffect(() => {
+        if (playlistToAddTrack.playlistTitle === playlistData.playlistTitle && trackToAddContent.trackUri) {
+            const updatedAddedTracks = [...localTracks, trackToAddContent];  // Create a new array with the added track
+            
+            // Update the local state of tracks
+            setLocalTracks(updatedAddedTracks);
+    
+            // Immediately compare and update hasChanges
+            const hasChangesNow = JSON.stringify(updatedAddedTracks) !== JSON.stringify(playlistTracksArr);
+    
+            // Update isSaved and hasChanges immediately
+            setIsSaved(playlistData.playlistId, !hasChangesNow);
+            playlistStateCache[playlistData.playlistId] = { tracks: updatedAddedTracks, isSaved: !hasChangesNow };  // Update local cache
+    
+            // Clear the current cache after deletion
+            handleTrackChange();  // Clear the cache for the playlist to force refresh
+        }
+    }, [trackToAddContent]);  // Only trigger this when trackToAddContent or other dependencies change
 
     // Detect if there are unsaved changes independently
     const hasChanges = JSON.stringify(localTracks) !== JSON.stringify(playlistTracksArr);
