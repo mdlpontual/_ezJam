@@ -9,7 +9,6 @@ import { DndContext } from '@dnd-kit/core';
 import { SortableContext, arrayMove, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { useAddTrack } from "../../../../../hooks/user_hooks/AddTrackContext";
 
-// Separate cache for OpenPlaylist state (tracks, saved status, etc.)
 const playlistStateCache = {};
 
 // Component
@@ -17,7 +16,7 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
     const { playlistTracksArr, setPlaylistTracksArr, handleTrackChange, clearPlaylistCache } = usePlaylistInfo({ playlistData, accessToken });
     const { setUserPlaylistsArr, refetchPlaylists, editPlaylists } = useUserInfo({ accessToken });
     const { handleEditPlaylist, handleSharePlaylist, handleUnfollowPlaylist, reorderTracksInPlaylist, newEditedName } = usePlaylistActions({ playlistData, editPlaylists, refetchPlaylists, setUserPlaylistsArr, accessToken });
-    const { trackUriToAdd, trackIdToAdd, playlistToAddTrack, trackToAddContent, token } = useAddTrack();
+    const { playlistToAddTrack, trackToAddContent } = useAddTrack();
 
     // Separate local states for tracks, reset state, and initialization flag
     const [localTracks, setLocalTracks] = useState([]);
@@ -25,11 +24,11 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
     const [isInitialized, setIsInitialized] = useState(false);
     const [timeoutId, setTimeoutId] = useState(null);  // State to store timeout ID
 
-    console.log(localTracks);
-
     // Import the save context functions for this playlist
     const { getIsSaved, setIsSaved } = useSave();
     const isSaved = getIsSaved(playlistData.playlistId); // Get saved state for the specific playlist
+
+    console.log("playlistStateCache-OPL", playlistStateCache)
 
     // Initialize tracks and saved state independently, with cache and API
     useEffect(() => {
@@ -82,15 +81,26 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
         }
     };
 
-    // Handle discarding changes and reset to last fetched data
     const handleDiscardChanges = () => {
-        setLocalTracks(playlistTracksArr);  // Reset to original data
-        debounceStateUpdate(() => setIsSaved(playlistData.playlistId, true), 300);  // Debounce setting saved state
+        // Clear cache and reset localTracks to the original playlist state
+        clearPlaylistCache(playlistData.playlistId);
+    
+        // Reset localTracks to the original tracks from the API (spread to create new array reference)
+        setLocalTracks([...playlistTracksArr]);
+    
+        // Reset playlistStateCache to the original playlist
+        playlistStateCache[playlistData.playlistId] = {
+            tracks: [...playlistTracksArr],
+            isSaved: true,
+        };
+    
+        // Update state to mark playlist as saved
+        debounceStateUpdate(() => setIsSaved(playlistData.playlistId, true), 300);
+    
+        // Reset "track saved" state
         setResetTrackSaved(true);
-        setTimeout(() => setResetTrackSaved(false), 100);  // Reset timeout
-        delete playlistStateCache[playlistData.playlistId];  // Clear cache after discard
-        clearPlaylistCache(playlistData.playlistId);  // Ensure cache is refreshed after discard
-    };
+        setTimeout(() => setResetTrackSaved(false), 100);  // Slight delay for state synchronization
+    };    
 
     // Pre-delete track function to remove a track
     const preDeleteTrack = (uriTrack) => {
@@ -112,25 +122,33 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
             handleTrackChange();  // Clear the cache for the playlist to force refresh
         }
     };
-    
+
+    // Handle adding a track
     useEffect(() => {
         if (playlistToAddTrack.playlistTitle === playlistData.playlistTitle && trackToAddContent.trackUri) {
-            const updatedAddedTracks = [...localTracks, trackToAddContent];  // Create a new array with the added track
-            
-            // Update the local state of tracks
-            setLocalTracks(updatedAddedTracks);
-    
-            // Immediately compare and update hasChanges
-            const hasChangesNow = JSON.stringify(updatedAddedTracks) !== JSON.stringify(playlistTracksArr);
-    
-            // Update isSaved and hasChanges immediately
-            setIsSaved(playlistData.playlistId, !hasChangesNow);
-            playlistStateCache[playlistData.playlistId] = { tracks: updatedAddedTracks, isSaved: !hasChangesNow };  // Update local cache
-    
-            // Clear the current cache after deletion
-            handleTrackChange();  // Clear the cache for the playlist to force refresh
+            setLocalTracks((prevTracks) => {
+                const trackExists = prevTracks.some(track => track.trackUri === trackToAddContent.trackUri);
+                if (trackExists) {
+                    return prevTracks;  // Prevent adding duplicates
+                }
+
+                // Create a new array (deep copy) and add the new track
+                const updatedAddedTracks = [...prevTracks, { ...trackToAddContent }];
+
+                // Update the playlistStateCache to reflect the added tracks
+                playlistStateCache[playlistData.playlistId] = {
+                    tracks: updatedAddedTracks,
+                    isSaved: false,
+                };
+
+                return updatedAddedTracks;  // Return the new array
+            });
+
+            // Clear and update the cache after adding the track
+            handleTrackChange();
         }
-    }, [trackToAddContent]);  // Only trigger this when trackToAddContent or other dependencies change
+    }, [trackToAddContent, playlistToAddTrack, playlistData.playlistTitle]);
+
 
     // Detect if there are unsaved changes independently
     const hasChanges = JSON.stringify(localTracks) !== JSON.stringify(playlistTracksArr);
