@@ -9,6 +9,7 @@ export const AddTrackProvider = ({ children }) => {
     const [playlistToAddTrack, setPlaylistToAddTrack] = useState({});
     const [trackToAddContent, setTrackToAddContent] = useState({});
     const [token, setToken] = useState(null);
+    const [trackToAdd, setTrackToAdd] = useState(null); 
 
 
     const updateTrackToAdd = (uriTrack, idTrack, playlist, accessToken) => {
@@ -41,7 +42,7 @@ export const AddTrackProvider = ({ children }) => {
                     trackDuration: trackData.duration_ms,
                     artistId: trackData.artists[0]?.id || null,
                     artistName: trackData.artists[0]?.name || "Unknown Artist",
-                    artistBanner: null, // Set this to whatever you need
+                    artistBanner: null, // Set this to whatever you needm
                     albumId: trackData.album.id || null,
                     albumTitle: trackData.album.name,
                     albumType: trackData.album.album_type,
@@ -58,10 +59,10 @@ export const AddTrackProvider = ({ children }) => {
     }, [trackIdToAdd, token]);
 
     return (
-        <AddTrackContext.Provider value={{ updateTrackToAdd, trackUriToAdd, trackIdToAdd, playlistToAddTrack, trackToAddContent, token }}>
+        <AddTrackContext.Provider value={{ updateTrackToAdd, playlistToAddTrack, trackToAddContent, trackToAdd, trackToAdd, setTrackToAdd }}>
             {children}
         </AddTrackContext.Provider>
     );
 };
 
-export const useAddTrack = () => useContext(AddTrackContext); 
+export const useAddTrack = () => useContext(AddTrackContext);

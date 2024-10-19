@@ -82,7 +82,7 @@ function Playlist({ playlistData, onPlaylistClick, onBackClick, onPlayButton, on
                         </a>
                     </div>
                     <div id="pl-title-col" className="col d-flex flex-column justify-content-center align-items-start">
-                        <a id="pl-name" type="button" onClick={() => onPlaylistClick(playlistData, onBackClick, onPlayButton, onArtistClick, onAlbumClick, playTrack, pauseTrack, accessToken)}>
+                        <a id="pl-name" type="button" onClick={() => onPlaylistClick(playlistData, onBackClick, onPlayButton, onArtistClick, onAlbumClick, playTrack, pauseTrack, onPlaylistClick, accessToken)}>
                             <h4 className="d-flex align-items-center">{playlistData.playlistTitle}</h4>
                         </a>
                     </div>

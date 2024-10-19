@@ -8,7 +8,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 function TrackResultItem({ artistContent, albumContent, trackContent, fetchedTracksArray, onArtistClick, onAlbumClick, onPlayButton, playTrack, pauseTrack, accessToken }) {
     const { currentTrackUri, isPaused } = useTrack(); 
-    const { updateTrackToAdd } = useAddTrack();
+    const { updateTrackToAdd, trackToAdd } = useAddTrack();
     const { userPlaylistsArr } = useUserInfo({accessToken});
     
     const uriTrack = trackContent.trackUri;
@@ -70,7 +70,7 @@ function TrackResultItem({ artistContent, albumContent, trackContent, fetchedTra
                                 <li><hr className="dropdown-divider"></hr></li>
                                 {userPlaylistsArr.map((playlist) => (
                                     <li key={playlist.playlistId}>
-                                        <a id="dd-item" className="dropdown-item" type="button"onClick={() => updateTrackToAdd(uriTrack, idTrack, playlist, accessToken)}>
+                                        <a id="dd-item" className="dropdown-item" type="button"onClick={() => {updateTrackToAdd(uriTrack, idTrack, playlist, accessToken), trackToAdd}}>
                                             {playlist.playlistTitle}
                                         </a>
                                     </li>
@@ -115,7 +115,7 @@ function TrackResultItem({ artistContent, albumContent, trackContent, fetchedTra
                                 <li><hr className="dropdown-divider"></hr></li>
                                 {userPlaylistsArr.map((playlist) => (
                                     <li key={playlist.playlistId}>
-                                        <a className="dropdown-item" type="button"onClick={() => updateTrackToAdd(uriTrack, idTrack, playlist, accessToken)}>
+                                        <a id="dd-item" lassName="dropdown-item" type="button" onClick={() => updateTrackToAdd(uriTrack, idTrack, playlist, accessToken)}>
                                             {playlist.playlistTitle}
                                         </a>
                                     </li>

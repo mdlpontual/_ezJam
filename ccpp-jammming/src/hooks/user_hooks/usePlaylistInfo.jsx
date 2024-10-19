@@ -9,9 +9,6 @@ function usePlaylistInfo({ playlistData, accessToken, trackLimit = 100, artistLi
     const [playlistTracksArr, setPlaylistTracksArr] = useState([]);
     const idPlaylist = playlistData.playlistId;
 
-    console.log("playlistTracksCache", playlistTracksCache)
-    console.log("playlistStateCache", playlistStateCache)
-
     // Initialize tracks and save state from cache
     useEffect(() => {
         const fetchPlaylist = async () => {
@@ -111,7 +108,7 @@ function usePlaylistInfo({ playlistData, accessToken, trackLimit = 100, artistLi
         clearPlaylistCache(idPlaylist);  // Clear both caches when track changes
     };
 
-    return { playlistTracksArr, setPlaylistTracksArr, clearPlaylistCache, handleTrackChange };
+    return { playlistTracksArr, setPlaylistTracksArr, clearPlaylistCache, handleTrackChange, playlistTracksCache };
 }
 
 export default usePlaylistInfo;
