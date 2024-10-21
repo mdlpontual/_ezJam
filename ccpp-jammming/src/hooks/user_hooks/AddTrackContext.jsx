@@ -7,7 +7,7 @@ export const AddTrackProvider = ({ children }) => {
     const [trackUriToAdd, setTrackUriToAdd] = useState(null);
     const [trackIdToAdd, setTrackIdToAdd] = useState(null);
     const [playlistToAddTrack, setPlaylistToAddTrack] = useState({});
-    const [trackToAddContent, setTrackToAddContent] = useState({});
+    const [trackToAddContent, setTrackToAddContent] = useState([]);
     const [token, setToken] = useState(null);
     const [trackToAdd, setTrackToAdd] = useState(null); 
 
@@ -49,7 +49,7 @@ export const AddTrackProvider = ({ children }) => {
                     albumCover: trackData.album.images[0]?.url || null,
                 };
         
-                setTrackToAddContent(track);
+                setTrackToAddContent([...trackToAddContent, track]);
             } catch (error) {
                 console.error("Error fetching track content:", error);
             }
@@ -66,7 +66,6 @@ export const AddTrackProvider = ({ children }) => {
                 trackToAddContent, 
                 setPlaylistToAddTrack, 
                 setTrackToAddContent,
-                trackToAdd, 
                 trackToAdd, 
                 setTrackToAdd }}>
             {children}

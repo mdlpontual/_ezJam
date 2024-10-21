@@ -135,15 +135,15 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
         }
 
         // Check if trackToAddContent has a valid trackUri before proceeding
-        if (playlistToAddTrack.playlistTitle === playlistData.playlistTitle && trackToAddContent.trackUri) {
+        if (playlistToAddTrack.playlistTitle === playlistData.playlistTitle) {
             setLocalTracks((prevTracks) => {
-                const trackExists = prevTracks.some(track => track.trackUri === trackToAddContent.trackUri);
+                const trackExists = trackToAddContent.some(trackToAdd => prevTracks.some(prevTrack => prevTrack.trackUri === trackToAdd.trackUri));
                 if (trackExists) {
                     return prevTracks;  // Prevent adding duplicates
                 }
 
                 // Create a new array (deep copy) and add the new track
-                const updatedAddedTracks = [...prevTracks, { ...trackToAddContent }];
+                const updatedAddedTracks = prevTracks.concat(trackToAddContent);
 
                 // Immediately compare and update hasChanges
                 const hasChangesNow = JSON.stringify(updatedAddedTracks) !== JSON.stringify(playlistTracksArr);
@@ -157,6 +157,8 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
                     isSaved: false,
                 };
 
+                console.log("prevTracks", prevTracks)
+
                 return updatedAddedTracks;  // Return the new array
             });
 
@@ -168,12 +170,12 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
         }
     }, [trackToAddContent, localTracks, playlistTracksArr]);
 
-
-    console.log("localTracks", localTracks);
+    console.log("trackToAddContent", trackToAddContent);
+/*     console.log("localTracks", localTracks);
     console.log("playlistTracksArr", playlistTracksArr);
     console.log("playlistStateCache", playlistStateCache[playlistData.playlistId]);
     console.log("trackToAddContent", trackToAddContent);
-    console.log("playlistToAddTrack", playlistToAddTrack);
+    console.log("playlistToAddTrack", playlistToAddTrack); */
 
     // Update saved state for buttons and icon after initialization
     useEffect(() => {
