@@ -67,7 +67,7 @@ function TopTrack({ topTrack, order, onPlayButton, playTrack, pauseTrack, fetche
                                 <li><hr className="dropdown-divider"></hr></li>
                                 {userPlaylistsArr.map((playlist) => (
                                     <li key={playlist.playlistId}>
-                                        <a id="dd-item" className="dropdown-item" type="button"onClick={() => {updateTrackToAdd(uriTrack, idTrack, playlist, accessToken), trackToAdd}}>
+                                        <a id="dd-item" className="dropdown-item" type="button" onClick={() => {updateTrackToAdd(uriTrack, idTrack, playlist, accessToken), trackToAdd}}>
                                             {playlist.playlistTitle}
                                         </a>
                                     </li>
