@@ -125,6 +125,16 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
 
     // Handle adding a track
     useEffect(() => {
+        // Check if either localTracks or playlistTracksArr is empty, null, or undefined
+        if (
+            !Array.isArray(localTracks) || localTracks.length === 0 ||
+            !Array.isArray(playlistTracksArr) || playlistTracksArr.length === 0
+        ) {
+            // Wait until both localTracks and playlistTracksArr are populated
+            return;
+        }
+
+        // Check if trackToAddContent has a valid trackUri before proceeding
         if (playlistToAddTrack.playlistTitle === playlistData.playlistTitle && trackToAddContent.trackUri) {
             setLocalTracks((prevTracks) => {
                 const trackExists = prevTracks.some(track => track.trackUri === trackToAddContent.trackUri);
@@ -156,7 +166,8 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
             setPlaylistToAddTrack({});
             setTrackToAddContent({});
         }
-    }, [trackToAddContent]);
+    }, [trackToAddContent, localTracks, playlistTracksArr]);
+
 
     console.log("localTracks", localTracks);
     console.log("playlistTracksArr", playlistTracksArr);
@@ -169,7 +180,7 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
         if (isInitialized) {
             debounceStateUpdate(() => setIsSaved(playlistData.playlistId, isSaved), 300);  // Debounce setting state to prevent rapid updates
         }
-    }, [isSaved, isInitialized, playlistData.playlistId, setIsSaved]);
+    }, [isSaved, isInitialized, playlistData.playlistId, setIsSaved, trackToAddContent]);
     
 
     return (
