@@ -23,7 +23,8 @@ function ArtistPage({ artistContent, onArtistClick, onAlbumClick, onPlayButton, 
                             fetchedArtistTopTracksArray={fetchedArtistTopTracksArray} 
                             onPlayButton={onPlayButton}
                             playTrack={playTrack}
-                            pauseTrack={pauseTrack}/>
+                            pauseTrack={pauseTrack}
+                            accessToken={accessToken}/>
                     </div>
                 </div>
                 <div id="artist-page-disco-row" className="row">

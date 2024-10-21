@@ -363,14 +363,41 @@
                     @include box-reset-default;
                     width: 50px;
                     padding: 3px;
+                    position: relative;
                     #plus-dd {
                         //border: $border-cyan-dotted;
                         @include box-reset-default;
                         width: 40px;
+                        #plus-icon {
+                            //border: $border-cyan-dotted;
+                            @include box-reset-default;
+                        }
                     }
-                    #plus-icon {
+                    #dropdown-ul {
                         //border: $border-cyan-dotted;
-                        @include box-reset-default;
+                        max-height: 300px;
+                        overflow-y: hidden;
+                        scrollbar-gutter: stable;
+                        padding-right: 5px;
+                        background-color: $primary;
+                        #dd-top-text {
+                            //border: $border-cyan-dotted;
+                            color: white;
+                            background-color: $primary;
+                        }
+                        #dd-item{
+                            //border: $border-cyan-dotted;
+                            font-weight: bold;
+                        }
+                        #dd-item:hover {
+                            //border: $border-cyan-dotted;
+                            background-color: $secondary;
+                            color: white;
+                            font-weight: bold;
+                        }
+                    }
+                    #dropdown-ul:hover {
+                        overflow-y: auto;
                     }
                     #plus-dd:focus, #plus-dd:focus-visible {
                         border: none;

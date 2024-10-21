@@ -106,23 +106,23 @@ function TrackResultItem({ artistContent, albumContent, trackContent, fetchedTra
                     <p>{millisToMinutesAndSeconds(trackContent.trackDuration)}</p>
                 </div>
                 <div id="col-plus" className="dropdown col-1 d-flex justify-content-end align-items-center">
-                        <div className="dropdown">
-                            <button id="plus-dd" className="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img id="plus-icon" src={IMG.plus2PNG} alt="plus icon" width="25px"/>
-                            </button>
-                            <ul className="dropdown-menu">
-                                <li><h6 className="dropdown-item">Select a playlist to add this track:</h6></li>
-                                <li><hr className="dropdown-divider"></hr></li>
-                                {userPlaylistsArr.map((playlist) => (
-                                    <li key={playlist.playlistId}>
-                                        <a id="dd-item" lassName="dropdown-item" type="button" onClick={() => updateTrackToAdd(uriTrack, idTrack, playlist, accessToken)}>
-                                            {playlist.playlistTitle}
-                                        </a>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
+                    <div className="dropdown">
+                        <button id="plus-dd" className="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img id="plus-icon" src={IMG.plus2PNG} alt="plus icon" width="25px"/>
+                        </button>
+                        <ul id="dropdown-ul" className="dropdown-menu">
+                            <li><h5 id="dd-top-text" className="dropdown-item">Select a playlist to add this track:</h5></li>
+                            <li><hr className="dropdown-divider"></hr></li>
+                            {userPlaylistsArr.map((playlist) => (
+                                <li key={playlist.playlistId}>
+                                    <a id="dd-item" className="dropdown-item" type="button"onClick={() => {updateTrackToAdd(uriTrack, idTrack, playlist, accessToken), trackToAdd}}>
+                                        {playlist.playlistTitle}
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
                     </div>
+                </div>
             </div> 
         </>
     );
