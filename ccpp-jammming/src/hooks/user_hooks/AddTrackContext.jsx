@@ -55,11 +55,20 @@ export const AddTrackProvider = ({ children }) => {
             }
         };
 
+        setTrackIdToAdd()
         fetchTrack();
     }, [trackIdToAdd, token]);
 
     return (
-        <AddTrackContext.Provider value={{ updateTrackToAdd, playlistToAddTrack, trackToAddContent, trackToAdd, trackToAdd, setTrackToAdd }}>
+        <AddTrackContext.Provider value={{ 
+                updateTrackToAdd, 
+                playlistToAddTrack, 
+                trackToAddContent, 
+                setPlaylistToAddTrack, 
+                setTrackToAddContent,
+                trackToAdd, 
+                trackToAdd, 
+                setTrackToAdd }}>
             {children}
         </AddTrackContext.Provider>
     );

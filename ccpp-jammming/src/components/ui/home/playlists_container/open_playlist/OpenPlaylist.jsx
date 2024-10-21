@@ -16,7 +16,7 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
     const { playlistTracksArr, setPlaylistTracksArr, handleTrackChange, clearPlaylistCache, playlistTracksCache } = usePlaylistInfo({ playlistData, accessToken });
     const { setUserPlaylistsArr, refetchPlaylists, editPlaylists } = useUserInfo({ accessToken });
     const { handleEditPlaylist, handleSharePlaylist, handleUnfollowPlaylist, reorderTracksInPlaylist, newEditedName } = usePlaylistActions({ playlistData, editPlaylists, refetchPlaylists, setUserPlaylistsArr, accessToken });
-    const { playlistToAddTrack, trackToAddContent } = useAddTrack();
+    const { playlistToAddTrack, trackToAddContent, setPlaylistToAddTrack, setTrackToAddContent } = useAddTrack();
 
     // Separate local states for tracks, reset state, and initialization flag
     const [localTracks, setLocalTracks] = useState([]);
@@ -74,8 +74,10 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
             playlistStateCache[playlistData.playlistId] = { tracks: localTracks, isSaved: true };  // Update cache after saving
             debounceStateUpdate(() => setIsSaved(playlistData.playlistId, true), 300); // Debounce setting saved state
             clearPlaylistCache(playlistData.playlistId);  // Clear cache after saving
+            
+            // Reset "track saved" state
             setResetTrackSaved(true);
-            setTimeout(() => setResetTrackSaved(false), 100);  // Reset timeout
+            setTimeout(() => setResetTrackSaved(false), 100);  // Slight delay for state synchronization
         } catch (error) {
             console.error("Error saving reordered tracks:", error);
         }
@@ -146,8 +148,11 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
 
             // Clear and update the cache after adding the track
             handleTrackChange();
+
+            setPlaylistToAddTrack({});
+            setTrackToAddContent({});
         }
-    }, [trackToAddContent, playlistToAddTrack]);
+    }, [trackToAddContent]);
 
     // Detect if there are unsaved changes independently
     const hasChanges = JSON.stringify(localTracks) !== JSON.stringify(playlistTracksArr);
@@ -155,6 +160,8 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
     console.log("localTracks", localTracks);
     console.log("playlistTracksArr", playlistTracksArr);
     console.log("playlistStateCache", playlistStateCache[playlistData.playlistId]);
+    console.log("trackToAddContent", trackToAddContent);
+    console.log("playlistToAddTrack", playlistToAddTrack);
 
     // Update saved state for buttons and icon after initialization
     useEffect(() => {
