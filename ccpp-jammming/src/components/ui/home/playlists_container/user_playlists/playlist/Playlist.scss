@@ -88,6 +88,7 @@
     height: 75px;
     padding-right: 10px;
     margin-right: 5px;
+    padding-right: 10px;
     #single-pl-row {
         //border: $border-yellow-solid;
         @include box-reset-default;
@@ -107,6 +108,7 @@
                 border-radius: 5px;
                 visibility: visible;
                 position: absolute;
+                opacity: 0.5;
             }
             #play-button {
                 //border: $border-lime-dashed;
@@ -115,7 +117,7 @@
                 #play-icon {
                     //border: $border-lime-dashed;
                     @include box-reset-default;
-                    visibility: hidden;
+                    visibility: visible;
                     position: relative;
                 }
             }
@@ -178,6 +180,7 @@
     background-color: $bg-transparent;
     border-radius: 10px;
     margin-right: 10px;
+    padding-right: 10px;
     #single-pl-row {
         //border: $border-yellow-solid;
         @include box-reset-default;
@@ -190,8 +193,9 @@
                 @include box-reset-default;
             }
             #playlist-cover {
-                visibility: hidden;
+                visibility: visible;
                 position: absolute;
+                opacity: 0.25;
             }
             #play-button {
                 //border: $border-lime-dashed;
@@ -253,6 +257,7 @@
     background-color: $bg-transparent;
     border-radius: 10px;
     margin-right: 10px;
+    padding-right: 10px;
     #single-pl-row {
         //border: $border-yellow-solid;
         @include box-reset-default;

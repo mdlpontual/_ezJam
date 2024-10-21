@@ -5,23 +5,9 @@ import useUserInfo from "../../../../../hooks/user_hooks/useUserInfo";
 import useCreatePlaylist from "../../../../../hooks/user_hooks/useCreatePlaylist";
 
 function UserPlaylists({onPlaylistClick, onBackClick, onPlayButton, onArtistClick, onAlbumClick, playTrack, pauseTrack, accessToken}) {          
-    const { userInfo, userPlaylistsArr, setUserPlaylistsArr, refetchPlaylists } = useUserInfo({accessToken});
+    const { userInfo, userPlaylistsArr, setUserPlaylistsArr, refetchPlaylists, editPlaylists } = useUserInfo({accessToken});
     const userId = userInfo.id;
-    const { createPlaylist } = useCreatePlaylist({ accessToken, userId });
-
-    const handleCreatePlaylist = async () => {
-        const playlistName = prompt("Type your new playlist's name:");
-        if (!playlistName || playlistName.trim() === "") {
-            alert("Playlist name is required.");
-            return;
-        }
-
-        // Create the new playlist
-        await createPlaylist(playlistName, "", true);
-
-        // Re-fetch playlists to include the newly created one
-        await refetchPlaylists();
-    };
+    const { handleCreatePlaylist } = useCreatePlaylist({ accessToken, userId, refetchPlaylists });
 
     return (
         <>
@@ -49,6 +35,7 @@ function UserPlaylists({onPlaylistClick, onBackClick, onPlayButton, onArtistClic
                                 playTrack={playTrack}
                                 pauseTrack={pauseTrack}
                                 refetchPlaylists={refetchPlaylists}
+                                editPlaylists={editPlaylists}
                                 setUserPlaylistsArr={setUserPlaylistsArr}
                                 accessToken={accessToken}
                                 key={playlist.playlistUri}/>

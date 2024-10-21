@@ -32,6 +32,7 @@ function PlaylistsContainer({ onPlayButton, playTrack, pauseTrack, onArtistClick
                 onAlbumClick={onAlbumClick}
                 playTrack={playTrack}
                 pauseTrack={pauseTrack}
+                onPlaylistClick={handleClickToOpenPlaylist}
                 accessToken={accessToken}
             />
         );

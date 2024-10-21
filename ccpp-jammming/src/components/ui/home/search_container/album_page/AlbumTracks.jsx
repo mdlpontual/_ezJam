@@ -1,11 +1,18 @@
 import React from "react";
 import IMG from "../../../../../assets/images/ImagesHUB";
 import { useTrack } from "../../../../../hooks/TrackContext";
+import { useAddTrack } from "../../../../../hooks/user_hooks/AddTrackContext";
+import Equalizer from "../../../../../utils/Equalizer";
+import useUserInfo from "../../../../../hooks/user_hooks/useUserInfo";
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
-function AlbumTracks({ trackContent, fetchedAlbumTracksArray, onPlayButton, playTrack, pauseTrack }) {
+function AlbumTracks({ trackContent, fetchedAlbumTracksArray, onPlayButton, playTrack, pauseTrack, accessToken }) {
     const { currentTrackUri, isPaused } = useTrack(); 
+    const { updateTrackToAdd, trackToAdd } = useAddTrack();
+    const { userPlaylistsArr } = useUserInfo({accessToken});
 
     const uriTrack = trackContent.trackUri;
+    const idTrack = trackContent.trackId;
     let uriQueue = [];
     fetchedAlbumTracksArray.map(track => uriQueue.push(track.trackUri));
 
@@ -37,15 +44,27 @@ function AlbumTracks({ trackContent, fetchedAlbumTracksArray, onPlayButton, play
                     <div id="col-title" className="col d-flex justify-content-start align-items-center">
                         <h5>{trackContent.trackTitle}</h5>
                     </div>
-                    <div id="col-plus" className="col-1 d-flex justify-content-end align-items-center">
-                        <img id="plus-icon" src={IMG.plus2PNG} alt="plus icon" width="25px"/>
-                    </div>
-                    <div id="col-minus" className="col-1 d-flex justify-content-start align-items-center">
-                        <img id="minus-icon" src={IMG.minus2PNG} alt="minus icon" width="25x"/>
-                    </div>
                     <div id="col-duration" className="col-1 d-flex justify-content-center align-items-center">
                         <p>{millisToMinutesAndSeconds(trackContent.trackDuration)}</p>
                     </div>
+                    <div id="col-plus" className="dropdown col-1 d-flex justify-content-end align-items-center">
+                        <div className="dropdown">
+                            <button id="plus-dd" className="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img id="plus-icon" src={IMG.plus2PNG} alt="plus icon" width="25px"/>
+                            </button>
+                            <ul id="dropdown-ul" className="dropdown-menu">
+                                <li><h5 id="dd-top-text" className="dropdown-item">Select a playlist to add this track:</h5></li>
+                                <li><hr className="dropdown-divider"></hr></li>
+                                {userPlaylistsArr.map((playlist) => (
+                                    <li key={playlist.playlistId}>
+                                        <a id="dd-item" className="dropdown-item" type="button"onClick={() => {updateTrackToAdd(uriTrack, idTrack, playlist, accessToken), trackToAdd}}>
+                                            {playlist.playlistTitle}
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    </div>                  
                 </div> 
             </>
         );
@@ -54,22 +73,36 @@ function AlbumTracks({ trackContent, fetchedAlbumTracksArray, onPlayButton, play
         <>
             <div id="songs-inner-row-green" className="row">
                 <div id="col-num" className="col-1 d-flex justify-content-center align-items-center">
-                    <a id="play-button" type="button" onClick={handleTogglePlay}>
-                        <img id="play-icon" src={isPaused ? IMG.playPNG2Green : IMG.pausePNG2Green} alt="play icon" width="20px"/>
+                    <a className="col-1 d-flex justify-content-center align-items-center" id="play-button" type="button" onClick={() => onPlayButton(handleTogglePlay)}>
+                        <div className="d-flex justify-content-center align-items-center" id="play-icon">
+                            {isPaused ? <img src={IMG.playPNG2Green} alt="play icon" width="22px" /> : <Equalizer />}
+                        </div>
                     </a>
                 </div>
                 <div id="col-title" className="col d-flex justify-content-start align-items-center">
                     <h5>{trackContent.trackTitle}</h5>
                 </div>
-                <div id="col-plus" className="col-1 d-flex justify-content-end align-items-center">
-                    <img id="plus-icon" src={IMG.plus2PNG} alt="plus icon" width="25px"/>
-                </div>
-                <div id="col-minus" className="col-1 d-flex justify-content-start align-items-center">
-                    <img id="minus-icon" src={IMG.minus2PNG} alt="minus icon" width="25x"/>
-                </div>
                 <div id="col-duration" className="col-1 d-flex justify-content-center align-items-center">
                     <p>{millisToMinutesAndSeconds(trackContent.trackDuration)}</p>
                 </div>
+                <div id="col-plus" className="dropdown col-1 d-flex justify-content-end align-items-center">
+                        <div className="dropdown">
+                            <button id="plus-dd" className="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img id="plus-icon" src={IMG.plus2PNG} alt="plus icon" width="25px"/>
+                            </button>
+                            <ul id="dropdown-ul" className="dropdown-menu">
+                                <li><h5 id="dd-top-text" className="dropdown-item">Select a playlist to add this track:</h5></li>
+                                <li><hr className="dropdown-divider"></hr></li>
+                                {userPlaylistsArr.map((playlist) => (
+                                    <li key={playlist.playlistId}>
+                                        <a id="dd-item" className="dropdown-item" type="button"onClick={() => {updateTrackToAdd(uriTrack, idTrack, playlist, accessToken), trackToAdd}}>
+                                            {playlist.playlistTitle}
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    </div>                
             </div>
         </>
     );

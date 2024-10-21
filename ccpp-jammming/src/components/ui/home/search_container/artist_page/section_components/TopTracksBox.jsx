@@ -2,7 +2,7 @@ import React from "react";
 import IMG from "../../../../../../assets/images/ImagesHUB";
 import TopTrack from "./unit_components/TopTrack";
 
-function TopTracksBox({ fetchedArtistTopTracksArray, onPlayButton, playTrack, pauseTrack, }) {
+function TopTracksBox({ fetchedArtistTopTracksArray, onPlayButton, playTrack, pauseTrack, accessToken}) {
     return (
         <>
             <div id="top-five-container" className="container-fluid">
@@ -17,7 +17,8 @@ function TopTracksBox({ fetchedArtistTopTracksArray, onPlayButton, playTrack, pa
                                 playTrack={playTrack}
                                 pauseTrack={pauseTrack}
                                 key={track.trackUri} 
-                                fetchedArtistTopTracksArray={fetchedArtistTopTracksArray}/>
+                                fetchedArtistTopTracksArray={fetchedArtistTopTracksArray}
+                                accessToken={accessToken}/>
                         ))}
                     </div>
                 </div>
