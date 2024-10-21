@@ -26,7 +26,7 @@ export const SaveProvider = ({ children }) => {
     };
 
     return (
-        <SaveContext.Provider value={{ getIsSaved, setIsSaved }}>
+        <SaveContext.Provider value={{ getIsSaved, savedState, setIsSaved }}>
             {children}
         </SaveContext.Provider>
     );

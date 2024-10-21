@@ -28,8 +28,6 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
     const { getIsSaved, setIsSaved } = useSave();
     const isSaved = getIsSaved(playlistData.playlistId); // Get saved state for the specific playlist
 
-    //console.log("playlistStateCache-OPL", playlistTracksCache[playlistData.playlistId])
-
     // Initialize tracks and saved state independently, with cache and API
     useEffect(() => {
         if (playlistStateCache[playlistData.playlistId]) {
@@ -137,6 +135,12 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
                 // Create a new array (deep copy) and add the new track
                 const updatedAddedTracks = [...prevTracks, { ...trackToAddContent }];
 
+                // Immediately compare and update hasChanges
+                const hasChangesNow = JSON.stringify(updatedAddedTracks) !== JSON.stringify(playlistTracksArr);
+
+                // Update isSaved and hasChanges immediately
+                setIsSaved(playlistData.playlistId, !hasChangesNow);
+
                 // Update the playlistStateCache to reflect the added tracks
                 playlistStateCache[playlistData.playlistId] = {
                     tracks: updatedAddedTracks,
@@ -154,9 +158,6 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
         }
     }, [trackToAddContent]);
 
-    // Detect if there are unsaved changes independently
-    const hasChanges = JSON.stringify(localTracks) !== JSON.stringify(playlistTracksArr);
-
     console.log("localTracks", localTracks);
     console.log("playlistTracksArr", playlistTracksArr);
     console.log("playlistStateCache", playlistStateCache[playlistData.playlistId]);
@@ -166,9 +167,9 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
     // Update saved state for buttons and icon after initialization
     useEffect(() => {
         if (isInitialized) {
-            debounceStateUpdate(() => setIsSaved(playlistData.playlistId, !hasChanges), 300);  // Debounce setting state to prevent rapid updates
+            debounceStateUpdate(() => setIsSaved(playlistData.playlistId, isSaved), 300);  // Debounce setting state to prevent rapid updates
         }
-    }, [hasChanges, isInitialized, playlistData.playlistId, setIsSaved]);
+    }, [isSaved, isInitialized, playlistData.playlistId, setIsSaved]);
     
 
     return (
@@ -254,12 +255,12 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
                 <footer id="open-pl-footer" className="row">
                     <div className="col-1 d-flex flex-column justify-content-center align-items-center"></div>
                     <div id="save-button-col" className="col-5 d-flex flex-column justify-content-center align-items-center">
-                        <button id="save-button" className={`btn btn-lg ${hasChanges ? 'btn-primary' : 'btn-outline-light'}`} onClick={handleSaveChanges} disabled={!hasChanges}>
+                        <button id="save-button" className={`btn btn-lg ${!isSaved ? 'btn-primary' : 'btn-outline-light'}`} onClick={handleSaveChanges} disabled={isSaved}>
                             Save to Spotify
                         </button>
                     </div>
                     <div id="discard-button-col" className="col-5 d-flex flex-column justify-content-center align-items-center">
-                        <button id="discard-button" className={`btn btn-lg ${hasChanges ? 'btn-danger' : 'btn-outline-light'}`} onClick={handleDiscardChanges} disabled={!hasChanges}>
+                        <button id="discard-button" className={`btn btn-lg ${!isSaved ? 'btn-danger' : 'btn-outline-light'}`} onClick={handleDiscardChanges} disabled={isSaved}>
                             Discard Changes
                         </button>
                     </div>
