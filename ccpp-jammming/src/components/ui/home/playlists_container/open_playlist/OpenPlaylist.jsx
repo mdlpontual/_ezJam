@@ -124,7 +124,7 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
         }
     };
 
-    // Handle adding a track
+    /* // Handle adding a track
     useEffect(() => {
         // Check if either localTracks or playlistTracksArr is empty, null, or undefined
         if (
@@ -167,7 +167,77 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
             setPlaylistToAddTrack({});
             setTrackToAddContent({});
         }
-    }, [trackToAddContent, localTracks, playlistTracksArr]);
+    }, [trackToAddContent]); */
+
+    useEffect(() => {
+        // Set a timeout of 5 seconds for waiting until localTracks or playlistTracksArr are populated
+        const timeoutDuration = 500; 
+        let timeoutId = null;
+    
+        const checkAndProceed = () => {
+            // Check if either localTracks or playlistTracksArr is empty, null, or undefined
+            if (
+                !Array.isArray(localTracks) || localTracks.length === 0 ||
+                !Array.isArray(playlistTracksArr) || playlistTracksArr.length === 0
+            ) {
+                // Wait for a limited time, then proceed after the timeout
+                timeoutId = setTimeout(() => {
+                    proceedToAddTrack();  // Proceed after timeout
+                }, timeoutDuration);
+                return;  // Exit early and wait for the timeout
+            }
+    
+            // If localTracks and playlistTracksArr are already populated, proceed immediately
+            proceedToAddTrack();
+        };
+    
+        // Function to proceed with adding the track
+        const proceedToAddTrack = () => {
+            // Check if trackToAddContent has a valid trackUri before proceeding
+            if (playlistToAddTrack.playlistTitle === playlistData.playlistTitle) {
+                setLocalTracks((prevTracks) => {
+                    const trackExists = trackToAddContent.some(trackToAdd => prevTracks.some(prevTrack => prevTrack.trackUri === trackToAdd.trackUri));
+                    if (trackExists) {
+                        return prevTracks;  // Prevent adding duplicates
+                    }
+    
+                    // Create a new array (deep copy) and add the new track
+                    const updatedAddedTracks = prevTracks.concat(trackToAddContent);
+    
+                    // Immediately compare and update hasChanges
+                    const hasChangesNow = JSON.stringify(updatedAddedTracks) !== JSON.stringify(playlistTracksArr);
+    
+                    // Update isSaved and hasChanges immediately
+                    setIsSaved(playlistData.playlistId, !hasChangesNow);
+    
+                    // Update the playlistStateCache to reflect the added tracks
+                    playlistStateCache[playlistData.playlistId] = {
+                        tracks: updatedAddedTracks,
+                        isSaved: false,
+                    };
+    
+                    return updatedAddedTracks;  // Return the new array
+                });
+    
+                // Clear and update the cache after adding the track
+                handleTrackChange();
+    
+                setPlaylistToAddTrack({});
+                setTrackToAddContent({});
+            }
+        };
+    
+        // Run the check on mount or when trackToAddContent changes
+        checkAndProceed();
+    
+        // Clean up the timeout on unmount
+        return () => {
+            if (timeoutId) {
+                clearTimeout(timeoutId);
+            }
+        };
+    }, [trackToAddContent]);
+    
 
     // Update saved state for buttons and icon after initialization
     useEffect(() => {
@@ -251,27 +321,32 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
                         </div>
                         <div id="tracks-list" className="row flex-grow-1">                           
                             <div id="tracks-list-col" className="col">
-                                <DndContext onDragEnd={handleDragEnd}>
-                                    <SortableContext items={localTracks.map(track => track.trackUri)} strategy={verticalListSortingStrategy}>
-                                        {localTracks === true ? localTracks.map((track, i) => (
-                                            <PlaylistTrack
-                                                order={i}
-                                                playlistTrack={track}
-                                                playlistTracksArr={localTracks}
-                                                setPlaylistTracksArr={setPlaylistTracksArr}
-                                                onPlayButton={onPlayButton}
-                                                onArtistClick={onArtistClick}
-                                                onAlbumClick={onAlbumClick}
-                                                playTrack={playTrack}
-                                                pauseTrack={pauseTrack}
-                                                preDeleteTrack={preDeleteTrack}
-                                                accessToken={accessToken}
-                                                key={track.trackUri}
-                                                resetTrackSaved={resetTrackSaved}
-                                            />
-                                        )) : <EmptyPlaylistPage/>}
-                                    </SortableContext>
-                                </DndContext>
+                                {localTracks.length === 0 ? (
+                                    <EmptyPlaylistPage/>
+                                ) : (
+                                    // Render the track list if there are tracks
+                                    <DndContext onDragEnd={handleDragEnd}>
+                                        <SortableContext items={localTracks.map(track => track.trackUri)} strategy={verticalListSortingStrategy}>
+                                            {localTracks.map((track, i) => (
+                                                <PlaylistTrack
+                                                    order={i}
+                                                    playlistTrack={track}
+                                                    playlistTracksArr={localTracks}
+                                                    setPlaylistTracksArr={setPlaylistTracksArr}
+                                                    onPlayButton={onPlayButton}
+                                                    onArtistClick={onArtistClick}
+                                                    onAlbumClick={onAlbumClick}
+                                                    playTrack={playTrack}
+                                                    pauseTrack={pauseTrack}
+                                                    preDeleteTrack={preDeleteTrack}
+                                                    accessToken={accessToken}
+                                                    key={track.trackUri}
+                                                    resetTrackSaved={resetTrackSaved}
+                                                />
+                                            ))}
+                                        </SortableContext>
+                                    </DndContext>
+                                )}
                             </div>
                         </div>
                     </div>
