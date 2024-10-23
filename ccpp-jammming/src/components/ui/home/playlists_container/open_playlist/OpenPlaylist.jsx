@@ -8,6 +8,7 @@ import useUserInfo from "../../../../../hooks/user_hooks/useUserInfo";
 import { DndContext } from '@dnd-kit/core';
 import { SortableContext, arrayMove, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { useAddTrack } from "../../../../../hooks/user_hooks/AddTrackContext";
+import EmptyPlaylistPage from "./track/EmptyPlaylistPage";
 
 const playlistStateCache = {};
 
@@ -248,11 +249,11 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
                             </div>
                             <div id="col-minus" className="col-1 d-flex justify-content-start align-items-end"></div>
                         </div>
-                        <div id="tracks-list" className="row flex-grow-1">
+                        <div id="tracks-list" className="row flex-grow-1">                           
                             <div id="tracks-list-col" className="col">
                                 <DndContext onDragEnd={handleDragEnd}>
                                     <SortableContext items={localTracks.map(track => track.trackUri)} strategy={verticalListSortingStrategy}>
-                                        {localTracks.map((track, i) => (
+                                        {localTracks === true ? localTracks.map((track, i) => (
                                             <PlaylistTrack
                                                 order={i}
                                                 playlistTrack={track}
@@ -266,9 +267,9 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
                                                 preDeleteTrack={preDeleteTrack}
                                                 accessToken={accessToken}
                                                 key={track.trackUri}
-                                                resetTrackSaved={resetTrackSaved}  // Pass reset state to PlaylistTrack
+                                                resetTrackSaved={resetTrackSaved}
                                             />
-                                        ))}
+                                        )) : <EmptyPlaylistPage/>}
                                     </SortableContext>
                                 </DndContext>
                             </div>
