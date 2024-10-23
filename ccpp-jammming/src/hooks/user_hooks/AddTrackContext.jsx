@@ -49,7 +49,8 @@ export const AddTrackProvider = ({ children }) => {
                     albumCover: trackData.album.images[0]?.url || null,
                 };
         
-                setTrackToAddContent([...trackToAddContent, track]);
+                setTrackToAddContent(prevContent => Array.isArray(prevContent) ? [...prevContent, track] : [track]);
+
             } catch (error) {
                 console.error("Error fetching track content:", error);
             }

@@ -5,7 +5,7 @@ import { useTrack } from "../../../../../../hooks/TrackContext";
 import { useSortable } from '@dnd-kit/sortable'; // Importing dnd-kit sortable
 import { CSS } from '@dnd-kit/utilities'; // Utility for CSS transformation
 
-function PlaylistTrack({ order, playlistTrack, playlistTracksArr, setPlaylistTracksArr, onPlayButton, onArtistClick, onAlbumClick, playTrack, pauseTrack, preDeleteTrack, accessToken, resetTrackSaved }) {
+function PlaylistTrack({ order, playlistTrack, playlistTracksArr, onPlayButton, onArtistClick, onAlbumClick, playTrack, pauseTrack, preDeleteTrack, accessToken, resetTrackSaved }) {
     const { currentTrackUri, isPaused } = useTrack();
     const [isSaved, setIsSaved] = useState(true);  // Track whether the current track is saved
 
@@ -30,10 +30,16 @@ function PlaylistTrack({ order, playlistTrack, playlistTracksArr, setPlaylistTra
 
     // Toggle play/pause
     const handleTogglePlay = () => {
-        if (isPaused) {
-            playTrack(); // Play the track
+        if (currentTrackUri !== uriTrack) {
+            // Play this track if it's not currently the one playing
+            onPlayButton(uriTrack, uriQueue);
         } else {
-            pauseTrack(); // Pause the track
+            // Toggle play/pause state only for the current track
+            if (isPaused) {
+                playTrack();
+            } else {
+                pauseTrack();
+            }
         }
     };
 
@@ -68,7 +74,7 @@ function PlaylistTrack({ order, playlistTrack, playlistTracksArr, setPlaylistTra
                         <div className="cover">
                             <img src={cover} height="40px" />
                         </div>
-                        <a className="col-1 d-flex justify-content-center align-items-center" id="play-button" type="button" onClick={() => onPlayButton(uriTrack, uriQueue)}>
+                        <a className="col-1 d-flex justify-content-center align-items-center" id="play-button" type="button" onClick={handleTogglePlay}>
                             <img id="play-icon" src={IMG.play2PNG} alt="play icon" width="22px" />
                         </a>
                     </div>
@@ -113,7 +119,7 @@ function PlaylistTrack({ order, playlistTrack, playlistTracksArr, setPlaylistTra
                     <div className="cover">
                         <img src={cover} height="40px" />
                     </div>
-                    <a className="col-1 d-flex justify-content-center align-items-center" id="play-button" type="button" onClick={handleTogglePlay(uriTrack)}>
+                    <a className="col-1 d-flex justify-content-center align-items-center" id="play-button" type="button" onClick={handleTogglePlay}>
                         <div className="d-flex justify-content-center align-items-center" id="play-icon">
                             {isPaused ? <img src={IMG.playPNG2Green} alt="play icon" width="22px" /> : <Equalizer />}
                         </div>

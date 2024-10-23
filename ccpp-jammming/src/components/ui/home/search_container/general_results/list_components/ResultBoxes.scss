@@ -91,15 +91,12 @@
                     //border: $border-lime-dotted;
                     @include box-reset-default;
                     width: 40px;
-                    position: relative;
-                    #play-button {
-                        //border: $border-lime-dotted;
+                    .drag {
                         @include box-reset-default;
-                        position: absolute;
-                        #play-icon {
+                        cursor: grab;
+                        img {
                             //border: $border-lime-dotted;
                             @include box-reset-default;
-                            position: relative;
                         }
                     }
                 }
@@ -107,9 +104,22 @@
                     //border: $border-lime-dotted;
                     @include box-reset-default;
                     width: 50px;
-                    img {
+                    position: relative;
+                    #cover-img {
                         //border: $border-lime-dotted;
                         @include box-reset-default;
+                        position: absolute;
+                    }
+                    #play-button {
+                        //border: $border-lime-dotted;
+                        @include box-reset-default;
+                        position: absolute;
+                        visibility: hidden;
+                        #play-icon {
+                            //border: $border-lime-dotted;
+                            @include box-reset-default;
+                            position: relative;
+                        }
                     }
                 }
                 #col-title {
@@ -194,9 +204,36 @@
                         //border: $border-cyan-dotted;
                         @include box-reset-default;
                         width: 40px;
+                        position: relative;
                         #plus-icon {
                             //border: $border-cyan-dotted;
                             @include box-reset-default;
+                            visibility: visible;
+                            position: absolute;
+                        }
+                        #plus-icon-green {
+                            //border: $border-cyan-dotted;
+                            @include box-reset-default;
+                            visibility: hidden;
+                            position: absolute;
+                        }
+                    }
+                    #plus-dd:hover {
+                        //border: $border-cyan-dotted;
+                        @include box-reset-default;
+                        width: 40px;
+                        position: relative;
+                        #plus-icon {
+                            //border: $border-cyan-dotted;
+                            @include box-reset-default;
+                            visibility: hidden;
+                            position: absolute;
+                        }
+                        #plus-icon-green {
+                            //border: $border-cyan-dotted;
+                            @include box-reset-default;
+                            visibility: visible;
+                            position: absolute;
                         }
                     }
                     #dropdown-ul {
@@ -251,30 +288,37 @@
                 #col-add {
                     //border: $border-lime-dotted;
                     @include box-reset-default;
-                    color: $primary;
                     width: 40px;
-                    position: relative;
-                    #play-button {
-                        //border: $border-lime-dotted;
+                    .drag {
                         @include box-reset-default;
-                        color: $primary;
-                        position: absolute;
-                        #play-icon {
+                        cursor: grab;
+                        img {
                             //border: $border-lime-dotted;
                             @include box-reset-default;
-                            color: $primary;
-                            position: relative;
                         }
                     }
                 }
                 #col-cover {
                     //border: $border-lime-dotted;
-                    color: $primary;
                     @include box-reset-default;
                     width: 50px;
-                    img {
+                    position: relative;
+                    #cover-img {
                         //border: $border-lime-dotted;
                         @include box-reset-default;
+                        position: absolute;
+                        opacity: 0.25;
+                    }
+                    #play-button {
+                        //border: $border-lime-dotted;
+                        @include box-reset-default;
+                        position: absolute;
+                        visibility: visible;
+                        #play-icon {
+                            //border: $border-lime-dotted;
+                            @include box-reset-default;
+                            position: relative;
+                        }
                     }
                 }
                 #col-title {
@@ -368,9 +412,36 @@
                         //border: $border-cyan-dotted;
                         @include box-reset-default;
                         width: 40px;
+                        position: relative;
                         #plus-icon {
                             //border: $border-cyan-dotted;
                             @include box-reset-default;
+                            visibility: visible;
+                            position: absolute;
+                        }
+                        #plus-icon-green {
+                            //border: $border-cyan-dotted;
+                            @include box-reset-default;
+                            visibility: hidden;
+                            position: absolute;
+                        }
+                    }
+                    #plus-dd:hover {
+                        //border: $border-cyan-dotted;
+                        @include box-reset-default;
+                        width: 40px;
+                        position: relative;
+                        #plus-icon {
+                            //border: $border-cyan-dotted;
+                            @include box-reset-default;
+                            visibility: hidden;
+                            position: absolute;
+                        }
+                        #plus-icon-green {
+                            //border: $border-cyan-dotted;
+                            @include box-reset-default;
+                            visibility: visible;
+                            position: absolute;
                         }
                     }
                     #dropdown-ul {
@@ -420,10 +491,56 @@
             #songs-inner-row:hover {
                 background-color: $bg-transparent;
                 border-radius: 15px;
+                #col-cover {
+                    //border: $border-lime-dotted;
+                    @include box-reset-default;
+                    width: 50px;
+                    position: relative;
+                    #cover-img {
+                        //border: $border-lime-dotted;
+                        @include box-reset-default;
+                        position: absolute;
+                        opacity: 0.25;
+                    }
+                    #play-button {
+                        //border: $border-lime-dotted;
+                        @include box-reset-default;
+                        position: absolute;
+                        visibility: visible;
+                        #play-icon {
+                            //border: $border-lime-dotted;
+                            @include box-reset-default;
+                            position: relative;
+                        }
+                    }
+                }
             }
             #songs-inner-row-green:hover {
                 background-color: $bg-transparent;
                 border-radius: 15px;
+                #col-cover {
+                    //border: $border-lime-dotted;
+                    @include box-reset-default;
+                    width: 50px;
+                    position: relative;
+                    #cover-img {
+                        //border: $border-lime-dotted;
+                        @include box-reset-default;
+                        position: absolute;
+                        opacity: 0.25;
+                    }
+                    #play-button {
+                        //border: $border-lime-dotted;
+                        @include box-reset-default;
+                        position: absolute;
+                        visibility: visible;
+                        #play-icon {
+                            //border: $border-lime-dotted;
+                            @include box-reset-default;
+                            position: relative;
+                        }
+                    }
+                }
             }
         }
     }
