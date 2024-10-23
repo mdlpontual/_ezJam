@@ -13,10 +13,10 @@ const playlistStateCache = {};
 
 // Component
 function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, onAlbumClick, playTrack, pauseTrack, onPlaylistClick, accessToken }) {
-    const { playlistTracksArr, setPlaylistTracksArr, handleTrackChange, clearPlaylistCache, playlistTracksCache } = usePlaylistInfo({ playlistData, accessToken });
+    const { playlistTracksArr, setPlaylistTracksArr, handleTrackChange, clearPlaylistCache } = usePlaylistInfo({ playlistData, accessToken });
     const { setUserPlaylistsArr, refetchPlaylists, editPlaylists } = useUserInfo({ accessToken });
     const { handleEditPlaylist, handleSharePlaylist, handleUnfollowPlaylist, reorderTracksInPlaylist, newEditedName } = usePlaylistActions({ playlistData, editPlaylists, refetchPlaylists, setUserPlaylistsArr, accessToken });
-    const { playlistToAddTrack, trackToAddContent, setPlaylistToAddTrack, setTrackToAddContent } = useAddTrack();
+    const { updateTrackToAdd, playlistToAddTrack, trackToAddContent, setPlaylistToAddTrack, setTrackToAddContent } = useAddTrack();
 
     // Separate local states for tracks, reset state, and initialization flag
     const [localTracks, setLocalTracks] = useState([]);
@@ -157,8 +157,6 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
                     isSaved: false,
                 };
 
-                console.log("prevTracks", prevTracks)
-
                 return updatedAddedTracks;  // Return the new array
             });
 
@@ -170,24 +168,36 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
         }
     }, [trackToAddContent, localTracks, playlistTracksArr]);
 
-    console.log("trackToAddContent", trackToAddContent);
-/*     console.log("localTracks", localTracks);
-    console.log("playlistTracksArr", playlistTracksArr);
-    console.log("playlistStateCache", playlistStateCache[playlistData.playlistId]);
-    console.log("trackToAddContent", trackToAddContent);
-    console.log("playlistToAddTrack", playlistToAddTrack); */
-
     // Update saved state for buttons and icon after initialization
     useEffect(() => {
         if (isInitialized) {
             debounceStateUpdate(() => setIsSaved(playlistData.playlistId, isSaved), 300);  // Debounce setting state to prevent rapid updates
         }
     }, [isSaved, isInitialized, playlistData.playlistId, setIsSaved, trackToAddContent]);
+
+    //------------------------------------------------------------------------------------------------------------
     
+    // Handle drag over event to allow drop
+    const handleDragOver = (event) => {
+        event.preventDefault(); // Necessary to allow dropping
+    };
+
+    // Handle drop event when track is dropped onto a playlist
+    const handleDrop = (event, playlistData) => {
+        event.preventDefault();
+        const uriTrack = event.dataTransfer.getData('trackUri');
+        const idTrack = event.dataTransfer.getData('trackId');
+        const accessToken = event.dataTransfer.getData('accessToken');
+
+        const playlist = playlistData;
+
+        // Call updateTrackToAdd with dropped track and selected playlist
+        updateTrackToAdd(uriTrack, idTrack, playlist, accessToken);
+    };
 
     return (
         <>
-            <div id="open-pl-container" className="container-fluid d-flex flex-column">
+            <div id="open-pl-container" className="container-fluid d-flex flex-column" onDragOver={handleDragOver} onDrop={(event) => handleDrop(event, playlistData)}>
                 <header id="open-pl-header" className="row">
                     <div id="go-back-col" className="col-auto d-flex flex-column justify-content-center align-items-start">
                         <a id="back-to-playlists" type="button" onClick={() => onBackClick()}>
@@ -284,4 +294,4 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
     );
 }
 
-export default OpenPlaylist;
+export default OpenPlaylist; 

@@ -91,9 +91,36 @@
                         //border: $border-cyan-dotted;
                         @include box-reset-default;
                         width: 40px;
+                        position: relative;
                         #plus-icon {
                             //border: $border-cyan-dotted;
                             @include box-reset-default;
+                            visibility: visible;
+                            position: absolute;
+                        }
+                        #plus-icon-green {
+                            //border: $border-cyan-dotted;
+                            @include box-reset-default;
+                            visibility: hidden;
+                            position: absolute;
+                        }
+                    }
+                    #plus-dd:hover {
+                        //border: $border-cyan-dotted;
+                        @include box-reset-default;
+                        width: 40px;
+                        position: relative;
+                        #plus-icon {
+                            //border: $border-cyan-dotted;
+                            @include box-reset-default;
+                            visibility: hidden;
+                            position: absolute;
+                        }
+                        #plus-icon-green {
+                            //border: $border-cyan-dotted;
+                            @include box-reset-default;
+                            visibility: visible;
+                            position: absolute;
                         }
                     }
                     #dropdown-ul {
@@ -169,6 +196,7 @@
                         //border: $border-yellow-dotted;
                         @include box-reset-default;
                         height: 50px;
+                        cursor: grab;
                         #col-num {
                             //border: $border-cyan-dotted;
                             @include box-reset-default;
@@ -181,19 +209,20 @@
                                 overflow: hidden;
                                 position: absolute;
                             }
-                            #play-button {
+                            #drag-button {
                                 //border: $border-lime-dotted;
                                 @include box-reset-default;
                                 position: absolute;
-                                #play-icon {
+                                #drag-icon {
                                     //border: $border-lime-dotted;
                                     @include box-reset-default;
                                     visibility: hidden;
                                     position: relative;
+                                    cursor: grab;
                                 }
                             }
                         };
-                        #col-cover {
+                        #col-play {
                             //border: $border-cyan-dotted;
                             @include box-reset-default;
                             width: 50px;
@@ -236,9 +265,36 @@
                                 //border: $border-cyan-dotted;
                                 @include box-reset-default;
                                 width: 40px;
+                                position: relative;
                                 #plus-icon {
                                     //border: $border-cyan-dotted;
                                     @include box-reset-default;
+                                    visibility: visible;
+                                    position: absolute;
+                                }
+                                #plus-icon-green {
+                                    //border: $border-cyan-dotted;
+                                    @include box-reset-default;
+                                    visibility: hidden;
+                                    position: absolute;
+                                }
+                            }
+                            #plus-dd:hover {
+                                //border: $border-cyan-dotted;
+                                @include box-reset-default;
+                                width: 40px;
+                                position: relative;
+                                #plus-icon {
+                                    //border: $border-cyan-dotted;
+                                    @include box-reset-default;
+                                    visibility: hidden;
+                                    position: absolute;
+                                }
+                                #plus-icon-green {
+                                    //border: $border-cyan-dotted;
+                                    @include box-reset-default;
+                                    visibility: visible;
+                                    position: absolute;
                                 }
                             }
                             #dropdown-ul {
@@ -313,35 +369,34 @@
                         @include box-reset-default;
                         color: $primary;
                         height: 50px;
+                        cursor: grab;
                         #col-num {
                             //border: $border-cyan-dotted;
                             @include box-reset-default;
-                            color: $primary;
                             width: 40px;
                             position: relative;
                             h5 {
                                 //border: $border-lime-dotted;
                                 @include box-reset-default;
-                                color: $primary;
                                 text-overflow: ellipsis;
                                 overflow: hidden;
                                 position: absolute;
+                                color: $primary
                             }
-                            #play-button {
+                            #drag-button {
                                 //border: $border-lime-dotted;
                                 @include box-reset-default;
-                                color: $primary;
                                 position: absolute;
-                                #play-icon {
+                                #drag-icon {
                                     //border: $border-lime-dotted;
                                     @include box-reset-default;
-                                    color: $primary;
-                                    visibility: visible;
+                                    visibility: hidden;
                                     position: relative;
+                                    cursor: grab;
                                 }
                             }
                         };
-                        #col-cover {
+                        #col-play {
                             //border: $border-cyan-dotted;
                             @include box-reset-default;
                             width: 50px;
@@ -387,9 +442,36 @@
                                 //border: $border-cyan-dotted;
                                 @include box-reset-default;
                                 width: 40px;
+                                position: relative;
                                 #plus-icon {
                                     //border: $border-cyan-dotted;
                                     @include box-reset-default;
+                                    visibility: visible;
+                                    position: absolute;
+                                }
+                                #plus-icon-green {
+                                    //border: $border-cyan-dotted;
+                                    @include box-reset-default;
+                                    visibility: hidden;
+                                    position: absolute;
+                                }
+                            }
+                            #plus-dd:hover {
+                                //border: $border-cyan-dotted;
+                                @include box-reset-default;
+                                width: 40px;
+                                position: relative;
+                                #plus-icon {
+                                    //border: $border-cyan-dotted;
+                                    @include box-reset-default;
+                                    visibility: hidden;
+                                    position: absolute;
+                                }
+                                #plus-icon-green {
+                                    //border: $border-cyan-dotted;
+                                    @include box-reset-default;
+                                    visibility: visible;
+                                    position: absolute;
                                 }
                             }
                             #dropdown-ul {
@@ -480,11 +562,11 @@
                                 visibility: hidden;
                                 position: absolute;
                             }
-                            #play-button {
+                            #drag-button {
                                 //border: $border-lime-dotted;
                                 @include box-reset-default;
                                 position: absolute;
-                                #play-icon {
+                                #drag-icon {
                                     //border: $border-lime-dotted;
                                     @include box-reset-default;
                                     visibility: visible;
@@ -522,11 +604,11 @@
                                 visibility: hidden;
                                 position: absolute;
                             }
-                            #play-button {
+                            #drag-button {
                                 //border: $border-lime-dotted;
                                 @include box-reset-default;
                                 position: absolute;
-                                #play-icon {
+                                #drag-icon {
                                     //border: $border-lime-dotted;
                                     @include box-reset-default;
                                     visibility: visible;

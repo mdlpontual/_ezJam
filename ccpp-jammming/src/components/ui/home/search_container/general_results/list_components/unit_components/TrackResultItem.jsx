@@ -38,17 +38,27 @@ function TrackResultItem({ artistContent, albumContent, trackContent, fetchedTra
         }
     };
 
+    // Handle drag start
+    const handleDragStart = (event) => {
+        event.dataTransfer.setData('trackUri', uriTrack);
+        event.dataTransfer.setData('trackId', idTrack);
+        event.dataTransfer.setData('accessToken', accessToken);
+    };
+
     if(currentTrackUri !== uriTrack) {
         return (
             <>
-                <div id="songs-inner-row" className="row">
+                <div id="songs-inner-row" className="row" draggable="true" onDragStart={handleDragStart}>
                     <div id="col-add" className="col-1 d-flex justify-content-center align-items-center">
+                        <div className="drag" draggable="false" onDragStart={handleDragStart}> 
+                            <img src={IMG.dragPNG} height="25px" />
+                        </div>
+                    </div>
+                    <div id="col-cover" className="col-1 d-flex justify-content-center align-items-center">
+                        <img id="cover-img"src={trackCover} height="40px"/>
                         <a id="play-button" type="button" onClick={() => onPlayButton(uriTrack, uriQueue)}>
                             <img id="play-icon" src={IMG.play2PNG} alt="play icon" width="20px"/>
                         </a>
-                    </div>
-                    <div id="col-cover" className="col-1 d-flex justify-content-center align-items-center">
-                        <img src={trackCover} height="40px"/>
                     </div>
                     <div id="col-title" className="col d-flex justify-content-start align-items-center">
                         <h5>{trackContent.trackTitle}</h5>
@@ -64,6 +74,7 @@ function TrackResultItem({ artistContent, albumContent, trackContent, fetchedTra
                         <div className="dropdown">
                             <button id="plus-dd" className="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <img id="plus-icon" src={IMG.plus2PNG} alt="plus icon" width="25px"/>
+                                <img id="plus-icon-green" src={IMG.plus2GreenPNG} alt="plus icon" width="25px"/>
                             </button>
                             <ul id="dropdown-ul" className="dropdown-menu">
                                 <li><h5 id="dd-top-text" className="dropdown-item">Select a playlist to add this track:</h5></li>
@@ -84,16 +95,19 @@ function TrackResultItem({ artistContent, albumContent, trackContent, fetchedTra
     }
     return (
         <>
-            <div id="songs-inner-row-green" className="row">
+            <div id="songs-inner-row-green" className="row" draggable="true" onDragStart={handleDragStart}>
                 <div id="col-add" className="col-1 d-flex justify-content-center align-items-center">
+                    <div className="drag">
+                        <img src={IMG.greenDragPNG} height="25px" />
+                    </div>
+                </div>
+                <div id="col-cover" className="col-1 d-flex justify-content-center align-items-center">
+                    <img id="cover-img"src={trackCover} height="40px"/>
                     <a className="col-1 d-flex justify-content-center align-items-center" id="play-button" type="button" onClick={() => onPlayButton(handleTogglePlay)}>
                         <div className="d-flex justify-content-center align-items-center" id="play-icon">
                             {isPaused ? <img src={IMG.playPNG2Green} alt="play icon" width="22px" /> : <Equalizer />}
                         </div>
                     </a>
-                </div>
-                <div id="col-cover" className="col-1 d-flex justify-content-center align-items-center">
-                    <img src={trackCover} height="40px"/>
                 </div>
                 <div id="col-title" className="col d-flex justify-content-start align-items-center">
                     <h5>{trackContent.trackTitle}</h5>
@@ -109,6 +123,7 @@ function TrackResultItem({ artistContent, albumContent, trackContent, fetchedTra
                     <div className="dropdown">
                         <button id="plus-dd" className="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <img id="plus-icon" src={IMG.plus2PNG} alt="plus icon" width="25px"/>
+                            <img id="plus-icon-green" src={IMG.plus2GreenPNG} alt="plus icon" width="25px"/>
                         </button>
                         <ul id="dropdown-ul" className="dropdown-menu">
                             <li><h5 id="dd-top-text" className="dropdown-item">Select a playlist to add this track:</h5></li>
