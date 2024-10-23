@@ -123,7 +123,6 @@ function PlaylistTrack({ order, playlistTrack, playlistTracksArr, onPlayButton, 
                         <div className="d-flex justify-content-center align-items-center" id="play-icon">
                             {isPaused ? <img src={IMG.playPNG2Green} alt="play icon" width="22px" /> : <Equalizer />}
                         </div>
-                        <img id="pause-icon" src={IMG.pausePNG2Green} alt="pause icon" width="22px" />
                     </a>
                 </div>
                 <div id="col-title" className="col d-flex justify-content-start align-items-center">

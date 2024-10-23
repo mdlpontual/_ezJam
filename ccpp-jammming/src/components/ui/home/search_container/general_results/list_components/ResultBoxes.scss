@@ -87,6 +87,7 @@
                 //border: $border-yellow-dashed;
                 @include box-reset-default;
                 height: 50px;
+                cursor: grab;
                 #col-add {
                     //border: $border-lime-dotted;
                     @include box-reset-default;

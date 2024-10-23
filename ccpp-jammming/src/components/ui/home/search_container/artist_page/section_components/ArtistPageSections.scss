@@ -26,12 +26,38 @@
                 height: 50px;
                 padding-right: 5px;
                 margin-right: 10px;
+                cursor: grab;
                 #col-add {
                     //border: $border-lime-dotted;
                     @include box-reset-default;
                     width: 30px;
                     position: relative;
-                    p {
+                    h5 {
+                        //border: $border-lime-dotted;
+                        @include box-reset-default;
+                        text-overflow: ellipsis;
+                        overflow: hidden;
+                        position: absolute;
+                    }
+                    #drag-button {
+                        //border: $border-lime-dotted;
+                        @include box-reset-default;
+                        position: absolute;
+                        #drag-icon {
+                            //border: $border-lime-dotted;
+                            @include box-reset-default;
+                            visibility: hidden;
+                            position: relative;
+                            cursor: grab;
+                        }
+                    }
+                }
+                #col-cover {
+                    //border: $border-lime-dotted;
+                    @include box-reset-default;
+                    width: 50px;
+                    position: relative;
+                    #cover-img {
                         //border: $border-lime-dotted;
                         @include box-reset-default;
                         position: absolute;
@@ -40,21 +66,12 @@
                         //border: $border-lime-dotted;
                         @include box-reset-default;
                         position: absolute;
+                        visibility: hidden;
                         #play-icon {
                             //border: $border-lime-dotted;
                             @include box-reset-default;
-                            visibility: hidden;
                             position: relative;
                         }
-                    }
-                }
-                #col-cover {
-                    //border: $border-lime-dotted;
-                    @include box-reset-default;
-                    width: 50px;
-                    img {
-                        //border: $border-lime-dotted;
-                        @include box-reset-default;
                     }
                 }
                 #col-title {
@@ -91,9 +108,36 @@
                         //border: $border-cyan-dotted;
                         @include box-reset-default;
                         width: 40px;
+                        position: relative;
                         #plus-icon {
                             //border: $border-cyan-dotted;
                             @include box-reset-default;
+                            visibility: visible;
+                            position: absolute;
+                        }
+                        #plus-icon-green {
+                            //border: $border-cyan-dotted;
+                            @include box-reset-default;
+                            visibility: hidden;
+                            position: absolute;
+                        }
+                    }
+                    #plus-dd:hover {
+                        //border: $border-cyan-dotted;
+                        @include box-reset-default;
+                        width: 40px;
+                        position: relative;
+                        #plus-icon {
+                            //border: $border-cyan-dotted;
+                            @include box-reset-default;
+                            visibility: hidden;
+                            position: absolute;
+                        }
+                        #plus-icon-green {
+                            //border: $border-cyan-dotted;
+                            @include box-reset-default;
+                            visibility: visible;
+                            position: absolute;
                         }
                     }
                     #dropdown-ul {
@@ -172,26 +216,26 @@
                 #col-add {
                     //border: $border-lime-dotted;
                     @include box-reset-default;
-                    color: $primary;
                     width: 30px;
                     position: relative;
-                    p {
+                    h5 {
                         //border: $border-lime-dotted;
                         @include box-reset-default;
-                        color: $primary;
+                        text-overflow: ellipsis;
+                        overflow: hidden;
                         position: absolute;
+                        color: $primary
                     }
-                    #play-button {
+                    #drag-button {
                         //border: $border-lime-dotted;
                         @include box-reset-default;
-                        color: $primary;
                         position: absolute;
-                        #play-icon {
+                        #drag-icon {
                             //border: $border-lime-dotted;
                             @include box-reset-default;
-                            color: $primary;
-                            visibility: visible;
+                            visibility: hidden;
                             position: relative;
+                            cursor: grab;
                         }
                     }
                 }
@@ -199,9 +243,23 @@
                     //border: $border-lime-dotted;
                     @include box-reset-default;
                     width: 50px;
-                    img {
+                    position: relative;
+                    #cover-img {
                         //border: $border-lime-dotted;
                         @include box-reset-default;
+                        position: absolute;
+                        opacity: 0.25;
+                    }
+                    #play-button {
+                        //border: $border-lime-dotted;
+                        @include box-reset-default;
+                        position: absolute;
+                        visibility: visible;
+                        #play-icon {
+                            //border: $border-lime-dotted;
+                            @include box-reset-default;
+                            position: relative;
+                        }
                     }
                 }
                 #col-title {
@@ -241,9 +299,36 @@
                         //border: $border-cyan-dotted;
                         @include box-reset-default;
                         width: 40px;
+                        position: relative;
                         #plus-icon {
                             //border: $border-cyan-dotted;
                             @include box-reset-default;
+                            visibility: visible;
+                            position: absolute;
+                        }
+                        #plus-icon-green {
+                            //border: $border-cyan-dotted;
+                            @include box-reset-default;
+                            visibility: hidden;
+                            position: absolute;
+                        }
+                    }
+                    #plus-dd:hover {
+                        //border: $border-cyan-dotted;
+                        @include box-reset-default;
+                        width: 40px;
+                        position: relative;
+                        #plus-icon {
+                            //border: $border-cyan-dotted;
+                            @include box-reset-default;
+                            visibility: hidden;
+                            position: absolute;
+                        }
+                        #plus-icon-green {
+                            //border: $border-cyan-dotted;
+                            @include box-reset-default;
+                            visibility: visible;
+                            position: absolute;
                         }
                     }
                     #dropdown-ul {
@@ -326,20 +411,51 @@
                     @include box-reset-default;
                     width: 30px;
                     position: relative;
-                    p {
+                    h5 {
                         //border: $border-lime-dotted;
                         @include box-reset-default;
-                        visibility: hidden;
+                        text-overflow: ellipsis;
+                        overflow: hidden;
                         position: absolute;
+                        visibility: hidden;
+                    }
+                    #drag-button {
+                        //border: $border-lime-dotted;
+                        @include box-reset-default;
+                        position: absolute;
+                        #drag-icon {
+                            //border: $border-lime-dotted;
+                            @include box-reset-default;
+                            visibility: visible;
+                            position: relative;
+                            cursor: grab;
+                        }
+                    }
+                }
+                #col-cover {
+                    //border: $border-lime-dotted;
+                    @include box-reset-default;
+                    width: 50px;
+                    position: relative;
+                    #cover-img {
+                        //border: $border-lime-dotted;
+                        @include box-reset-default;
+                        position: absolute;
+                        opacity: 1;
+                        background-color: black;
+                        border-radius: 15%;
+                        img {
+                            visibility: hidden;
+                        }
                     }
                     #play-button {
                         //border: $border-lime-dotted;
                         @include box-reset-default;
                         position: absolute;
+                        visibility: visible;
                         #play-icon {
                             //border: $border-lime-dotted;
                             @include box-reset-default;
-                            visibility: visible;
                             position: relative;
                         }
                     }
@@ -354,24 +470,51 @@
                     @include box-reset-default;
                     width: 30px;
                     position: relative;
-                    p {
+                    h5 {
                         //border: $border-lime-dotted;
                         @include box-reset-default;
+                        text-overflow: ellipsis;
+                        overflow: hidden;
+                        position: absolute;
                         visibility: hidden;
-                        position: absolute;
                     }
-                    #play-button {
+                    #drag-button {
                         //border: $border-lime-dotted;
-                        background-color: black;
-                        border-radius: 25%;
                         @include box-reset-default;
                         position: absolute;
-                        height: 40px;
-                        width: 25px;
-                        #play-icon {
+                        #drag-icon {
                             //border: $border-lime-dotted;
                             @include box-reset-default;
                             visibility: visible;
+                            position: relative;
+                            cursor: grab;
+                        }
+                    }
+                }
+                #col-cover {
+                    //border: $border-lime-dotted;
+                    @include box-reset-default;
+                    width: 50px;
+                    position: relative;
+                    #cover-img {
+                        //border: $border-lime-dotted;
+                        @include box-reset-default;
+                        position: absolute;
+                        opacity: 1;
+                        background-color: black;
+                        border-radius: 15%;
+                        img {
+                            visibility: hidden;
+                        }
+                    }
+                    #play-button {
+                        //border: $border-lime-dotted;
+                        @include box-reset-default;
+                        position: absolute;
+                        visibility: visible;
+                        #play-icon {
+                            //border: $border-lime-dotted;
+                            @include box-reset-default;
                             position: relative;
                         }
                     }

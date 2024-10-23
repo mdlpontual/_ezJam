@@ -38,18 +38,30 @@ function TopTrack({ topTrack, order, onPlayButton, playTrack, pauseTrack, fetche
         return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
     }
 
+    // Handle drag start
+    const handleDragStart = (event) => {
+        event.dataTransfer.setData('trackUri', uriTrack);
+        event.dataTransfer.setData('trackId', idTrack);
+        event.dataTransfer.setData('accessToken', accessToken);
+    };
+
     if(currentTrackUri !== uriTrack) {
         return (
             <>
-                <div id="songs-inner-row" className="row">
+                <div id="songs-inner-row" className="row" draggable="true" onDragStart={handleDragStart}>
                     <div id="col-add" className="col-1 d-flex justify-content-center align-items-center">
-                        <p>{order + 1}</p>
-                        <a id="play-button" type="button" onClick={() => onPlayButton(uriTrack, uriQueue)}>
-                            <img id="play-icon" src={IMG.play2PNG} alt="play icon" width="20px"/>
-                        </a>
+                        <h5>{order + 1}</h5>
+                        <div id="drag-button" className="drag" draggable="false" onDragStart={handleDragStart}> 
+                            <img id="drag-icon" src={IMG.dragPNG} height="25px" />
+                        </div>
                     </div>
                     <div id="col-cover" className="col-1 d-flex justify-content-center align-items-center">
-                        <img src={cover} height="40px"/>
+                        <div id="cover-img" className="cover">
+                            <img src={cover} height="40px" />
+                        </div>
+                        <a id="play-button" type="button" onClick={() => onPlayButton(uriTrack, uriQueue)}>
+                            <img id="play-icon" src={IMG.play2PNG} alt="play icon" width="25px"/>
+                        </a>
                     </div>
                     <div id="col-title" className="col d-flex justify-content-start align-items-center">
                         <h5>{topTrack.trackTitle}</h5>
@@ -61,6 +73,7 @@ function TopTrack({ topTrack, order, onPlayButton, playTrack, pauseTrack, fetche
                         <div className="dropdown">
                             <button id="plus-dd" className="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <img id="plus-icon" src={IMG.plus2PNG} alt="plus icon" width="25px"/>
+                                <img id="plus-icon-green" src={IMG.plus2BlackPNG} alt="plus icon" width="25px"/>
                             </button>
                             <ul id="dropdown-ul" className="dropdown-menu">
                                 <li><h5 id="dd-top-text" className="dropdown-item">Select a playlist to add this track:</h5></li>
@@ -81,16 +94,22 @@ function TopTrack({ topTrack, order, onPlayButton, playTrack, pauseTrack, fetche
     }
     return (
         <>
-            <div id="songs-inner-row-green" className="row">
+            <div id="songs-inner-row-green" className="row" draggable="true" onDragStart={handleDragStart}>
                 <div id="col-add" className="col-1 d-flex justify-content-center align-items-center">
-                    <a className="col-1 d-flex justify-content-center align-items-center" id="play-button" type="button" onClick={() => onPlayButton(handleTogglePlay)}>
-                        <div className="d-flex justify-content-center align-items-center" id="play-icon">
-                            {isPaused ? <img src={IMG.playPNG2Green} alt="play icon" width="22px" /> : <Equalizer />}
-                        </div>
-                    </a>
+                    <h5>{order + 1}</h5>
+                    <div id="drag-button" className="drag" draggable="false" onDragStart={handleDragStart}> 
+                        <img id="drag-icon" src={IMG.blackDragPNG} height="25px" />
+                    </div>
                 </div>
                 <div id="col-cover" className="col-1 d-flex justify-content-center align-items-center">
-                    <img src={cover} height="40px"/>
+                    <div id="cover-img" className="cover">
+                        <img src={cover} height="40px" />
+                    </div>
+                    <a className="col-1 d-flex justify-content-center align-items-center" id="play-button" type="button" onClick={handleTogglePlay}>
+                        <div className="d-flex justify-content-center align-items-center" id="play-icon">
+                            {isPaused ? <img src={IMG.playPNG2Green} alt="play icon" width="25px" /> : <Equalizer />}
+                        </div>
+                    </a>
                 </div>
                 <div id="col-title" className="col d-flex justify-content-start align-items-center">
                     <h5>{topTrack.trackTitle}</h5>
@@ -102,6 +121,7 @@ function TopTrack({ topTrack, order, onPlayButton, playTrack, pauseTrack, fetche
                     <div className="dropdown">
                         <button id="plus-dd" className="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <img id="plus-icon" src={IMG.plus2PNG} alt="plus icon" width="25px"/>
+                            <img id="plus-icon-green" src={IMG.plus2BlackPNG} alt="plus icon" width="25px"/>
                         </button>
                         <ul id="dropdown-ul" className="dropdown-menu">
                             <li><h5 id="dd-top-text" className="dropdown-item">Select a playlist to add this track:</h5></li>
