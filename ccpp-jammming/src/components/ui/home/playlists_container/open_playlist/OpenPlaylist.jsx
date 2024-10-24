@@ -13,8 +13,8 @@ import EmptyPlaylistPage from "./track/EmptyPlaylistPage";
 const playlistStateCache = {};
 
 // Component
-function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, onAlbumClick, playTrack, pauseTrack, onPlaylistClick, accessToken }) {
-    const { playlistTracksArr, setPlaylistTracksArr, handleTrackChange, clearPlaylistCache } = usePlaylistInfo({ playlistData, accessToken });
+function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, onAlbumClick, playTrack, pauseTrack, accessToken }) {
+    const { playlistTracksArr, setPlaylistTracksArr, handleTrackChange, clearPlaylistCache, playlistTracksCache } = usePlaylistInfo({ playlistData, accessToken });
     const { setUserPlaylistsArr, refetchPlaylists, editPlaylists } = useUserInfo({ accessToken });
     const { handleEditPlaylist, handleSharePlaylist, handleUnfollowPlaylist, reorderTracksInPlaylist, newEditedName } = usePlaylistActions({ playlistData, editPlaylists, refetchPlaylists, setUserPlaylistsArr, accessToken });
     const { updateTrackToAdd, playlistToAddTrack, trackToAddContent, setPlaylistToAddTrack, setTrackToAddContent } = useAddTrack();
@@ -24,6 +24,7 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
     const [resetTrackSaved, setResetTrackSaved] = useState(false);
     const [isInitialized, setIsInitialized] = useState(false);
     const [timeoutId, setTimeoutId] = useState(null);  // State to store timeout ID
+    const [loading, setLoading] = useState(true);
 
     // Import the save context functions for this playlist
     const { getIsSaved, setIsSaved } = useSave();
@@ -124,51 +125,6 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
         }
     };
 
-    /* // Handle adding a track
-    useEffect(() => {
-        // Check if either localTracks or playlistTracksArr is empty, null, or undefined
-        if (
-            !Array.isArray(localTracks) || localTracks.length === 0 ||
-            !Array.isArray(playlistTracksArr) || playlistTracksArr.length === 0
-        ) {
-            // Wait until both localTracks and playlistTracksArr are populated
-            return;
-        }
-
-        // Check if trackToAddContent has a valid trackUri before proceeding
-        if (playlistToAddTrack.playlistTitle === playlistData.playlistTitle) {
-            setLocalTracks((prevTracks) => {
-                const trackExists = trackToAddContent.some(trackToAdd => prevTracks.some(prevTrack => prevTrack.trackUri === trackToAdd.trackUri));
-                if (trackExists) {
-                    return prevTracks;  // Prevent adding duplicates
-                }
-
-                // Create a new array (deep copy) and add the new track
-                const updatedAddedTracks = prevTracks.concat(trackToAddContent);
-
-                // Immediately compare and update hasChanges
-                const hasChangesNow = JSON.stringify(updatedAddedTracks) !== JSON.stringify(playlistTracksArr);
-
-                // Update isSaved and hasChanges immediately
-                setIsSaved(playlistData.playlistId, !hasChangesNow);
-
-                // Update the playlistStateCache to reflect the added tracks
-                playlistStateCache[playlistData.playlistId] = {
-                    tracks: updatedAddedTracks,
-                    isSaved: false,
-                };
-
-                return updatedAddedTracks;  // Return the new array
-            });
-
-            // Clear and update the cache after adding the track
-            handleTrackChange();
-
-            setPlaylistToAddTrack({});
-            setTrackToAddContent({});
-        }
-    }, [trackToAddContent]); */
-
     useEffect(() => {
         // Set a timeout of 5 seconds for waiting until localTracks or playlistTracksArr are populated
         const timeoutDuration = 500; 
@@ -246,6 +202,22 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
         }
     }, [isSaved, isInitialized, playlistData.playlistId, setIsSaved, trackToAddContent]);
 
+    useEffect(() => {
+        let timeoutDuration = 700; // Default timeout duration (1 second)
+
+        // Check if there is cached data for the current playlist
+        if (playlistStateCache[playlistData.playlistId]) {
+            timeoutDuration = 200; // Use a shorter timeout if the cache exists (300ms)
+        }
+    
+        const timer = setTimeout(() => {
+            setLoading(false); // Set loading to false after the timeout
+        }, timeoutDuration);
+    
+        return () => clearTimeout(timer); // Clear the timeout when the component unmounts
+    }, [playlistData.playlistId]);
+    
+
     //------------------------------------------------------------------------------------------------------------
     
     // Handle drag over event to allow drop
@@ -301,7 +273,7 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
                             handleUnfollowPlaylist();
                             setTimeout(() => {
                                 onBackClick();
-                            }, 500);
+                            }, 100);
                         }}>
                             <img src={IMG.trashBinPNG} alt="delete icon" width="27px" />
                         </a>
@@ -319,35 +291,39 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
                             </div>
                             <div id="col-minus" className="col-1 d-flex justify-content-start align-items-end"></div>
                         </div>
-                        <div id="tracks-list" className="row flex-grow-1">                           
-                            <div id="tracks-list-col" className="col">
-                                {localTracks.length === 0 ? (
-                                    <EmptyPlaylistPage/>
-                                ) : (
-                                    // Render the track list if there are tracks
-                                    <DndContext onDragEnd={handleDragEnd}>
-                                        <SortableContext items={localTracks.map(track => track.trackUri)} strategy={verticalListSortingStrategy}>
-                                            {localTracks.map((track, i) => (
-                                                <PlaylistTrack
-                                                    order={i}
-                                                    playlistTrack={track}
-                                                    playlistTracksArr={localTracks}
-                                                    setPlaylistTracksArr={setPlaylistTracksArr}
-                                                    onPlayButton={onPlayButton}
-                                                    onArtistClick={onArtistClick}
-                                                    onAlbumClick={onAlbumClick}
-                                                    playTrack={playTrack}
-                                                    pauseTrack={pauseTrack}
-                                                    preDeleteTrack={preDeleteTrack}
-                                                    accessToken={accessToken}
-                                                    key={track.trackUri}
-                                                    resetTrackSaved={resetTrackSaved}
-                                                />
-                                            ))}
-                                        </SortableContext>
-                                    </DndContext>
-                                )}
-                            </div>
+                        <div id="tracks-list" className="row flex-grow-1">   
+                            {loading ? (
+                                    <div className="d-flex justify-content-center align-items-center">Loading...</div> // Placeholder content during the timeout
+                                ) : (                        
+                                <div id="tracks-list-col" className="col">
+                                    {localTracks.length === 0 ? (
+                                        <EmptyPlaylistPage/>
+                                    ) : (
+                                        // Render the track list if there are tracks
+                                        <DndContext onDragEnd={handleDragEnd}>
+                                            <SortableContext items={localTracks.map(track => track.trackUri)} strategy={verticalListSortingStrategy}>
+                                                {localTracks.map((track, i) => (
+                                                    <PlaylistTrack
+                                                        order={i}
+                                                        playlistTrack={track}
+                                                        playlistTracksArr={localTracks}
+                                                        setPlaylistTracksArr={setPlaylistTracksArr}
+                                                        onPlayButton={onPlayButton}
+                                                        onArtistClick={onArtistClick}
+                                                        onAlbumClick={onAlbumClick}
+                                                        playTrack={playTrack}
+                                                        pauseTrack={pauseTrack}
+                                                        preDeleteTrack={preDeleteTrack}
+                                                        accessToken={accessToken}
+                                                        key={track.trackUri}
+                                                        resetTrackSaved={resetTrackSaved}
+                                                    />
+                                                ))}
+                                            </SortableContext>
+                                        </DndContext>
+                                    )}
+                                </div> 
+                            )}
                         </div>
                     </div>
                 </main>
