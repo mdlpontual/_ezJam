@@ -42,11 +42,7 @@ function UserPlaylists({ onPlaylistClick, onBackClick, onPlayButton, onArtistCli
             <main id="pl-body-row" className="row">
                 <div id="pl-body-col" className="col">
                     {userPlaylistsArr.map((playlist) => (
-                        <div
-                            key={playlist.playlistUri}
-                            onDragOver={handleDragOver} // Allow dropping
-                            onDrop={(event) => handleDrop(event, playlist)} // Handle track drop
-                        >
+                        <div key={playlist.playlistUri} onDragOver={handleDragOver} onDrop={(event) => handleDrop(event, playlist)}>
                             <Playlist
                                 playlistData={playlist}
                                 onPlaylistClick={onPlaylistClick}

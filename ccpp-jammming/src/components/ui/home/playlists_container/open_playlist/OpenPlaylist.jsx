@@ -14,7 +14,7 @@ const playlistStateCache = {};
 
 // Component
 function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, onAlbumClick, playTrack, pauseTrack, accessToken }) {
-    const { playlistTracksArr, setPlaylistTracksArr, handleTrackChange, clearPlaylistCache, playlistTracksCache } = usePlaylistInfo({ playlistData, accessToken });
+    const { playlistTracksArr, setPlaylistTracksArr, handleTrackChange, clearPlaylistCache } = usePlaylistInfo({ playlistData, accessToken });
     const { setUserPlaylistsArr, refetchPlaylists, editPlaylists } = useUserInfo({ accessToken });
     const { handleEditPlaylist, handleSharePlaylist, handleUnfollowPlaylist, reorderTracksInPlaylist, newEditedName } = usePlaylistActions({ playlistData, editPlaylists, refetchPlaylists, setUserPlaylistsArr, accessToken });
     const { updateTrackToAdd, playlistToAddTrack, trackToAddContent, setPlaylistToAddTrack, setTrackToAddContent } = useAddTrack();
@@ -273,7 +273,7 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
                             handleUnfollowPlaylist();
                             setTimeout(() => {
                                 onBackClick();
-                            }, 100);
+                            }, 500);
                         }}>
                             <img src={IMG.trashBinPNG} alt="delete icon" width="27px" />
                         </a>

@@ -108,7 +108,7 @@ function usePlaylistInfo({ playlistData, accessToken, trackLimit = 100, artistLi
         clearPlaylistCache(idPlaylist);  // Clear both caches when track changes
     };
 
-    return { playlistTracksArr, setPlaylistTracksArr, clearPlaylistCache, handleTrackChange, playlistTracksCache };
+    return { playlistTracksArr, setPlaylistTracksArr, clearPlaylistCache, handleTrackChange };
 }
 
 export default usePlaylistInfo;

@@ -1,18 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import IMG from "../../../../../../assets/images/ImagesHUB";
 import { useTrack } from "../../../../../../hooks/TrackContext"; 
-import useReducePlaylistInfo from "../../../../../../hooks/user_hooks/useReducePlaylistInfo";
+import usePlaylistInfo from "../../../../../../hooks/user_hooks/usePlaylistInfo";
 import usePlaylistActions from "../../../../../../hooks/user_hooks/usePlaylistActions";
 import Equalizer from '../../../../../../utils/Equalizer';
 import { useSave } from "../../../../../../hooks/user_hooks/SaveContext"; // Import the Save context
 
 function Playlist({ playlistData, onPlaylistClick, onBackClick, onPlayButton, onArtistClick, onAlbumClick, playTrack, pauseTrack, refetchPlaylists, editPlaylists, setUserPlaylistsArr, accessToken }) {
     const { currentQueueUri, isPaused } = useTrack(); 
-    const { reducedPlaylistTracksArr } = useReducePlaylistInfo({ playlistData, accessToken });
+    const { playlistTracksArr, playlistStateCache } = usePlaylistInfo({ playlistData, accessToken });    
     const { handleEditPlaylist, handleSharePlaylist, handleUnfollowPlaylist } = usePlaylistActions({ playlistData, editPlaylists, refetchPlaylists, setUserPlaylistsArr, accessToken });
 
-    const reducedUriQueue = reducedPlaylistTracksArr.map(track => track.trackUri);
-    const firstUriTrack = reducedUriQueue[0];
+    console.log(playlistTracksArr)
+
+    const uriQueue = playlistTracksArr.map(track => track.trackUri);
+
+/*     useEffect(() => {
+        uriQueue = playlistTracksArr.map(track => track.trackUri);
+    }, []) */
+
+    const firstUriTrack = uriQueue[0];
 
     const cover = playlistData.playlistCover || IMG.placeHolders;
 
@@ -64,14 +71,14 @@ function Playlist({ playlistData, onPlaylistClick, onBackClick, onPlayButton, on
     let isTrackPlaying = false;
     
     // Check conditions step by step, short-circuiting on failure
-    if (Array.isArray(reducedUriQueue) &&
+    if (Array.isArray(uriQueue) &&
         Array.isArray(currentQueueUri) &&
-        reducedUriQueue.length === currentQueueUri.length &&
-        arraysAreEqual(reducedUriQueue, currentQueueUri)) {
+        uriQueue.length === currentQueueUri.length &&
+        arraysAreEqual(uriQueue, currentQueueUri)) {
             isTrackPlaying = true;
     }
 
-    if (reducedPlaylistTracksArr.length === 0) {
+    if (playlistTracksArr.length === 0) {
         return (
             <div id="single-pl-container" className="container-fluid">
                 <div id="single-pl-row" className="row">
@@ -83,7 +90,7 @@ function Playlist({ playlistData, onPlaylistClick, onBackClick, onPlayButton, on
                     </div>
                     <div id="pl-title-col" className="col d-flex flex-column justify-content-center align-items-start">
                         <a id="pl-name" type="button" onClick={() => onPlaylistClick(playlistData, onBackClick, onPlayButton, onArtistClick, onAlbumClick, playTrack, pauseTrack, onPlaylistClick, accessToken)}>
-                            <h4 className="d-flex align-items-center">{playlistData.playlistTitle}</h4>
+                            <h3 className="d-flex align-items-center">{playlistData.playlistTitle}</h3>
                         </a>
                     </div>
                     <div id="edit-button-col" className="col-auto d-flex flex-column justify-content-center align-items-center">
@@ -104,8 +111,8 @@ function Playlist({ playlistData, onPlaylistClick, onBackClick, onPlayButton, on
                     <div id="col-saved" className="col-auto d-flex justify-content-center align-items-center">
                         <img 
                             id="saved-icon" 
-                            src={isSaved ? IMG.savedPNG : IMG.unsavedPNG}  // Sync saved state from global state
-                            height="27px" 
+                            src={isSaved ? IMG.savedPNG : IMG.cautionPNG}  // Sync saved state from global state
+                            height="35px" 
                         />
                     </div>
                 </div>
@@ -119,13 +126,13 @@ function Playlist({ playlistData, onPlaylistClick, onBackClick, onPlayButton, on
                 <div id="single-pl-row" className="row">
                     <div id="checkmark-col" className="col-1 d-flex flex-column justify-content-center align-items-center">
                         <img id="playlist-cover" src={cover} alt="saved icon" width="60px" />
-                        <a id="play-button" type="button" onClick={() => onPlayButton(firstUriTrack, reducedUriQueue)}>
+                        <a id="play-button" type="button" onClick={() => onPlayButton(firstUriTrack, uriQueue)}>
                             <img id="play-icon" src={IMG.play2PNG} alt="play icon" width="30px" />
                         </a>
                     </div>
                     <div id="pl-title-col" className="col d-flex flex-column justify-content-center align-items-start">
                         <a id="pl-name" type="button" onClick={() => onPlaylistClick(playlistData, onBackClick, onPlayButton, onArtistClick, onAlbumClick, playTrack, pauseTrack, accessToken)}>
-                            <h4 className="d-flex align-items-center">{playlistData.playlistTitle}</h4>
+                            <h3 className="d-flex align-items-center">{playlistData.playlistTitle}</h3>
                         </a>
                     </div>
                     <div id="edit-button-col" className="col-auto d-flex flex-column justify-content-center align-items-center">
@@ -146,8 +153,8 @@ function Playlist({ playlistData, onPlaylistClick, onBackClick, onPlayButton, on
                     <div id="col-saved" className="col-auto d-flex justify-content-center align-items-center">
                         <img 
                             id="saved-icon" 
-                            src={isSaved ? IMG.savedPNG : IMG.unsavedPNG}  // Sync saved state from global state
-                            height="27px" 
+                            src={isSaved ? IMG.savedPNG : IMG.cautionPNG}  // Sync saved state from global state
+                            height="35px" 
                         />
                     </div>
                 </div>
@@ -166,7 +173,7 @@ function Playlist({ playlistData, onPlaylistClick, onBackClick, onPlayButton, on
                 </div>
                 <div id="pl-title-col" className="col d-flex flex-column justify-content-center align-items-start">
                     <a id="pl-name" type="button" onClick={() => onPlaylistClick(playlistData, onBackClick, onPlayButton, onArtistClick, onAlbumClick, playTrack, pauseTrack, accessToken)}>
-                        <h4 className="d-flex align-items-center">{playlistData.playlistTitle}</h4>
+                        <h3 className="d-flex align-items-center">{playlistData.playlistTitle}</h3>
                     </a>
                 </div>
                 <div id="edit-button-col" className="col-auto d-flex flex-column justify-content-center align-items-center">
@@ -187,8 +194,8 @@ function Playlist({ playlistData, onPlaylistClick, onBackClick, onPlayButton, on
                 <div id="col-saved" className="col-auto d-flex justify-content-center align-items-center">
                     <img 
                         id="saved-icon" 
-                        src={isSaved ? IMG.savedPNG : IMG.unsavedPNG}  // Sync saved state from global state
-                        height="27px" 
+                        src={isSaved ? IMG.savedPNG : IMG.cautionPNG}  // Sync saved state from global state
+                        height="35px" 
                     />
                 </div>
             </div>
