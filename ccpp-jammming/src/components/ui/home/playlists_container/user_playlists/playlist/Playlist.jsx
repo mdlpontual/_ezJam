@@ -11,8 +11,6 @@ function Playlist({ playlistData, onPlaylistClick, onBackClick, onPlayButton, on
     const { playlistTracksArr, playlistStateCache } = usePlaylistInfo({ playlistData, accessToken });    
     const { handleEditPlaylist, handleSharePlaylist, handleUnfollowPlaylist } = usePlaylistActions({ playlistData, editPlaylists, refetchPlaylists, setUserPlaylistsArr, accessToken });
 
-    console.log(playlistTracksArr)
-
     const uriQueue = playlistTracksArr.map(track => track.trackUri);
 
 /*     useEffect(() => {

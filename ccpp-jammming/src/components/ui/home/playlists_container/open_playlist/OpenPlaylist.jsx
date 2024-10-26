@@ -13,7 +13,7 @@ import EmptyPlaylistPage from "./track/EmptyPlaylistPage";
 const playlistStateCache = {};
 
 // Component
-function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, onAlbumClick, playTrack, pauseTrack, accessToken }) {
+function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, onAlbumClick, playTrack, pauseTrack, updateQueue, accessToken }) {
     const { playlistTracksArr, setPlaylistTracksArr, handleTrackChange, clearPlaylistCache } = usePlaylistInfo({ playlistData, accessToken });
     const { setUserPlaylistsArr, refetchPlaylists, editPlaylists } = useUserInfo({ accessToken });
     const { handleEditPlaylist, handleSharePlaylist, handleUnfollowPlaylist, reorderTracksInPlaylist, newEditedName } = usePlaylistActions({ playlistData, editPlaylists, refetchPlaylists, setUserPlaylistsArr, accessToken });
@@ -29,6 +29,15 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
     // Import the save context functions for this playlist
     const { getIsSaved, setIsSaved } = useSave();
     const isSaved = getIsSaved(playlistData.playlistId); // Get saved state for the specific playlist
+
+    let openUriQueue = [];
+    localTracks.forEach(track => openUriQueue.push(track.trackUri));
+
+    useEffect(() => {
+        if (!isSaved) {
+            updateQueue(openUriQueue);
+        }
+    }, [isSaved, localTracks]);
 
     // Initialize tracks and saved state independently, with cache and API
     useEffect(() => {

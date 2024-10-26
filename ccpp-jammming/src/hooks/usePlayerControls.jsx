@@ -28,7 +28,7 @@ function usePlayerControls({ uriTrack, uriQueue }) {
                         if (playerInstanceRef.current) return; // Prevent re-initialization
 
                         const player = new window.Spotify.Player({
-                            name: 'Jammming Track Player',
+                            name: 'ezJam Track Player',
                             getOAuthToken: cb => { cb(window.spotifyAccessToken); }, // Use access token from global scope
                             volume: 0.5,
                         });
