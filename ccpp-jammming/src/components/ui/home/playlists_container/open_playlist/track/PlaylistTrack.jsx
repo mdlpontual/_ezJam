@@ -66,7 +66,7 @@ function PlaylistTrack({ order, playlistTrack, playlistTracksArr, onPlayButton, 
                 <div id="single-track-row" className="row">
                     <div id="col-num" className="col-1 d-flex justify-content-center align-items-center">
                         <h5 id="number-icon">{order + 1}</h5>
-                        <div className="drag" {...listeners} {...attributes} onMouseDown={handleTrackChange}>
+                        <div className="drag" {...listeners} {...attributes} onMouseUp={handleTrackChange}>
                             <img src={IMG.dragPNG} height="25px" />
                         </div>
                     </div>

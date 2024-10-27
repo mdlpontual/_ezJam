@@ -382,3 +382,33 @@
         }
     };
 }
+
+#empty-pl-container {
+    //border: $border-red-dotted;
+    @include box-reset-default;
+    height: 500px;
+    #empty-pl-row {
+        //border: $border-yellow-dotted;
+        @include box-reset-default;
+        height: 100%;
+        width: 75%;
+        #empty-pl-col {
+            //border: $border-cyan-dotted;
+            @include box-reset-default;
+            height: 100%;
+            h3 {
+                //border: $border-cyan-dotted;
+                @include box-reset-default;
+                padding-top: 25px;
+                padding-bottom: 10px;
+                color: $primary;
+            }
+            h6 {
+                //border: $border-cyan-dotted;
+                @include box-reset-default;
+                text-align: center;
+                color: rgb(180, 180, 180);
+            }
+        }
+    }
+}

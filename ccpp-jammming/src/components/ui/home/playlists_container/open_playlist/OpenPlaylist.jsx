@@ -8,11 +8,12 @@ import useUserInfo from "../../../../../hooks/user_hooks/useUserInfo";
 import { DndContext } from '@dnd-kit/core';
 import { SortableContext, arrayMove, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { useAddTrack } from "../../../../../hooks/user_hooks/AddTrackContext";
+import EmptyPlaylistPage from "./track/EmptyPlaylistPage";
 
 const playlistStateCache = {};
 
 // Component
-function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, onAlbumClick, playTrack, pauseTrack, onPlaylistClick, accessToken }) {
+function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, onAlbumClick, playTrack, pauseTrack, updateQueue, accessToken }) {
     const { playlistTracksArr, setPlaylistTracksArr, handleTrackChange, clearPlaylistCache } = usePlaylistInfo({ playlistData, accessToken });
     const { setUserPlaylistsArr, refetchPlaylists, editPlaylists } = useUserInfo({ accessToken });
     const { handleEditPlaylist, handleSharePlaylist, handleUnfollowPlaylist, reorderTracksInPlaylist, newEditedName } = usePlaylistActions({ playlistData, editPlaylists, refetchPlaylists, setUserPlaylistsArr, accessToken });
@@ -23,10 +24,20 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
     const [resetTrackSaved, setResetTrackSaved] = useState(false);
     const [isInitialized, setIsInitialized] = useState(false);
     const [timeoutId, setTimeoutId] = useState(null);  // State to store timeout ID
+    const [loading, setLoading] = useState(true);
 
     // Import the save context functions for this playlist
     const { getIsSaved, setIsSaved } = useSave();
     const isSaved = getIsSaved(playlistData.playlistId); // Get saved state for the specific playlist
+
+    let openUriQueue = [];
+    localTracks.forEach(track => openUriQueue.push(track.trackUri));
+
+    useEffect(() => {
+        if (!isSaved) {
+            updateQueue(openUriQueue);
+        }
+    }, [isSaved, localTracks]);
 
     // Initialize tracks and saved state independently, with cache and API
     useEffect(() => {
@@ -123,50 +134,75 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
         }
     };
 
-    // Handle adding a track
     useEffect(() => {
-        // Check if either localTracks or playlistTracksArr is empty, null, or undefined
-        if (
-            !Array.isArray(localTracks) || localTracks.length === 0 ||
-            !Array.isArray(playlistTracksArr) || playlistTracksArr.length === 0
-        ) {
-            // Wait until both localTracks and playlistTracksArr are populated
-            return;
-        }
-
-        // Check if trackToAddContent has a valid trackUri before proceeding
-        if (playlistToAddTrack.playlistTitle === playlistData.playlistTitle) {
-            setLocalTracks((prevTracks) => {
-                const trackExists = trackToAddContent.some(trackToAdd => prevTracks.some(prevTrack => prevTrack.trackUri === trackToAdd.trackUri));
-                if (trackExists) {
-                    return prevTracks;  // Prevent adding duplicates
-                }
-
-                // Create a new array (deep copy) and add the new track
-                const updatedAddedTracks = prevTracks.concat(trackToAddContent);
-
-                // Immediately compare and update hasChanges
-                const hasChangesNow = JSON.stringify(updatedAddedTracks) !== JSON.stringify(playlistTracksArr);
-
-                // Update isSaved and hasChanges immediately
-                setIsSaved(playlistData.playlistId, !hasChangesNow);
-
-                // Update the playlistStateCache to reflect the added tracks
-                playlistStateCache[playlistData.playlistId] = {
-                    tracks: updatedAddedTracks,
-                    isSaved: false,
-                };
-
-                return updatedAddedTracks;  // Return the new array
-            });
-
-            // Clear and update the cache after adding the track
-            handleTrackChange();
-
-            setPlaylistToAddTrack({});
-            setTrackToAddContent({});
-        }
-    }, [trackToAddContent, localTracks, playlistTracksArr]);
+        // Set a timeout of 5 seconds for waiting until localTracks or playlistTracksArr are populated
+        const timeoutDuration = 500; 
+        let timeoutId = null;
+    
+        const checkAndProceed = () => {
+            // Check if either localTracks or playlistTracksArr is empty, null, or undefined
+            if (
+                !Array.isArray(localTracks) || localTracks.length === 0 ||
+                !Array.isArray(playlistTracksArr) || playlistTracksArr.length === 0
+            ) {
+                // Wait for a limited time, then proceed after the timeout
+                timeoutId = setTimeout(() => {
+                    proceedToAddTrack();  // Proceed after timeout
+                }, timeoutDuration);
+                return;  // Exit early and wait for the timeout
+            }
+    
+            // If localTracks and playlistTracksArr are already populated, proceed immediately
+            proceedToAddTrack();
+        };
+    
+        // Function to proceed with adding the track
+        const proceedToAddTrack = () => {
+            // Check if trackToAddContent has a valid trackUri before proceeding
+            if (playlistToAddTrack.playlistTitle === playlistData.playlistTitle) {
+                setLocalTracks((prevTracks) => {
+                    const trackExists = trackToAddContent.some(trackToAdd => prevTracks.some(prevTrack => prevTrack.trackUri === trackToAdd.trackUri));
+                    if (trackExists) {
+                        return prevTracks;  // Prevent adding duplicates
+                    }
+    
+                    // Create a new array (deep copy) and add the new track
+                    const updatedAddedTracks = prevTracks.concat(trackToAddContent);
+    
+                    // Immediately compare and update hasChanges
+                    const hasChangesNow = JSON.stringify(updatedAddedTracks) !== JSON.stringify(playlistTracksArr);
+    
+                    // Update isSaved and hasChanges immediately
+                    setIsSaved(playlistData.playlistId, !hasChangesNow);
+    
+                    // Update the playlistStateCache to reflect the added tracks
+                    playlistStateCache[playlistData.playlistId] = {
+                        tracks: updatedAddedTracks,
+                        isSaved: false,
+                    };
+    
+                    return updatedAddedTracks;  // Return the new array
+                });
+    
+                // Clear and update the cache after adding the track
+                handleTrackChange();
+    
+                setPlaylistToAddTrack({});
+                setTrackToAddContent({});
+            }
+        };
+    
+        // Run the check on mount or when trackToAddContent changes
+        checkAndProceed();
+    
+        // Clean up the timeout on unmount
+        return () => {
+            if (timeoutId) {
+                clearTimeout(timeoutId);
+            }
+        };
+    }, [trackToAddContent]);
+    
 
     // Update saved state for buttons and icon after initialization
     useEffect(() => {
@@ -174,6 +210,22 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
             debounceStateUpdate(() => setIsSaved(playlistData.playlistId, isSaved), 300);  // Debounce setting state to prevent rapid updates
         }
     }, [isSaved, isInitialized, playlistData.playlistId, setIsSaved, trackToAddContent]);
+
+    useEffect(() => {
+        let timeoutDuration = 700; // Default timeout duration (1 second)
+
+        // Check if there is cached data for the current playlist
+        if (playlistStateCache[playlistData.playlistId]) {
+            timeoutDuration = 200; // Use a shorter timeout if the cache exists (300ms)
+        }
+    
+        const timer = setTimeout(() => {
+            setLoading(false); // Set loading to false after the timeout
+        }, timeoutDuration);
+    
+        return () => clearTimeout(timer); // Clear the timeout when the component unmounts
+    }, [playlistData.playlistId]);
+    
 
     //------------------------------------------------------------------------------------------------------------
     
@@ -248,30 +300,39 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
                             </div>
                             <div id="col-minus" className="col-1 d-flex justify-content-start align-items-end"></div>
                         </div>
-                        <div id="tracks-list" className="row flex-grow-1">
-                            <div id="tracks-list-col" className="col">
-                                <DndContext onDragEnd={handleDragEnd}>
-                                    <SortableContext items={localTracks.map(track => track.trackUri)} strategy={verticalListSortingStrategy}>
-                                        {localTracks.map((track, i) => (
-                                            <PlaylistTrack
-                                                order={i}
-                                                playlistTrack={track}
-                                                playlistTracksArr={localTracks}
-                                                setPlaylistTracksArr={setPlaylistTracksArr}
-                                                onPlayButton={onPlayButton}
-                                                onArtistClick={onArtistClick}
-                                                onAlbumClick={onAlbumClick}
-                                                playTrack={playTrack}
-                                                pauseTrack={pauseTrack}
-                                                preDeleteTrack={preDeleteTrack}
-                                                accessToken={accessToken}
-                                                key={track.trackUri}
-                                                resetTrackSaved={resetTrackSaved}  // Pass reset state to PlaylistTrack
-                                            />
-                                        ))}
-                                    </SortableContext>
-                                </DndContext>
-                            </div>
+                        <div id="tracks-list" className="row flex-grow-1">   
+                            {loading ? (
+                                    <div className="d-flex justify-content-center align-items-center">Loading...</div> // Placeholder content during the timeout
+                                ) : (                        
+                                <div id="tracks-list-col" className="col">
+                                    {localTracks.length === 0 ? (
+                                        <EmptyPlaylistPage/>
+                                    ) : (
+                                        // Render the track list if there are tracks
+                                        <DndContext onDragEnd={handleDragEnd}>
+                                            <SortableContext items={localTracks.map(track => track.trackUri)} strategy={verticalListSortingStrategy}>
+                                                {localTracks.map((track, i) => (
+                                                    <PlaylistTrack
+                                                        order={i}
+                                                        playlistTrack={track}
+                                                        playlistTracksArr={localTracks}
+                                                        setPlaylistTracksArr={setPlaylistTracksArr}
+                                                        onPlayButton={onPlayButton}
+                                                        onArtistClick={onArtistClick}
+                                                        onAlbumClick={onAlbumClick}
+                                                        playTrack={playTrack}
+                                                        pauseTrack={pauseTrack}
+                                                        preDeleteTrack={preDeleteTrack}
+                                                        accessToken={accessToken}
+                                                        key={track.trackUri}
+                                                        resetTrackSaved={resetTrackSaved}
+                                                    />
+                                                ))}
+                                            </SortableContext>
+                                        </DndContext>
+                                    )}
+                                </div> 
+                            )}
                         </div>
                     </div>
                 </main>

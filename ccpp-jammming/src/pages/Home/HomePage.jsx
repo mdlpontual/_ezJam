@@ -15,7 +15,7 @@ function HomePage({ code }) {
     const { currentTrackUri, updateCurrentTrackUri, updateCurrentTrackTitle, updateCurrentTrackArtist, updateCurrentQueueUri, updateCurrentTrackAlbum } = useTrack(); 
 
     const { accessToken } = useAuth(code);
-    const { uriTrack, uriQueue, updateUri } = usePlayTrack();
+    const { uriTrack, uriQueue, updateUri, updateQueue } = usePlayTrack();
     const { isPaused, isActive, currentTrack, trackPosition, playTrack, pauseTrack, previousTrack, nextTrack, seekPosition, volumeControl } = usePlayerControls({uriTrack, uriQueue});
     const { activePage, goBack, goForward, handleArtistClick, handleAlbumClick } = useAdimSearchPage(search, updateUri, playTrack, pauseTrack, accessToken);
 
@@ -51,6 +51,7 @@ function HomePage({ code }) {
                             playTrack={playTrack}
                             pauseTrack={pauseTrack}
                             uriQueue={uriQueue}
+                            updateQueue={updateQueue}
                             accessToken={accessToken}/>
                     </div>
                     <div id="search-col" className="col">

@@ -11,7 +11,11 @@ function usePlayTrack() {
     setUriQueue(newUriQueue);
   }, []);
 
-  return { uriTrack, uriQueue, updateUri };
+  const updateQueue = useCallback((newUriQueue) => {
+    setUriQueue(newUriQueue);
+  }, []);
+
+  return { uriTrack, uriQueue, setUriQueue, updateUri, updateQueue };
 }
 
 export default usePlayTrack;
