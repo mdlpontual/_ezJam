@@ -143,7 +143,6 @@
                         @include box-reset-default;
                         text-overflow: ellipsis;
                         overflow: hidden;
-                        width: 100%;
                         margin-top: -3px;
                         #open-artist-page:hover{
                             text-decoration: underline;
@@ -286,6 +285,7 @@
                 @include box-reset-default;
                 color: $primary;
                 height: 50px;
+                cursor: grab;
                 #col-add {
                     //border: $border-lime-dotted;
                     @include box-reset-default;
@@ -345,7 +345,6 @@
                         color: $primary;
                         text-overflow: ellipsis;
                         overflow: hidden;
-                        width: 100%;
                         margin-top: -3px;
                         #open-artist-page:hover{
                             text-decoration: underline;

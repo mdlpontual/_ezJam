@@ -8,6 +8,7 @@
         //border: $border-yellow-solid;
         @include box-reset-default;
         height: 100%;
+        padding-left: 10px;
         #checkmark-col {
             //border: $border-cyan-solid;
             @include box-reset-default;
@@ -38,14 +39,14 @@
             //border: $border-cyan-solid;
             @include box-reset-default;
             overflow: hidden;
-            h4 {
+            h3 {
                 //border: $border-lime-dashed;
                 @include box-reset-default;
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
+                display: block;
                 max-width: 100%;
-                height: 50px;
                 margin-left: 5px;
             }
         }
@@ -89,6 +90,7 @@
     padding-right: 10px;
     margin-right: 5px;
     padding-right: 10px;
+    padding-left: 10px;
     #single-pl-row {
         //border: $border-yellow-solid;
         @include box-reset-default;
@@ -125,17 +127,16 @@
         #pl-title-col {
             //border: $border-cyan-solid;
             @include box-reset-default;
-            color: $primary;
             overflow: hidden;
-            h4 {
+            color: $primary;
+            h3 {
                 //border: $border-lime-dashed;
                 @include box-reset-default;
-                color: $primary;
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
+                display: block;
                 max-width: 100%;
-                height: 100%;
                 margin-left: 5px;
             }
         }
@@ -184,6 +185,7 @@
     #single-pl-row {
         //border: $border-yellow-solid;
         @include box-reset-default;
+        padding-left: 10px;
         #checkmark-col {
             //border: $border-cyan-solid;
             @include box-reset-default;
@@ -262,6 +264,7 @@
         //border: $border-yellow-solid;
         @include box-reset-default;
         color: $primary;
+        padding-left: 10px;
         #checkmark-col {
             //border: $border-cyan-solid;
             @include box-reset-default;

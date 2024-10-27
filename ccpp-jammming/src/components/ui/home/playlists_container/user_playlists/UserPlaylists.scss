@@ -13,6 +13,7 @@
             @include box-reset-default;
             height: 100%;
             overflow: hidden;
+            padding-left: 15px;
             h3 {
                 //border: $border-lime-dashed;
                 @include box-reset-default;
@@ -27,9 +28,46 @@
             //border: $border-cyan-solid;
             @include box-reset-default;
             height: 100%;
-            img {
+            padding-right: 20px;
+            padding-top: 10px;
+            #create-pl-button {
                 //border: $border-lime-dashed;
                 @include box-reset-default;
+                position: relative;
+                #plus {
+                    //border: $border-lime-dashed;
+                    @include box-reset-default;  
+                    position: absolute;              
+                    visibility: visible;  
+                }
+                #plusGreen {
+                    //border: $border-lime-dashed;
+                    @include box-reset-default;    
+                    visibility: hidden;                 
+                }
+            }
+        }
+        #add-button-col:hover {
+            //border: $border-cyan-solid;
+            @include box-reset-default;
+            height: 100%;
+            padding-right: 20px;
+            padding-top: 10px;
+            #create-pl-button {
+                //border: $border-lime-dashed;
+                @include box-reset-default;
+                position: relative;
+                #plus {
+                    //border: $border-lime-dashed;
+                    @include box-reset-default;  
+                    position: absolute;              
+                    visibility: hidden;  
+                }
+                #plusGreen {
+                    //border: $border-lime-dashed;
+                    @include box-reset-default;    
+                    visibility: visible;                 
+                }
             }
         }
     }

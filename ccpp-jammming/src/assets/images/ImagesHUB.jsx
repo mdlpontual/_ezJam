@@ -3,6 +3,7 @@ const IMG = {
     spotifyLogo: new URL('./branding/00_spotify-logo.png', import.meta.url).href,  
 
     plusPNG: new URL('./symbols/02_plus-symbol.png', import.meta.url).href,
+    plusGreenPNG: new URL('./symbols/02_plus-symbol-green.png', import.meta.url).href,
     minusPNG: new URL('./symbols/02_minus-symbol.png', import.meta.url).href,
     plus2PNG: new URL('./symbols/02_plus2-symbol.png', import.meta.url).href,
     plus2GreenPNG: new URL('./symbols/02_plus2-symbol-green.png', import.meta.url).href,
@@ -11,6 +12,7 @@ const IMG = {
     plusMenuPNG: new URL('./symbols/02_plusMenu-symbol.png', import.meta.url).href,
     plusMenuGreenPNG: new URL('./symbols/02_plusMenu-symbol-green.png', import.meta.url).href,
     minus2PNG: new URL('./symbols/02_minus2-symbol.png', import.meta.url).href,
+    minusRedPNG: new URL('./symbols/02_minus2-symbol-red.png', import.meta.url).href,
     gobackPNG: new URL('./symbols/01_arrow-symbol.png', import.meta.url).href,
     gofowardPNG: new URL('./symbols/01_right-arrow.png', import.meta.url).href,
     upAndDownPNG: new URL('./symbols/01_up-and-down.png', import.meta.url).href,

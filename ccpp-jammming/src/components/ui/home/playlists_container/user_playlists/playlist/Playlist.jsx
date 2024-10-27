@@ -87,9 +87,9 @@ function Playlist({ playlistData, onPlaylistClick, onBackClick, onPlayButton, on
                         </a>
                     </div>
                     <div id="pl-title-col" className="col d-flex flex-column justify-content-center align-items-start">
-                        <a id="pl-name" type="button" onClick={() => onPlaylistClick(playlistData, onBackClick, onPlayButton, onArtistClick, onAlbumClick, playTrack, pauseTrack, onPlaylistClick, accessToken)}>
-                            <h3 className="d-flex align-items-center">{playlistData.playlistTitle}</h3>
-                        </a>
+                        <h3 id="pl-name" type="button" onClick={() => onPlaylistClick(playlistData, onBackClick, onPlayButton, onArtistClick, onAlbumClick, playTrack, pauseTrack, accessToken)}>
+                            {playlistData.playlistTitle}
+                        </h3>
                     </div>
                     <div id="edit-button-col" className="col-auto d-flex flex-column justify-content-center align-items-center">
                         <a id="edit-pl-button" type="button" onClick={handleEditPlaylist}>
@@ -129,9 +129,9 @@ function Playlist({ playlistData, onPlaylistClick, onBackClick, onPlayButton, on
                         </a>
                     </div>
                     <div id="pl-title-col" className="col d-flex flex-column justify-content-center align-items-start">
-                        <a id="pl-name" type="button" onClick={() => onPlaylistClick(playlistData, onBackClick, onPlayButton, onArtistClick, onAlbumClick, playTrack, pauseTrack, accessToken)}>
-                            <h3 className="d-flex align-items-center">{playlistData.playlistTitle}</h3>
-                        </a>
+                        <h3 id="pl-name" type="button" onClick={() => onPlaylistClick(playlistData, onBackClick, onPlayButton, onArtistClick, onAlbumClick, playTrack, pauseTrack, accessToken)}>
+                            {playlistData.playlistTitle}
+                        </h3>
                     </div>
                     <div id="edit-button-col" className="col-auto d-flex flex-column justify-content-center align-items-center">
                         <a id="edit-pl-button" type="button" onClick={handleEditPlaylist}>
@@ -170,9 +170,9 @@ function Playlist({ playlistData, onPlaylistClick, onBackClick, onPlayButton, on
                     </a>
                 </div>
                 <div id="pl-title-col" className="col d-flex flex-column justify-content-center align-items-start">
-                    <a id="pl-name" type="button" onClick={() => onPlaylistClick(playlistData, onBackClick, onPlayButton, onArtistClick, onAlbumClick, playTrack, pauseTrack, accessToken)}>
-                        <h3 className="d-flex align-items-center">{playlistData.playlistTitle}</h3>
-                    </a>
+                    <h3 id="pl-name" type="button" onClick={() => onPlaylistClick(playlistData, onBackClick, onPlayButton, onArtistClick, onAlbumClick, playTrack, pauseTrack, accessToken)}>
+                        {playlistData.playlistTitle}
+                    </h3>
                 </div>
                 <div id="edit-button-col" className="col-auto d-flex flex-column justify-content-center align-items-center">
                     <a id="edit-pl-button" type="button" onClick={handleEditPlaylist}>
