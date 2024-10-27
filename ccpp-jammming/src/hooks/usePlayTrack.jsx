@@ -15,8 +15,6 @@ function usePlayTrack() {
     setUriQueue(newUriQueue);
   }, []);
 
-  /* console.log("uriQueue", uriQueue) */
-
   return { uriTrack, uriQueue, setUriQueue, updateUri, updateQueue };
 }
 
