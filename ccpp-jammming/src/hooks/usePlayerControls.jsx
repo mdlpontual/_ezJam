@@ -13,6 +13,7 @@ function usePlayerControls({ uriTrack, uriQueue }) {
     const [currentTrack, setCurrentTrack] = useState(defaultTrack); // Current track details
     const [trackPosition, setTrackPosition] = useState(0);
     const playerInstanceRef = useRef(null); // Ref to track the player instance
+    const previousUriTrackRef = useRef(uriTrack);
 
     // Initialize Spotify SDK
     useEffect(() => {
@@ -78,16 +79,17 @@ function usePlayerControls({ uriTrack, uriQueue }) {
 
     //------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    // Play a new track when uriTrack changes and set the whole queue
+    // Effect to handle changes in uriTrack only (to start playback)
     useEffect(() => {
         const player = playerInstanceRef.current;
-        if (player && uriTrack && uriQueue) {
+        if (player && uriTrack && uriQueue && uriTrack !== previousUriTrackRef.current) {
+            previousUriTrackRef.current = uriTrack;
             player._options.getOAuthToken(access_token => {
                 fetch(`https://api.spotify.com/v1/me/player/play`, {
                     method: 'PUT',
                     body: JSON.stringify({
-                        uris: uriQueue,  // Set the entire queue
-                        offset: { uri: uriTrack }, // Start from the current track
+                        uris: uriQueue,
+                        offset: { uri: uriTrack },
                     }),
                     headers: {
                         'Content-Type': 'application/json',
@@ -96,7 +98,24 @@ function usePlayerControls({ uriTrack, uriQueue }) {
                 });
             });
         }
-    }, [uriTrack, uriQueue]);
+    }, [uriTrack]);
+
+    // New effect to update the uriQueue without triggering playback
+    useEffect(() => {
+        const player = playerInstanceRef.current;
+        if (player && uriQueue) {
+            player._options.getOAuthToken(access_token => {
+                fetch(`https://api.spotify.com/v1/me/player/play`, {
+                    method: 'PUT',
+                    body: JSON.stringify({ uris: uriQueue }),
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${access_token}`,
+                    },
+                });
+            });
+        }
+    }, [uriQueue]);
 
     // Function to play track
     const playTrack = () => {
