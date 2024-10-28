@@ -102,7 +102,7 @@ function usePlayerControls({ uriTrack, uriQueue, customUriQueue }) {
     // New effect to update the uriQueue without triggering playback
     useEffect(() => {
         const player = playerInstanceRef.current;
-        if (player && customUriQueue && customUriQueue !== previousUriQueueRef.current) {
+        if (isActive && player && customUriQueue && customUriQueue !== previousUriQueueRef.current) {
             player._options.getOAuthToken(access_token => {
                 fetch(`https://api.spotify.com/v1/me/player/play`, {
                     method: 'PUT',
@@ -114,20 +114,11 @@ function usePlayerControls({ uriTrack, uriQueue, customUriQueue }) {
                 }).then(() => {
                     // Start a series of intervals to pause playback
                     const interval1 = setTimeout(() => pauseTrack(), 50);
-                    const interval2 = setTimeout(() => pauseTrack(), 75);
-                    const interval3 = setTimeout(() => pauseTrack(), 100);
-                    const interval4 = setTimeout(() => pauseTrack(), 125);
-                    const interval5 = setTimeout(() => pauseTrack(), 150);
-                    const interval6 = setTimeout(() => pauseTrack(), 175);
-                    const interval7 = setTimeout(() => pauseTrack(), 200);
-                    const interval8 = setTimeout(() => pauseTrack(), 225);
-                    const interval9 = setTimeout(() => pauseTrack(), 250);
-                    const interval10 = setTimeout(() => pauseTrack(), 275);
-                    const interval11 = setTimeout(() => pauseTrack(), 300);
-                    const interval12 = setTimeout(() => pauseTrack(), 400);
-                    const interval13 = setTimeout(() => pauseTrack(), 500);
-                    const interval14 = setTimeout(() => pauseTrack(), 750);
-                    const interval15 = setTimeout(() => pauseTrack(), 1000);
+                    const interval2 = setTimeout(() => pauseTrack(), 100);
+                    const interval3 = setTimeout(() => pauseTrack(), 200);
+                    const interval4 = setTimeout(() => pauseTrack(), 300);
+                    const interval5 = setTimeout(() => pauseTrack(), 500);
+                    const interval6 = setTimeout(() => pauseTrack(), 1000);
     
                     // Cleanup intervals once the effect runs or component unmounts
                     return () => {
@@ -137,15 +128,6 @@ function usePlayerControls({ uriTrack, uriQueue, customUriQueue }) {
                         clearTimeout(interval4);
                         clearTimeout(interval5);
                         clearTimeout(interval6);
-                        clearTimeout(interval7);
-                        clearTimeout(interval8);
-                        clearTimeout(interval9);
-                        clearTimeout(interval10);
-                        clearTimeout(interval11);
-                        clearTimeout(interval12);
-                        clearTimeout(interval13);
-                        clearTimeout(interval14);
-                        clearTimeout(interval15);
                     };
                 });
             });

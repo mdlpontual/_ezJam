@@ -5,7 +5,14 @@ import { useTrack } from "../../../../../../hooks/TrackContext";
 import { useSortable } from '@dnd-kit/sortable'; // Importing dnd-kit sortable
 import { CSS } from '@dnd-kit/utilities'; // Utility for CSS transformation
 
-function PlaylistTrack({ order, playlistTrack, playlistTracksArr, onPlayButton, onArtistClick, onAlbumClick, playTrack, pauseTrack, preDeleteTrack, accessToken, resetTrackSaved, onTrackClick, isSelected }) {
+function PlaylistTrack({ order, 
+                        playlistTrack, playlistTracksArr, 
+                        onPlayButton, onArtistClick, onAlbumClick, 
+                        playTrack, pauseTrack, 
+                        preDeleteTrack, resetTrackSaved, 
+                        onTrackClick, isSelected, 
+                        selectedTracks, accessToken 
+                    }) {
     const { currentTrackUri, isPaused } = useTrack();
     const [isSaved, setIsSaved] = useState(true);  // Track whether the current track is saved
 
@@ -23,26 +30,33 @@ function PlaylistTrack({ order, playlistTrack, playlistTracksArr, onPlayButton, 
         transition,
     };
 
-    console.log(isSelected);
-
     // Handle changes to track (e.g., drag & drop)
     const handleTrackChange = () => {
         setIsSaved(false);  // Mark track as unsaved when changed
     };
 
-    // Toggle play/pause
-    const handleTogglePlay = () => {
+    const handleTogglePlay = (e) => {
+        e.stopPropagation();
         if (currentTrackUri !== uriTrack) {
-            // Play this track if it's not currently the one playing
             onPlayButton(uriTrack, uriQueue);
         } else {
-            // Toggle play/pause state only for the current track
-            if (isPaused) {
-                playTrack();
-            } else {
-                pauseTrack();
-            }
+            isPaused ? playTrack() : pauseTrack();
         }
+    };
+
+    const handleDeleteClick = (e) => {
+        e.stopPropagation();
+        preDeleteTrack(uriTrack, selectedTracks);
+    };
+
+    const handleArtistClick = (e) => {
+        e.stopPropagation();
+        if (playlistTrack.artistId) onArtistClick(playlistTrack, onArtistClick, onAlbumClick, onPlayButton, accessToken);
+    };
+
+    const handleAlbumClick = (e) => {
+        e.stopPropagation();
+        if (playlistTrack.albumId) onAlbumClick(playlistTrack, onArtistClick, onAlbumClick, onPlayButton, accessToken);
     };
 
     // Helper function to format track duration
@@ -82,12 +96,12 @@ function PlaylistTrack({ order, playlistTrack, playlistTracksArr, onPlayButton, 
                     </div>
                     <div id="col-title" className="col d-flex justify-content-start align-items-center">
                         <h5>{playlistTrack.trackTitle}</h5>
-                        <p id="open-artist-page" type="button" onClick={() => playlistTrack.artistId && onArtistClick(playlistTrack, onArtistClick, onAlbumClick, onPlayButton, accessToken)}>
+                        <p id="open-artist-page" type="button" onClick={handleArtistClick}>
                             {playlistTrack.trackAuthor}
                         </p>
                     </div>
                     <div id="col-album" className="col-3 d-flex justify-content-start align-items-center">
-                        <p id="open-album-page" type="button" onClick={() => playlistTrack.albumId && onAlbumClick(playlistTrack, onArtistClick, onAlbumClick, onPlayButton, accessToken)}>
+                        <p id="open-album-page" type="button" onClick={handleAlbumClick}>
                             {playlistTrack.trackAlbum}
                         </p>
                     </div>
@@ -95,7 +109,7 @@ function PlaylistTrack({ order, playlistTrack, playlistTracksArr, onPlayButton, 
                         <p>{millisToMinutesAndSeconds(playlistTrack.trackDuration)}</p>
                     </div>
                     <div id="col-minus" className="col-1 d-flex justify-content-end align-items-center">
-                        <a id="delete-track" className="col-1 d-flex justify-content-end align-items-center" type="button" onClick={() => preDeleteTrack(uriTrack)}>
+                        <a id="delete-track" className="col-1 d-flex justify-content-end align-items-center" type="button" onClick={handleDeleteClick}>
                             <img id="minus-icon" src={IMG.minus2PNG} alt="minus icon" width="25px" />
                             <img id="minus-icon-red" src={IMG.minusRedPNG} alt="minus icon" width="25px" />
                         </a>
@@ -126,12 +140,12 @@ function PlaylistTrack({ order, playlistTrack, playlistTracksArr, onPlayButton, 
                 </div>
                 <div id="col-title" className="col d-flex justify-content-start align-items-center">
                     <h5>{playlistTrack.trackTitle}</h5>
-                    <p id="open-artist-page" type="button" onClick={() => playlistTrack.artistId && onArtistClick(playlistTrack, onArtistClick, onAlbumClick, onPlayButton, accessToken)}>
+                    <p id="open-artist-page" type="button" onClick={handleArtistClick}>
                         {playlistTrack.trackAuthor}
                     </p>
                 </div>
                 <div id="col-album" className="col-3 d-flex justify-content-start align-items-center">
-                    <p id="open-album-page" type="button" onClick={() => playlistTrack.albumId && onAlbumClick(playlistTrack, onArtistClick, onAlbumClick, onPlayButton, accessToken)}>
+                    <p id="open-album-page" type="button" onClick={handleAlbumClick}>
                         {playlistTrack.trackAlbum}
                     </p>
                 </div>
@@ -139,7 +153,7 @@ function PlaylistTrack({ order, playlistTrack, playlistTracksArr, onPlayButton, 
                     <p>{millisToMinutesAndSeconds(playlistTrack.trackDuration)}</p>
                 </div>
                 <div id="col-minus" className="col-1 d-flex justify-content-end align-items-center">
-                    <a id="delete-track" className="col-1 d-flex justify-content-end align-items-center" type="button" onClick={() => preDeleteTrack(uriTrack)}>
+                    <a id="delete-track" className="col-1 d-flex justify-content-end align-items-center" type="button" onClick={handleDeleteClick}>
                         <img id="minus-icon" src={IMG.minus2PNG} alt="minus icon" width="25px" />
                         <img id="minus-icon-red" src={IMG.minusRedPNG} alt="minus icon" width="25px" />
                     </a>
