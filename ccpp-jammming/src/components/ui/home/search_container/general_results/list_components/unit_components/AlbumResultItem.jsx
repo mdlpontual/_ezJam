@@ -13,13 +13,16 @@ function AlbumResultItem({ artistContent, albumContent, onArtistClick, onAlbumCl
         <>
             <div id="albuns-inner-row" className="row">
                 <div id="album-thumbnail" className="col-1 d-flex justify-content-center align-items-center">
-                    <img src={albumCoverImg} alt="album cover" height="65px"/>
+                    <img src={albumCoverImg} alt="album cover" height="75px"/>
                 </div>
                 <div id="album-title" className="col d-flex flex-column justify-content-center align-items-start">
-                    <a id="open-album-page" type="button" onClick={() => onAlbumClick(albumContent, onArtistClick, onAlbumClick, onPlayButton, accessToken)}>
-                        <h5>{albumContent.albumTitle}</h5>
-                    </a>
-                    <p>{albumContent.albumYear} - <a id="open-artist-page" type="button" onClick={() => onArtistClick(artistContent, onArtistClick, onAlbumClick, onPlayButton, accessToken)}>{albumContent.albumAuthor}</a></p>
+                    <h5 id="open-album-page" type="button" onClick={() => onAlbumClick(albumContent, onArtistClick, onAlbumClick, onPlayButton, accessToken)}>
+                        {albumContent.albumTitle}
+                    </h5>
+                    <p>{albumContent.albumYear} - <a id="open-artist-page" type="button" onClick={() => onArtistClick(artistContent, onArtistClick, onAlbumClick, onPlayButton, accessToken)}>
+                            {albumContent.albumAuthor}
+                        </a>
+                    </p>
                 </div>
             </div>  
         </>

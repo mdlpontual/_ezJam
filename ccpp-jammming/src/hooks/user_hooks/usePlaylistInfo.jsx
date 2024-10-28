@@ -68,6 +68,7 @@ function usePlaylistInfo({ playlistData, accessToken, trackLimit = 100, artistLi
                         artistId: track.track.artists[0]?.id || null, 
                         artistName: track.track.artists[0]?.name || "Unknown Artist",
                         artistBanner: artistBanners[track.track.artists[0]?.id] || null,
+                        albumAuthor: track.track.artists[0]?.name || "Unknown Artist", 
                         albumId: track.track.album?.id || null, 
                         albumTitle: track.track.album.name,
                         albumType: track.track.album.album_type,

@@ -7,7 +7,7 @@ function GeneralResultsPage({ searchArtistResults, searchAlbumResults, searchTra
     return (
         <>
             <div id="gen-results-container" className="container-fluid">
-                <div id="gen-results-artists" className="row">
+                <div id="gen-results-artists" className="row flex-column ">
                     <div id="gen-results-artists-col" className="col">
                         <ArtistResultsBox 
                             searchArtistResults={searchArtistResults}

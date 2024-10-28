@@ -568,6 +568,7 @@
                         @include box-reset-default;
                         padding-bottom: 5px;
                         width: 100%;
+                        border-radius: 10px;
                     } 
                     h6 {
                         //border: $border-lime-solid;
@@ -576,6 +577,9 @@
                         text-overflow: ellipsis;
                         overflow: hidden;
                     }    
+                    h6:hover {
+                        text-decoration: underline;
+                    }
                     p {
                         //border: $border-lime-solid;
                         @include box-reset-default;

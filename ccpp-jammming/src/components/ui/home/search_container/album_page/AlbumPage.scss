@@ -5,7 +5,8 @@
     #album-page-banner-row {
         //border: $border-yellow-solid;
         @include box-reset-default;
-        height: 120px;
+        height: fit-content;
+        padding-bottom: 10px;
         #album-page-banner-col {
             //border: $border-cyan-solid;
             @include box-reset-default;
@@ -19,19 +20,26 @@
                     img {
                         //border: $border-lime-dotted;
                         @include box-reset-default;
+                        border-radius: 10px;
                     }
                 }
                 #album-title-col {
                     //border: $border-cyan-dashed;
                     @include box-reset-default;
-                    padding-bottom: 15px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    padding-left: 10px;
                     p {
                         //border: $border-lime-dotted;
                         @include box-reset-default;
+                        text-overflow: ellipsis;
+                        overflow: hidden;
                     }
                     h1 {
                         //border: $border-lime-dotted;
                         @include box-reset-default;
+                        text-overflow: ellipsis;
+                        overflow: hidden;
                     }
                 }
             }
@@ -232,6 +240,30 @@
                             }
                         };
                         #col-title {
+                            //border: $border-cyan-dotted;
+                            @include box-reset-default;
+                            white-space: nowrap;
+                            text-overflow: ellipsis;
+                            overflow: hidden;
+                            flex-wrap: wrap;
+                            h5 {
+                                //border: $border-lime-dotted;
+                                @include box-reset-default;
+                                text-overflow: ellipsis;
+                                overflow: hidden;
+                                width: 100%;
+                                margin-bottom: -3px;
+                            }
+                            p {
+                                //border: $border-lime-dotted;
+                                @include box-reset-default;
+                                text-overflow: ellipsis;
+                                overflow: hidden;
+                                width: 100%;
+                                margin-top: -3px;
+                            }
+                        };
+                        #col-author {
                             //border: $border-cyan-dotted;
                             @include box-reset-default;
                             white-space: nowrap;

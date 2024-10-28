@@ -34,7 +34,7 @@ function useFetchSearchResults({ searchArtistResults, searchAlbumResults, search
           artistType: artist.type,
           artistName: artist.name,
           artistBanner: artist.images[0]?.url,
-          artistProfileImg: artist.images[artist.images.length - 1]?.url,
+          artistProfileImg: artist.images[artist.images.length - 2]?.url,
           artistGenres: artist.genres,
           artistUri: artist.uri,
         }));

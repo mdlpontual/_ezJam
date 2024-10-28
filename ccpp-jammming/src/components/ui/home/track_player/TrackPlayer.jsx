@@ -119,7 +119,10 @@ function TrackPlayer({
         return (
             <div id="track-player-container" className="container-fluid d-flex justify-content-center align-items-center">
                 <div id="track-player-row" className="row d-flex justify-content-center align-items-center">
-                    <b> Track Player instance not active. Transfer your playback using your Spotify app </b>
+                    <div id="track-player-text" className="col d-flex flex-column justify-content-center align-items-center">
+                        <h4>Enable your music player!</h4>
+                        <p> Open the Spotify app, go to "Connect to a Device" and click on "ezJam Track Player" </p>
+                    </div>
                 </div>
             </div>
         );
@@ -138,15 +141,18 @@ function TrackPlayer({
                     <div id="col-player" className="col d-flex flex-column">
                         <div id="track-butttons-row" className="row d-flex justify-content-center align-items-center">
                             <div id="col-prev" className="col-auto d-flex justify-content-center align-items-center">
-                                <img src={IMG.previousPNG} alt="previous track button" height="20px" onClick={handlePreviousTrack} />
+                                <img id="prev-white" src={IMG.previousPNG} alt="previous track button" height="25px" onClick={handlePreviousTrack} />
+                                <img id="prev-green" src={IMG.previousGreenPNG} alt="previous track button" height="25px" onClick={handlePreviousTrack} />
                             </div>
                             <div id="col-play" className="col-auto d-flex justify-content-center align-items-center">
                                 <a id="togglePlay-button" type="button" onClick={handleTogglePlay} >
-                                    <img src={isPaused ? IMG.playPNG : IMG.pausePNG} alt="play pause button" height="35px" />
+                                    <img id="play-pause-white" src={isPaused ? IMG.playPNG : IMG.pausePNG} alt="play pause button" height="40px" />
+                                    <img id="play-pause-green" src={isPaused ? IMG.playGreenPNG : IMG.pauseGreenPNG} alt="play pause button" height="40px" />
                                 </a>
                             </div>
                             <div id="col-next" className="col-auto d-flex justify-content-center align-items-center">
-                                <img src={IMG.nextPNG} alt="next track button" height="20px" onClick={handleNextTrack} />
+                                <img id="next-white" src={IMG.nextPNG} alt="next track button" height="25px" onClick={handleNextTrack} />
+                                <img id="next-green" src={IMG.nextGreenPNG} alt="next track button" height="25px" onClick={handleNextTrack} />
                             </div>
                         </div>
                         <div id="progress-bar-row" className="row d-flex">

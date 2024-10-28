@@ -294,7 +294,7 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
                             <div id="col-num" className="col-1 d-flex justify-content-start align-items-end">#</div>
                             <div id="col-cover" className="col-1 d-flex justify-content-start align-items-end"></div>
                             <div id="col-title" className="col d-flex justify-content-start align-items-end">title</div>
-                            <div id="col-album" className="col-2 d-flex justify-content-start align-items-end">album</div>
+                            <div id="col-album" className="col-3 d-flex justify-content-start align-items-end">album</div>
                             <div id="col-duration" className="col-1 d-flex justify-content-center align-items-end">
                                 <img src={IMG.clockPNG} alt="clock icon" height="15px" />
                             </div>

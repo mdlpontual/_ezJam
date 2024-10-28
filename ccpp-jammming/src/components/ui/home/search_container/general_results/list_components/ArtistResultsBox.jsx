@@ -8,15 +8,21 @@ function ArtistResultsBox({ searchArtistResults, onArtistClick, onAlbumClick, on
     return (
         <>
             <h4>artists:</h4>
-            {fetchedArtistsArray.filter((artist, idx) => idx < 5).map(artist => (
-                <ArtistResultItem 
-                    artistContent={artist}
-                    onArtistClick={onArtistClick}
-                    onAlbumClick={onAlbumClick}
-                    onPlayButton={onPlayButton}
-                    accessToken={accessToken}
-                    key={artist.artistUri}/>
-            ))}
+            <div id="inside-container" className="container-fluid justify-content-center align-items-center">
+                <div id="inside-row" className="row justify-content-center align-items-center">
+                    {fetchedArtistsArray.filter((artist, idx) => idx < 5).map(artist => (
+                        <div id="inside-col" className="col justify-content-center align-items-start" key={artist.artistUri}>
+                            <ArtistResultItem 
+                                artistContent={artist}
+                                onArtistClick={onArtistClick}
+                                onAlbumClick={onAlbumClick}
+                                onPlayButton={onPlayButton}
+                                accessToken={accessToken}
+                                key={artist.artistUri}/>
+                        </div>
+                    ))}
+                </div>
+            </div>
         </>
     );
 }

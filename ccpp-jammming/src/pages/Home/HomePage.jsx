@@ -15,8 +15,8 @@ function HomePage({ code }) {
     const { currentTrackUri, updateCurrentTrackUri, updateCurrentTrackTitle, updateCurrentTrackArtist, updateCurrentQueueUri, updateCurrentTrackAlbum } = useTrack(); 
 
     const { accessToken } = useAuth(code);
-    const { uriTrack, uriQueue, updateUri, updateQueue } = usePlayTrack();
-    const { isPaused, isActive, currentTrack, trackPosition, playTrack, pauseTrack, previousTrack, nextTrack, seekPosition, volumeControl } = usePlayerControls({uriTrack, uriQueue});
+    const { uriTrack, uriQueue, customUriQueue, updateUri, updateQueue } = usePlayTrack();
+    const { isPaused, isActive, currentTrack, trackPosition, playTrack, pauseTrack, previousTrack, nextTrack, seekPosition, volumeControl } = usePlayerControls({uriTrack, uriQueue, customUriQueue});
     const { activePage, goBack, goForward, handleArtistClick, handleAlbumClick } = useAdimSearchPage(search, updateUri, playTrack, pauseTrack, accessToken);
 
     // Function to handle when a new track is played

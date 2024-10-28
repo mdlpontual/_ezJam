@@ -80,25 +80,22 @@ function PlaylistTrack({ order, playlistTrack, playlistTracksArr, onPlayButton, 
                     </div>
                     <div id="col-title" className="col d-flex justify-content-start align-items-center">
                         <h5>{playlistTrack.trackTitle}</h5>
-                        <p>
-                            <a id="open-artist-page" type="button" onClick={() => playlistTrack.artistId && onArtistClick(playlistTrack, onArtistClick, onAlbumClick, onPlayButton, accessToken)}>
-                                {playlistTrack.trackAuthor}
-                            </a>
+                        <p id="open-artist-page" type="button" onClick={() => playlistTrack.artistId && onArtistClick(playlistTrack, onArtistClick, onAlbumClick, onPlayButton, accessToken)}>
+                            {playlistTrack.trackAuthor}
                         </p>
                     </div>
-                    <div id="col-album" className="col-2 d-flex justify-content-start align-items-center">
-                        <p>
-                            <a id="open-album-page" type="button" onClick={() => playlistTrack.albumId && onAlbumClick(playlistTrack, onArtistClick, onAlbumClick, onPlayButton, accessToken)}>
-                                {playlistTrack.trackAlbum}
-                            </a>
+                    <div id="col-album" className="col-3 d-flex justify-content-start align-items-center">
+                        <p id="open-album-page" type="button" onClick={() => playlistTrack.albumId && onAlbumClick(playlistTrack, onArtistClick, onAlbumClick, onPlayButton, accessToken)}>
+                            {playlistTrack.trackAlbum}
                         </p>
                     </div>
                     <div id="col-duration" className="col-1 d-flex justify-content-center align-items-center">
                         <p>{millisToMinutesAndSeconds(playlistTrack.trackDuration)}</p>
                     </div>
                     <div id="col-minus" className="col-1 d-flex justify-content-end align-items-center">
-                        <a id="delete-track" type="button" onClick={() => preDeleteTrack(uriTrack)}>
+                        <a id="delete-track" className="col-1 d-flex justify-content-end align-items-center" type="button" onClick={() => preDeleteTrack(uriTrack)}>
                             <img id="minus-icon" src={IMG.minus2PNG} alt="minus icon" width="25px" />
+                            <img id="minus-icon-red" src={IMG.minusRedPNG} alt="minus icon" width="25px" />
                         </a>
                     </div>
                 </div>
@@ -127,25 +124,22 @@ function PlaylistTrack({ order, playlistTrack, playlistTracksArr, onPlayButton, 
                 </div>
                 <div id="col-title" className="col d-flex justify-content-start align-items-center">
                     <h5>{playlistTrack.trackTitle}</h5>
-                    <p>
-                        <a id="open-artist-page" type="button" onClick={() => playlistTrack.artistId && onArtistClick(playlistTrack, onArtistClick, onAlbumClick, onPlayButton, accessToken)}>
-                            {playlistTrack.trackAuthor}
-                        </a>
+                    <p id="open-artist-page" type="button" onClick={() => playlistTrack.artistId && onArtistClick(playlistTrack, onArtistClick, onAlbumClick, onPlayButton, accessToken)}>
+                        {playlistTrack.trackAuthor}
                     </p>
                 </div>
-                <div id="col-album" className="col-2 d-flex justify-content-start align-items-center">
-                    <p>
-                        <a id="open-album-page" type="button" onClick={() => playlistTrack.albumId && onAlbumClick(playlistTrack, onArtistClick, onAlbumClick, onPlayButton, accessToken)}>
-                            {playlistTrack.trackAlbum}
-                        </a>
+                <div id="col-album" className="col-3 d-flex justify-content-start align-items-center">
+                    <p id="open-album-page" type="button" onClick={() => playlistTrack.albumId && onAlbumClick(playlistTrack, onArtistClick, onAlbumClick, onPlayButton, accessToken)}>
+                        {playlistTrack.trackAlbum}
                     </p>
                 </div>
                 <div id="col-duration" className="col-1 d-flex justify-content-center align-items-center">
                     <p>{millisToMinutesAndSeconds(playlistTrack.trackDuration)}</p>
                 </div>
                 <div id="col-minus" className="col-1 d-flex justify-content-end align-items-center">
-                    <a id="delete-track" type="button" onClick={() => preDeleteTrack(uriTrack)}>
+                    <a id="delete-track" className="col-1 d-flex justify-content-end align-items-center" type="button" onClick={() => preDeleteTrack(uriTrack)}>
                         <img id="minus-icon" src={IMG.minus2PNG} alt="minus icon" width="25px" />
+                        <img id="minus-icon-red" src={IMG.minusRedPNG} alt="minus icon" width="25px" />
                     </a>
                 </div>
             </div>

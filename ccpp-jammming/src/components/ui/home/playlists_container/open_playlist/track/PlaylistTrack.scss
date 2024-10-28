@@ -73,7 +73,12 @@
                 @include box-reset-default;
                 text-overflow: ellipsis;
                 overflow: hidden;
-                width: 100%;
+                margin-top: -3px;
+            }
+            p:hover {
+                //border: $border-lime-dotted;
+                @include box-reset-default;
+                text-decoration: underline;
                 margin-top: -3px;
             }
         };
@@ -98,6 +103,13 @@
                 @include box-reset-default;
                 text-overflow: ellipsis;
                 overflow: hidden;
+                margin-top: -3px;
+            }
+            p:hover {
+                //border: $border-lime-dotted;
+                @include box-reset-default;
+                text-decoration: underline;
+                margin-top: -3px;
             }
         };
         #col-duration {
@@ -117,6 +129,46 @@
             @include box-reset-default;
             width: 50px;
             padding: 3px;
+            #delete-track {
+                //border: $border-lime-dotted;
+                @include box-reset-default;
+                position: relative;
+                width: 100%;
+                #minus-icon {
+                    //border: $border-lime-dotted;
+                    @include box-reset-default;
+                    visibility: visible;
+                    position: absolute;
+                }
+                #minus-icon-red {
+                    //border: $border-lime-dotted;
+                    @include box-reset-default;
+                    visibility: hidden;
+                }
+            }
+        }
+        #col-minus:hover {
+            //border: $border-cyan-dotted;
+            @include box-reset-default;
+            width: 50px;
+            padding: 5px;
+            #delete-track {
+                //border: $border-lime-dotted;
+                @include box-reset-default;
+                position: relative;
+                width: 100%;
+                #minus-icon {
+                    //border: $border-lime-dotted;
+                    @include box-reset-default;
+                    visibility: hidden;
+                    position: absolute;
+                }
+                #minus-icon-red {
+                    //border: $border-lime-dotted;
+                    @include box-reset-default;
+                    visibility: visible;
+                }
+            }
         }
         #col-num, #col-cover, #col-title, 
         #col-saved, #col-album, #col-duration,
@@ -205,10 +257,15 @@
             p {
                 //border: $border-lime-dotted;
                 @include box-reset-default;
-                color: $primary;
                 text-overflow: ellipsis;
                 overflow: hidden;
-                width: 100%;
+                margin-top: -3px;
+                color: $primary;
+            }
+            p:hover {
+                //border: $border-lime-dotted;
+                @include box-reset-default;
+                text-decoration: underline;
                 margin-top: -3px;
             }
         };
@@ -232,9 +289,16 @@
             p {
                 //border: $border-lime-dotted;
                 @include box-reset-default;
-                color: $primary;
                 text-overflow: ellipsis;
                 overflow: hidden;
+                margin-top: -3px;
+                color: $primary;
+            }
+            p:hover {
+                //border: $border-lime-dotted;
+                @include box-reset-default;
+                text-decoration: underline;
+                margin-top: -3px;
             }
         };
         #col-duration {
@@ -256,6 +320,46 @@
             @include box-reset-default;
             width: 50px;
             padding: 3px;
+            #delete-track {
+                //border: $border-lime-dotted;
+                @include box-reset-default;
+                position: relative;
+                width: 100%;
+                #minus-icon {
+                    //border: $border-lime-dotted;
+                    @include box-reset-default;
+                    visibility: visible;
+                    position: absolute;
+                }
+                #minus-icon-red {
+                    //border: $border-lime-dotted;
+                    @include box-reset-default;
+                    visibility: hidden;
+                }
+            }
+        }
+        #col-minus:hover {
+            //border: $border-cyan-dotted;
+            @include box-reset-default;
+            width: 50px;
+            padding: 5px;
+            #delete-track {
+                //border: $border-lime-dotted;
+                @include box-reset-default;
+                position: relative;
+                width: 100%;
+                #minus-icon {
+                    //border: $border-lime-dotted;
+                    @include box-reset-default;
+                    visibility: hidden;
+                    position: absolute;
+                }
+                #minus-icon-red {
+                    //border: $border-lime-dotted;
+                    @include box-reset-default;
+                    visibility: visible;
+                }
+            }
         }
         #col-num, #col-cover, #col-title, 
         #col-saved, #col-album, #col-duration,

@@ -4,6 +4,7 @@ import { useState, useCallback } from 'react';
 function usePlayTrack() {
   const [uriTrack, setUriTrack] = useState(null);
   const [uriQueue, setUriQueue] = useState(null);
+  const [customUriQueue, setCustomUriQueue] = useState(null);
 
   // Function to update the shared variable
   const updateUri = useCallback((newUriTrack, newUriQueue) => {
@@ -13,9 +14,10 @@ function usePlayTrack() {
 
   const updateQueue = useCallback((newUriQueue) => {
     setUriQueue(newUriQueue);
+    setCustomUriQueue(newUriQueue);
   }, []);
 
-  return { uriTrack, uriQueue, setUriQueue, updateUri, updateQueue };
+  return { uriTrack, uriQueue, customUriQueue, setUriQueue, updateUri, updateQueue };
 }
 
 export default usePlayTrack;
