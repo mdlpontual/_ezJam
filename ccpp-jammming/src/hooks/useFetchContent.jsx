@@ -114,12 +114,13 @@ function useFetchContent({ idArtist, idAlbum, accessToken, limit = 50, offset = 
             trackId: track.id,
             trackTitle: track.name,
             trackUri: track.uri,
+            trackAuthor: track.artists[0].name,
             trackDuration: track.duration_ms,
             trackPopularity: track.popularity,
             trackNumber: track.track_number,
             trackDiscNumber: track.disc_number,
             trackExplicit: track.explicit,
-            ptrackPeviewUrl: track.preview_url,
+            trackPeviewUrl: track.preview_url,
             trackExternalIds: track.external_ids,
         }));
 

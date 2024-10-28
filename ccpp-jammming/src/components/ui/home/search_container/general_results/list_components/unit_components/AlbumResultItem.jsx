@@ -30,14 +30,3 @@ function AlbumResultItem({ artistContent, albumContent, onArtistClick, onAlbumCl
 }
 
 export default AlbumResultItem;
-
-/*
-<div id="col-title" className="col d-flex justify-content-start align-items-center">
-    <h5>{trackContent.trackTitle}</h5>
-    <p><a id="open-artist-page" type="button" onClick={() => onArtistClick(artistContent, onArtistClick, onAlbumClick, onPlayButton, accessToken)}>{trackContent.trackAuthor}</a></p>
-</div>
-<div id="col-album" className="col-3 d-flex justify-content-start align-items-center">
-    <p><a id="open-album-page" type="button" onClick={() => onAlbumClick(albumContent, onArtistClick, onAlbumClick, onPlayButton, accessToken)}>{trackContent.trackAlbum}</a></p>
-</div>
-
-*/

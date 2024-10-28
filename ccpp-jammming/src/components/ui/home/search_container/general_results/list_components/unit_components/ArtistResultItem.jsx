@@ -13,12 +13,17 @@ function ArtistResultItem({ artistContent, onArtistClick, onAlbumClick, onPlayBu
         <>
             <div id="artist-inner-row" className="row flex-column d-flex justify-content-center align-items-center">
                 <div id="artist-thumbnail" className="col-1 d-flex justify-content-center align-items-center">
-                    <img src={profilePicture} alt="profile picture" height="175x"/>
+                    <img 
+                        src={profilePicture} 
+                        type="button" 
+                        onClick={() => onArtistClick(artistContent, onArtistClick, onAlbumClick, onPlayButton, accessToken)}
+                        alt="profile picture" 
+                        height="175x"/>
                 </div>
                 <div id="artist-name" className="col d-flex justify-content-center align-items-start">
-                    <h5 id="open-artist-page" type="button" onClick={() => onArtistClick(artistContent, onArtistClick, onAlbumClick, onPlayButton, accessToken)}>
+                    <h6 id="open-artist-page" type="button" onClick={() => onArtistClick(artistContent, onArtistClick, onAlbumClick, onPlayButton, accessToken)}>
                         {artistContent.artistName}
-                    </h5>
+                    </h6>
                 </div>
             </div>
         </>

@@ -15,10 +15,8 @@ function Album({ albumContent, onArtistClick, onAlbumClick, onPlayButton, access
                 <a type="button" onClick={() => onAlbumClick(albumContent, onArtistClick, onAlbumClick, onPlayButton, accessToken)} >
                     <img src={coverPicture} alt="album cover"/>
                 </a>
-                <h6>
-                    <a type="button" onClick={() => onAlbumClick(albumContent, onArtistClick, onAlbumClick, onPlayButton, accessToken)} >
-                        {albumContent.albumTitle}
-                    </a>
+                <h6 type="button" onClick={() => onAlbumClick(albumContent, onArtistClick, onAlbumClick, onPlayButton, accessToken)} >
+                    {albumContent.albumTitle}
                 </h6>
                 <p>{albumContent.albumYear} - {albumContent.albumType}</p>
             </div>
