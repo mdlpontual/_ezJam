@@ -6,26 +6,68 @@
         //border: $border-yellow-solid;
         @include box-reset-default;
         height: 100%;
+        #track-player-text {
+            //border: $border-cyan-solid;
+            @include box-reset-default;
+            height: 100%;
+            h4 {
+                //border: $border-lime-solid;
+                @include box-reset-default;
+            }
+            p {
+                //border: $border-lime-solid;
+                @include box-reset-default;
+            }
+        }
         #col-track {
             //border: $border-cyan-solid;
             @include box-reset-default;
-            padding-left: 5px;
+            overflow: hidden;
             #col-cover {
                 //border: $border-cyan-dashed;
                 @include box-reset-default;
-                width: 90px;
+                width: 80px;
+                margin-left: 20px;
+                #display-cover {
+                    //border: $border-lime-dashed;
+                    @include box-reset-default;
+                    width: 100%;
+                    img {
+                        //border: $border-lime-dashed;
+                        @include box-reset-default;
+                        border-radius: 6px;
+                    }
+                }
             }
             #col-title {
                 //border: $border-cyan-dashed;
                 @include box-reset-default;
+                margin-left: 5px;
+                overflow: hidden;
+                white-space: nowrap;
                 h5 {
                     //border: $border-lime-dotted;
                     @include box-reset-default;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
                 }
                 p {
                     //border: $border-lime-dotted;
                     @include box-reset-default;
                     font-weight: lighter;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                }
+                p:hover {
+                    //border: $border-lime-dotted;
+                    @include box-reset-default;
+                    font-weight: lighter;
+                    text-decoration: underline;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
                 }
             }
             #col-saved {
@@ -57,24 +99,125 @@
                     @include box-reset-default;
                     height: 100%;
                     padding: 10px;
+                    position: relative;
+                    width: 50px;
+                    #prev-white {
+                        //border: $border-lime-dashed;
+                        @include box-reset-default;
+                        position: absolute;
+                        visibility: visible;
+                    }
+                    #prev-green {
+                        //border: $border-lime-dashed;
+                        @include box-reset-default;
+                        position: absolute;
+                        visibility: hidden;
+                    }
                 }
                 #col-play {
                     //border: $border-cyan-dashed;
                     @include box-reset-default;
                     height: 100%;
                     padding: 10px;
+                    position: relative;
+                    #play-pause-white {
+                        //border: $border-lime-dashed;
+                        @include box-reset-default;
+                        position: absolute;
+                        visibility: visible;
+                    }
+                    #play-pause-green {
+                        //border: $border-lime-dashed;
+                        @include box-reset-default;
+                        //position: absolute;
+                        visibility: hidden;
+                    }
                 }
                 #col-next {
                     //border: $border-cyan-dashed;
                     @include box-reset-default;
                     height: 100%;
                     padding: 10px;
+                    position: relative;
+                    width: 50px;
+                    #next-white {
+                        //border: $border-lime-dashed;
+                        @include box-reset-default;
+                        position: absolute;
+                        visibility: visible;
+                    }
+                    #next-green {
+                        //border: $border-lime-dashed;
+                        @include box-reset-default;
+                        position: absolute;
+                        visibility: hidden;
+                    }
                 }
                 #col-repeat {
                     //border: $border-cyan-dashed;
                     @include box-reset-default;
                     height: 100%;
                     padding: 10px;
+                }
+                //---------------hover---------------------------------
+                #col-prev:hover {
+                    //border: $border-cyan-dashed;
+                    @include box-reset-default;
+                    height: 100%;
+                    padding: 10px;
+                    position: relative;
+                    width: 50px;
+                    #prev-white {
+                        //border: $border-lime-dashed;
+                        @include box-reset-default;
+                        position: absolute;
+                        visibility: hidden;
+                    }
+                    #prev-green {
+                        //border: $border-lime-dashed;
+                        @include box-reset-default;
+                        position: absolute;
+                        visibility: visible;
+                    }
+                }
+                #col-play:hover {
+                    //border: $border-cyan-dashed;
+                    @include box-reset-default;
+                    height: 100%;
+                    padding: 10px;
+                    position: relative;
+                    #play-pause-white {
+                        //border: $border-lime-dashed;
+                        @include box-reset-default;
+                        position: absolute;
+                        visibility: hidden;
+                    }
+                    #play-pause-green {
+                        //border: $border-lime-dashed;
+                        @include box-reset-default;
+                        //position: absolute;
+                        visibility: visible;
+                    }
+                }
+                #col-next:hover {
+                    //border: $border-cyan-dashed;
+                    @include box-reset-default;
+                    height: 100%;
+                    padding: 10px;
+                    position: relative;
+                    width: 50px;
+                    #next-white {
+                        //border: $border-lime-dashed;
+                        @include box-reset-default;
+                        position: absolute;
+                        visibility: hidden;
+                    }
+                    #next-green {
+                        //border: $border-lime-dashed;
+                        @include box-reset-default;
+                        position: absolute;
+                        visibility: visible;
+                    }
                 }
             }
             #track-butttons-row:hover {

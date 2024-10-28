@@ -22,16 +22,16 @@ function TrackDisplay({ currentTrack, onPlayButton, onArtistClick, onAlbumClick,
     
     return (
         <>
-           <div id="col-cover" className="col-1 d-flex justify-content-center align-items-center">
+            <div id="col-cover" className="col-1 d-flex justify-content-center align-items-center">
                 <a id="display-cover" type="button" onClick={() => onAlbumClick(albumContent, onArtistClick, onAlbumClick, onPlayButton, accessToken)}>
-                    <img src={coverPicture} height="75px"/>
+                    <img src={coverPicture} height="70px" width="70px"/>
                 </a>
             </div>
-            <div id="col-title" className="col-auto d-flex flex-column justify-content-center align-items-start">
+            <div id="col-title" className="row d-flex flex-column justify-content-center align-items-start">
                 <h5>{currentTrack.name}</h5>
-                <a id="display-artist" type="button" onClick={() => onArtistClick(artistContent, onArtistClick, onAlbumClick, onPlayButton, accessToken)}>
-                    <p>{currentTrack.artists[0].name}</p>
-                </a>
+                <p id="display-artist" type="button" onClick={() => onArtistClick(artistContent, onArtistClick, onAlbumClick, onPlayButton, accessToken)}>
+                    {currentTrack.artists[0].name}
+                </p>
             </div>
             <div id="col-blank" className="col"></div>
         </>

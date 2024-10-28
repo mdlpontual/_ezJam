@@ -84,7 +84,7 @@ function PlaylistTrack({ order, playlistTrack, playlistTracksArr, onPlayButton, 
                             {playlistTrack.trackAuthor}
                         </p>
                     </div>
-                    <div id="col-album" className="col-2 d-flex justify-content-start align-items-center">
+                    <div id="col-album" className="col-3 d-flex justify-content-start align-items-center">
                         <p id="open-album-page" type="button" onClick={() => playlistTrack.albumId && onAlbumClick(playlistTrack, onArtistClick, onAlbumClick, onPlayButton, accessToken)}>
                             {playlistTrack.trackAlbum}
                         </p>
@@ -128,7 +128,7 @@ function PlaylistTrack({ order, playlistTrack, playlistTracksArr, onPlayButton, 
                         {playlistTrack.trackAuthor}
                     </p>
                 </div>
-                <div id="col-album" className="col-2 d-flex justify-content-start align-items-center">
+                <div id="col-album" className="col-3 d-flex justify-content-start align-items-center">
                     <p id="open-album-page" type="button" onClick={() => playlistTrack.albumId && onAlbumClick(playlistTrack, onArtistClick, onAlbumClick, onPlayButton, accessToken)}>
                         {playlistTrack.trackAlbum}
                     </p>
