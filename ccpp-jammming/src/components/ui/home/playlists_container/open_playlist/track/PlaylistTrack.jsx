@@ -5,7 +5,7 @@ import { useTrack } from "../../../../../../hooks/TrackContext";
 import { useSortable } from '@dnd-kit/sortable'; // Importing dnd-kit sortable
 import { CSS } from '@dnd-kit/utilities'; // Utility for CSS transformation
 
-function PlaylistTrack({ order, playlistTrack, playlistTracksArr, onPlayButton, onArtistClick, onAlbumClick, playTrack, pauseTrack, preDeleteTrack, accessToken, resetTrackSaved }) {
+function PlaylistTrack({ order, playlistTrack, playlistTracksArr, onPlayButton, onArtistClick, onAlbumClick, playTrack, pauseTrack, preDeleteTrack, accessToken, resetTrackSaved, onTrackClick, isSelected }) {
     const { currentTrackUri, isPaused } = useTrack();
     const [isSaved, setIsSaved] = useState(true);  // Track whether the current track is saved
 
@@ -19,9 +19,11 @@ function PlaylistTrack({ order, playlistTrack, playlistTracksArr, onPlayButton, 
     const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: playlistTrack.trackUri });
 
     const style = {
-        transform: CSS.Transform.toString(transform ? { ...transform, x: 0 } : transform), // Restrict to vertical movement
+        transform: CSS.Transform.toString(transform ? { ...transform, x: 0 } : transform),
         transition,
     };
+
+    console.log(isSelected);
 
     // Handle changes to track (e.g., drag & drop)
     const handleTrackChange = () => {
@@ -62,7 +64,7 @@ function PlaylistTrack({ order, playlistTrack, playlistTracksArr, onPlayButton, 
 
     if (!isTrackPlaying) {
         return (
-            <div id="single-track-container" className="container-fluid" ref={setNodeRef} style={style}>
+            <div id="single-track-container" className={`container-fluid ${isSelected ? 'selected-track' : ''}`}   ref={setNodeRef} style={style} onClick={onTrackClick}>
                 <div id="single-track-row" className="row">
                     <div id="col-num" className="col-1 d-flex justify-content-center align-items-center">
                         <h5 id="number-icon">{order + 1}</h5>
@@ -104,7 +106,7 @@ function PlaylistTrack({ order, playlistTrack, playlistTracksArr, onPlayButton, 
     }
 
     return (
-        <div id="single-track-container-green" className="container-fluid" ref={setNodeRef} style={style}>
+        <div id="single-track-container-green" className={`container-fluid ${isSelected ? 'selected-track' : ''}`}   ref={setNodeRef} style={style} onClick={onTrackClick}>
             <div id="single-track-row" className="row">
                 <div id="col-num" className="col-1 d-flex justify-content-center align-items-center">
                     <h5 id="number-icon">{order + 1}</h5>

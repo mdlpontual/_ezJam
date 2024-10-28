@@ -1,4 +1,336 @@
 import React, { useState, useEffect } from "react";
+import { useSave } from "../../../../../hooks/user_hooks/SaveContext";
+import IMG from "../../../../../assets/images/ImagesHUB";
+import usePlaylistInfo from "../../../../../hooks/user_hooks/usePlaylistInfo";
+import PlaylistTrack from "./track/PlaylistTrack";
+import usePlaylistActions from "../../../../../hooks/user_hooks/usePlaylistActions";
+import useUserInfo from "../../../../../hooks/user_hooks/useUserInfo";
+import { DndContext } from '@dnd-kit/core';
+import { SortableContext, arrayMove, verticalListSortingStrategy } from '@dnd-kit/sortable';
+import { useAddTrack } from "../../../../../hooks/user_hooks/AddTrackContext";
+import EmptyPlaylistPage from "./track/EmptyPlaylistPage";
+
+const playlistStateCache = {};
+
+function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, onAlbumClick, playTrack, pauseTrack, updateQueue, accessToken }) {
+    const { playlistTracksArr, setPlaylistTracksArr, handleTrackChange, clearPlaylistCache } = usePlaylistInfo({ playlistData, accessToken });
+    const { setUserPlaylistsArr, refetchPlaylists, editPlaylists } = useUserInfo({ accessToken });
+    const { handleEditPlaylist, handleSharePlaylist, handleUnfollowPlaylist, reorderTracksInPlaylist, newEditedName } = usePlaylistActions({ playlistData, editPlaylists, refetchPlaylists, setUserPlaylistsArr, accessToken });
+    const { updateTrackToAdd, playlistToAddTrack, trackToAddContent, setPlaylistToAddTrack, setTrackToAddContent } = useAddTrack();
+
+    const [localTracks, setLocalTracks] = useState([]);
+    const [resetTrackSaved, setResetTrackSaved] = useState(false);
+    const [isInitialized, setIsInitialized] = useState(false);
+    const [timeoutId, setTimeoutId] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [selectedTracks, setSelectedTracks] = useState([]);
+    const [lastSelectedIndex, setLastSelectedIndex] = useState(null);
+    const [isShiftSelecting, setIsShiftSelecting] = useState(false);
+
+    const { getIsSaved, setIsSaved } = useSave();
+    const isSaved = getIsSaved(playlistData.playlistId);
+    
+    let openUriQueue = [];
+    localTracks.forEach(track => openUriQueue.push(track.trackUri));
+
+    useEffect(() => {
+        if (!isSaved) {
+            updateQueue(openUriQueue);
+        }
+    }, [isSaved, localTracks]);
+
+    useEffect(() => {
+        if (playlistStateCache[playlistData.playlistId]) {
+            setLocalTracks(playlistStateCache[playlistData.playlistId].tracks);
+            setIsSaved(playlistData.playlistId, playlistStateCache[playlistData.playlistId].isSaved);
+        } else {
+            setLocalTracks(playlistTracksArr);
+            setIsSaved(playlistData.playlistId, true);
+        }
+        setIsInitialized(true);
+    }, [playlistData.playlistId, playlistTracksArr, setIsSaved]);
+
+    const debounceStateUpdate = (callback, delay) => {
+        if (timeoutId) clearTimeout(timeoutId);
+        const newTimeoutId = setTimeout(callback, delay);
+        setTimeoutId(newTimeoutId);
+    };
+
+    const handleDragEnd = (event) => {
+        const { active, over } = event;
+        if (active.id !== over.id) {
+            const oldIndex = localTracks.findIndex((track) => track.trackUri === active.id);
+            const newIndex = localTracks.findIndex((track) => track.trackUri === over.id);
+            const reorderedTracks = arrayMove(localTracks, oldIndex, newIndex);
+            setLocalTracks(reorderedTracks);
+            debounceStateUpdate(() => setIsSaved(playlistData.playlistId, false), 300);
+            handleTrackChange();
+            playlistStateCache[playlistData.playlistId] = { tracks: reorderedTracks, isSaved: false };
+        }
+    };
+
+    const handleSaveChanges = async () => {
+        const uris = localTracks.map(track => track.trackUri);
+        try {
+            await reorderTracksInPlaylist(playlistData.playlistId, uris);
+            setPlaylistTracksArr(localTracks);
+            playlistStateCache[playlistData.playlistId] = { tracks: localTracks, isSaved: true };
+            debounceStateUpdate(() => setIsSaved(playlistData.playlistId, true), 300);
+            clearPlaylistCache(playlistData.playlistId);
+            setResetTrackSaved(true);
+            setTimeout(() => setResetTrackSaved(false), 100);
+        } catch (error) {
+            console.error("Error saving reordered tracks:", error);
+        }
+    };
+
+    const handleDiscardChanges = () => {
+        clearPlaylistCache(playlistData.playlistId);
+        setLocalTracks([...playlistTracksArr]);
+        playlistStateCache[playlistData.playlistId] = {
+            tracks: [...playlistTracksArr],
+            isSaved: true,
+        };
+        debounceStateUpdate(() => setIsSaved(playlistData.playlistId, true), 300);
+        setResetTrackSaved(true);
+        setTimeout(() => setResetTrackSaved(false), 100);
+    };
+
+    const preDeleteTrack = (uriTrack) => {
+        const confirmed = window.confirm("Are you sure you want to remove this track?");
+        if (confirmed) {
+            const updatedTracks = localTracks.filter(track => track.trackUri !== uriTrack);
+            setLocalTracks(updatedTracks);
+            const hasChangesNow = JSON.stringify(updatedTracks) !== JSON.stringify(playlistTracksArr);
+            setIsSaved(playlistData.playlistId, !hasChangesNow);
+            playlistStateCache[playlistData.playlistId] = { tracks: updatedTracks, isSaved: !hasChangesNow };
+            handleTrackChange();
+        }
+    };
+
+    useEffect(() => {
+        const timeoutDuration = 500;
+        let timeoutId = null;
+
+        const checkAndProceed = () => {
+            if (!Array.isArray(localTracks) || localTracks.length === 0 ||
+                !Array.isArray(playlistTracksArr) || playlistTracksArr.length === 0) {
+                timeoutId = setTimeout(() => proceedToAddTrack(), timeoutDuration);
+                return;
+            }
+            proceedToAddTrack();
+        };
+
+        const proceedToAddTrack = () => {
+            if (playlistToAddTrack.playlistTitle === playlistData.playlistTitle) {
+                setLocalTracks((prevTracks) => {
+                    const trackExists = trackToAddContent.some(trackToAdd => prevTracks.some(prevTrack => prevTrack.trackUri === trackToAdd.trackUri));
+                    if (trackExists) return prevTracks;
+
+                    const updatedAddedTracks = prevTracks.concat(trackToAddContent);
+                    const hasChangesNow = JSON.stringify(updatedAddedTracks) !== JSON.stringify(playlistTracksArr);
+                    setIsSaved(playlistData.playlistId, !hasChangesNow);
+                    playlistStateCache[playlistData.playlistId] = { tracks: updatedAddedTracks, isSaved: false };
+                    return updatedAddedTracks;
+                });
+                handleTrackChange();
+                setPlaylistToAddTrack({});
+                setTrackToAddContent({});
+            }
+        };
+
+        checkAndProceed();
+        return () => {
+            if (timeoutId) clearTimeout(timeoutId);
+        };
+    }, [trackToAddContent]);
+
+    useEffect(() => {
+        if (isInitialized) {
+            debounceStateUpdate(() => setIsSaved(playlistData.playlistId, isSaved), 300);
+        }
+    }, [isSaved, isInitialized, playlistData.playlistId, setIsSaved, trackToAddContent]);
+
+    useEffect(() => {
+        let timeoutDuration = playlistStateCache[playlistData.playlistId] ? 200 : 700;
+        const timer = setTimeout(() => setLoading(false), timeoutDuration);
+        return () => clearTimeout(timer);
+    }, [playlistData.playlistId]);
+
+    const handleTrackClick = (uriTrack, index, event) => {
+        const isCtrlOrCmdPressed = event.metaKey || event.ctrlKey;
+        const isShiftPressed = event.shiftKey;
+
+        setSelectedTracks((prevSelected) => {
+            if (isShiftPressed && lastSelectedIndex !== null) {
+                const start = Math.min(lastSelectedIndex, index);
+                const end = Math.max(lastSelectedIndex, index);
+                const range = localTracks.slice(start, end + 1).map(track => track.trackUri);
+                return Array.from(new Set([...prevSelected, ...range]));
+            } else if (isCtrlOrCmdPressed) {
+                return prevSelected.includes(uriTrack)
+                    ? prevSelected.filter(track => track !== uriTrack)
+                    : [...prevSelected, uriTrack];
+            } else {
+                setLastSelectedIndex(index);
+                return prevSelected.includes(uriTrack) ? [] : [uriTrack];
+            }
+        });
+    };
+
+    const handleMouseDown = (event) => {
+        if (event.shiftKey) setIsShiftSelecting(true);
+    };
+
+    const handleMouseUp = () => setIsShiftSelecting(false);
+
+    const handleOutsideClick = (event) => {
+        const container = document.getElementById("open-pl-container");
+        if (!container.contains(event.target)) setSelectedTracks([]);
+    };
+
+    const handleKeyDown = (event) => {
+        if (event.key === "Escape") setSelectedTracks([]);
+    };
+
+    useEffect(() => {
+        document.addEventListener("mousedown", handleOutsideClick);
+        document.addEventListener("keydown", handleKeyDown);
+        return () => {
+            document.removeEventListener("mousedown", handleOutsideClick);
+            document.removeEventListener("keydown", handleKeyDown);
+        };
+    }, []);
+
+    const handleDragOver = (event) => event.preventDefault();
+
+    const handleDrop = (event, playlistData) => {
+        event.preventDefault();
+        const uriTrack = event.dataTransfer.getData('trackUri');
+        const idTrack = event.dataTransfer.getData('trackId');
+        const accessToken = event.dataTransfer.getData('accessToken');
+        updateTrackToAdd(uriTrack, idTrack, playlistData, accessToken);
+    };
+
+    return (
+        <>
+            <div id="open-pl-container" 
+                className={`container-fluid d-flex flex-column ${isShiftSelecting ? 'no-text-select' : ''}`}  
+                onMouseDown={handleMouseDown} 
+                onMouseUp={handleMouseUp}
+                onDragOver={handleDragOver} 
+                onDrop={(event) => handleDrop(event, playlistData)}
+            >
+                <header id="open-pl-header" className="row">
+                    <div id="go-back-col" className="col-auto d-flex flex-column justify-content-center align-items-start">
+                        <a id="back-to-playlists" type="button" onClick={() => onBackClick()}>
+                            <img src={IMG.gobackPNG} alt="go back button" width="22px" />
+                        </a>
+                    </div>
+                    <div id="title-col" className="col d-flex flex-column justify-content-center align-items-start">
+                        <h3 className="align-items-center">{newEditedName}</h3>
+                    </div>
+                    <div id="checkmark-col" className="col-auto d-flex flex-column justify-content-center align-items-center">
+                        <img 
+                            id="saved-icon" 
+                            src={isSaved ? IMG.savedPNG : IMG.unsavedPNG}
+                            alt="saved icon" 
+                            width="27px" 
+                        />
+                    </div>
+                    <div id="edit-button-col" className="col-auto d-flex flex-column justify-content-center align-items-center">
+                        <a id="edit-button" type="button" onClick={handleEditPlaylist}>
+                            <img src={IMG.pencilPNG} alt="edit icon" width="27px" />
+                        </a>
+                    </div>
+                    <div id="share-button-col" className="col-auto d-flex flex-column justify-content-center align-items-center">
+                        <a id="share-button" type="button" onClick={handleSharePlaylist}>
+                            <img src={IMG.sharePNG} alt="share icon" width="27px" />
+                        </a>
+                    </div>
+                    <div id="delete-button-col" className="col-auto d-flex flex-column justify-content-center align-items-center">
+                        <a id="delete-button" type="button" onClick={() => {
+                            handleUnfollowPlaylist();
+                            setTimeout(() => {
+                                onBackClick();
+                            }, 500);
+                        }}>
+                            <img src={IMG.trashBinPNG} alt="delete icon" width="27px" />
+                        </a>
+                    </div>
+                </header>
+                <main id="open-pl-main" className="row flex-grow-1">
+                    <div id="open-pl-col" className="col d-flex flex-column">
+                        <div id="top-labels" className="row">
+                            <div id="col-num" className="col-1 d-flex justify-content-start align-items-end">#</div>
+                            <div id="col-cover" className="col-1 d-flex justify-content-start align-items-end"></div>
+                            <div id="col-title" className="col d-flex justify-content-start align-items-end">title</div>
+                            <div id="col-album" className="col-3 d-flex justify-content-start align-items-end">album</div>
+                            <div id="col-duration" className="col-1 d-flex justify-content-center align-items-end">
+                                <img src={IMG.clockPNG} alt="clock icon" height="15px" />
+                            </div>
+                            <div id="col-minus" className="col-1 d-flex justify-content-start align-items-end"></div>
+                        </div>
+                        <div id="tracks-list" className="row flex-grow-1">   
+                            {loading ? (
+                                    <div className="d-flex justify-content-center align-items-center">Loading...</div>
+                                ) : (                        
+                                <div id="tracks-list-col" className="col">
+                                    {localTracks.length === 0 ? (
+                                        <EmptyPlaylistPage/>
+                                    ) : (
+                                        <DndContext onDragEnd={handleDragEnd}>
+                                            <SortableContext items={localTracks.map(track => track.trackUri)} strategy={verticalListSortingStrategy}>
+                                                {localTracks.map((track, i) => (
+                                                    <PlaylistTrack
+                                                        order={i}
+                                                        playlistTrack={track}
+                                                        playlistTracksArr={localTracks}
+                                                        setPlaylistTracksArr={setPlaylistTracksArr}
+                                                        onPlayButton={onPlayButton}
+                                                        onArtistClick={onArtistClick}
+                                                        onAlbumClick={onAlbumClick}
+                                                        playTrack={playTrack}
+                                                        pauseTrack={pauseTrack}
+                                                        preDeleteTrack={preDeleteTrack}
+                                                        accessToken={accessToken}
+                                                        key={track.trackUri}
+                                                        resetTrackSaved={resetTrackSaved}
+                                                        onTrackClick={(event) => handleTrackClick(track.trackUri, i, event)}
+                                                        isSelected={selectedTracks.includes(track.trackUri)}
+                                                    />
+                                                ))}
+                                            </SortableContext>
+                                        </DndContext>
+                                    )}
+                                </div> 
+                            )}
+                        </div>
+                    </div>
+                </main>
+                <footer id="open-pl-footer" className="row">
+                    <div className="col-1 d-flex flex-column justify-content-center align-items-center"></div>
+                    <div id="save-button-col" className="col-5 d-flex flex-column justify-content-center align-items-center">
+                        <button id="save-button" className={`btn btn-lg ${!isSaved ? 'btn-primary' : 'btn-outline-light'}`} onClick={handleSaveChanges} disabled={isSaved}>
+                            Save to Spotify
+                        </button>
+                    </div>
+                    <div id="discard-button-col" className="col-5 d-flex flex-column justify-content-center align-items-center">
+                        <button id="discard-button" className={`btn btn-lg ${!isSaved ? 'btn-danger' : 'btn-outline-light'}`} onClick={handleDiscardChanges} disabled={isSaved}>
+                            Discard Changes
+                        </button>
+                    </div>
+                    <div className="col-1 d-flex flex-column justify-content-center align-items-center"></div>
+                </footer>
+            </div>
+        </>
+    );
+}
+
+export default OpenPlaylist;
+
+
+/* import React, { useState, useEffect } from "react";
 import { useSave } from "../../../../../hooks/user_hooks/SaveContext"; // Import the Save context
 import IMG from "../../../../../assets/images/ImagesHUB";
 import usePlaylistInfo from "../../../../../hooks/user_hooks/usePlaylistInfo";
@@ -25,6 +357,10 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
     const [isInitialized, setIsInitialized] = useState(false);
     const [timeoutId, setTimeoutId] = useState(null);  // State to store timeout ID
     const [loading, setLoading] = useState(true);
+    const [selectedTracks, setSelectedTracks] = useState([]);
+    const [lastSelectedIndex, setLastSelectedIndex] = useState(null);
+    const [isShiftSelecting, setIsShiftSelecting] = useState(false); // Track shift key for conditional text selection
+
 
     // Import the save context functions for this playlist
     const { getIsSaved, setIsSaved } = useSave();
@@ -228,6 +564,37 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
     
 
     //------------------------------------------------------------------------------------------------------------
+
+    const handleTrackClick = (uriTrack, index, event) => {
+        const isCtrlOrCmdPressed = event.metaKey || event.ctrlKey;
+        const isShiftPressed = event.shiftKey;
+
+        setSelectedTracks((prevSelected) => {
+            if (isShiftPressed && lastSelectedIndex !== null) {
+                const start = Math.min(lastSelectedIndex, index);
+                const end = Math.max(lastSelectedIndex, index);
+                const range = localTracks.slice(start, end + 1).map(track => track.trackUri);
+                return Array.from(new Set([...prevSelected, ...range]));
+            } else if (isCtrlOrCmdPressed) {
+                return prevSelected.includes(uriTrack)
+                    ? prevSelected.filter(track => track !== uriTrack)
+                    : [...prevSelected, uriTrack];
+            } else {
+                setLastSelectedIndex(index);
+                return [uriTrack];
+            }
+        });
+    };
+
+    const handleMouseDown = (event) => {
+        if (event.shiftKey) {
+            setIsShiftSelecting(true); // Enable no-select during shift-click
+        }
+    };
+
+    const handleMouseUp = () => {
+        setIsShiftSelecting(false); // Disable no-select after shift-click
+    };
     
     // Handle drag over event to allow drop
     const handleDragOver = (event) => {
@@ -249,7 +616,13 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
 
     return (
         <>
-            <div id="open-pl-container" className="container-fluid d-flex flex-column" onDragOver={handleDragOver} onDrop={(event) => handleDrop(event, playlistData)}>
+            <div id="open-pl-container" 
+                className={`container-fluid d-flex flex-column ${isShiftSelecting ? 'no-text-select' : ''}`}  
+                onMouseDown={handleMouseDown} 
+                onMouseUp={handleMouseUp}
+                onDragOver={handleDragOver} 
+                onDrop={(event) => handleDrop(event, playlistData)}
+            >
                 <header id="open-pl-header" className="row">
                     <div id="go-back-col" className="col-auto d-flex flex-column justify-content-center align-items-start">
                         <a id="back-to-playlists" type="button" onClick={() => onBackClick()}>
@@ -326,6 +699,8 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
                                                         accessToken={accessToken}
                                                         key={track.trackUri}
                                                         resetTrackSaved={resetTrackSaved}
+                                                        onTrackClick={(event) => handleTrackClick(track.trackUri, i, event)}
+                                                        isSelected={selectedTracks.includes(track.trackUri)}
                                                     />
                                                 ))}
                                             </SortableContext>
@@ -355,4 +730,4 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
     );
 }
 
-export default OpenPlaylist; 
+export default OpenPlaylist;  */
