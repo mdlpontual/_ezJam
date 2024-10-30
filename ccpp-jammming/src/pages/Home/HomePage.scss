@@ -1,4 +1,4 @@
-#home-page-container {
+/* #home-page-container {
     //border: $border-red-solid;
     @include box-reset-default;
     height: 100vh;
@@ -44,4 +44,99 @@
             @include box-reset-default;
         }
     }
+} */
+
+#home-page-container {
+    //border: $border-red-solid;
+    @include box-reset-default;
+    height: 100vh;
+
+    #header-row {
+        //border: $border-yellow-solid;
+        @include box-reset-default;
+        background-color: $bg-transparent;
+        height: 90px;
+        #header-col {
+            //border: $border-cyan-solid;
+            @include box-reset-default;
+        }
+    }
+
+    #main-row {
+        //border: $border-yellow-solid;
+        @include box-reset-default;
+        #playlists-col, #search-col {
+            //border: $border-cyan-solid;
+            @include box-reset-default;
+            background-color: $bg-transparent;
+            border-radius: 20px;
+            margin: 20px 10px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        #fused-col {
+            //border: $border-cyan-solid;
+            @include box-reset-default;
+            background-color: $bg-transparent;
+            border-radius: 20px;
+            margin: 20px 10px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            padding: 0px 15px;
+            #smallScreenTabs {
+                //border: $border-lime-solid;
+                @include box-reset-default;
+                height: 90px;
+                .nav-item {
+                    //border: $border-yellow-dotted;
+                    @include box-reset-default;
+                    padding: 20px;
+                    font-weight: bold;
+                    font-size: larger;
+                    button {
+                        //border: $border-cyan-dotted;
+                        @include box-reset-default;
+                        border-color: $primary;
+                        height: 50px;
+                        border-radius: 25px;
+                    }
+                }
+            }
+            #smallScreenTabsContent{
+                //border: $border-lime-solid;
+                @include box-reset-default;
+                #playlists {
+                    //border: $border-yellow-dotted;
+                    @include box-reset-default;
+                }
+                #search {
+                    //border: $border-yellow-dotted;
+                    @include box-reset-default;
+                }
+            }
+        }
+    }
+
+    #footer-row {
+        //border: $border-yellow-solid;
+        @include box-reset-default;
+        background-color: $bg-transparent;
+        height: 90px;
+        #footer-col {
+            //border: $border-cyan-solid;
+            @include box-reset-default;
+        }
+    }
 }
+
+/*
+.tab-content {
+    .tab-pane {
+        background-color: $bg-transparent;
+        border-radius: 20px;
+        margin: 20px 10px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+*/

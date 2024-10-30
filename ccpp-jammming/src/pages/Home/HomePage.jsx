@@ -43,7 +43,9 @@ function HomePage({ code }) {
                     </div>
                 </header>
                 <main id="main-row" className="row flex-grow-1">
-                    <div id="playlists-col" className="col">  
+
+                    {/* Side-by-side layout for larger screens */}
+                    <div id="playlists-col" className="col d-none d-md-block">  
                         <PlaylistsContainer
                             onPlayButton={updateUri} 
                             onArtistClick={handleArtistClick}
@@ -54,13 +56,60 @@ function HomePage({ code }) {
                             updateQueue={updateQueue}
                             accessToken={accessToken}/>
                     </div>
-                    <div id="search-col" className="col">
+                    <div id="search-col" className="col d-none d-md-block">
                         <SearchContainer 
                             search={search} 
                             setSearch={setSearch} 
                             activePage={activePage} 
                             goBack={goBack} 
                             goForward={goForward}/>
+                    </div>
+
+                    {/* Tab layout for small screens */}
+                    <div id="fused-col" className="col d-flex flex-column d-md-none">
+                        <ul className="nav nav-tabs justify-content-center nav-pills nav-fill" id="smallScreenTabs" role="tablist">
+                            <li className="nav-item" role="presentation">
+                                <button className="nav-link active" 
+                                        id="playlists-tab" data-bs-toggle="tab" 
+                                        data-bs-target="#playlists" type="button" 
+                                        role="tab" aria-controls="playlists" 
+                                        aria-selected="true">
+                                    Playlists
+                                </button>
+                            </li>
+                            <li className="nav-item" role="presentation">
+                                <button className="nav-link" 
+                                        id="search-tab" data-bs-toggle="tab" 
+                                        data-bs-target="#search" type="button" 
+                                        role="tab" aria-controls="search" 
+                                        aria-selected="false">
+                                    Search
+                                </button>
+                            </li>
+                        </ul>
+                        <div className="row d-flex flex-grow-1 tab-content" id="smallScreenTabsContent">
+                            <div className="col tab-pane fade show active" id="playlists" role="tabpanel" aria-labelledby="playlists-tab">
+                                <PlaylistsContainer
+                                    onPlayButton={updateUri} 
+                                    onArtistClick={handleArtistClick}
+                                    onAlbumClick={handleAlbumClick}
+                                    playTrack={playTrack}
+                                    pauseTrack={pauseTrack}
+                                    uriQueue={uriQueue}
+                                    updateQueue={updateQueue}
+                                    accessToken={accessToken}
+                                />
+                            </div>
+                            <div className="col tab-pane fade" id="search" role="tabpanel" aria-labelledby="search-tab">
+                                <SearchContainer 
+                                    search={search} 
+                                    setSearch={setSearch} 
+                                    activePage={activePage} 
+                                    goBack={goBack} 
+                                    goForward={goForward}
+                                />
+                            </div>
+                        </div>
                     </div>
                 </main>
                 <footer id="footer-row" className="row">
@@ -90,3 +139,27 @@ function HomePage({ code }) {
 }
 
 export default HomePage;
+
+/*
+<main id="main-row" className="row flex-grow-1">
+                    <div id="playlists-col" className="col">  
+                        <PlaylistsContainer
+                            onPlayButton={updateUri} 
+                            onArtistClick={handleArtistClick}
+                            onAlbumClick={handleAlbumClick}
+                            playTrack={playTrack}
+                            pauseTrack={pauseTrack}
+                            uriQueue={uriQueue}
+                            updateQueue={updateQueue}
+                            accessToken={accessToken}/>
+                    </div>
+                    <div id="search-col" className="col">
+                        <SearchContainer 
+                            search={search} 
+                            setSearch={setSearch} 
+                            activePage={activePage} 
+                            goBack={goBack} 
+                            goForward={goForward}/>
+                    </div>
+                </main>
+*/
