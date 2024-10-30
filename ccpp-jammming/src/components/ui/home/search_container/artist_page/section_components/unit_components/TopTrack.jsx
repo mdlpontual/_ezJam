@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import IMG from "../../../../../../../assets/images/ImagesHUB";
 import { useTrack } from "../../../../../../../hooks/TrackContext";
 import { useAddTrack } from "../../../../../../../hooks/user_hooks/AddTrackContext";
@@ -18,6 +18,8 @@ function TopTrack({ topTrack, order, onPlayButton,
     let uriQueue = [];
     fetchedArtistTopTracksArray.map(track => uriQueue.push(track.trackUri));
     const selectedTracksIds = selectedTracks.length > 0 ? selectedTracks.map(track => track.substring(14)) : idTrack;
+
+    const dropdownButtonRef = useRef(null); // Reference to dropdown button
 
     let cover;
     if (topTrack.trackCover) {
@@ -52,11 +54,19 @@ function TopTrack({ topTrack, order, onPlayButton,
 
     const handleDropDownAdd = (playlistData) => {
         if (selectedTracksIds === 0) {
-            updateTrackToAdd(uriTrack, idTrack, playlistData, accessToken)
-            console.log(idTrack)
+            updateTrackToAdd(uriTrack, idTrack, playlistData, accessToken);
+            console.log(idTrack);
         } else {
-            updateTrackToAdd(uriTrack, selectedTracksIds, playlistData, accessToken)
-            console.log(selectedTracksIds)
+            updateTrackToAdd(uriTrack, selectedTracksIds, playlistData, accessToken);
+            console.log(selectedTracksIds);
+        }
+
+        // Close the dropdown after selection
+        if (dropdownButtonRef.current) {
+            const dropdownInstance = bootstrap.Dropdown.getInstance(dropdownButtonRef.current);
+            if (dropdownInstance) {
+                dropdownInstance.hide();
+            }
         }
     };
 
@@ -86,7 +96,7 @@ function TopTrack({ topTrack, order, onPlayButton,
                     </div>
                     <div id="col-plus" className="dropdown col-1 d-flex justify-content-end align-items-center">
                         <div className="dropdown">
-                            <button id="plus-dd" className="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" onClick={(e) => e.stopPropagation()}>
+                            <button id="plus-dd" ref={dropdownButtonRef} className="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" onClick={(e) => e.stopPropagation()}>
                                 <img id="plus-icon" src={IMG.plus2PNG} alt="plus icon" width="25px"/>
                                 <img id="plus-icon-green" src={IMG.plus2BlackPNG} alt="plus icon" width="25px"/>
                             </button>
@@ -134,7 +144,7 @@ function TopTrack({ topTrack, order, onPlayButton,
                 </div>
                 <div id="col-plus" className="dropdown col-1 d-flex justify-content-end align-items-center">
                     <div className="dropdown">
-                        <button id="plus-dd" className="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" onClick={(e) => e.stopPropagation()}>
+                        <button id="plus-dd" ref={dropdownButtonRef} className="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" onClick={(e) => e.stopPropagation()}>
                             <img id="plus-icon" src={IMG.plus2PNG} alt="plus icon" width="25px"/>
                             <img id="plus-icon-green" src={IMG.plus2BlackPNG} alt="plus icon" width="25px"/>
                         </button>
