@@ -59,10 +59,10 @@ function TrackResultsBox({ searchArtistResults, searchAlbumResults, searchTrackR
     };
     
     useEffect(() => {
-        //document.addEventListener("mousedown", handleOutsideClick);
+        document.addEventListener("mousedown", handleOutsideClick);
         document.addEventListener("keydown", handleKeyDown);
         return () => {
-            //document.removeEventListener("mousedown", handleOutsideClick);
+            document.removeEventListener("mousedown", handleOutsideClick);
             document.removeEventListener("keydown", handleKeyDown);
         };
     }, []);

@@ -6,7 +6,10 @@ import Equalizer from "../../../../../../../utils/Equalizer";
 import useUserInfo from "../../../../../../../hooks/user_hooks/useUserInfo";
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
-function TrackResultItem({ artistContent, albumContent, trackContent, fetchedTracksArray, onArtistClick, onAlbumClick, onPlayButton, playTrack, pauseTrack, onTrackClick, isSelected, selectedTracks, accessToken }) {
+function TrackResultItem({  artistContent, albumContent, trackContent, 
+                            fetchedTracksArray, onArtistClick, onAlbumClick, 
+                            onPlayButton, playTrack, pauseTrack, 
+                            onTrackClick, isSelected, selectedTracks, accessToken }) {
     const { currentTrackUri, isPaused } = useTrack(); 
     const { updateTrackToAdd } = useAddTrack();
     const { userPlaylistsArr } = useUserInfo({accessToken});
