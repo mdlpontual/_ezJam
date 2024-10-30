@@ -364,7 +364,6 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
                     </div>
                 </main>
                 <footer id="open-pl-footer" className="row">
-                    <div className="col-1 d-flex flex-column justify-content-center align-items-center"></div>
                     <div id="save-button-col" className="col-5 d-flex flex-column justify-content-center align-items-center">
                         <button id="save-button" className={`btn btn-lg ${!isSaved ? 'btn-primary' : 'btn-outline-light'}`} onClick={handleSaveChanges} disabled={isSaved}>
                             Save to Spotify
@@ -375,7 +374,6 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
                             Discard Changes
                         </button>
                     </div>
-                    <div className="col-1 d-flex flex-column justify-content-center align-items-center"></div>
                 </footer>
             </div>
         </>

@@ -1,51 +1,3 @@
-/* #home-page-container {
-    //border: $border-red-solid;
-    @include box-reset-default;
-    height: 100vh;
-    #header-row {
-        //border: $border-yellow-solid;
-        @include box-reset-default;
-        background-color: $bg-transparent;
-        height: 90px;
-        #header-col {
-            //border: $border-cyan-solid;
-            @include box-reset-default;
-        }
-    }
-    #main-row {
-        //border: $border-yellow-solid;
-        @include box-reset-default;
-        #playlists-col {
-            //border: $border-cyan-solid;
-            @include box-reset-default;
-            background-color: $bg-transparent;
-            border-radius: 20px;
-            margin: 20px 10px 20px 20px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        #search-col {
-            //border: $border-cyan-solid;
-            @include box-reset-default;
-            background-color: $bg-transparent;
-            border-radius: 20px;
-            margin: 20px 20px 20px 10px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-    }
-    #footer-row {
-        //border: $border-yellow-solid;
-        @include box-reset-default;
-        background-color: $bg-transparent;
-        height: 90px;
-        #footer-col {
-            //border: $border-cyan-solid;
-            @include box-reset-default;
-        }
-    }
-} */
-
 #home-page-container {
     //border: $border-red-solid;
     @include box-reset-default;
@@ -86,19 +38,33 @@
             #smallScreenTabs {
                 //border: $border-lime-solid;
                 @include box-reset-default;
-                height: 90px;
+                height: 75px;
                 .nav-item {
                     //border: $border-yellow-dotted;
                     @include box-reset-default;
-                    padding: 20px;
+                    padding: 20px 0px;
                     font-weight: bold;
                     font-size: larger;
-                    button {
+                    width: 50%;
+                    #playlists-tab {
                         //border: $border-cyan-dotted;
                         @include box-reset-default;
                         border-color: $primary;
-                        height: 50px;
-                        border-radius: 25px;
+                        height: 40px;
+                        border-top-left-radius: 15px;
+                        border-bottom-left-radius: 15px;
+                        border-top-right-radius: 0px;
+                        border-bottom-right-radius: 0px;
+                    }
+                    #search-tab {
+                        //border: $border-cyan-dotted;
+                        @include box-reset-default;
+                        border-color: $primary;
+                        height: 40px;
+                        border-top-left-radius: 0px;
+                        border-bottom-left-radius: 0px;
+                        border-top-right-radius: 15px;
+                        border-bottom-right-radius: 15px;
                     }
                 }
             }
@@ -128,15 +94,3 @@
         }
     }
 }
-
-/*
-.tab-content {
-    .tab-pane {
-        background-color: $bg-transparent;
-        border-radius: 20px;
-        margin: 20px 10px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-}
-*/
