@@ -10,7 +10,7 @@ function TopTrack({ topTrack, order, onPlayButton,
                     playTrack, pauseTrack, fetchedArtistTopTracksArray, 
                     onTrackClick, isSelected, selectedTracks, accessToken }) {
     const { currentTrackUri, isPaused } = useTrack(); 
-    const { updateTrackToAdd, trackToAdd } = useAddTrack();
+    const { updateTrackToAdd } = useAddTrack();
     const { userPlaylistsArr } = useUserInfo({accessToken});
 
     const uriTrack = topTrack.trackUri;
@@ -73,7 +73,7 @@ function TopTrack({ topTrack, order, onPlayButton,
     if(currentTrackUri !== uriTrack) {
         return (
             <>
-                <div id="songs-inner-row" className={`row ${isSelected ? 'selected-track2' : ''}`} draggable="true" onDragStart={handleDragStart} onClick={onTrackClick}>
+                <div id="songs-inner-row" className={`row ${isSelected ? 'selected-track3' : ''}`} draggable="true" onDragStart={handleDragStart} onClick={onTrackClick}>
                     <div id="col-add" className="col-1 d-flex justify-content-center align-items-center">
                         <h5>{order + 1}</h5>
                         <div id="drag-button" className="drag" draggable="false" onDragStart={handleDragStart}> 
@@ -119,7 +119,7 @@ function TopTrack({ topTrack, order, onPlayButton,
     }
     return (
         <>
-            <div id="songs-inner-row-green" className={`row ${isSelected ? 'selected-track2' : ''}`} draggable="true" onDragStart={handleDragStart} onClick={onTrackClick}>
+            <div id="songs-inner-row-green" className={`row ${isSelected ? 'selected-track3' : ''}`} draggable="true" onDragStart={handleDragStart} onClick={onTrackClick}>
                 <div id="col-add" className="col-1 d-flex justify-content-center align-items-center">
                     <h5>{order + 1}</h5>
                     <div id="drag-button" className="drag" draggable="false" onDragStart={handleDragStart}> 
