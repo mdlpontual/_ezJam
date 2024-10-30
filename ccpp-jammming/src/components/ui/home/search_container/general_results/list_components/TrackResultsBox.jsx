@@ -48,12 +48,10 @@ function TrackResultsBox({ searchArtistResults, searchAlbumResults, searchTrackR
 
     const handleMouseUp = () => setIsShiftSelecting(false);
 
+
     const handleOutsideClick = (event) => {
-        const container = document.getElementById("open-pl-container");
-        if (!container.contains(event.target) && !event.ctrlKey && !event.shiftKey) {
-            // Add a slight delay to allow `Ctrl+Click` to process
-            setTimeout(() => setSelectedTracks([]), 10);
-        }
+        const container = document.getElementById("open-tracks-results-container");
+        if (!container.contains(event.target)) setSelectedTracks([]);
     };
     
     const handleKeyDown = (event) => {
@@ -61,17 +59,17 @@ function TrackResultsBox({ searchArtistResults, searchAlbumResults, searchTrackR
     };
     
     useEffect(() => {
-        document.addEventListener("mousedown", handleOutsideClick);
+        //document.addEventListener("mousedown", handleOutsideClick);
         document.addEventListener("keydown", handleKeyDown);
         return () => {
-            document.removeEventListener("mousedown", handleOutsideClick);
+            //document.removeEventListener("mousedown", handleOutsideClick);
             document.removeEventListener("keydown", handleKeyDown);
         };
     }, []);
 
     return (
         <>
-            <div id="open-pl-container" 
+            <div id="open-tracks-results-container" 
                 className={`container-fluid d-flex flex-column ${isShiftSelecting ? 'no-text-select' : ''}`}  
                 onMouseDown={handleMouseDown} 
                 onMouseUp={handleMouseUp}

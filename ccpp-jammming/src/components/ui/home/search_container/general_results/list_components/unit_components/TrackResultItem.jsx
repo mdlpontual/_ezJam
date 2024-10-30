@@ -93,7 +93,7 @@ function TrackResultItem({ artistContent, albumContent, trackContent, fetchedTra
                                 <li><hr className="dropdown-divider"></hr></li>
                                 {userPlaylistsArr.map((playlistData) => (
                                     <li key={playlistData.playlistId}>
-                                        <a id="dd-item" className="dropdown-item" type="button" onClick={() => handleDropDownAdd(playlistData)}>
+                                        <a id="dd-item" className="dropdown-item" type="button" onClick={(e) => {handleDropDownAdd(playlistData); e.stopPropagation()}}>
                                             {playlistData.playlistTitle}
                                         </a>
                                     </li>
@@ -142,7 +142,7 @@ function TrackResultItem({ artistContent, albumContent, trackContent, fetchedTra
                             <li><hr className="dropdown-divider"></hr></li>
                             {userPlaylistsArr.map((playlistData) => (
                                 <li key={playlistData.playlistId}>
-                                    <a id="dd-item" className="dropdown-item" type="button"onClick={() => handleDropDownAdd(playlistData)}>
+                                    <a id="dd-item" className="dropdown-item" type="button" onClick={(e) => {handleDropDownAdd(playlistData); e.stopPropagation()}}>
                                         {playlistData.playlistTitle}
                                     </a>
                                 </li>
