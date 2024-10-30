@@ -46,8 +46,6 @@ function HomePage({ code }) {
                     </div>
                 </header>
                 <main id="main-row" className="row flex-grow-1">
-
-                    {/* Side-by-side layout for larger screens */}
                     <div id="playlists-col" className="col d-none d-md-block">  
                         <PlaylistsContainer
                             onPlayButton={updateUri} 
@@ -68,7 +66,6 @@ function HomePage({ code }) {
                             goForward={goForward}/>
                     </div>
 
-                    {/* Tab layout for small screens */}
                     <div id="fused-col" className="col d-flex flex-column d-md-none">
                         <ul className="row nav nav-tabs justify-content-center nav-pills nav-fill" id="smallScreenTabs" role="tablist">
                             <li className="col nav-item justify-content-center align-items-center" role="presentation">

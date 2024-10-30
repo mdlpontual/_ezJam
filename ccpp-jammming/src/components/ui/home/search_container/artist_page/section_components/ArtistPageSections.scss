@@ -562,6 +562,7 @@
                     //border: $border-cyan-dotted;
                     @include box-reset-default;
                     padding: 10px;
+                    max-width: 50%;
                     white-space: nowrap;
                     img {
                         //border: $border-lime-solid;
