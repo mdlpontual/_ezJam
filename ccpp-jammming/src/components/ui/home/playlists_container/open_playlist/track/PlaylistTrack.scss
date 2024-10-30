@@ -516,15 +516,24 @@
         }
     }
 }
+
 .selected-track {
     @include box-reset-default;
     background-color: $bg-transparent2;
-    border-radius: 10px; // Add similar styling as hover if needed
+    border-radius: 10px; 
     border: 1px solid $primary;
     box-sizing: border-box;
     height: 50px;
 }
 .selected-track:hover {
     @include box-reset-default;
-    border: 0px solid $secondary;
+    background-color: $bg-transparent2;
+    border-radius: 10px; 
+    border: 1px solid $primary;
+    box-sizing: border-box;
+    height: 50px;
+    
+    #single-track-row {
+        background: none !important;
+    }
 }

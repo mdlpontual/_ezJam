@@ -247,6 +247,7 @@
                         @include box-reset-default;
                         width: 40px;
                         position: relative;
+                        padding-right: 7px;
                         #plus-icon {
                             //border: $border-cyan-dotted;
                             @include box-reset-default;
@@ -265,6 +266,7 @@
                         @include box-reset-default;
                         width: 40px;
                         position: relative;
+                        padding-right: 7px;
                         #plus-icon {
                             //border: $border-cyan-dotted;
                             @include box-reset-default;
@@ -455,6 +457,7 @@
                         @include box-reset-default;
                         width: 40px;
                         position: relative;
+                        padding-right: 7px;
                         #plus-icon {
                             //border: $border-cyan-dotted;
                             @include box-reset-default;
@@ -473,6 +476,7 @@
                         @include box-reset-default;
                         width: 40px;
                         position: relative;
+                        padding-right: 7px;
                         #plus-icon {
                             //border: $border-cyan-dotted;
                             @include box-reset-default;
@@ -532,7 +536,7 @@
             }
             #songs-inner-row:hover {
                 background-color: $bg-transparent;
-                border-radius: 15px;
+                border-radius: 10px;
                 #col-cover {
                     //border: $border-lime-dotted;
                     @include box-reset-default;
@@ -559,7 +563,7 @@
             }
             #songs-inner-row-green:hover {
                 background-color: $bg-transparent;
-                border-radius: 15px;
+                border-radius: 10px;
                 #col-cover {
                     //border: $border-lime-dotted;
                     @include box-reset-default;
@@ -586,4 +590,20 @@
             }
         }
     }
+}
+.selected-track2 {
+    @include box-reset-default;
+    background-color: $bg-transparent2;
+    border-radius: 10px; // Add similar styling as hover if needed
+    border: 1px solid $primary;
+    box-sizing: border-box;
+    height: 50px;
+}
+.selected-track2:hover {
+    @include box-reset-default;
+    border: 1px solid $primary;
+    border-radius: 10px; // Add similar styling as hover if needed
+}
+.no-text-select {
+    user-select: none;
 }

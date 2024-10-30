@@ -78,7 +78,9 @@ function PlaylistTrack({ order,
 
     if (!isTrackPlaying) {
         return (
-            <div id="single-track-container" className={`container-fluid ${isSelected ? 'selected-track' : ''}`}   ref={setNodeRef} style={style} onClick={onTrackClick}>
+            <div id="single-track-container" 
+                className={`container-fluid ${isSelected ? 'selected-track' : ''}`}   
+                ref={setNodeRef} style={style} onClick={onTrackClick}>
                 <div id="single-track-row" className="row">
                     <div id="col-num" className="col-1 d-flex justify-content-center align-items-center">
                         <h5 id="number-icon">{order + 1}</h5>

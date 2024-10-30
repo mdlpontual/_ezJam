@@ -58,19 +58,6 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
 
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    /* const handleDragEnd = (event) => {
-        const { active, over } = event;
-        if (active.id !== over.id) {
-            const oldIndex = localTracks.findIndex((track) => track.trackUri === active.id);
-            const newIndex = localTracks.findIndex((track) => track.trackUri === over.id);
-            const reorderedTracks = arrayMove(localTracks, oldIndex, newIndex);
-            setLocalTracks(reorderedTracks);
-            debounceStateUpdate(() => setIsSaved(playlistData.playlistId, false), 300);
-            handleTrackChange();
-            playlistStateCache[playlistData.playlistId] = { tracks: reorderedTracks, isSaved: false };
-        }
-    }; */
-
     const handleDragEnd = (event) => {
         const { active, over } = event;
         if (!over) return; // Exit if there’s no valid drop target
@@ -208,13 +195,13 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
         }
     }, [isSaved, isInitialized, playlistData.playlistId, setIsSaved, trackToAddContent]);
 
-    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
     useEffect(() => {
         let timeoutDuration = playlistStateCache[playlistData.playlistId] ? 200 : 700;
         const timer = setTimeout(() => setLoading(false), timeoutDuration);
         return () => clearTimeout(timer);
     }, [playlistData.playlistId]);
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     const handleTrackClick = (uriTrack, index, event) => {
         const isCtrlOrCmdPressed = event.metaKey || event.ctrlKey;
@@ -267,10 +254,14 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
 
     const handleDrop = (event, playlistData) => {
         event.preventDefault();
+        
         const uriTrack = event.dataTransfer.getData('trackUri');
-        const idTrack = event.dataTransfer.getData('trackId');
+        const idTrack = JSON.parse(event.dataTransfer.getData('trackIds')); // Parse JSON string back to array
         const accessToken = event.dataTransfer.getData('accessToken');
+        
         updateTrackToAdd(uriTrack, idTrack, playlistData, accessToken);
+        
+        console.log("Dropped Track IDs:", idTrack); // This should now log the full array
     };
 
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
