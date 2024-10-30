@@ -93,7 +93,7 @@ export const AddTrackProvider = ({ children }) => {
             }
         };
     
-        setTrackIdToAdd()
+        //setTrackIdToAdd()
         fetchTrack();
     }, [trackIdToAdd, token]);    
 
