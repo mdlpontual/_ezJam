@@ -562,6 +562,7 @@
                     //border: $border-cyan-dotted;
                     @include box-reset-default;
                     padding: 10px;
+                    max-width: 50%;
                     white-space: nowrap;
                     img {
                         //border: $border-lime-solid;
@@ -597,4 +598,21 @@
             }
         }
     }
+}
+
+.selected-track3 {
+    @include box-reset-default;
+    background-color: $bg-transparent2;
+    border-radius: 10px; // Add similar styling as hover if needed
+    border: 1px solid $primary;
+    box-sizing: border-box;
+    height: 50px;
+}
+.selected-track3:hover {
+    @include box-reset-default;
+    border: 1px solid white !important;
+    border-radius: 10px; // Add similar styling as hover if needed
+}
+.no-text-select {
+    user-select: none;
 }

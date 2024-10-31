@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useSave } from "../../../../../hooks/user_hooks/SaveContext"; // Import the Save context
+import { useSave } from "../../../../../hooks/user_hooks/SaveContext";
 import IMG from "../../../../../assets/images/ImagesHUB";
 import usePlaylistInfo from "../../../../../hooks/user_hooks/usePlaylistInfo";
 import PlaylistTrack from "./track/PlaylistTrack";
@@ -12,24 +12,24 @@ import EmptyPlaylistPage from "./track/EmptyPlaylistPage";
 
 const playlistStateCache = {};
 
-// Component
 function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, onAlbumClick, playTrack, pauseTrack, updateQueue, accessToken }) {
     const { playlistTracksArr, setPlaylistTracksArr, handleTrackChange, clearPlaylistCache } = usePlaylistInfo({ playlistData, accessToken });
     const { setUserPlaylistsArr, refetchPlaylists, editPlaylists } = useUserInfo({ accessToken });
     const { handleEditPlaylist, handleSharePlaylist, handleUnfollowPlaylist, reorderTracksInPlaylist, newEditedName } = usePlaylistActions({ playlistData, editPlaylists, refetchPlaylists, setUserPlaylistsArr, accessToken });
     const { updateTrackToAdd, playlistToAddTrack, trackToAddContent, setPlaylistToAddTrack, setTrackToAddContent } = useAddTrack();
 
-    // Separate local states for tracks, reset state, and initialization flag
     const [localTracks, setLocalTracks] = useState([]);
     const [resetTrackSaved, setResetTrackSaved] = useState(false);
     const [isInitialized, setIsInitialized] = useState(false);
-    const [timeoutId, setTimeoutId] = useState(null);  // State to store timeout ID
+    const [timeoutId, setTimeoutId] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [selectedTracks, setSelectedTracks] = useState([]);
+    const [lastSelectedIndex, setLastSelectedIndex] = useState(null);
+    const [isShiftSelecting, setIsShiftSelecting] = useState(false);
 
-    // Import the save context functions for this playlist
     const { getIsSaved, setIsSaved } = useSave();
-    const isSaved = getIsSaved(playlistData.playlistId); // Get saved state for the specific playlist
-
+    const isSaved = getIsSaved(playlistData.playlistId);
+    
     let openUriQueue = [];
     localTracks.forEach(track => openUriQueue.push(track.trackUri));
 
@@ -39,11 +39,10 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
         }
     }, [isSaved, localTracks]);
 
-    // Initialize tracks and saved state independently, with cache and API
     useEffect(() => {
         if (playlistStateCache[playlistData.playlistId]) {
             setLocalTracks(playlistStateCache[playlistData.playlistId].tracks);
-            setIsSaved(playlistData.playlistId, playlistStateCache[playlistData.playlistId].isSaved); // Update saved state for the playlist
+            setIsSaved(playlistData.playlistId, playlistStateCache[playlistData.playlistId].isSaved);
         } else {
             setLocalTracks(playlistTracksArr);
             setIsSaved(playlistData.playlistId, true);
@@ -51,205 +50,231 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
         setIsInitialized(true);
     }, [playlistData.playlistId, playlistTracksArr, setIsSaved]);
 
-    // Debounce function to prevent rapid updates
     const debounceStateUpdate = (callback, delay) => {
-        if (timeoutId) {
-            clearTimeout(timeoutId);  // Clear any existing timeouts
-        }
-        const newTimeoutId = setTimeout(callback, delay);  // Set a new timeout
-        setTimeoutId(newTimeoutId);  // Store the new timeout ID
+        if (timeoutId) clearTimeout(timeoutId);
+        const newTimeoutId = setTimeout(callback, delay);
+        setTimeoutId(newTimeoutId);
     };
 
-    // Function to handle drag end and update track order locally
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
     const handleDragEnd = (event) => {
         const { active, over } = event;
-        if (active.id !== over.id) {
-            const oldIndex = localTracks.findIndex((track) => track.trackUri === active.id);
-            const newIndex = localTracks.findIndex((track) => track.trackUri === over.id);
-            const reorderedTracks = arrayMove(localTracks, oldIndex, newIndex);
-            setLocalTracks(reorderedTracks);
-            debounceStateUpdate(() => setIsSaved(playlistData.playlistId, false), 300);  // Debounce setting unsaved state
-            handleTrackChange();  // Clear cache after track order change
-            playlistStateCache[playlistData.playlistId] = { tracks: reorderedTracks, isSaved: false };  // Update local cache
+        if (!over) return; // Exit if there’s no valid drop target
+    
+        const draggedTrackUri = active.id;
+    
+        // Determine if we're moving a group or a single track
+        const tracksToMove = selectedTracks.includes(draggedTrackUri)
+            ? selectedTracks // Move all selected tracks if the dragged item is selected
+            : [draggedTrackUri]; // Otherwise, move only the dragged item
+    
+        const draggedIndices = tracksToMove.map(uri =>
+            localTracks.findIndex(track => track.trackUri === uri)
+        );
+    
+        const targetIndex = localTracks.findIndex(track => track.trackUri === over.id);
+        const minIndex = Math.min(...draggedIndices);
+        const maxIndex = Math.max(...draggedIndices);
+    
+        // Remove selected tracks from their original positions
+        const remainingTracks = localTracks.filter(track => !tracksToMove.includes(track.trackUri));
+    
+        // Calculate the target insertion index after removing
+        let insertionIndex;
+        if (targetIndex < minIndex) {
+            insertionIndex = targetIndex;
+        } else if (targetIndex > maxIndex) {
+            insertionIndex = targetIndex - (maxIndex - minIndex);
+        } else {
+            insertionIndex = minIndex; // No change if target within the selected range
         }
+    
+        // Insert the tracksToMove at the new position
+        const reorderedTracks = [
+            ...remainingTracks.slice(0, insertionIndex),
+            ...localTracks.filter(track => tracksToMove.includes(track.trackUri)),
+            ...remainingTracks.slice(insertionIndex)
+        ];
+    
+        setLocalTracks(reorderedTracks);
+        debounceStateUpdate(() => setIsSaved(playlistData.playlistId, false), 300); // Mark as unsaved
+        handleTrackChange(); // Clear cache
+        playlistStateCache[playlistData.playlistId] = { tracks: reorderedTracks, isSaved: false }; // Update cache
     };
 
-    // Handle saving changes and update saved state/cache independently
     const handleSaveChanges = async () => {
-        const uris = localTracks.map(track => track.trackUri);  // Get URIs from local state
+        const uris = localTracks.map(track => track.trackUri);
         try {
-            await reorderTracksInPlaylist(playlistData.playlistId, uris);  // Save changes via Spotify API
+            await reorderTracksInPlaylist(playlistData.playlistId, uris);
             setPlaylistTracksArr(localTracks);
-            playlistStateCache[playlistData.playlistId] = { tracks: localTracks, isSaved: true };  // Update cache after saving
-            debounceStateUpdate(() => setIsSaved(playlistData.playlistId, true), 300); // Debounce setting saved state
-            clearPlaylistCache(playlistData.playlistId);  // Clear cache after saving
-            
-            // Reset "track saved" state
+            playlistStateCache[playlistData.playlistId] = { tracks: localTracks, isSaved: true };
+            debounceStateUpdate(() => setIsSaved(playlistData.playlistId, true), 300);
+            clearPlaylistCache(playlistData.playlistId);
             setResetTrackSaved(true);
-            setTimeout(() => setResetTrackSaved(false), 100);  // Slight delay for state synchronization
+            setTimeout(() => setResetTrackSaved(false), 100);
         } catch (error) {
             console.error("Error saving reordered tracks:", error);
         }
     };
 
     const handleDiscardChanges = () => {
-        // Clear cache and reset localTracks to the original playlist state
         clearPlaylistCache(playlistData.playlistId);
-    
-        // Reset localTracks to the original tracks from the API (spread to create new array reference)
         setLocalTracks([...playlistTracksArr]);
-    
-        // Reset playlistStateCache to the original playlist
         playlistStateCache[playlistData.playlistId] = {
             tracks: [...playlistTracksArr],
             isSaved: true,
         };
-    
-        // Update state to mark playlist as saved
         debounceStateUpdate(() => setIsSaved(playlistData.playlistId, true), 300);
-    
-        // Reset "track saved" state
         setResetTrackSaved(true);
-        setTimeout(() => setResetTrackSaved(false), 100);  // Slight delay for state synchronization
-    };    
+        setTimeout(() => setResetTrackSaved(false), 100);
+    };
+    
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    // Pre-delete track function to remove a track
-    const preDeleteTrack = (uriTrack) => {
+    const preDeleteTrack = (uriTrack, selectedTracks) => {
         const confirmed = window.confirm("Are you sure you want to remove this track?");
         if (confirmed) {
-            const updatedTracks = localTracks.filter(track => track.trackUri !== uriTrack);  // Filter out the deleted track
-
-            // Update the local state of tracks
+            if (selectedTracks.length === 0) {
+                const updatedTracks = localTracks.filter(track => track.trackUri !== uriTrack);
+                setLocalTracks(updatedTracks);
+                const hasChangesNow = JSON.stringify(updatedTracks) !== JSON.stringify(playlistTracksArr);
+                setIsSaved(playlistData.playlistId, !hasChangesNow);
+                playlistStateCache[playlistData.playlistId] = { tracks: updatedTracks, isSaved: !hasChangesNow };
+            }
+            const updatedTracks = localTracks.filter(track => !selectedTracks.some(selectedTrack => track.trackUri === selectedTrack));
             setLocalTracks(updatedTracks);
-
-            // Immediately compare and update hasChanges
             const hasChangesNow = JSON.stringify(updatedTracks) !== JSON.stringify(playlistTracksArr);
-
-            // Update isSaved and hasChanges immediately
             setIsSaved(playlistData.playlistId, !hasChangesNow);
-            playlistStateCache[playlistData.playlistId] = { tracks: updatedTracks, isSaved: !hasChangesNow };  // Update local cache
+            playlistStateCache[playlistData.playlistId] = { tracks: updatedTracks, isSaved: !hasChangesNow };
 
-            // Clear the current cache after deletion
-            handleTrackChange();  // Clear the cache for the playlist to force refresh
+            handleTrackChange();
         }
     };
 
     useEffect(() => {
-        // Set a timeout of 5 seconds for waiting until localTracks or playlistTracksArr are populated
-        const timeoutDuration = 500; 
+        const timeoutDuration = 500;
         let timeoutId = null;
-    
+
         const checkAndProceed = () => {
-            // Check if either localTracks or playlistTracksArr is empty, null, or undefined
-            if (
-                !Array.isArray(localTracks) || localTracks.length === 0 ||
-                !Array.isArray(playlistTracksArr) || playlistTracksArr.length === 0
-            ) {
-                // Wait for a limited time, then proceed after the timeout
-                timeoutId = setTimeout(() => {
-                    proceedToAddTrack();  // Proceed after timeout
-                }, timeoutDuration);
-                return;  // Exit early and wait for the timeout
+            if (!Array.isArray(localTracks) || localTracks.length === 0 ||
+                !Array.isArray(playlistTracksArr) || playlistTracksArr.length === 0) {
+                timeoutId = setTimeout(() => proceedToAddTrack(), timeoutDuration);
+                return;
             }
-    
-            // If localTracks and playlistTracksArr are already populated, proceed immediately
             proceedToAddTrack();
         };
-    
-        // Function to proceed with adding the track
+
         const proceedToAddTrack = () => {
-            // Check if trackToAddContent has a valid trackUri before proceeding
             if (playlistToAddTrack.playlistTitle === playlistData.playlistTitle) {
                 setLocalTracks((prevTracks) => {
                     const trackExists = trackToAddContent.some(trackToAdd => prevTracks.some(prevTrack => prevTrack.trackUri === trackToAdd.trackUri));
-                    if (trackExists) {
-                        return prevTracks;  // Prevent adding duplicates
-                    }
-    
-                    // Create a new array (deep copy) and add the new track
+                    if (trackExists) return prevTracks;
+
                     const updatedAddedTracks = prevTracks.concat(trackToAddContent);
-    
-                    // Immediately compare and update hasChanges
                     const hasChangesNow = JSON.stringify(updatedAddedTracks) !== JSON.stringify(playlistTracksArr);
-    
-                    // Update isSaved and hasChanges immediately
                     setIsSaved(playlistData.playlistId, !hasChangesNow);
-    
-                    // Update the playlistStateCache to reflect the added tracks
-                    playlistStateCache[playlistData.playlistId] = {
-                        tracks: updatedAddedTracks,
-                        isSaved: false,
-                    };
-    
-                    return updatedAddedTracks;  // Return the new array
+                    playlistStateCache[playlistData.playlistId] = { tracks: updatedAddedTracks, isSaved: false };
+                    return updatedAddedTracks;
                 });
-    
-                // Clear and update the cache after adding the track
                 handleTrackChange();
-    
                 setPlaylistToAddTrack({});
                 setTrackToAddContent({});
             }
         };
-    
-        // Run the check on mount or when trackToAddContent changes
+
         checkAndProceed();
-    
-        // Clean up the timeout on unmount
         return () => {
-            if (timeoutId) {
-                clearTimeout(timeoutId);
-            }
+            if (timeoutId) clearTimeout(timeoutId);
         };
     }, [trackToAddContent]);
-    
 
-    // Update saved state for buttons and icon after initialization
     useEffect(() => {
         if (isInitialized) {
-            debounceStateUpdate(() => setIsSaved(playlistData.playlistId, isSaved), 300);  // Debounce setting state to prevent rapid updates
+            debounceStateUpdate(() => setIsSaved(playlistData.playlistId, isSaved), 300);
         }
     }, [isSaved, isInitialized, playlistData.playlistId, setIsSaved, trackToAddContent]);
 
     useEffect(() => {
-        let timeoutDuration = 700; // Default timeout duration (1 second)
-
-        // Check if there is cached data for the current playlist
-        if (playlistStateCache[playlistData.playlistId]) {
-            timeoutDuration = 200; // Use a shorter timeout if the cache exists (300ms)
-        }
-    
-        const timer = setTimeout(() => {
-            setLoading(false); // Set loading to false after the timeout
-        }, timeoutDuration);
-    
-        return () => clearTimeout(timer); // Clear the timeout when the component unmounts
+        let timeoutDuration = playlistStateCache[playlistData.playlistId] ? 200 : 700;
+        const timer = setTimeout(() => setLoading(false), timeoutDuration);
+        return () => clearTimeout(timer);
     }, [playlistData.playlistId]);
-    
 
-    //------------------------------------------------------------------------------------------------------------
-    
-    // Handle drag over event to allow drop
-    const handleDragOver = (event) => {
-        event.preventDefault(); // Necessary to allow dropping
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    const handleTrackClick = (uriTrack, index, event) => {
+        const isCtrlOrCmdPressed = event.metaKey || event.ctrlKey;
+        const isShiftPressed = event.shiftKey;
+
+        setSelectedTracks((prevSelected) => {
+            if (isShiftPressed && lastSelectedIndex !== null) {
+                const start = Math.min(lastSelectedIndex, index);
+                const end = Math.max(lastSelectedIndex, index);
+                const range = localTracks.slice(start, end + 1).map(track => track.trackUri);
+                return Array.from(new Set([...prevSelected, ...range]));
+            } else if (isCtrlOrCmdPressed) {
+                return prevSelected.includes(uriTrack)
+                    ? prevSelected.filter(track => track !== uriTrack)
+                    : [...prevSelected, uriTrack];
+            } else {
+                setLastSelectedIndex(index);
+                return prevSelected.includes(uriTrack) ? [] : [uriTrack];
+            }
+        });
     };
 
-    // Handle drop event when track is dropped onto a playlist
+    const handleMouseDown = (event) => {
+        if (event.shiftKey) setIsShiftSelecting(true);
+    };
+
+    const handleMouseUp = () => setIsShiftSelecting(false);
+
+    const handleOutsideClick = (event) => {
+        const container = document.getElementById("open-pl-container");
+        if (!container.contains(event.target)) setSelectedTracks([]);
+    };
+
+    const handleKeyDown = (event) => {
+        if (event.key === "Escape") setSelectedTracks([]);
+    };
+
+    useEffect(() => {
+        document.addEventListener("mousedown", handleOutsideClick);
+        document.addEventListener("keydown", handleKeyDown);
+        return () => {
+            document.removeEventListener("mousedown", handleOutsideClick);
+            document.removeEventListener("keydown", handleKeyDown);
+        };
+    }, []);
+    
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    const handleDragOver = (event) => event.preventDefault();
+
     const handleDrop = (event, playlistData) => {
         event.preventDefault();
+        
         const uriTrack = event.dataTransfer.getData('trackUri');
-        const idTrack = event.dataTransfer.getData('trackId');
+        const idTrack = JSON.parse(event.dataTransfer.getData('trackIds')); // Parse JSON string back to array
         const accessToken = event.dataTransfer.getData('accessToken');
-
-        const playlist = playlistData;
-
-        // Call updateTrackToAdd with dropped track and selected playlist
-        updateTrackToAdd(uriTrack, idTrack, playlist, accessToken);
+        
+        updateTrackToAdd(uriTrack, idTrack, playlistData, accessToken);
+        
+        console.log("Dropped Track IDs:", idTrack); // This should now log the full array
     };
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     return (
         <>
-            <div id="open-pl-container" className="container-fluid d-flex flex-column" onDragOver={handleDragOver} onDrop={(event) => handleDrop(event, playlistData)}>
+            <div id="open-pl-container" 
+                className={`container-fluid d-flex flex-column ${isShiftSelecting ? 'no-text-select' : ''}`}  
+                onMouseDown={handleMouseDown} 
+                onMouseUp={handleMouseUp}
+                onDragOver={handleDragOver} 
+                onDrop={(event) => handleDrop(event, playlistData)}
+            >
                 <header id="open-pl-header" className="row">
                     <div id="go-back-col" className="col-auto d-flex flex-column justify-content-center align-items-start">
                         <a id="back-to-playlists" type="button" onClick={() => onBackClick()}>
@@ -262,7 +287,7 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
                     <div id="checkmark-col" className="col-auto d-flex flex-column justify-content-center align-items-center">
                         <img 
                             id="saved-icon" 
-                            src={isSaved ? IMG.savedPNG : IMG.unsavedPNG}  // Update the icon based on save state for this playlist
+                            src={isSaved ? IMG.savedPNG : IMG.unsavedPNG}
                             alt="saved icon" 
                             width="27px" 
                         />
@@ -302,13 +327,12 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
                         </div>
                         <div id="tracks-list" className="row flex-grow-1">   
                             {loading ? (
-                                    <div className="d-flex justify-content-center align-items-center">Loading...</div> // Placeholder content during the timeout
+                                    <div className="d-flex justify-content-center align-items-center">Loading...</div>
                                 ) : (                        
                                 <div id="tracks-list-col" className="col">
                                     {localTracks.length === 0 ? (
                                         <EmptyPlaylistPage/>
                                     ) : (
-                                        // Render the track list if there are tracks
                                         <DndContext onDragEnd={handleDragEnd}>
                                             <SortableContext items={localTracks.map(track => track.trackUri)} strategy={verticalListSortingStrategy}>
                                                 {localTracks.map((track, i) => (
@@ -326,6 +350,9 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
                                                         accessToken={accessToken}
                                                         key={track.trackUri}
                                                         resetTrackSaved={resetTrackSaved}
+                                                        onTrackClick={(event) => handleTrackClick(track.trackUri, i, event)}
+                                                        isSelected={selectedTracks.includes(track.trackUri)}
+                                                        selectedTracks={selectedTracks}
                                                     />
                                                 ))}
                                             </SortableContext>
@@ -337,7 +364,6 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
                     </div>
                 </main>
                 <footer id="open-pl-footer" className="row">
-                    <div className="col-1 d-flex flex-column justify-content-center align-items-center"></div>
                     <div id="save-button-col" className="col-5 d-flex flex-column justify-content-center align-items-center">
                         <button id="save-button" className={`btn btn-lg ${!isSaved ? 'btn-primary' : 'btn-outline-light'}`} onClick={handleSaveChanges} disabled={isSaved}>
                             Save to Spotify
@@ -348,11 +374,10 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
                             Discard Changes
                         </button>
                     </div>
-                    <div className="col-1 d-flex flex-column justify-content-center align-items-center"></div>
                 </footer>
             </div>
         </>
     );
 }
 
-export default OpenPlaylist; 
+export default OpenPlaylist;

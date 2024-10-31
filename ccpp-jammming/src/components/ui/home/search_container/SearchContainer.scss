@@ -2,6 +2,7 @@
     //border: $border-red-solid;
     @include box-reset-default;
     height: 100%;
+    position: relative;
     padding: 0px 15px 15px 15px;
     #searchbar-row {
         //border: $border-yellow-solid;
@@ -94,6 +95,8 @@
         //border: $border-yellow-solid;
         @include box-reset-default;
         height: 100%;
+        overflow-y: hidden;
+        scrollbar-gutter: stable;
         #results-col {
             //border: $border-cyan-solid;
             @include box-reset-default;

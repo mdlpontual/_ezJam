@@ -17,6 +17,8 @@
             p {
                 //border: $border-lime-solid;
                 @include box-reset-default;
+                text-align: center;
+                padding: 0 10px;
             }
         }
         #col-track {
@@ -337,7 +339,7 @@
                 #volume-bar {
                     //border: $border-cyan-dashed;
                     @include box-reset-default;
-                    width: 150px;
+                    width: 140px;
                     padding: 10px;
                     padding-right: 25px;
                     #progress-bar {
@@ -364,7 +366,7 @@
                 #volume-bar:hover {
                     //border: $border-cyan-dashed;
                     @include box-reset-default;
-                    width: 150px;
+                    width: 145px;
                     padding: 10px;
                     padding-right: 25px;
                     #progress-bar {

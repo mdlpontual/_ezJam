@@ -11,20 +11,18 @@ function UserPlaylists({ onPlaylistClick, onBackClick, onPlayButton, onArtistCli
     const { handleCreatePlaylist } = useCreatePlaylist({ accessToken, userId, refetchPlaylists });
     const { updateTrackToAdd } = useAddTrack();
 
-    // Handle drag over event to allow drop
-    const handleDragOver = (event) => {
-        event.preventDefault(); // Necessary to allow dropping
-    };
+    const handleDragOver = (event) => event.preventDefault();
 
-    // Handle drop event when track is dropped onto a playlist
-    const handleDrop = (event, playlist) => {
+    const handleDrop = (event, playlistData) => {
         event.preventDefault();
+        
         const uriTrack = event.dataTransfer.getData('trackUri');
-        const idTrack = event.dataTransfer.getData('trackId');
+        const idTrack = JSON.parse(event.dataTransfer.getData('trackIds')); // Parse JSON string back to array
         const accessToken = event.dataTransfer.getData('accessToken');
-
-        // Call updateTrackToAdd with dropped track and selected playlist
-        updateTrackToAdd(uriTrack, idTrack, playlist, accessToken);
+        
+        updateTrackToAdd(uriTrack, idTrack, playlistData, accessToken);
+        
+        console.log("Dropped Track IDs:", idTrack); // This should now log the full array
     };
 
     return (

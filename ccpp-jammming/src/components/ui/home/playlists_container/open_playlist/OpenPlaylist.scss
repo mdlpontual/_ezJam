@@ -186,9 +186,13 @@
             //border: $border-cyan-solid;
             @include box-reset-default;
             padding-bottom: 5px;
+            width: 50%;
             #save-button {
+                //border: $border-lime-solid;
+                @include box-reset-default;
                 color: white;
                 width: 90%;
+                height: 50px;
                 border-radius: 25px;
             }
         }
@@ -196,11 +200,19 @@
             //border: $border-cyan-solid;
             @include box-reset-default;
             padding-bottom: 5px;
+            width: 50%;
             #discard-button {
+                //border: $border-lime-solid;
+                @include box-reset-default;
                 color: white;
                 width: 90%;
+                height: 50px;
                 border-radius: 25px;
             }
         }
     }
+}
+
+.no-text-select {
+    user-select: none;
 }

@@ -1,7 +1,7 @@
 #artist-page-container {
-    //border: $border-red-solid;
+    //border: $border-red-dashed;
     @include box-reset-default;
-    height: 600px;
+    height: 100px;
     #artist-page-banner-row {
         //border: $border-yellow-solid;
         @include box-reset-default;

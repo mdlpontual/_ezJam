@@ -3,12 +3,13 @@
     @include box-reset-default;
     background-color: $bg-transparent;
     border-radius: 20px;
-    height: 750px;
-    width: 500px;
+    max-height: 750px;
+    width: 480px;
+    flex-grow: 1; 
     #logo-row{
         //border: $border-yellow-solid;
         @include box-reset-default;
-        height: 30%;
+        height: 200px;
         #logo-col{
             //border: $border-cyan-solid;
             @include box-reset-default;
@@ -35,13 +36,19 @@
             }
         }
     }
+    #empty-row {
+        //border: $border-yellow-solid;
+        @include box-reset-default;
+        flex-grow: 1; 
+    }
     #button-row{
         //border: $border-yellow-solid;
         @include box-reset-default;
-        height: 60%;
+        height: 100px;
         #button-col{
             //border: $border-cyan-solid;
             @include box-reset-default;
+            height: 100%;
             #login-button {
                 //border: $border-lime-dotted;
                 @include box-reset-default;
@@ -49,15 +56,13 @@
                 border-radius: 25px;
                 height: 50px;
                 color: white;
-                margin-bottom: 50px;
-                
             }
         }
     }
     #sub-link-row{
         //border: $border-yellow-solid;
         @include box-reset-default;
-        height: 10%;
+        height: 50px;
         #sub-link-col{
             //border: $border-cyan-solid;
             @include box-reset-default;
