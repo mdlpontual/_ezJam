@@ -1,7 +1,7 @@
 import React from "react";
 import Album from "./unit_components/Album";
 
-function DiscographyBox({ fetchedArtistDiscographyArray, onArtistClick, onAlbumClick, onPlayButton, accessToken }) {
+function DiscographyBox({ fetchedArtistDiscographyArray, onArtistClick, onAlbumClick, onPlayButton, userPlaylistsArr, accessToken }) {
     return (
         <>
             <div id="discography-container" className="container-fluid">
@@ -15,6 +15,7 @@ function DiscographyBox({ fetchedArtistDiscographyArray, onArtistClick, onAlbumC
                                     onArtistClick={onArtistClick}
                                     onAlbumClick={onAlbumClick} 
                                     onPlayButton={onPlayButton}
+                                    userPlaylistsArr={userPlaylistsArr}
                                     accessToken={accessToken} 
                                     key={album.albumUri}/>
                             ))}

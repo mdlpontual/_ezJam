@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import TrackResultItem from "./unit_components/TrackResultItem";
 import useFetchSearchResults from "../../../../../../hooks/useFetchSearchResults";
 
-function TrackResultsBox({ searchArtistResults, searchAlbumResults, searchTrackResults, onArtistClick, onAlbumClick, onPlayButton, playTrack, pauseTrack, accessToken }) {
+function TrackResultsBox({ searchArtistResults, searchAlbumResults, searchTrackResults, onArtistClick, onAlbumClick, onPlayButton, playTrack, pauseTrack, userPlaylistsArr, accessToken }) {
     const { fetchedArtistsArray, fetchedAlbumsArray, fetchedTracksArray, fetchMissingArtistByName, fetchMissingAlbumByName } = useFetchSearchResults({ searchArtistResults, searchAlbumResults, searchTrackResults, accessToken });
     const [updatedArtistContent, setUpdatedArtistContent] = useState([]);
     const [updatedAlbumContent, setUpdatedAlbumContent] = useState([]);
@@ -111,6 +111,7 @@ function TrackResultsBox({ searchArtistResults, searchAlbumResults, searchTrackR
                             key={track.trackUri}
                             onTrackClick={(event) => handleTrackClick(track.trackUri, fetchedTracksArray.indexOf(track), event)}
                             isSelected={selectedTracks.includes(track.trackUri)}
+                            userPlaylistsArr={userPlaylistsArr}
                             selectedTracks={selectedTracks} 
                         />
                     );

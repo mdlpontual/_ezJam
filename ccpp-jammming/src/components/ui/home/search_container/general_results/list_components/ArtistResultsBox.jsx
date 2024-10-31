@@ -2,7 +2,7 @@ import React from "react";
 import ArtistResultItem from "./unit_components/ArtistResultItem";
 import useFetchSearchResults from "../../../../../../hooks/useFetchSearchResults";
 
-function ArtistResultsBox({ searchArtistResults, onArtistClick, onAlbumClick, onPlayButton, accessToken }) {
+function ArtistResultsBox({ searchArtistResults, onArtistClick, onAlbumClick, onPlayButton, userPlaylistsArr, accessToken }) {
     const { fetchedArtistsArray } = useFetchSearchResults({ searchArtistResults, accessToken })
 
     return (
@@ -17,6 +17,7 @@ function ArtistResultsBox({ searchArtistResults, onArtistClick, onAlbumClick, on
                                 onArtistClick={onArtistClick}
                                 onAlbumClick={onAlbumClick}
                                 onPlayButton={onPlayButton}
+                                userPlaylistsArr={userPlaylistsArr}
                                 accessToken={accessToken}
                                 key={artist.artistUri}/>
                         </div>

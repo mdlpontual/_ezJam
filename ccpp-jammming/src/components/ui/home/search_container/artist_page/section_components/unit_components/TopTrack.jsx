@@ -3,15 +3,13 @@ import IMG from "../../../../../../../assets/images/ImagesHUB";
 import { useTrack } from "../../../../../../../hooks/TrackContext";
 import { useAddTrack } from "../../../../../../../hooks/user_hooks/AddTrackContext";
 import Equalizer from "../../../../../../../utils/Equalizer"
-import useUserInfo from "../../../../../../../hooks/user_hooks/useUserInfo";
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 function TopTrack({ topTrack, order, onPlayButton, 
                     playTrack, pauseTrack, fetchedArtistTopTracksArray, 
-                    onTrackClick, isSelected, selectedTracks, accessToken }) {
+                    onTrackClick, isSelected, selectedTracks, userPlaylistsArr, accessToken }) {
     const { currentTrackUri, isPaused } = useTrack(); 
     const { updateTrackToAdd } = useAddTrack();
-    const { userPlaylistsArr } = useUserInfo({accessToken});
 
     const uriTrack = topTrack.trackUri;
     const idTrack = topTrack.trackId;
@@ -49,7 +47,6 @@ function TopTrack({ topTrack, order, onPlayButton,
         event.dataTransfer.setData('trackUri', uriTrack);
         event.dataTransfer.setData('trackIds', JSON.stringify(selectedTracksIds)); // Convert array to JSON string
         event.dataTransfer.setData('accessToken', accessToken);
-        console.log("TrackResultItem - Selected Track IDs:", JSON.stringify(selectedTracksIds)); // This should now log all IDs
     };
 
     const handleDropDownAdd = (playlistData) => {

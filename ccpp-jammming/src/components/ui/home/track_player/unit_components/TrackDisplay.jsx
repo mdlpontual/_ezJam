@@ -3,7 +3,7 @@ import IMG from "../../../../../assets/images/ImagesHUB";
 import useFetchId from "../../../../../hooks/useFetchId";
 import useFetchSearchResults from "../../../../../hooks/useFetchSearchResults";
 
-function TrackDisplay({ currentTrack, onPlayButton, onArtistClick, onAlbumClick, accessToken }) {
+function TrackDisplay({ currentTrack, onPlayButton, onArtistClick, onAlbumClick, userPlaylistsArr, accessToken }) {
     const search = currentTrack.artists[0].name;
     const albumCurrent = currentTrack.album.name;
 
@@ -23,13 +23,13 @@ function TrackDisplay({ currentTrack, onPlayButton, onArtistClick, onAlbumClick,
     return (
         <>
             <div id="col-cover" className="col-1 d-flex justify-content-center align-items-center">
-                <a id="display-cover" type="button" onClick={() => onAlbumClick(albumContent, onArtistClick, onAlbumClick, onPlayButton, accessToken)}>
+                <a id="display-cover" type="button" onClick={() => onAlbumClick(albumContent, onArtistClick, onAlbumClick, onPlayButton, userPlaylistsArr, accessToken)}>
                     <img src={coverPicture} height="70px" width="70px"/>
                 </a>
             </div>
             <div id="col-title" className="row d-flex flex-column justify-content-center align-items-start">
                 <h5>{currentTrack.name}</h5>
-                <p id="display-artist" type="button" onClick={() => onArtistClick(artistContent, onArtistClick, onAlbumClick, onPlayButton, accessToken)}>
+                <p id="display-artist" type="button" onClick={() => onArtistClick(artistContent, onArtistClick, onAlbumClick, onPlayButton, userPlaylistsArr, accessToken)}>
                     {currentTrack.artists[0].name}
                 </p>
             </div>

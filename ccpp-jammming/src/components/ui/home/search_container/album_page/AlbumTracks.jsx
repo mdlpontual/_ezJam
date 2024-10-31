@@ -3,15 +3,13 @@ import IMG from "../../../../../assets/images/ImagesHUB";
 import { useTrack } from "../../../../../hooks/TrackContext";
 import { useAddTrack } from "../../../../../hooks/user_hooks/AddTrackContext";
 import Equalizer from "../../../../../utils/Equalizer";
-import useUserInfo from "../../../../../hooks/user_hooks/useUserInfo";
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 function AlbumTracks({ trackContent, fetchedAlbumTracksArray, 
                         onPlayButton, playTrack, pauseTrack, 
-                        onTrackClick, isSelected, selectedTracks, accessToken }) {
+                        onTrackClick, isSelected, selectedTracks, userPlaylistsArr, accessToken }) {
     const { currentTrackUri, isPaused } = useTrack(); 
     const { updateTrackToAdd } = useAddTrack();
-    const { userPlaylistsArr } = useUserInfo({accessToken});
 
     const uriTrack = trackContent.trackUri;
     const idTrack = trackContent.trackId;

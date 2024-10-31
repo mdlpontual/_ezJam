@@ -19,6 +19,7 @@ function TrackPlayer({
     onArtistClick, 
     onAlbumClick, 
     onPlayTrack, 
+    userPlaylistsArr,
     accessToken
 }) {
     const [liveTrackPosition, setLiveTrackPosition] = useState(trackPosition); // Local track position
@@ -135,7 +136,8 @@ function TrackPlayer({
                             currentTrack={currentTrack} 
                             onPlayButton={onPlayButton} 
                             onArtistClick={onArtistClick} 
-                            onAlbumClick={onAlbumClick} 
+                            onAlbumClick={onAlbumClick}
+                            userPlaylistsArr={userPlaylistsArr} 
                             accessToken={accessToken} />
                     </div>
                     <div id="col-player" className="col d-flex flex-column">
