@@ -45,6 +45,9 @@ $form-check-input-focus-box-shadow: none;
 
 body{
     background-image: url(../assets/images/background/00_sparkly-purple-bkg.jpg);
+    background-size: cover; // Options: cover, contain, or specific size in px/percentage
+    background-repeat: no-repeat; // Prevents the image from repeating
+    background-position: center; // Centers the image
 }
 
 @include custom-scroll-bar;
