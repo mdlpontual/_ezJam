@@ -87,3 +87,13 @@
         overflow-y: auto;
     }
 }
+
+#empty-pl-collection-col {
+    //border: $border-yellow-solid;
+    @include box-reset-default;
+    p {
+        //border: $border-yellow-solid;
+        @include box-reset-default;
+        color: lightgray;
+    }
+}

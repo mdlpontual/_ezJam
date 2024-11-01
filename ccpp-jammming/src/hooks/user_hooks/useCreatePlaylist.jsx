@@ -31,7 +31,7 @@ function useCreatePlaylist({ accessToken, userId, refetchPlaylists }) {
         }
     };
 
-    const handleCreatePlaylist = async () => {
+    /* const handleCreatePlaylist = async () => {
         const playlistName = prompt("Type your new playlist's name:");
         if (!playlistName || playlistName.trim() === "") {
             alert("Playlist name is required.");
@@ -43,6 +43,20 @@ function useCreatePlaylist({ accessToken, userId, refetchPlaylists }) {
 
         // Re-fetch playlists to include the newly created one
         await refetchPlaylists();
+    }; */
+
+    const handleCreatePlaylist = async () => {
+        const playlistName = prompt("Type your new playlist's name:");
+        if (!playlistName || playlistName.trim() === "") {
+            alert("Playlist name is required.");
+            return;
+        }
+    
+        // Create the new playlist
+        await createPlaylist(playlistName, "", true);
+    
+        // Re-fetch playlists with forced override to include the newly created one
+        await refetchPlaylists(true);
     };
 
     return { handleCreatePlaylist };

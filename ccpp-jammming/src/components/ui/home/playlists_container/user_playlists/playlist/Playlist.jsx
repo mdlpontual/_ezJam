@@ -13,10 +13,6 @@ function Playlist({ playlistData, onPlaylistClick, onBackClick, onPlayButton, on
 
     const uriQueue = playlistTracksArr.map(track => track.trackUri);
 
-/*     useEffect(() => {
-        uriQueue = playlistTracksArr.map(track => track.trackUri);
-    }, []) */
-
     const firstUriTrack = uriQueue[0];
 
     const cover = playlistData.playlistCover || IMG.placeHolders;
@@ -78,7 +74,7 @@ function Playlist({ playlistData, onPlaylistClick, onBackClick, onPlayButton, on
 
     if (playlistTracksArr.length === 0) {
         return (
-            <div id="single-pl-container" className="container-fluid">
+            <div id="single-pl-container" className="container-fluid" >
                 <div id="single-pl-row" className="row">
                     <div id="checkmark-col" className="col-1 d-flex flex-column justify-content-center align-items-center">
                         <img id="playlist-cover" src={cover} alt="saved icon" width="60px" />

@@ -4,6 +4,7 @@ import Playlist from "./playlist/Playlist";
 import useUserInfo from "../../../../../hooks/user_hooks/useUserInfo";
 import useCreatePlaylist from "../../../../../hooks/user_hooks/useCreatePlaylist";
 import { useAddTrack } from "../../../../../hooks/user_hooks/AddTrackContext";
+import EmptyPlaylistsCollection from "./EmptyPlaylistsCollection";
 
 function UserPlaylists({ onPlaylistClick, onBackClick, onPlayButton, onArtistClick, onAlbumClick, playTrack, pauseTrack, accessToken }) {
     const { userInfo, userPlaylistsArr, setUserPlaylistsArr, refetchPlaylists, editPlaylists } = useUserInfo({ accessToken });
@@ -38,28 +39,34 @@ function UserPlaylists({ onPlaylistClick, onBackClick, onPlayButton, onArtistCli
                     </a>
                 </div>
             </header>
-            <main id="pl-body-row" className="row">
-                <div id="pl-body-col" className="col">
-                    {userPlaylistsArr.map((playlist) => (
-                        <div key={playlist.playlistUri} onDragOver={handleDragOver} onDrop={(event) => handleDrop(event, playlist)}>
-                            <Playlist
-                                playlistData={playlist}
-                                onPlaylistClick={onPlaylistClick}
-                                onBackClick={onBackClick}
-                                onPlayButton={onPlayButton}
-                                onArtistClick={onArtistClick}
-                                onAlbumClick={onAlbumClick}
-                                playTrack={playTrack}
-                                pauseTrack={pauseTrack}
-                                refetchPlaylists={refetchPlaylists}
-                                editPlaylists={editPlaylists}
-                                setUserPlaylistsArr={setUserPlaylistsArr}
-                                accessToken={accessToken}
-                            />
-                        </div>
-                    ))}
-                </div>
-            </main>
+            {userPlaylistsArr.length === 0 ? (
+                <main id="pl-body-row" className="row">
+                    <EmptyPlaylistsCollection />
+                </main>
+            ) : (
+                <main id="pl-body-row" className="row">
+                    <div id="pl-body-col" className="col">
+                        {userPlaylistsArr.map((playlist) => (
+                            <div key={playlist.playlistUri} onDragOver={handleDragOver} onDrop={(event) => handleDrop(event, playlist)}>
+                                <Playlist
+                                    playlistData={playlist}
+                                    onPlaylistClick={onPlaylistClick}
+                                    onBackClick={onBackClick}
+                                    onPlayButton={onPlayButton}
+                                    onArtistClick={onArtistClick}
+                                    onAlbumClick={onAlbumClick}
+                                    playTrack={playTrack}
+                                    pauseTrack={pauseTrack}
+                                    refetchPlaylists={refetchPlaylists}
+                                    editPlaylists={editPlaylists}
+                                    setUserPlaylistsArr={setUserPlaylistsArr}
+                                    accessToken={accessToken}
+                                />
+                            </div>
+                        ))}
+                    </div>
+                </main>
+            )}
         </div>
     );
 }

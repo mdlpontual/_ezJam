@@ -4,7 +4,7 @@ import IMG from "../../../../../../assets/images/ImagesHUB";
 function EmptyPlaylistPage() {
   return (
     <>
-        <div id="empty-pl-container" className="container d-flex flex-column justify-content-center align-items-center">
+        <div id="empty-pl-container" className="container d-flex flex-column justify-content-center align-items-center h-100">
             <div id="empty-pl-row"className="row justify-content-center align-items-center">
                 <div id="empty-pl-col" className="col d-flex flex-column justify-content-center align-items-center">
                     <img src={IMG.emptyPlaylistPlaceHolder} alt="empty playlist" width="100px"/>

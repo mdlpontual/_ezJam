@@ -49,6 +49,17 @@
                 max-width: 100%;
                 margin-left: 5px;
             }
+            h3:hover {
+                //border: $border-lime-dashed;
+                @include box-reset-default;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: block;
+                max-width: 100%;
+                margin-left: 5px;
+                text-decoration: underline;
+            }
         }
         #edit-button-col {
             //border: $border-cyan-solid;

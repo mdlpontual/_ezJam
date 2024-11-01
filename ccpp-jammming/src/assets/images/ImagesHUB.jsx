@@ -60,6 +60,7 @@ const IMG = {
     glassSearchPNG: new URL('./pictures/search-glass.png', import.meta.url).href,
     notFound2PNG: new URL('./pictures/no-results.png', import.meta.url).href,
     emptyPlaylistPlaceHolder: new URL('./pictures/empty-playlist-place-holder.png', import.meta.url).href,
+    emptyPlaylistCollectionPlaceHolder: new URL('./pictures/folder.png', import.meta.url).href,
 
     rhcpPNG: new URL('./background/01_rhcp-placeholder.jpg', import.meta.url).href,
 };
