@@ -141,14 +141,16 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
                 const hasChangesNow = JSON.stringify(updatedTracks) !== JSON.stringify(playlistTracksArr);
                 setIsSaved(playlistData.playlistId, !hasChangesNow);
                 playlistStateCache[playlistData.playlistId] = { tracks: updatedTracks, isSaved: !hasChangesNow };
+            } else if (selectedTracks.length > 0) {
+                const updatedTracks = localTracks.filter(track => !selectedTracks.some(selectedTrack => track.trackUri === selectedTrack));
+                setLocalTracks(updatedTracks);
+                const hasChangesNow = JSON.stringify(updatedTracks) !== JSON.stringify(playlistTracksArr);
+                setIsSaved(playlistData.playlistId, !hasChangesNow);
+                playlistStateCache[playlistData.playlistId] = { tracks: updatedTracks, isSaved: !hasChangesNow };
             }
-            const updatedTracks = localTracks.filter(track => !selectedTracks.some(selectedTrack => track.trackUri === selectedTrack));
-            setLocalTracks(updatedTracks);
-            const hasChangesNow = JSON.stringify(updatedTracks) !== JSON.stringify(playlistTracksArr);
-            setIsSaved(playlistData.playlistId, !hasChangesNow);
-            playlistStateCache[playlistData.playlistId] = { tracks: updatedTracks, isSaved: !hasChangesNow };
 
             handleTrackChange();
+            setSelectedTracks([]);
         }
     };
 

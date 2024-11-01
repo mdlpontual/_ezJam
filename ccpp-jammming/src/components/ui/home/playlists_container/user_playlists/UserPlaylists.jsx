@@ -23,7 +23,7 @@ function UserPlaylists({ onPlaylistClick, onBackClick, onPlayButton, onArtistCli
         
         updateTrackToAdd(uriTrack, idTrack, playlistData, accessToken);
         
-        console.log("Dropped Track IDs:", idTrack); // This should now log the full array
+        //console.log("Dropped Track IDs:", idTrack); // This should now log the full array
     };
 
     return (
