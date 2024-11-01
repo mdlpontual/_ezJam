@@ -47,16 +47,16 @@ function TrackResultItem({  artistContent, albumContent, trackContent,
         event.dataTransfer.setData('trackUri', uriTrack);
         event.dataTransfer.setData('trackIds', JSON.stringify(selectedTracksIds)); // Convert array to JSON string
         event.dataTransfer.setData('accessToken', accessToken);
-        console.log("TrackResultItem - Selected Track IDs:", JSON.stringify(selectedTracksIds)); // This should now log all IDs
+        //console.log("TrackResultItem - Selected Track IDs:", JSON.stringify(selectedTracksIds)); // This should now log all IDs
     };
 
     const handleDropDownAdd = (playlistData) => {
         if (selectedTracksIds === 0) {
             updateTrackToAdd(uriTrack, idTrack, playlistData, accessToken);
-            console.log(idTrack);
+            //console.log(idTrack);
         } else {
             updateTrackToAdd(uriTrack, selectedTracksIds, playlistData, accessToken);
-            console.log(selectedTracksIds);
+            //console.log(selectedTracksIds);
         }
 
         // Close the dropdown after selection
@@ -85,10 +85,10 @@ function TrackResultItem({  artistContent, albumContent, trackContent,
                     </div>
                     <div id="col-title" className="col d-flex justify-content-start align-items-center">
                         <h5>{trackContent.trackTitle}</h5>
-                        <p><a id="open-artist-page" type="button" onClick={() => onArtistClick(artistContent, onArtistClick, onAlbumClick, onPlayButton, accessToken)}>{trackContent.trackAuthor}</a></p>
+                        <p><a id="open-artist-page" type="button" onClick={() => onArtistClick(artistContent, onArtistClick, onAlbumClick, onPlayButton, userPlaylistsArr, accessToken)}>{trackContent.trackAuthor}</a></p>
                     </div>
                     <div id="col-album" className="col-3 d-flex justify-content-start align-items-center">
-                        <p><a id="open-album-page" type="button" onClick={() => onAlbumClick(albumContent, onArtistClick, onAlbumClick, onPlayButton, accessToken)}>{trackContent.trackAlbum}</a></p>
+                        <p><a id="open-album-page" type="button" onClick={() => onAlbumClick(albumContent, onArtistClick, onAlbumClick, onPlayButton, userPlaylistsArr, accessToken)}>{trackContent.trackAlbum}</a></p>
                     </div>
                     <div id="col-duration" className="col-1 d-flex justify-content-center align-items-center">
                         <p>{millisToMinutesAndSeconds(trackContent.trackDuration)}</p>
@@ -134,10 +134,10 @@ function TrackResultItem({  artistContent, albumContent, trackContent,
                 </div>
                 <div id="col-title" className="col d-flex justify-content-start align-items-center">
                     <h5>{trackContent.trackTitle}</h5>
-                    <p><a id="open-artist-page" type="button" onClick={() => onArtistClick(artistContent, onArtistClick, onAlbumClick, onPlayButton, accessToken)}>{trackContent.trackAuthor}</a></p>
+                    <p><a id="open-artist-page" type="button" onClick={() => onArtistClick(artistContent, onArtistClick, onAlbumClick, onPlayButton, userPlaylistsArr, accessToken)}>{trackContent.trackAuthor}</a></p>
                 </div>
                 <div id="col-album" className="col-3 d-flex justify-content-start align-items-center">
-                    <p><a id="open-album-page" type="button" onClick={() => onAlbumClick(albumContent, onArtistClick, onAlbumClick, onPlayButton, accessToken)}>{trackContent.trackAlbum}</a></p>
+                    <p><a id="open-album-page" type="button" onClick={() => onAlbumClick(albumContent, onArtistClick, onAlbumClick, onPlayButton, userPlaylistsArr, accessToken)}>{trackContent.trackAlbum}</a></p>
                 </div>
                 <div id="col-duration" className="col-1 d-flex justify-content-center align-items-center">
                     <p>{millisToMinutesAndSeconds(trackContent.trackDuration)}</p>

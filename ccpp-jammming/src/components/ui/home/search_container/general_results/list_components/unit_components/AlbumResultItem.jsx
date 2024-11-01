@@ -8,6 +8,11 @@ function AlbumResultItem({ artistContent, albumContent, onArtistClick, onAlbumCl
     } else {
         albumCoverImg = IMG.placeHolders;
     }
+
+    // Check if artistContent is available
+    if (!artistContent || !artistContent.artistId) {
+        return null; // Do not render if artistContent is missing or incomplete
+    }
     
     return (
         <>
