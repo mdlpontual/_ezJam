@@ -1,7 +1,7 @@
 import React from "react";
 import IMG from "../../../../../../../assets/images/ImagesHUB";
 
-function ArtistResultItem({ artistContent, onArtistClick, onAlbumClick, onPlayButton, accessToken }) {
+function ArtistResultItem({ artistContent, onArtistClick, onAlbumClick, onPlayButton, userPlaylistsArr, accessToken }) {
     let profilePicture;
     if (artistContent.artistProfileImg) {
         profilePicture = artistContent.artistProfileImg;
@@ -16,12 +16,12 @@ function ArtistResultItem({ artistContent, onArtistClick, onAlbumClick, onPlayBu
                     <img 
                         src={profilePicture} 
                         type="button" 
-                        onClick={() => onArtistClick(artistContent, onArtistClick, onAlbumClick, onPlayButton, accessToken)}
+                        onClick={() => onArtistClick(artistContent, onArtistClick, onAlbumClick, onPlayButton, userPlaylistsArr, accessToken)}
                         alt="profile picture" 
                         height="175x"/>
                 </div>
                 <div id="artist-name" className="col d-flex justify-content-center align-items-start">
-                    <h6 id="open-artist-page" type="button" onClick={() => onArtistClick(artistContent, onArtistClick, onAlbumClick, onPlayButton, accessToken)}>
+                    <h6 id="open-artist-page" type="button" onClick={() => onArtistClick(artistContent, onArtistClick, onAlbumClick, onPlayButton, userPlaylistsArr, accessToken)}>
                         {artistContent.artistName}
                     </h6>
                 </div>

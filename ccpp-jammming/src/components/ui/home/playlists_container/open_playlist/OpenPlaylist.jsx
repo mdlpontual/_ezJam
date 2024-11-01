@@ -14,7 +14,7 @@ const playlistStateCache = {};
 
 function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, onAlbumClick, playTrack, pauseTrack, updateQueue, accessToken }) {
     const { playlistTracksArr, setPlaylistTracksArr, handleTrackChange, clearPlaylistCache } = usePlaylistInfo({ playlistData, accessToken });
-    const { setUserPlaylistsArr, refetchPlaylists, editPlaylists } = useUserInfo({ accessToken });
+    const { userPlaylistsArr, setUserPlaylistsArr, refetchPlaylists, editPlaylists } = useUserInfo({ accessToken });
     const { handleEditPlaylist, handleSharePlaylist, handleUnfollowPlaylist, reorderTracksInPlaylist, newEditedName } = usePlaylistActions({ playlistData, editPlaylists, refetchPlaylists, setUserPlaylistsArr, accessToken });
     const { updateTrackToAdd, playlistToAddTrack, trackToAddContent, setPlaylistToAddTrack, setTrackToAddContent } = useAddTrack();
 
@@ -141,14 +141,16 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
                 const hasChangesNow = JSON.stringify(updatedTracks) !== JSON.stringify(playlistTracksArr);
                 setIsSaved(playlistData.playlistId, !hasChangesNow);
                 playlistStateCache[playlistData.playlistId] = { tracks: updatedTracks, isSaved: !hasChangesNow };
+            } else if (selectedTracks.length > 0) {
+                const updatedTracks = localTracks.filter(track => !selectedTracks.some(selectedTrack => track.trackUri === selectedTrack));
+                setLocalTracks(updatedTracks);
+                const hasChangesNow = JSON.stringify(updatedTracks) !== JSON.stringify(playlistTracksArr);
+                setIsSaved(playlistData.playlistId, !hasChangesNow);
+                playlistStateCache[playlistData.playlistId] = { tracks: updatedTracks, isSaved: !hasChangesNow };
             }
-            const updatedTracks = localTracks.filter(track => !selectedTracks.some(selectedTrack => track.trackUri === selectedTrack));
-            setLocalTracks(updatedTracks);
-            const hasChangesNow = JSON.stringify(updatedTracks) !== JSON.stringify(playlistTracksArr);
-            setIsSaved(playlistData.playlistId, !hasChangesNow);
-            playlistStateCache[playlistData.playlistId] = { tracks: updatedTracks, isSaved: !hasChangesNow };
 
             handleTrackChange();
+            setSelectedTracks([]);
         }
     };
 
@@ -156,44 +158,44 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
         const timeoutDuration = 500;
         let timeoutId = null;
 
-        const checkAndProceed = () => {
-            if (!Array.isArray(localTracks) || localTracks.length === 0 ||
-                !Array.isArray(playlistTracksArr) || playlistTracksArr.length === 0) {
-                timeoutId = setTimeout(() => proceedToAddTrack(), timeoutDuration);
-                return;
-            }
-            proceedToAddTrack();
+        const handleTrackAddition = () => {
+            setLocalTracks((prevTracks) => {
+                const trackExists = trackToAddContent.some(trackToAdd => 
+                    prevTracks.some(prevTrack => prevTrack.trackUri === trackToAdd.trackUri)
+                );
+                if (trackExists) return prevTracks;
+
+                const updatedAddedTracks = prevTracks.concat(trackToAddContent);
+                playlistStateCache[playlistData.playlistId] = { tracks: updatedAddedTracks, isSaved: false };
+                return updatedAddedTracks;
+            });
+            setPlaylistToAddTrack({});
+            setTrackToAddContent([]);
         };
 
-        const proceedToAddTrack = () => {
-            if (playlistToAddTrack.playlistTitle === playlistData.playlistTitle) {
-                setLocalTracks((prevTracks) => {
-                    const trackExists = trackToAddContent.some(trackToAdd => prevTracks.some(prevTrack => prevTrack.trackUri === trackToAdd.trackUri));
-                    if (trackExists) return prevTracks;
-
-                    const updatedAddedTracks = prevTracks.concat(trackToAddContent);
-                    const hasChangesNow = JSON.stringify(updatedAddedTracks) !== JSON.stringify(playlistTracksArr);
-                    setIsSaved(playlistData.playlistId, !hasChangesNow);
-                    playlistStateCache[playlistData.playlistId] = { tracks: updatedAddedTracks, isSaved: false };
-                    return updatedAddedTracks;
-                });
-                handleTrackChange();
-                setPlaylistToAddTrack({});
-                setTrackToAddContent({});
+        const initiateTrackAddition = () => {
+            if (trackToAddContent.length > 0 && playlistToAddTrack.playlistTitle === playlistData.playlistTitle) {
+                if (!Array.isArray(localTracks) || localTracks.length === 0 ||
+                    !Array.isArray(playlistTracksArr) || playlistTracksArr.length === 0) {
+                    timeoutId = setTimeout(() => handleTrackAddition(), timeoutDuration);
+                    return;
+                }
+                handleTrackAddition();
             }
         };
 
-        checkAndProceed();
+        initiateTrackAddition();
+
         return () => {
             if (timeoutId) clearTimeout(timeoutId);
         };
-    }, [trackToAddContent]);
+    }, [trackToAddContent, playlistToAddTrack.playlistTitle, playlistData.playlistTitle, localTracks, playlistTracksArr]);
 
     useEffect(() => {
         if (isInitialized) {
-            debounceStateUpdate(() => setIsSaved(playlistData.playlistId, isSaved), 300);
+            debounceStateUpdate(() => setIsSaved(playlistData.playlistId, JSON.stringify(localTracks) === JSON.stringify(playlistTracksArr)), 300);
         }
-    }, [isSaved, isInitialized, playlistData.playlistId, setIsSaved, trackToAddContent]);
+    }, [localTracks, playlistTracksArr, isInitialized, playlistData.playlistId, setIsSaved]);
 
     useEffect(() => {
         let timeoutDuration = playlistStateCache[playlistData.playlistId] ? 200 : 700;
@@ -260,8 +262,6 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
         const accessToken = event.dataTransfer.getData('accessToken');
         
         updateTrackToAdd(uriTrack, idTrack, playlistData, accessToken);
-        
-        console.log("Dropped Track IDs:", idTrack); // This should now log the full array
     };
 
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -325,42 +325,45 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
                             </div>
                             <div id="col-minus" className="col-1 d-flex justify-content-start align-items-end"></div>
                         </div>
-                        <div id="tracks-list" className="row flex-grow-1">   
-                            {loading ? (
-                                    <div className="d-flex justify-content-center align-items-center">Loading...</div>
-                                ) : (                        
-                                <div id="tracks-list-col" className="col">
-                                    {localTracks.length === 0 ? (
-                                        <EmptyPlaylistPage/>
-                                    ) : (
-                                        <DndContext onDragEnd={handleDragEnd}>
-                                            <SortableContext items={localTracks.map(track => track.trackUri)} strategy={verticalListSortingStrategy}>
-                                                {localTracks.map((track, i) => (
-                                                    <PlaylistTrack
-                                                        order={i}
-                                                        playlistTrack={track}
-                                                        playlistTracksArr={localTracks}
-                                                        setPlaylistTracksArr={setPlaylistTracksArr}
-                                                        onPlayButton={onPlayButton}
-                                                        onArtistClick={onArtistClick}
-                                                        onAlbumClick={onAlbumClick}
-                                                        playTrack={playTrack}
-                                                        pauseTrack={pauseTrack}
-                                                        preDeleteTrack={preDeleteTrack}
-                                                        accessToken={accessToken}
-                                                        key={track.trackUri}
-                                                        resetTrackSaved={resetTrackSaved}
-                                                        onTrackClick={(event) => handleTrackClick(track.trackUri, i, event)}
-                                                        isSelected={selectedTracks.includes(track.trackUri)}
-                                                        selectedTracks={selectedTracks}
-                                                    />
-                                                ))}
-                                            </SortableContext>
-                                        </DndContext>
-                                    )}
-                                </div> 
-                            )}
-                        </div>
+                        {localTracks.length === 0 ? (
+                            <div id="tracks-list" className="row flex-grow-1">  
+                                <EmptyPlaylistPage/>
+                            </div>
+                        ) : (
+                            <div id="tracks-list" className="row flex-grow-1">   
+                                {loading ? (
+                                        <div className="d-flex justify-content-center align-items-center">Loading...</div>
+                                    ) : (                        
+                                    <div id="tracks-list-col" className="col">
+                                            <DndContext onDragEnd={handleDragEnd}>
+                                                <SortableContext items={localTracks.map(track => track.trackUri)} strategy={verticalListSortingStrategy}>
+                                                    {localTracks.map((track, i) => (
+                                                        <PlaylistTrack
+                                                            order={i}
+                                                            playlistTrack={track}
+                                                            playlistTracksArr={localTracks}
+                                                            setPlaylistTracksArr={setPlaylistTracksArr}
+                                                            onPlayButton={onPlayButton}
+                                                            onArtistClick={onArtistClick}
+                                                            onAlbumClick={onAlbumClick}
+                                                            playTrack={playTrack}
+                                                            pauseTrack={pauseTrack}
+                                                            preDeleteTrack={preDeleteTrack}
+                                                            userPlaylistsArr={userPlaylistsArr}
+                                                            accessToken={accessToken}
+                                                            key={track.trackUri}
+                                                            resetTrackSaved={resetTrackSaved}
+                                                            onTrackClick={(event) => handleTrackClick(track.trackUri, i, event)}
+                                                            isSelected={selectedTracks.includes(track.trackUri)}
+                                                            selectedTracks={selectedTracks}
+                                                        />
+                                                    ))}
+                                                </SortableContext>
+                                            </DndContext>
+                                    </div> 
+                                )}
+                            </div>
+                        )}
                     </div>
                 </main>
                 <footer id="open-pl-footer" className="row">

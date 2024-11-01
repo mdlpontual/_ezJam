@@ -10,15 +10,11 @@ export const AddTrackProvider = ({ children }) => {
     const [trackToAddContent, setTrackToAddContent] = useState([]);
     const [token, setToken] = useState(null);
 
-    console.log("trackToAddContent", trackToAddContent)
-    console.log("trackIdToAdd", trackIdToAdd)
-
     const updateTrackToAdd = (uriTrack, idTrack, playlistData, accessToken) => {
         setTrackUriToAdd(uriTrack);
         setTrackIdToAdd(Array.isArray(idTrack) ? idTrack : [idTrack]); // Ensure idTrack is always an array
         setPlaylistToAddTrack(playlistData);
         setToken(accessToken);
-        console.log("AddTrackProvider selectedTracksIds", idTrack);
     };
     
     useEffect(() => {

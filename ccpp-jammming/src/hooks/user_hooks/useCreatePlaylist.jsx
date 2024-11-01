@@ -37,12 +37,12 @@ function useCreatePlaylist({ accessToken, userId, refetchPlaylists }) {
             alert("Playlist name is required.");
             return;
         }
-
+    
         // Create the new playlist
         await createPlaylist(playlistName, "", true);
-
-        // Re-fetch playlists to include the newly created one
-        await refetchPlaylists();
+    
+        // Re-fetch playlists with forced override to include the newly created one
+        await refetchPlaylists(true);
     };
 
     return { handleCreatePlaylist };

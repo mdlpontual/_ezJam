@@ -3,7 +3,7 @@ import ArtistResultsBox from "./list_components/ArtistResultsBox";
 import AlbumResultsBox from "./list_components/AlbumResultsBox";
 import TrackResultsBox from "./list_components/TrackResultsBox";
 
-function GeneralResultsPage({ searchArtistResults, searchAlbumResults, searchTrackResults, onArtistClick, onAlbumClick, onPlayButton, playTrack, pauseTrack, accessToken }) {
+function GeneralResultsPage({ searchArtistResults, searchAlbumResults, searchTrackResults, onArtistClick, onAlbumClick, onPlayButton, playTrack, pauseTrack, userPlaylistsArr, accessToken }) {
     return (
         <>
             <div id="gen-results-container" className="container-fluid">
@@ -14,6 +14,7 @@ function GeneralResultsPage({ searchArtistResults, searchAlbumResults, searchTra
                             onArtistClick={onArtistClick}
                             onAlbumClick={onAlbumClick}
                             onPlayButton={onPlayButton}
+                            userPlaylistsArr={userPlaylistsArr}
                             accessToken={accessToken}/>
                     </div>
                 </div>
@@ -26,6 +27,7 @@ function GeneralResultsPage({ searchArtistResults, searchAlbumResults, searchTra
                             onArtistClick={onArtistClick}
                             onAlbumClick={onAlbumClick}
                             onPlayButton={onPlayButton}
+                            userPlaylistsArr={userPlaylistsArr}
                             accessToken={accessToken}/>
                     </div>
                 </div>
@@ -40,6 +42,7 @@ function GeneralResultsPage({ searchArtistResults, searchAlbumResults, searchTra
                             onPlayButton={onPlayButton}
                             playTrack={playTrack}
                             pauseTrack={pauseTrack}
+                            userPlaylistsArr={userPlaylistsArr}
                             accessToken={accessToken}/>
                     </div>
                 </div>

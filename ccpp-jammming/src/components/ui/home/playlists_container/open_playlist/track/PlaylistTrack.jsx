@@ -11,7 +11,7 @@ function PlaylistTrack({ order,
                         playTrack, pauseTrack, 
                         preDeleteTrack, resetTrackSaved, 
                         onTrackClick, isSelected, 
-                        selectedTracks, accessToken 
+                        selectedTracks, userPlaylistsArr, accessToken 
                     }) {
     const { currentTrackUri, isPaused } = useTrack();
     const [isSaved, setIsSaved] = useState(true);  // Track whether the current track is saved
@@ -51,12 +51,12 @@ function PlaylistTrack({ order,
 
     const handleArtistClick = (e) => {
         e.stopPropagation();
-        if (playlistTrack.artistId) onArtistClick(playlistTrack, onArtistClick, onAlbumClick, onPlayButton, accessToken);
+        if (playlistTrack.artistId) onArtistClick(playlistTrack, onArtistClick, onAlbumClick, onPlayButton, userPlaylistsArr, accessToken);
     };
 
     const handleAlbumClick = (e) => {
         e.stopPropagation();
-        if (playlistTrack.albumId) onAlbumClick(playlistTrack, onArtistClick, onAlbumClick, onPlayButton, accessToken);
+        if (playlistTrack.albumId) onAlbumClick(playlistTrack, onArtistClick, onAlbumClick, onPlayButton, userPlaylistsArr, accessToken);
     };
 
     // Helper function to format track duration

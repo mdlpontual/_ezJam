@@ -3,7 +3,7 @@ import IMG from "../../../../../assets/images/ImagesHUB";
 import AlbumTracks from "./AlbumTracks";
 import useFetchContent from "../../../../../hooks/useFetchContent";
 
-function AlbumPage({ albumContent, onArtistClick, onAlbumClick, onPlayButton, playTrack, pauseTrack, accessToken }) {
+function AlbumPage({ albumContent, onArtistClick, onAlbumClick, onPlayButton, playTrack, pauseTrack, userPlaylistsArr, accessToken }) {
     const idAlbum = albumContent.albumId;
     const { fetchedAlbumTracksArray } = useFetchContent({ idAlbum, accessToken });
     const [selectedTracks, setSelectedTracks] = useState([]);
@@ -113,6 +113,7 @@ function AlbumPage({ albumContent, onArtistClick, onAlbumClick, onPlayButton, pl
                                         onPlayButton={onPlayButton}
                                         playTrack={playTrack}
                                         pauseTrack={pauseTrack}
+                                        userPlaylistsArr={userPlaylistsArr}
                                         accessToken={accessToken} 
                                         key={track.trackUri}
                                         onTrackClick={(event) => handleTrackClick(track.trackUri, fetchedAlbumTracksArray.indexOf(track), event)}

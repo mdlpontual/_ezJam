@@ -8,6 +8,7 @@ import useAuth from "../../hooks/useAuth";
 import usePlayTrack from "../../hooks/usePlayTrack";
 import usePlayerControls from "../../hooks/usePlayerControls";
 import { useTrack } from "../../hooks/TrackContext";
+import useUserInfo from "../../hooks/user_hooks/useUserInfo";
 
 function HomePage({ code }) {
     const [search, setSearch] = useState("");
@@ -17,7 +18,8 @@ function HomePage({ code }) {
     const { accessToken } = useAuth(code);
     const { uriTrack, uriQueue, customUriQueue, updateUri, updateQueue } = usePlayTrack();
     const { isPaused, isActive, currentTrack, trackPosition, playTrack, pauseTrack, previousTrack, nextTrack, seekPosition, volumeControl } = usePlayerControls({uriTrack, uriQueue, customUriQueue});
-    const { activePage, goBack, goForward, handleArtistClick, handleAlbumClick } = useAdimSearchPage(search, updateUri, playTrack, pauseTrack, accessToken);
+    const { userPlaylistsArr } = useUserInfo({accessToken});
+    const { activePage, goBack, goForward, handleArtistClick, handleAlbumClick } = useAdimSearchPage(search, updateUri, playTrack, pauseTrack, userPlaylistsArr, accessToken);
 
     // Function to handle when a new track is played
     const handlePlayTrack = () => {
@@ -132,6 +134,7 @@ function HomePage({ code }) {
                             onAlbumClick={handleAlbumClick}
                             onPlayTrack={handlePlayTrack}
                             currentTrackUri={currentTrackUri} 
+                            userPlaylistsArr={userPlaylistsArr}
                             accessToken={accessToken}/>
                     </div>
                 </footer>

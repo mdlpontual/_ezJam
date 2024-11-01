@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import IMG from "../../../../../../assets/images/ImagesHUB";
 import TopTrack from "./unit_components/TopTrack";
 
-function TopTracksBox({ fetchedArtistTopTracksArray, onPlayButton, playTrack, pauseTrack, accessToken}) {
+function TopTracksBox({ fetchedArtistTopTracksArray, onPlayButton, playTrack, pauseTrack, userPlaylistsArr, accessToken}) {
     const [selectedTracks, setSelectedTracks] = useState([]);
     const [lastSelectedIndex, setLastSelectedIndex] = useState(null);
     const [isShiftSelecting, setIsShiftSelecting] = useState(false);
@@ -75,6 +75,7 @@ function TopTracksBox({ fetchedArtistTopTracksArray, onPlayButton, playTrack, pa
                                 pauseTrack={pauseTrack}
                                 key={track.trackUri} 
                                 fetchedArtistTopTracksArray={fetchedArtistTopTracksArray}
+                                userPlaylistsArr={userPlaylistsArr}
                                 accessToken={accessToken}
                                 onTrackClick={(event) => handleTrackClick(track.trackUri, fetchedArtistTopTracksArray.indexOf(track), event)}
                                 isSelected={selectedTracks.includes(track.trackUri)}

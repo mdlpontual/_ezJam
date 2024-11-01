@@ -3,7 +3,7 @@ import TopTracksBox from "./section_components/TopTracksBox";
 import DiscographyBox from "./section_components/DiscographyBox";
 import useFetchContent from "../../../../../hooks/useFetchContent";
 
-function ArtistPage({ artistContent, onArtistClick, onAlbumClick, onPlayButton, playTrack, pauseTrack, accessToken }) {
+function ArtistPage({ artistContent, onArtistClick, onAlbumClick, onPlayButton, playTrack, pauseTrack, userPlaylistsArr, accessToken }) {
     const idArtist = artistContent.artistId;
     const { fetchedArtistDiscographyArray, fetchedArtistTopTracksArray } = useFetchContent({ idArtist, accessToken })
 
@@ -24,6 +24,7 @@ function ArtistPage({ artistContent, onArtistClick, onAlbumClick, onPlayButton, 
                             onPlayButton={onPlayButton}
                             playTrack={playTrack}
                             pauseTrack={pauseTrack}
+                            userPlaylistsArr={userPlaylistsArr}
                             accessToken={accessToken}/>
                     </div>
                 </div>
@@ -34,6 +35,7 @@ function ArtistPage({ artistContent, onArtistClick, onAlbumClick, onPlayButton, 
                             onArtistClick={onArtistClick}
                             onAlbumClick={onAlbumClick} 
                             onPlayButton={onPlayButton}
+                            userPlaylistsArr={userPlaylistsArr}
                             accessToken={accessToken}/>
                     </div>
                 </div> 

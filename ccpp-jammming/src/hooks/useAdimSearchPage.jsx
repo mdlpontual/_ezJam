@@ -18,12 +18,11 @@ const debounce = (func, delay) => {
     };
 };
 
-function useAdimSearchPage(search, updateUri, playTrack, pauseTrack, accessToken) {
+function useAdimSearchPage(search, updateUri, playTrack, pauseTrack, userPlaylistsArr, accessToken) {
     const [activePage, setActivePage] = useState(emptyPage);
     const [history, setHistory] = useState([emptyPage]);
     const [currentHistoryIndex, setCurrentHistoryIndex] = useState(0);
     const [isHistoryUpdateNeeded, setIsHistoryUpdateNeeded] = useState(false);
-
     const { searchArtistResults, searchAlbumResults, searchTrackResults } = useFetchId({ search, accessToken });
 
     // Memoize the fetched results so they don't change unless the search query changes
@@ -59,6 +58,7 @@ function useAdimSearchPage(search, updateUri, playTrack, pauseTrack, accessToken
                     onPlayButton={updateUri}
                     playTrack={playTrack}
                     pauseTrack={pauseTrack}
+                    userPlaylistsArr={userPlaylistsArr}
                     accessToken={accessToken}
                 />
             );
@@ -90,7 +90,7 @@ function useAdimSearchPage(search, updateUri, playTrack, pauseTrack, accessToken
     //----------------------------------------------------------------------------------------------------------------------------------------------
     //----------------------------------------------------------------------------------------------------------------------------------------------
 
-    const handleArtistClick = useCallback((artistContent, onArtistClick, onAlbumClick, onPlayButton, accessToken) => {
+    const handleArtistClick = useCallback((artistContent, onArtistClick, onAlbumClick, onPlayButton, userPlaylistsArr, accessToken) => {
         const newPage = (
             <ArtistPage 
                 artistContent={artistContent} 
@@ -99,6 +99,7 @@ function useAdimSearchPage(search, updateUri, playTrack, pauseTrack, accessToken
                 onPlayButton={onPlayButton}
                 playTrack={playTrack}
                 pauseTrack={pauseTrack}
+                userPlaylistsArr={userPlaylistsArr}
                 accessToken={accessToken}/>
         );
         setActivePage(newPage);
@@ -107,7 +108,7 @@ function useAdimSearchPage(search, updateUri, playTrack, pauseTrack, accessToken
 
     //--------------------------------------------------------------
 
-    const handleAlbumClick = useCallback((albumContent, onArtistClick, onAlbumClick, onPlayButton, accessToken) => {
+    const handleAlbumClick = useCallback((albumContent, onArtistClick, onAlbumClick, onPlayButton, userPlaylistsArr, accessToken) => {
         const newPage = (
             <AlbumPage 
                 albumContent={albumContent} 
@@ -116,6 +117,7 @@ function useAdimSearchPage(search, updateUri, playTrack, pauseTrack, accessToken
                 onPlayButton={onPlayButton}
                 playTrack={playTrack}
                 pauseTrack={pauseTrack}
+                userPlaylistsArr={userPlaylistsArr}
                 accessToken={accessToken}/>
         );
         setActivePage(newPage);

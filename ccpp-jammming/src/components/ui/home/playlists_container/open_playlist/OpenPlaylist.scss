@@ -213,6 +213,13 @@
     }
 }
 
+#empty-pl-container{
+    //border: $border-cyan-solid;
+    @include box-reset-default;
+
+
+}
+
 .no-text-select {
     user-select: none;
 }
