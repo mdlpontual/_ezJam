@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import axios from "axios";
 
 // Default track structure
 const defaultTrack = {
@@ -7,14 +8,44 @@ const defaultTrack = {
     artists: [{ name: "" }],
 };
 
-function usePlayerControls({ uriTrack, uriQueue, customUriQueue }) {
+function usePlayerControls({ uriTrack, uriQueue, customUriQueue, accessToken }) {
     const [isPaused, setIsPaused] = useState(true);
     const [isActive, setIsActive] = useState(false);
-    const [currentTrack, setCurrentTrack] = useState(defaultTrack);
+    const [currentTrack, setCurrentTrack] = useState({});
+    const [fetchedTrackPosition, setFetchedTrackPosition] = useState(0);
     const [trackPosition, setTrackPosition] = useState(0);
     const playerInstanceRef = useRef(null);
     const previousUriTrackRef = useRef(uriTrack);
     const previousUriQueueRef = useRef(customUriQueue); 
+    const currentQueueIndex = customUriQueue ? customUriQueue.findIndex(queueTrackUri => queueTrackUri === currentTrack.uri) : 0;
+
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    useEffect(() => {
+        const fetchCurrentTrackPosition = async () => {
+            if (!customUriQueue || !accessToken) return;
+    
+            try {
+                const res = await axios.get(`https://api.spotify.com/v1/me/player/currently-playing`, {
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`,
+                    },
+                });
+                // Update trackPosition based on fetched value if customUriQueue changes
+                setTrackPosition(res.data.progress_ms);
+            } catch (error) {
+                console.error("Error fetching playlist content:", error);
+            }
+        };
+
+        fetchCurrentTrackPosition();
+    }, [customUriQueue, accessToken]); // customUriQueue triggers fetching position
+    
+
+    console.log(isActive)
+    console.log(trackPosition)
+
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     useEffect(() => {
         const loadSpotifyPlayer = () => {
@@ -48,8 +79,11 @@ function usePlayerControls({ uriTrack, uriQueue, customUriQueue }) {
                             if (!state) return;
                             setCurrentTrack(state.track_window.current_track);
                             setIsPaused(state.paused);
-                            setTrackPosition(state.position);
                             setIsActive(true);
+
+                            /* if (trackPosition === null) {
+                                setTrackPosition(state.position);
+                            }  */
                         });
 
                         player.connect();
@@ -99,28 +133,33 @@ function usePlayerControls({ uriTrack, uriQueue, customUriQueue }) {
         }
     }, [uriTrack, uriQueue]);
 
-    // New effect to update the uriQueue without triggering playback
     useEffect(() => {
         const player = playerInstanceRef.current;
-        if (isActive && player && customUriQueue && customUriQueue !== previousUriQueueRef.current) {
+    
+        // Only proceed if `isActive`, `trackPosition` has a valid value, and other conditions are met
+        if (isActive && player && customUriQueue && customUriQueue !== previousUriQueueRef.current && trackPosition !== null) {
             player._options.getOAuthToken(access_token => {
                 fetch(`https://api.spotify.com/v1/me/player/play`, {
                     method: 'PUT',
-                    body: JSON.stringify({ uris: uriQueue }),
                     headers: {
                         'Content-Type': 'application/json',
                         Authorization: `Bearer ${access_token}`,
                     },
+                    body: JSON.stringify({
+                        uris: customUriQueue,
+                        offset: { position: currentQueueIndex },
+                        position_ms: trackPosition,
+                    }), 
                 }).then(() => {
-                    // Start a series of intervals to pause playback
-                    const interval1 = setTimeout(() => pauseTrack(), 50);
-                    const interval2 = setTimeout(() => pauseTrack(), 100);
-                    const interval3 = setTimeout(() => pauseTrack(), 200);
-                    const interval4 = setTimeout(() => pauseTrack(), 300);
-                    const interval5 = setTimeout(() => pauseTrack(), 500);
-                    const interval6 = setTimeout(() => pauseTrack(), 1000);
+                    if (isPaused) {
+                        const interval1 = setTimeout(() => pauseTrack(), 50);
+                        const interval2 = setTimeout(() => pauseTrack(), 100);
+                        const interval3 = setTimeout(() => pauseTrack(), 200);
+                        const interval4 = setTimeout(() => pauseTrack(), 300);
+                        const interval5 = setTimeout(() => pauseTrack(), 500);
+                        const interval6 = setTimeout(() => pauseTrack(), 1000);
+                    }
     
-                    // Cleanup intervals once the effect runs or component unmounts
                     return () => {
                         clearTimeout(interval1);
                         clearTimeout(interval2);
@@ -132,7 +171,7 @@ function usePlayerControls({ uriTrack, uriQueue, customUriQueue }) {
                 });
             });
         }
-    }, [customUriQueue]);
+    }, [customUriQueue, trackPosition]); 
 
     const playTrack = () => {
         const player = playerInstanceRef.current;

@@ -158,44 +158,45 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
         const timeoutDuration = 500;
         let timeoutId = null;
 
-        const handleTrackAddition = () => {
-            setLocalTracks((prevTracks) => {
-                const trackExists = trackToAddContent.some(trackToAdd => 
-                    prevTracks.some(prevTrack => prevTrack.trackUri === trackToAdd.trackUri)
-                );
-                if (trackExists) return prevTracks;
-
-                const updatedAddedTracks = prevTracks.concat(trackToAddContent);
-                playlistStateCache[playlistData.playlistId] = { tracks: updatedAddedTracks, isSaved: false };
-                return updatedAddedTracks;
-            });
-            setPlaylistToAddTrack({});
-            setTrackToAddContent([]);
+        const checkAndProceed = () => {
+            if (!Array.isArray(localTracks) || localTracks.length === 0 ||
+                !Array.isArray(playlistTracksArr) || playlistTracksArr.length === 0) {
+                timeoutId = setTimeout(() => proceedToAddTrack(), timeoutDuration);
+                return;
+            }
+            proceedToAddTrack();
         };
 
-        const initiateTrackAddition = () => {
-            if (trackToAddContent.length > 0 && playlistToAddTrack.playlistTitle === playlistData.playlistTitle) {
-                if (!Array.isArray(localTracks) || localTracks.length === 0 ||
-                    !Array.isArray(playlistTracksArr) || playlistTracksArr.length === 0) {
-                    timeoutId = setTimeout(() => handleTrackAddition(), timeoutDuration);
-                    return;
-                }
-                handleTrackAddition();
+        const proceedToAddTrack = () => {
+            if (playlistToAddTrack.playlistTitle === playlistData.playlistTitle) {
+                setLocalTracks((prevTracks) => {
+                    const trackExists = trackToAddContent.some(trackToAdd => 
+                        prevTracks.some(prevTrack => prevTrack.trackUri === trackToAdd.trackUri)
+                    );
+                    if (trackExists) return prevTracks;
+
+                    const updatedAddedTracks = prevTracks.concat(trackToAddContent);
+                    playlistStateCache[playlistData.playlistId] = { tracks: updatedAddedTracks, isSaved: false };
+                    return updatedAddedTracks;
+                });
+                handleTrackChange();
+                setPlaylistToAddTrack({});
+                setTrackToAddContent({});
             }
         };
 
-        initiateTrackAddition();
-
+        checkAndProceed();
         return () => {
             if (timeoutId) clearTimeout(timeoutId);
         };
-    }, [trackToAddContent, playlistToAddTrack.playlistTitle, playlistData.playlistTitle, localTracks, playlistTracksArr]);
+    }, [trackToAddContent]);
 
     useEffect(() => {
         if (isInitialized) {
             debounceStateUpdate(() => setIsSaved(playlistData.playlistId, JSON.stringify(localTracks) === JSON.stringify(playlistTracksArr)), 300);
         }
-    }, [localTracks, playlistTracksArr, isInitialized, playlistData.playlistId, setIsSaved]);
+    }, [localTracks, playlistTracksArr, isInitialized, playlistData.playlistId]);    
+    
 
     useEffect(() => {
         let timeoutDuration = playlistStateCache[playlistData.playlistId] ? 200 : 700;
