@@ -133,25 +133,22 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     const preDeleteTrack = (uriTrack, selectedTracks) => {
-        const confirmed = window.confirm("Are you sure you want to remove this track?");
-        if (confirmed) {
-            if (selectedTracks.length === 0) {
-                const updatedTracks = localTracks.filter(track => track.trackUri !== uriTrack);
-                setLocalTracks(updatedTracks);
-                const hasChangesNow = JSON.stringify(updatedTracks) !== JSON.stringify(playlistTracksArr);
-                setIsSaved(playlistData.playlistId, !hasChangesNow);
-                playlistStateCache[playlistData.playlistId] = { tracks: updatedTracks, isSaved: !hasChangesNow };
-            } else if (selectedTracks.length > 0) {
-                const updatedTracks = localTracks.filter(track => !selectedTracks.some(selectedTrack => track.trackUri === selectedTrack));
-                setLocalTracks(updatedTracks);
-                const hasChangesNow = JSON.stringify(updatedTracks) !== JSON.stringify(playlistTracksArr);
-                setIsSaved(playlistData.playlistId, !hasChangesNow);
-                playlistStateCache[playlistData.playlistId] = { tracks: updatedTracks, isSaved: !hasChangesNow };
-            }
-
-            handleTrackChange();
-            setSelectedTracks([]);
+        if (selectedTracks.length === 0) {
+            const updatedTracks = localTracks.filter(track => track.trackUri !== uriTrack);
+            setLocalTracks(updatedTracks);
+            const hasChangesNow = JSON.stringify(updatedTracks) !== JSON.stringify(playlistTracksArr);
+            setIsSaved(playlistData.playlistId, !hasChangesNow);
+            playlistStateCache[playlistData.playlistId] = { tracks: updatedTracks, isSaved: !hasChangesNow };
+        } else if (selectedTracks.length > 0) {
+            const updatedTracks = localTracks.filter(track => !selectedTracks.some(selectedTrack => track.trackUri === selectedTrack));
+            setLocalTracks(updatedTracks);
+            const hasChangesNow = JSON.stringify(updatedTracks) !== JSON.stringify(playlistTracksArr);
+            setIsSaved(playlistData.playlistId, !hasChangesNow);
+            playlistStateCache[playlistData.playlistId] = { tracks: updatedTracks, isSaved: !hasChangesNow };
         }
+
+        handleTrackChange();
+        setSelectedTracks([]);
     };
 
     useEffect(() => {
@@ -308,13 +305,138 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
                             handleUnfollowPlaylist();
                             setTimeout(() => {
                                 onBackClick();
-                            }, 500);
+                            }, 1000);
                         }}>
                             <img src={IMG.trashBinPNG} alt="delete icon" width="27px" />
                         </a>
                     </div>
                 </header>
                 <main id="open-pl-main" className="row flex-grow-1">
+                    <div id="open-pl-col" className="col d-flex flex-column">
+                        <div id="top-labels" className="row">
+                            <div id="col-num" className="col-1 d-flex justify-content-start align-items-end">#</div>
+                            <div id="col-cover" className="col-1 d-flex justify-content-start align-items-end"></div>
+                            <div id="col-title" className="col d-flex justify-content-start align-items-end">title</div>
+                            <div id="col-album" className="col-3 d-flex justify-content-start align-items-end">album</div>
+                            <div id="col-duration" className="col-1 d-flex justify-content-center align-items-end">
+                                <img src={IMG.clockPNG} alt="clock icon" height="15px" />
+                            </div>
+                            <div id="col-minus" className="col-1 d-flex justify-content-start align-items-end"></div>
+                        </div>
+                        {loading ? (
+                            <div id="tracks-list" className="row flex-grow-1">  
+                                <div className="d-flex justify-content-center align-items-center">Loading...</div>
+                            </div>
+                        ) : localTracks.length === 0 ? (
+                            <div id="tracks-list" className="row flex-grow-1">  
+                                <EmptyPlaylistPage/>
+                            </div>
+                        ) : (
+                            <div id="tracks-list" className="row flex-grow-1">  
+                                <div id="tracks-list-col" className="col">
+                                    <DndContext onDragEnd={handleDragEnd}>
+                                        <SortableContext items={localTracks.map(track => track.trackUri)} strategy={verticalListSortingStrategy}>
+                                            {localTracks.map((track, i) => (
+                                                <PlaylistTrack
+                                                    order={i}
+                                                    playlistTrack={track}
+                                                    playlistTracksArr={localTracks}
+                                                    setPlaylistTracksArr={setPlaylistTracksArr}
+                                                    onPlayButton={onPlayButton}
+                                                    onArtistClick={onArtistClick}
+                                                    onAlbumClick={onAlbumClick}
+                                                    playTrack={playTrack}
+                                                    pauseTrack={pauseTrack}
+                                                    preDeleteTrack={preDeleteTrack}
+                                                    userPlaylistsArr={userPlaylistsArr}
+                                                    accessToken={accessToken}
+                                                    key={track.trackUri}
+                                                    resetTrackSaved={resetTrackSaved}
+                                                    onTrackClick={(event) => handleTrackClick(track.trackUri, i, event)}
+                                                    isSelected={selectedTracks.includes(track.trackUri)}
+                                                    selectedTracks={selectedTracks}
+                                                />
+                                            ))}
+                                        </SortableContext>
+                                    </DndContext>
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                </main>
+                <footer id="open-pl-footer" className="row">
+                    <div id="save-button-col" className="col-5 d-flex flex-column justify-content-center align-items-center">
+                        <button id="save-button" className={`btn btn-lg ${!isSaved ? 'btn-primary' : 'btn-outline-light'}`} onClick={handleSaveChanges} disabled={isSaved}>
+                            Save to Spotify
+                        </button>
+                    </div>
+                    <div id="discard-button-col" className="col-5 d-flex flex-column justify-content-center align-items-center">
+                        <button id="discard-button" className={`btn btn-lg ${!isSaved ? 'btn-danger' : 'btn-outline-light'}`} onClick={handleDiscardChanges} disabled={isSaved}>
+                            Discard Changes
+                        </button>
+                    </div>
+                </footer>
+            </div>
+        </>
+    );
+}
+
+export default OpenPlaylist;
+
+/*
+<main id="open-pl-main" className="row flex-grow-1">
+                    <div id="open-pl-col" className="col d-flex flex-column">
+                        <div id="top-labels" className="row">
+                            <div id="col-num" className="col-1 d-flex justify-content-start align-items-end">#</div>
+                            <div id="col-cover" className="col-1 d-flex justify-content-start align-items-end"></div>
+                            <div id="col-title" className="col d-flex justify-content-start align-items-end">title</div>
+                            <div id="col-album" className="col-3 d-flex justify-content-start align-items-end">album</div>
+                            <div id="col-duration" className="col-1 d-flex justify-content-center align-items-end">
+                                <img src={IMG.clockPNG} alt="clock icon" height="15px" />
+                            </div>
+                            <div id="col-minus" className="col-1 d-flex justify-content-start align-items-end"></div>
+                        </div>
+                        {loading ? (
+                            <div className="d-flex justify-content-center align-items-center">Loading...</div>
+                        ) : localTracks.length === 0 ? (
+                            <div id="tracks-list" className="row flex-grow-1">  
+                                <EmptyPlaylistPage/>
+                            </div>
+                        ) : (
+                            <div id="tracks-list-col" className="col">
+                                <DndContext onDragEnd={handleDragEnd}>
+                                    <SortableContext items={localTracks.map(track => track.trackUri)} strategy={verticalListSortingStrategy}>
+                                        {localTracks.map((track, i) => (
+                                            <PlaylistTrack
+                                                order={i}
+                                                playlistTrack={track}
+                                                playlistTracksArr={localTracks}
+                                                setPlaylistTracksArr={setPlaylistTracksArr}
+                                                onPlayButton={onPlayButton}
+                                                onArtistClick={onArtistClick}
+                                                onAlbumClick={onAlbumClick}
+                                                playTrack={playTrack}
+                                                pauseTrack={pauseTrack}
+                                                preDeleteTrack={preDeleteTrack}
+                                                userPlaylistsArr={userPlaylistsArr}
+                                                accessToken={accessToken}
+                                                key={track.trackUri}
+                                                resetTrackSaved={resetTrackSaved}
+                                                onTrackClick={(event) => handleTrackClick(track.trackUri, i, event)}
+                                                isSelected={selectedTracks.includes(track.trackUri)}
+                                                selectedTracks={selectedTracks}
+                                            />
+                                        ))}
+                                    </SortableContext>
+                                </DndContext>
+                            </div> 
+                        )}
+                    </div>
+                </main>
+*/
+
+/*
+<main id="open-pl-main" className="row flex-grow-1">
                     <div id="open-pl-col" className="col d-flex flex-column">
                         <div id="top-labels" className="row">
                             <div id="col-num" className="col-1 d-flex justify-content-start align-items-end">#</div>
@@ -367,21 +489,4 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
                         )}
                     </div>
                 </main>
-                <footer id="open-pl-footer" className="row">
-                    <div id="save-button-col" className="col-5 d-flex flex-column justify-content-center align-items-center">
-                        <button id="save-button" className={`btn btn-lg ${!isSaved ? 'btn-primary' : 'btn-outline-light'}`} onClick={handleSaveChanges} disabled={isSaved}>
-                            Save to Spotify
-                        </button>
-                    </div>
-                    <div id="discard-button-col" className="col-5 d-flex flex-column justify-content-center align-items-center">
-                        <button id="discard-button" className={`btn btn-lg ${!isSaved ? 'btn-danger' : 'btn-outline-light'}`} onClick={handleDiscardChanges} disabled={isSaved}>
-                            Discard Changes
-                        </button>
-                    </div>
-                </footer>
-            </div>
-        </>
-    );
-}
-
-export default OpenPlaylist;
+*/

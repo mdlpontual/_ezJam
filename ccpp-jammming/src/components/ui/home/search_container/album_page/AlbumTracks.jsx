@@ -73,7 +73,7 @@ function AlbumTracks({ trackContent, fetchedAlbumTracksArray,
                         </div>
                     </div>
                     <div id="col-play" className="col-1 d-flex justify-content-center align-items-center">
-                        <a id="play-button" type="button" onClick={() => onPlayButton(uriTrack, uriQueue)}>
+                        <a id="play-button" type="button" onClick={(e) => {onPlayButton(uriTrack, uriQueue); e.stopPropagation()}}>
                             <img id="play-icon" src={IMG.play3PNG} alt="play icon" width="30px"/>
                         </a>
                     </div>
@@ -116,7 +116,7 @@ function AlbumTracks({ trackContent, fetchedAlbumTracksArray,
                         </div>
                     </div>
                     <div id="col-play" className="col-1 d-flex justify-content-center align-items-center">
-                        <a className="col-1 d-flex justify-content-center align-items-center" id="play-button" type="button" onClick={() => onPlayButton(handleTogglePlay)}>
+                        <a className="col-1 d-flex justify-content-center align-items-center" id="play-button" type="button" onClick={(e) => onPlayButton(handleTogglePlay(e))}>
                             <div className="d-flex justify-content-center align-items-center" id="play-icon">
                                 {isPaused ? <img src={IMG.play3PNGGreen} alt="play icon" width="30px" /> : <Equalizer />}
                             </div>

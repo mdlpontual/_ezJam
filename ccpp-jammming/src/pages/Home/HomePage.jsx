@@ -14,7 +14,7 @@ function HomePage({ code }) {
     const [search, setSearch] = useState("");
     const [activeTab, setActiveTab] = useState("playlists"); // State to manage active tab
 
-    const { currentTrackUri, updateCurrentTrackUri, updateCurrentTrackTitle, updateCurrentTrackArtist, updateCurrentQueueUri, updateCurrentTrackAlbum } = useTrack();
+    const { currentTrackUri, updateCurrentTrackUri, updateCurrentTrackTitle, updateCurrentTrackArtist, updateCurrentQueueUri, updateCurrentTrackAlbum, togglePausePlay } = useTrack();
     const { accessToken } = useAuth(code);
     const { uriTrack, uriQueue, customUriQueue, updateUri, updateQueue } = usePlayTrack();
     const { isPaused, isActive, currentTrack, trackPosition, playTrack, pauseTrack, previousTrack, nextTrack, seekPosition, volumeControl } = usePlayerControls({uriTrack, uriQueue, customUriQueue, accessToken});
@@ -133,6 +133,7 @@ function HomePage({ code }) {
                             onArtistClick={handleArtistClick}
                             onAlbumClick={handleAlbumClick}
                             onPlayTrack={handlePlayTrack}
+                            togglePausePlay={togglePausePlay}
                             currentTrackUri={currentTrackUri} 
                             userPlaylistsArr={userPlaylistsArr}
                             accessToken={accessToken}/>

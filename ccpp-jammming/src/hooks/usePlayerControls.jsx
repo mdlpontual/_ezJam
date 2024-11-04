@@ -12,8 +12,8 @@ function usePlayerControls({ uriTrack, uriQueue, customUriQueue, accessToken }) 
     const [isPaused, setIsPaused] = useState(true);
     const [isActive, setIsActive] = useState(false);
     const [currentTrack, setCurrentTrack] = useState({});
-    const [fetchedTrackPosition, setFetchedTrackPosition] = useState(0);
     const [trackPosition, setTrackPosition] = useState(0);
+    const [liveTrackPosition, setLiveTrackPosition] = useState(trackPosition);
     const playerInstanceRef = useRef(null);
     const previousUriTrackRef = useRef(uriTrack);
     const previousUriQueueRef = useRef(customUriQueue); 
@@ -21,29 +21,78 @@ function usePlayerControls({ uriTrack, uriQueue, customUriQueue, accessToken }) 
 
     //-----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    useEffect(() => {
+    /* useEffect(() => {
         const fetchCurrentTrackPosition = async () => {
             if (!customUriQueue || !accessToken) return;
-    
-            try {
-                const res = await axios.get(`https://api.spotify.com/v1/me/player/currently-playing`, {
-                    headers: {
-                        Authorization: `Bearer ${accessToken}`,
-                    },
-                });
-                // Update trackPosition based on fetched value if customUriQueue changes
-                setTrackPosition(res.data.progress_ms);
-            } catch (error) {
-                console.error("Error fetching playlist content:", error);
+            if (currentTrack?.uri !== previousUriTrackRef.current) {
+                setTrackPosition(0);
+                setLiveTrackPosition(0);
+                previousUriTrackRef.current = currentTrack?.uri; // Update the previous track URI
+            } else if (!isPaused) {
+                setInterval(() => {
+                    setLiveTrackPosition((prevPosition) => prevPosition + 1000); // Increment by 1 second (1000ms)
+                }, 1000); // Update every second
+            } else if (isPaused) {
+                try {
+                    const res = await axios.get(`https://api.spotify.com/v1/me/player/currently-playing`, {
+                        headers: {
+                            Authorization: `Bearer ${accessToken}`,
+                        },
+                    });
+                    // Update trackPosition based on fetched value if customUriQueue changes
+                    setTrackPosition(res.data.progress_ms);
+                    setLiveTrackPosition(res.data.progress_ms);
+                } catch (error) {
+                    console.error("Error fetching playlist content:", error);
+                }
             }
         };
 
         fetchCurrentTrackPosition();
-    }, [customUriQueue, accessToken]); // customUriQueue triggers fetching position
-    
+    }, [uriTrack, isActive, isPaused, accessToken]);  */
 
-    console.log(isActive)
-    console.log(trackPosition)
+    useEffect(() => {
+        setTrackPosition(0);
+        setLiveTrackPosition(0);
+    }, [uriTrack]);
+
+    useEffect(() => {
+        let intervalId;
+    
+        // Update live position if the track is playing and there's a current track
+        if (!isPaused && currentTrack?.uri) {
+            intervalId = setInterval(() => {
+                setLiveTrackPosition(prevPosition => prevPosition + 1000); // Increment by 1 second (1000ms)
+            }, 1000);
+        } else {
+            // When paused or when the URI changes, sync live position with track position
+            setLiveTrackPosition(trackPosition);
+        }
+    
+        // Clear interval on cleanup or when conditions change
+        return () => clearInterval(intervalId);
+    }, [isPaused, uriTrack, currentTrack?.uri, trackPosition]);
+
+    // Separate effect to sync the track position from the API when paused
+    useEffect(() => {
+        const fetchCurrentTrackPosition = async () => {
+            if (!accessToken || !isPaused) return;
+
+            try {
+                const res = await axios.get(`https://api.spotify.com/v1/me/player/currently-playing`, {
+                    headers: { Authorization: `Bearer ${accessToken}` },
+                });
+                const progressMs = res.data?.progress_ms || 0;
+
+                setTrackPosition(progressMs);
+                setLiveTrackPosition(progressMs);
+            } catch (error) {
+                console.error("Error fetching current track position:", error);
+            }
+        };
+
+        fetchCurrentTrackPosition();
+    }, [accessToken, isPaused]);
 
     //-----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -80,10 +129,6 @@ function usePlayerControls({ uriTrack, uriQueue, customUriQueue, accessToken }) 
                             setCurrentTrack(state.track_window.current_track);
                             setIsPaused(state.paused);
                             setIsActive(true);
-
-                            /* if (trackPosition === null) {
-                                setTrackPosition(state.position);
-                            }  */
                         });
 
                         player.connect();
@@ -135,7 +180,8 @@ function usePlayerControls({ uriTrack, uriQueue, customUriQueue, accessToken }) 
 
     useEffect(() => {
         const player = playerInstanceRef.current;
-    
+        console.log(trackPosition)
+        console.log(liveTrackPosition)
         // Only proceed if `isActive`, `trackPosition` has a valid value, and other conditions are met
         if (isActive && player && customUriQueue && customUriQueue !== previousUriQueueRef.current && trackPosition !== null) {
             player._options.getOAuthToken(access_token => {
@@ -148,7 +194,7 @@ function usePlayerControls({ uriTrack, uriQueue, customUriQueue, accessToken }) 
                     body: JSON.stringify({
                         uris: customUriQueue,
                         offset: { position: currentQueueIndex },
-                        position_ms: trackPosition,
+                        position_ms: liveTrackPosition,
                     }), 
                 }).then(() => {
                     if (isPaused) {
@@ -171,7 +217,7 @@ function usePlayerControls({ uriTrack, uriQueue, customUriQueue, accessToken }) 
                 });
             });
         }
-    }, [customUriQueue, trackPosition]); 
+    }, [customUriQueue]); 
 
     const playTrack = () => {
         const player = playerInstanceRef.current;
