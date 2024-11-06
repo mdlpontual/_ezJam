@@ -67,6 +67,24 @@ function TrackPlayer({
         return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
     }
 
+    // Inside the TrackPlayer component
+    useEffect(() => {
+        const handleKeyDown = (e) => {
+            if (e.code === "Space") {
+                e.preventDefault(); // Prevent scrolling
+                handleTogglePlay();
+            }
+        };
+
+        // Attach event listener
+        window.addEventListener("keydown", handleKeyDown);
+
+        // Clean up event listener
+        return () => {
+            window.removeEventListener("keydown", handleKeyDown);
+        };
+    }, [isPaused, playTrack, pauseTrack]); // Add dependencies to avoid stale state
+
     if (!isActive) {
         return (
             <div id="track-player-container" className="container-fluid d-flex justify-content-center align-items-center">

@@ -79,7 +79,7 @@ function TrackResultItem({  artistContent, albumContent, trackContent,
                     </div>
                     <div id="col-cover" className="col-1 d-flex justify-content-center align-items-center">
                         <img id="cover-img" src={trackCover} height="40px"/>
-                        <a id="play-button" type="button" onClick={() => onPlayButton(uriTrack, uriQueue)}>
+                        <a id="play-button" type="button" onClick={(e) => {onPlayButton(uriTrack, uriQueue); e.stopPropagation()}}>
                             <img id="play-icon" src={IMG.play2PNG} alt="play icon" width="20px"/>
                         </a>
                     </div>
@@ -126,7 +126,7 @@ function TrackResultItem({  artistContent, albumContent, trackContent,
                 </div>
                 <div id="col-cover" className="col-1 d-flex justify-content-center align-items-center">
                     <img id="cover-img" src={trackCover} height="40px"/>
-                    <a className="col-1 d-flex justify-content-center align-items-center" id="play-button" type="button" onClick={handleTogglePlay}>
+                    <a className="col-1 d-flex justify-content-center align-items-center" id="play-button" type="button" onClick={(e) => onPlayButton(handleTogglePlay(e))}>
                         <div className="d-flex justify-content-center align-items-center" id="play-icon">
                             {isPaused ? <img src={IMG.playPNG2Green} alt="play icon" width="22px" /> : <Equalizer />}
                         </div>

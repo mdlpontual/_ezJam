@@ -81,7 +81,7 @@ function TopTrack({ topTrack, order, onPlayButton,
                         <div id="cover-img" className="cover">
                             <img src={cover} height="40px" />
                         </div>
-                        <a id="play-button" type="button" onClick={() => onPlayButton(uriTrack, uriQueue)}>
+                        <a id="play-button" type="button" onClick={(e) => {onPlayButton(uriTrack, uriQueue); e.stopPropagation()}}>
                             <img id="play-icon" src={IMG.play2PNG} alt="play icon" width="25px"/>
                         </a>
                     </div>
@@ -127,7 +127,7 @@ function TopTrack({ topTrack, order, onPlayButton,
                     <div id="cover-img" className="cover">
                         <img src={cover} height="40px" />
                     </div>
-                    <a className="col-1 d-flex justify-content-center align-items-center" id="play-button" type="button" onClick={handleTogglePlay}>
+                    <a className="col-1 d-flex justify-content-center align-items-center" id="play-button" type="button" onClick={(e) => onPlayButton(handleTogglePlay(e))}>
                         <div className="d-flex justify-content-center align-items-center" id="play-icon">
                             {isPaused ? <img src={IMG.playPNG2Green} alt="play icon" width="25px" /> : <Equalizer />}
                         </div>

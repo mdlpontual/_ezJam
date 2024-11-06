@@ -1,8 +1,8 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import IMG from "../../../../../assets/images/ImagesHUB";
 
 function TrackVolume({ volumeControl }) {
-    const [volume, setVolume] = useState(50); // Default volume at 50%
+    const [volume, setVolume] = useState(75); // Default volume at 50%
     const debounceRef = useRef(null); // Ref to store the debounce timeout
     const prevVolumeRef = useRef(volume); // Ref to store the previous volume value before muting
 
@@ -33,6 +33,22 @@ function TrackVolume({ volumeControl }) {
     };
 
     let speakerPicture = volume > 0 ? IMG.volumePNG : IMG.mutePNG;
+
+    useEffect(() => {
+        const handleKeyDown = (e) => {
+            if (e.key.toLowerCase() === "m") {
+                handleMuteButton(); // Toggle mute/unmute on "M" key press
+            }
+        };
+    
+        // Attach the event listener
+        window.addEventListener("keydown", handleKeyDown);
+    
+        // Clean up the event listener on unmount
+        return () => {
+            window.removeEventListener("keydown", handleKeyDown);
+        };
+    }, [volume]); // Add volume as a dependency to ensure updated volume state
 
     return (
         <>
