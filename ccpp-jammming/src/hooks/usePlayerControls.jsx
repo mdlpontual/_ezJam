@@ -23,7 +23,7 @@ function usePlayerControls({ uriTrack, uriQueue, customUriQueue, togglePausePlay
 
     //-----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    /* useEffect(() => {
+    useEffect(() => {
         if (isActive === true) {
             debounceRef.current = setTimeout(() => {
                 seekPosition(0); // Call the seekPosition function after a delay
@@ -34,10 +34,9 @@ function usePlayerControls({ uriTrack, uriQueue, customUriQueue, togglePausePlay
     useEffect(() => {
         if (currentTrack?.uri !== previousUriTrackRef.current) {
             // If the current track is different from the previous one, reset the progress bar
-            setLiveTrackPosition(0); // Reset progress to 0 when the track changes
-            previousUriTrackRef.current = currentTrack?.uri; // Update the previous track URI
+            setTrackPosition(0)
         }
-    }, [currentTrack, isPaused]); */
+    }, [currentTrack, isPaused]);
 
     useEffect(() => {
         const loadSpotifyPlayer = () => {
@@ -108,8 +107,8 @@ function usePlayerControls({ uriTrack, uriQueue, customUriQueue, togglePausePlay
         if (!isPaused && currentTrack?.uri) {
             togglePausePlay(false);
             intervalId = setInterval(() => {
-                setLiveTrackPosition(prevPosition => prevPosition + 500); // Increment by 1 second (1000ms)
-            }, 500);
+                setLiveTrackPosition(prevPosition => prevPosition + 200); // Increment by 1 second (1000ms)
+            }, 200);
         } else {
             // When paused or when the URI changes, sync live position with track position
             togglePausePlay(true);
@@ -145,6 +144,7 @@ function usePlayerControls({ uriTrack, uriQueue, customUriQueue, togglePausePlay
             fetchCurrentTrackPosition();
         }
     }, [accessToken, isPaused]);
+    
 
     // Debounced progress bar change handler
     const handleProgressBarChange = (e) => {
