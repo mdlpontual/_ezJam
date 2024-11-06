@@ -13,7 +13,7 @@ const debounce = (func, delay) => {
     };
 };
 
-function PlaylistsContainer({ onPlayButton, playTrack, pauseTrack, onArtistClick, onAlbumClick, updateQueue, updateQueueByAdd, accessToken }) {
+function PlaylistsContainer({ onPlayButton, playTrack, pauseTrack, onArtistClick, onAlbumClick, updateQueue, accessToken }) {
     const [activePlaylistPage, setActivePlaylistPage] = useState(null);
     const [pageStack, setPageStack] = useState([]); // Stack to keep track of previous pages
 
@@ -33,7 +33,6 @@ function PlaylistsContainer({ onPlayButton, playTrack, pauseTrack, onArtistClick
                 playTrack={playTrack}
                 pauseTrack={pauseTrack}
                 updateQueue={updateQueue}
-                updateQueueByAdd={updateQueueByAdd}
                 onPlaylistClick={handleClickToOpenPlaylist}
                 accessToken={accessToken}
             />

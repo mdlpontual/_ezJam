@@ -21,6 +21,7 @@ function TrackPlayer({
     onPlayTrack, 
     userPlaylistsArr,
     liveTrackPosition,
+    progressBarTrackPosition,
     handleProgressBarChange,
     accessToken
 }) {
@@ -38,44 +39,6 @@ function TrackPlayer({
             onPlayTrack(currentTrack.uri); // Notify parent component of the new track
         }
     }, [currentTrack, onPlayTrack, updateCurrentTrackUri]);
-
-/*     // Sync liveTrackPosition with trackPosition when the track is played or resumed
-    useEffect(() => {
-        setLiveTrackPosition(trackPosition); // Align live position with trackPosition when updated
-    }, [trackPosition]);
-
-    // Handle counting when the track is playing
-    useEffect(() => {
-        if (!isPaused) {
-            togglePausePlay(false); // Notify that track is playing
-            clearInterval(intervalRef.current); // Clear any existing interval before starting a new one
-            intervalRef.current = setInterval(() => {
-                setLiveTrackPosition((prevPosition) => prevPosition + 1000); // Increment by 1 second (1000ms)
-            }, 1000); // Update every second
-        } else {
-            togglePausePlay(true); // Notify that track is paused
-            clearInterval(intervalRef.current); // Stop counting when paused
-        }
-
-        // Clean up the interval on unmount or when paused
-        return () => clearInterval(intervalRef.current);
-    }, [isPaused, togglePausePlay]); */
-
-/*     // Reset the progress bar when a new track starts playing
-    useEffect(() => {
-        if (currentTrack?.uri !== previousTrackUriRef.current) {
-            // If the current track is different from the previous one, reset the progress bar
-            setLiveTrackPosition(0); // Reset progress to 0 when the track changes
-            previousTrackUriRef.current = currentTrack?.uri; // Update the previous track URI
-
-            clearInterval(intervalRef.current); // Ensure the interval is reset
-            if (!isPaused) {
-                intervalRef.current = setInterval(() => {
-                    setLiveTrackPosition((prevPosition) => prevPosition + 1000); // Increment by 1 second (1000ms)
-                }, 1000); // Update every second
-            }
-        }
-    }, [currentTrack, isPaused]); */
 
     // Handle play/pause toggle
     const handleTogglePlay = () => {
@@ -103,20 +66,6 @@ function TrackPlayer({
         const seconds = ((millis % 60000) / 1000).toFixed(0);
         return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
     }
-
-/*     // Debounced progress bar change handler
-    const handleProgressBarChange = (e) => {
-        const newPosition = Number(e.target.value); // Get the new position from the input range
-        setLiveTrackPosition(newPosition); // Update local state to reflect this change visually
-
-        // Clear any existing timeout to prevent multiple API calls
-        clearTimeout(debounceRef.current);
-
-        // Set a new timeout to debounce the seekPosition API call
-        debounceRef.current = setTimeout(() => {
-            seekPosition(newPosition); // Call the seekPosition function after a delay
-        }, 300); // Debounce delay of 300ms
-    }; */
 
     if (!isActive) {
         return (

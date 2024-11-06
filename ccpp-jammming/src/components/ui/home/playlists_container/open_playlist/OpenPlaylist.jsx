@@ -177,6 +177,8 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
                     playlistStateCache[playlistData.playlistId] = { tracks: updatedAddedTracks, isSaved: false };
                     return updatedAddedTracks;
                 });
+
+                debounceStateUpdate(() => setIsSaved(playlistData.playlistId, false), 300);
                 handleTrackChange();
                 setPlaylistToAddTrack({});
                 setTrackToAddContent({});
@@ -189,12 +191,11 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
         };
     }, [trackToAddContent]);
 
-    useEffect(() => {
+    /* useEffect(() => {
         if (isInitialized) {
-            debounceStateUpdate(() => setIsSaved(playlistData.playlistId, JSON.stringify(localTracks) === JSON.stringify(playlistTracksArr)), 300);
+            debounceStateUpdate(() => setIsSaved(playlistData.playlistId, JSON.stringify(localTracks) === JSON.stringify(playlistTracksArr)), 1000);
         }
-    }, [localTracks, playlistTracksArr, isInitialized, playlistData.playlistId]);    
-
+    }, [localTracks, playlistTracksArr, isInitialized, playlistData.playlistId]);   */  
 
     useEffect(() => {
         let timeoutDuration = playlistStateCache[playlistData.playlistId] ? 200 : 700;
@@ -383,111 +384,3 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
 }
 
 export default OpenPlaylist;
-
-/*
-<main id="open-pl-main" className="row flex-grow-1">
-                    <div id="open-pl-col" className="col d-flex flex-column">
-                        <div id="top-labels" className="row">
-                            <div id="col-num" className="col-1 d-flex justify-content-start align-items-end">#</div>
-                            <div id="col-cover" className="col-1 d-flex justify-content-start align-items-end"></div>
-                            <div id="col-title" className="col d-flex justify-content-start align-items-end">title</div>
-                            <div id="col-album" className="col-3 d-flex justify-content-start align-items-end">album</div>
-                            <div id="col-duration" className="col-1 d-flex justify-content-center align-items-end">
-                                <img src={IMG.clockPNG} alt="clock icon" height="15px" />
-                            </div>
-                            <div id="col-minus" className="col-1 d-flex justify-content-start align-items-end"></div>
-                        </div>
-                        {loading ? (
-                            <div className="d-flex justify-content-center align-items-center">Loading...</div>
-                        ) : localTracks.length === 0 ? (
-                            <div id="tracks-list" className="row flex-grow-1">  
-                                <EmptyPlaylistPage/>
-                            </div>
-                        ) : (
-                            <div id="tracks-list-col" className="col">
-                                <DndContext onDragEnd={handleDragEnd}>
-                                    <SortableContext items={localTracks.map(track => track.trackUri)} strategy={verticalListSortingStrategy}>
-                                        {localTracks.map((track, i) => (
-                                            <PlaylistTrack
-                                                order={i}
-                                                playlistTrack={track}
-                                                playlistTracksArr={localTracks}
-                                                setPlaylistTracksArr={setPlaylistTracksArr}
-                                                onPlayButton={onPlayButton}
-                                                onArtistClick={onArtistClick}
-                                                onAlbumClick={onAlbumClick}
-                                                playTrack={playTrack}
-                                                pauseTrack={pauseTrack}
-                                                preDeleteTrack={preDeleteTrack}
-                                                userPlaylistsArr={userPlaylistsArr}
-                                                accessToken={accessToken}
-                                                key={track.trackUri}
-                                                resetTrackSaved={resetTrackSaved}
-                                                onTrackClick={(event) => handleTrackClick(track.trackUri, i, event)}
-                                                isSelected={selectedTracks.includes(track.trackUri)}
-                                                selectedTracks={selectedTracks}
-                                            />
-                                        ))}
-                                    </SortableContext>
-                                </DndContext>
-                            </div> 
-                        )}
-                    </div>
-                </main>
-*/
-
-/*
-<main id="open-pl-main" className="row flex-grow-1">
-                    <div id="open-pl-col" className="col d-flex flex-column">
-                        <div id="top-labels" className="row">
-                            <div id="col-num" className="col-1 d-flex justify-content-start align-items-end">#</div>
-                            <div id="col-cover" className="col-1 d-flex justify-content-start align-items-end"></div>
-                            <div id="col-title" className="col d-flex justify-content-start align-items-end">title</div>
-                            <div id="col-album" className="col-3 d-flex justify-content-start align-items-end">album</div>
-                            <div id="col-duration" className="col-1 d-flex justify-content-center align-items-end">
-                                <img src={IMG.clockPNG} alt="clock icon" height="15px" />
-                            </div>
-                            <div id="col-minus" className="col-1 d-flex justify-content-start align-items-end"></div>
-                        </div>
-                        {localTracks.length === 0 ? (
-                            <div id="tracks-list" className="row flex-grow-1">  
-                                <EmptyPlaylistPage/>
-                            </div>
-                        ) : (
-                            <div id="tracks-list" className="row flex-grow-1">   
-                                {loading ? (
-                                        <div className="d-flex justify-content-center align-items-center">Loading...</div>
-                                    ) : (                        
-                                    <div id="tracks-list-col" className="col">
-                                            <DndContext onDragEnd={handleDragEnd}>
-                                                <SortableContext items={localTracks.map(track => track.trackUri)} strategy={verticalListSortingStrategy}>
-                                                    {localTracks.map((track, i) => (
-                                                        <PlaylistTrack
-                                                            order={i}
-                                                            playlistTrack={track}
-                                                            playlistTracksArr={localTracks}
-                                                            setPlaylistTracksArr={setPlaylistTracksArr}
-                                                            onPlayButton={onPlayButton}
-                                                            onArtistClick={onArtistClick}
-                                                            onAlbumClick={onAlbumClick}
-                                                            playTrack={playTrack}
-                                                            pauseTrack={pauseTrack}
-                                                            preDeleteTrack={preDeleteTrack}
-                                                            userPlaylistsArr={userPlaylistsArr}
-                                                            accessToken={accessToken}
-                                                            key={track.trackUri}
-                                                            resetTrackSaved={resetTrackSaved}
-                                                            onTrackClick={(event) => handleTrackClick(track.trackUri, i, event)}
-                                                            isSelected={selectedTracks.includes(track.trackUri)}
-                                                            selectedTracks={selectedTracks}
-                                                        />
-                                                    ))}
-                                                </SortableContext>
-                                            </DndContext>
-                                    </div> 
-                                )}
-                            </div>
-                        )}
-                    </div>
-                </main>
-*/

@@ -32,13 +32,6 @@ function usePlayerControls({ uriTrack, uriQueue, customUriQueue, togglePausePlay
     }, [isActive]);
 
     useEffect(() => {
-        if (currentTrack?.uri !== previousUriTrackRef.current) {
-            // If the current track is different from the previous one, reset the progress bar
-            setTrackPosition(0)
-        }
-    }, [currentTrack, isPaused]);
-
-    useEffect(() => {
         const loadSpotifyPlayer = () => {
             const script = document.createElement("script");
             script.src = "https://sdk.scdn.co/spotify-player.js";
@@ -96,11 +89,6 @@ function usePlayerControls({ uriTrack, uriQueue, customUriQueue, togglePausePlay
     //-----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     useEffect(() => {
-        setTrackPosition(0);
-        setLiveTrackPosition(0);
-    }, [uriTrack]);
-
-    useEffect(() => {
         let intervalId;
     
         // Update live position if the track is playing and there's a current track
@@ -139,12 +127,13 @@ function usePlayerControls({ uriTrack, uriQueue, customUriQueue, togglePausePlay
         if (isPaused) {
             // Fetch the track position when paused
             fetchCurrentTrackPosition();
-        } else {
-            // Fetch once immediately when track resumes or starts playing
+        } else if (currentTrack?.uri !== previousUriTrackRef.current) {
             fetchCurrentTrackPosition();
+        } else {
+             // Fetch once immediately when track resumes or starts playing
+             fetchCurrentTrackPosition();
         }
-    }, [accessToken, isPaused]);
-    
+    }, [currentTrack, accessToken, isPaused]);
 
     // Debounced progress bar change handler
     const handleProgressBarChange = (e) => {
@@ -192,8 +181,6 @@ function usePlayerControls({ uriTrack, uriQueue, customUriQueue, togglePausePlay
 
     useEffect(() => {
         const player = playerInstanceRef.current;
-        console.log(trackPosition)
-        console.log(liveTrackPosition)
         // Only proceed if `isActive`, `trackPosition` has a valid value, and other conditions are met
         if (isActive && player && customUriQueue && customUriQueue !== previousUriQueueRef.current && trackPosition !== null) {
             player._options.getOAuthToken(access_token => {

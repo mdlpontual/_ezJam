@@ -17,7 +17,7 @@ function HomePage({ code }) {
     const { currentTrackUri, updateCurrentTrackUri, updateCurrentTrackTitle, updateCurrentTrackArtist, updateCurrentQueueUri, updateCurrentTrackAlbum, togglePausePlay } = useTrack();
     const { accessToken } = useAuth(code);
     const { uriTrack, uriQueue, customUriQueue, updateUri, updateQueue } = usePlayTrack();
-    const { isPaused, isActive, currentTrack, trackPosition, playTrack, pauseTrack, previousTrack, nextTrack, seekPosition, volumeControl, liveTrackPosition, handleProgressBarChange } = usePlayerControls({uriTrack, uriQueue, customUriQueue, togglePausePlay, accessToken});
+    const { isPaused, isActive, currentTrack, trackPosition, playTrack, pauseTrack, previousTrack, nextTrack, seekPosition, volumeControl, liveTrackPosition, progressBarTrackPosition, handleProgressBarChange } = usePlayerControls({uriTrack, uriQueue, customUriQueue, togglePausePlay, accessToken});
     const { userPlaylistsArr } = useUserInfo({accessToken});
     const { activePage, goBack, goForward, handleArtistClick, handleAlbumClick } = useAdimSearchPage(search, updateUri, playTrack, pauseTrack, userPlaylistsArr, accessToken);
 
@@ -137,6 +137,7 @@ function HomePage({ code }) {
                             currentTrackUri={currentTrackUri} 
                             userPlaylistsArr={userPlaylistsArr}
                             liveTrackPosition={liveTrackPosition}
+                            progressBarTrackPosition={progressBarTrackPosition}
                             handleProgressBarChange={handleProgressBarChange}
                             accessToken={accessToken}/>
                     </div>
