@@ -23,6 +23,22 @@ function usePlayerControls({ uriTrack, uriQueue, customUriQueue, togglePausePlay
 
     //-----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+    /* useEffect(() => {
+        if (isActive === true) {
+            debounceRef.current = setTimeout(() => {
+                seekPosition(0); // Call the seekPosition function after a delay
+            }, 200); // Debounce delay of 300ms
+        }
+    }, [isActive]);
+
+    useEffect(() => {
+        if (currentTrack?.uri !== previousUriTrackRef.current) {
+            // If the current track is different from the previous one, reset the progress bar
+            setLiveTrackPosition(0); // Reset progress to 0 when the track changes
+            previousUriTrackRef.current = currentTrack?.uri; // Update the previous track URI
+        }
+    }, [currentTrack, isPaused]); */
+
     useEffect(() => {
         const loadSpotifyPlayer = () => {
             const script = document.createElement("script");
@@ -104,25 +120,30 @@ function usePlayerControls({ uriTrack, uriQueue, customUriQueue, togglePausePlay
         return () => clearInterval(intervalId);
     }, [isPaused, uriTrack, currentTrack?.uri, trackPosition]);
 
-    // Separate effect to sync the track position from the API when paused
     useEffect(() => {
         const fetchCurrentTrackPosition = async () => {
-            if (!accessToken || !isPaused) return;
-
+            if (!accessToken) return;
+    
             try {
                 const res = await axios.get(`https://api.spotify.com/v1/me/player/currently-playing`, {
                     headers: { Authorization: `Bearer ${accessToken}` },
                 });
                 const progressMs = res.data?.progress_ms || 0;
-
+    
                 setTrackPosition(progressMs);
                 setLiveTrackPosition(progressMs);
             } catch (error) {
                 console.error("Error fetching current track position:", error);
             }
         };
-
-        fetchCurrentTrackPosition();
+    
+        if (isPaused) {
+            // Fetch the track position when paused
+            fetchCurrentTrackPosition();
+        } else {
+            // Fetch once immediately when track resumes or starts playing
+            fetchCurrentTrackPosition();
+        }
     }, [accessToken, isPaused]);
 
     // Debounced progress bar change handler

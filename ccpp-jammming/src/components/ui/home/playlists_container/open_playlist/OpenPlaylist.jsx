@@ -47,6 +47,7 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
             setLocalTracks(playlistTracksArr);
             setIsSaved(playlistData.playlistId, true);
         }
+        
         setIsInitialized(true);
     }, [playlistData.playlistId, playlistTracksArr, setIsSaved]);
 
@@ -193,7 +194,7 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
             debounceStateUpdate(() => setIsSaved(playlistData.playlistId, JSON.stringify(localTracks) === JSON.stringify(playlistTracksArr)), 300);
         }
     }, [localTracks, playlistTracksArr, isInitialized, playlistData.playlistId]);    
-    
+
 
     useEffect(() => {
         let timeoutDuration = playlistStateCache[playlistData.playlistId] ? 200 : 700;
