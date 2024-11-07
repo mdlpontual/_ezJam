@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import IMG from "../../../../../assets/images/ImagesHUB";
 
 function TrackVolume({ volumeControl }) {
-    const [volume, setVolume] = useState(75); // Default volume at 50%
+    const [volume, setVolume] = useState(100); // Default volume at 50%
     const debounceRef = useRef(null); // Ref to store the debounce timeout
     const prevVolumeRef = useRef(volume); // Ref to store the previous volume value before muting
 
@@ -17,7 +17,6 @@ function TrackVolume({ volumeControl }) {
             volumeControl(prevVolumeRef.current / 100); // Spotify API expects a value between 0 and 1
             setVolume(prevVolumeRef.current); // Update the local state to the previous volume
         }
-        console.log("prevVolumeValue", prevVolumeRef.current);
     };
 
     // Debounced volume change handler

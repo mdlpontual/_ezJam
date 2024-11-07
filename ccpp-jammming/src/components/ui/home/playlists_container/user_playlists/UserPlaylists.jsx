@@ -24,8 +24,6 @@ function UserPlaylists({ onPlaylistClick, onBackClick, onPlayButton, onArtistCli
         const accessToken = event.dataTransfer.getData('accessToken');
         
         updateTrackToAdd(uriTrack, idTrack, playlistData, accessToken);
-        
-        //console.log("Dropped Track IDs:", idTrack); // This should now log the full array
     };
 
     useEffect(() => {

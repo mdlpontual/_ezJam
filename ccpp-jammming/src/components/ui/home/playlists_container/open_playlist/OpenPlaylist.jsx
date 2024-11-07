@@ -12,11 +12,18 @@ import EmptyPlaylistPage from "./track/EmptyPlaylistPage";
 
 const playlistStateCache = {};
 
-function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, onAlbumClick, playTrack, pauseTrack, updateQueue, accessToken }) {
+function OpenPlaylist({ playlistData, onBackClick, 
+                        onPlayButton, onArtistClick, 
+                        onAlbumClick, playTrack, 
+                        pauseTrack, updateQueue, accessToken }) {
     const { playlistTracksArr, setPlaylistTracksArr, handleTrackChange, clearPlaylistCache } = usePlaylistInfo({ playlistData, accessToken });
     const { userPlaylistsArr, setUserPlaylistsArr, refetchPlaylists, editPlaylists } = useUserInfo({ accessToken });
-    const { handleEditPlaylist, handleSharePlaylist, handleUnfollowPlaylist, reorderTracksInPlaylist, newEditedName } = usePlaylistActions({ playlistData, editPlaylists, refetchPlaylists, setUserPlaylistsArr, accessToken });
     const { updateTrackToAdd, playlistToAddTrack, trackToAddContent, setPlaylistToAddTrack, setTrackToAddContent } = useAddTrack();
+    const { handleEditPlaylist, 
+            handleSharePlaylist, 
+            handleUnfollowPlaylist, 
+            reorderTracksInPlaylist, 
+            newEditedName } = usePlaylistActions({ playlistData, editPlaylists, refetchPlaylists, setUserPlaylistsArr, accessToken });
 
     const [localTracks, setLocalTracks] = useState([]);
     const [resetTrackSaved, setResetTrackSaved] = useState(false);
@@ -190,12 +197,6 @@ function OpenPlaylist({ playlistData, onBackClick, onPlayButton, onArtistClick, 
             if (timeoutId) clearTimeout(timeoutId);
         };
     }, [trackToAddContent]);
-
-    /* useEffect(() => {
-        if (isInitialized) {
-            debounceStateUpdate(() => setIsSaved(playlistData.playlistId, JSON.stringify(localTracks) === JSON.stringify(playlistTracksArr)), 1000);
-        }
-    }, [localTracks, playlistTracksArr, isInitialized, playlistData.playlistId]);   */  
 
     useEffect(() => {
         let timeoutDuration = playlistStateCache[playlistData.playlistId] ? 200 : 700;

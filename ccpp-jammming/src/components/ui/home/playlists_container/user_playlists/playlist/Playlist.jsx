@@ -6,9 +6,14 @@ import usePlaylistActions from "../../../../../../hooks/user_hooks/usePlaylistAc
 import Equalizer from '../../../../../../utils/Equalizer';
 import { useSave } from "../../../../../../hooks/user_hooks/SaveContext"; // Import the Save context
 
-function Playlist({ playlistData, onPlaylistClick, onBackClick, onPlayButton, onArtistClick, onAlbumClick, playTrack, pauseTrack, refetchPlaylists, editPlaylists, setUserPlaylistsArr, accessToken }) {
+function Playlist({ playlistData, onPlaylistClick, 
+                    onBackClick, onPlayButton, onArtistClick, 
+                    onAlbumClick, playTrack, pauseTrack, 
+                    refetchPlaylists, editPlaylists, 
+                    setUserPlaylistsArr, accessToken }) {
+
     const { currentQueueUri, isPaused } = useTrack(); 
-    const { playlistTracksArr, playlistStateCache } = usePlaylistInfo({ playlistData, accessToken });    
+    const { playlistTracksArr } = usePlaylistInfo({ playlistData, accessToken });    
     const { handleEditPlaylist, handleSharePlaylist, handleUnfollowPlaylist } = usePlaylistActions({ playlistData, editPlaylists, refetchPlaylists, setUserPlaylistsArr, accessToken });
 
     const uriQueue = playlistTracksArr.map(track => track.trackUri);

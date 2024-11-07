@@ -6,11 +6,6 @@ const SaveContext = createContext();
 export const SaveProvider = ({ children }) => {
     const [savedState, setSavedState] = useState({}); // Object to store saved status per playlist ID
 
-    // Function to get the saved state of a specific playlist by ID
-    /* const getIsSaved = (playlistId) => {
-        return savedState[playlistId] ?? true; // Default to true (saved) if no entry exists
-    }; */
-
     const getIsSaved = (playlistId) => savedState[playlistId] ?? true;
 
     // Function to set the saved state of a specific playlist by ID

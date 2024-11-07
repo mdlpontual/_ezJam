@@ -8,7 +8,7 @@ import DropdownAddButton from "../../../../../../../utils/DropdownAddButton";
 
 function TopTrack({ topTrack, order, onPlayButton, 
                     playTrack, pauseTrack, fetchedArtistTopTracksArray, 
-                    onTrackClick, isSelected, selectedTracks, userPlaylistsArr, accessToken }) {
+                    onTrackClick, isSelected, selectedTracks, accessToken }) {
     const { currentTrackUri, isPaused } = useTrack(); 
     const { updateTrackToAdd } = useAddTrack();
 
@@ -53,10 +53,10 @@ function TopTrack({ topTrack, order, onPlayButton,
     const handleDropDownAdd = (playlistData) => {
         if (selectedTracksIds === 0) {
             updateTrackToAdd(uriTrack, idTrack, playlistData, accessToken);
-            console.log(idTrack);
+            //console.log(idTrack);
         } else {
             updateTrackToAdd(uriTrack, selectedTracksIds, playlistData, accessToken);
-            console.log(selectedTracksIds);
+            //console.log(selectedTracksIds);
         }
 
         // Close the dropdown after selection

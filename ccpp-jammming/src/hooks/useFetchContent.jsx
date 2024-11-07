@@ -133,10 +133,6 @@ function useFetchContent({ idArtist, idAlbum, accessToken, limit = 50, offset = 
     fetchAlbumTracks();
   }, [idAlbum , accessToken]);
 
-  /* console.log("DiscographyArray", fetchedArtistDiscographyArray);
-  console.log("TopTracksArray", fetchedArtistTopTracksArray);
-  console.log("AlbumTracksArray", fetchedAlbumTracksArray); */
-
   return { fetchedArtistDiscographyArray, fetchedArtistTopTracksArray, fetchedAlbumTracksArray };
 }
 
