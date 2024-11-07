@@ -3,7 +3,13 @@ import ArtistResultsBox from "./list_components/ArtistResultsBox";
 import AlbumResultsBox from "./list_components/AlbumResultsBox";
 import TrackResultsBox from "./list_components/TrackResultsBox";
 
-function GeneralResultsPage({ searchArtistResults, searchAlbumResults, searchTrackResults, onArtistClick, onAlbumClick, onPlayButton, playTrack, pauseTrack, userPlaylistsArr, accessToken }) {
+function GeneralResultsPage({ searchArtistResults, searchAlbumResults, 
+                                searchTrackResults, onArtistClick, 
+                                onAlbumClick, onPlayButton, 
+                                playTrack, pauseTrack, 
+                                userPlaylistsArr, accessToken }) {
+
+                                    
     return (
         <>
             <div id="gen-results-container" className="container-fluid">

@@ -14,12 +14,18 @@ function HomePage({ code }) {
     const [search, setSearch] = useState("");
     const [activeTab, setActiveTab] = useState("playlists"); // State to manage active tab
 
-    const { currentTrackUri, updateCurrentTrackUri, updateCurrentTrackTitle, updateCurrentTrackArtist, updateCurrentQueueUri, updateCurrentTrackAlbum } = useTrack();
+    const { currentTrackUri, updateCurrentTrackUri, updateCurrentTrackTitle, updateCurrentTrackArtist, 
+            updateCurrentQueueUri, updateCurrentTrackAlbum, togglePausePlay } = useTrack();
     const { accessToken } = useAuth(code);
-    const { uriTrack, uriQueue, customUriQueue, updateUri, updateQueue } = usePlayTrack();
-    const { isPaused, isActive, currentTrack, trackPosition, playTrack, pauseTrack, previousTrack, nextTrack, seekPosition, volumeControl } = usePlayerControls({uriTrack, uriQueue, customUriQueue});
+    const { uriTrack, uriQueue, 
+            customUriQueue, updateUri, updateQueue } = usePlayTrack();
+    const { isPaused, isActive, currentTrack, trackPosition, liveTrackPosition, 
+            progressBarTrackPosition, playTrack, pauseTrack, previousTrack, 
+            nextTrack, seekPosition, volumeControl, handleProgressBarChange } = usePlayerControls({uriTrack, uriQueue, customUriQueue, togglePausePlay, accessToken});
     const { userPlaylistsArr } = useUserInfo({accessToken});
-    const { activePage, goBack, goForward, handleArtistClick, handleAlbumClick } = useAdimSearchPage(search, updateUri, playTrack, pauseTrack, userPlaylistsArr, accessToken);
+    const { activePage, goBack, 
+            goForward, handleArtistClick,
+             handleAlbumClick } = useAdimSearchPage(search, updateUri, playTrack, pauseTrack, userPlaylistsArr, accessToken);
 
     // Function to handle when a new track is played
     const handlePlayTrack = () => {
@@ -133,8 +139,12 @@ function HomePage({ code }) {
                             onArtistClick={handleArtistClick}
                             onAlbumClick={handleAlbumClick}
                             onPlayTrack={handlePlayTrack}
+                            togglePausePlay={togglePausePlay}
                             currentTrackUri={currentTrackUri} 
                             userPlaylistsArr={userPlaylistsArr}
+                            liveTrackPosition={liveTrackPosition}
+                            progressBarTrackPosition={progressBarTrackPosition}
+                            handleProgressBarChange={handleProgressBarChange}
                             accessToken={accessToken}/>
                     </div>
                 </footer>

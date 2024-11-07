@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import IMG from "../../../../../assets/images/ImagesHUB";
 import Playlist from "./playlist/Playlist";
 import useUserInfo from "../../../../../hooks/user_hooks/useUserInfo";
@@ -12,6 +12,8 @@ function UserPlaylists({ onPlaylistClick, onBackClick, onPlayButton, onArtistCli
     const { handleCreatePlaylist } = useCreatePlaylist({ accessToken, userId, refetchPlaylists });
     const { updateTrackToAdd } = useAddTrack();
 
+    const [loading, setLoading] = useState(true);
+
     const handleDragOver = (event) => event.preventDefault();
 
     const handleDrop = (event, playlistData) => {
@@ -22,9 +24,13 @@ function UserPlaylists({ onPlaylistClick, onBackClick, onPlayButton, onArtistCli
         const accessToken = event.dataTransfer.getData('accessToken');
         
         updateTrackToAdd(uriTrack, idTrack, playlistData, accessToken);
-        
-        //console.log("Dropped Track IDs:", idTrack); // This should now log the full array
     };
+
+    useEffect(() => {
+        const timeoutDuration = userPlaylistsArr.length > 0 ? 200 : 200;
+        const timer = setTimeout(() => setLoading(false), timeoutDuration);
+        return () => clearTimeout(timer);
+    }, [userPlaylistsArr]);
 
     return (
         <div id="playlists-container" className="container-fluid d-flex flex-column">
@@ -39,7 +45,11 @@ function UserPlaylists({ onPlaylistClick, onBackClick, onPlayButton, onArtistCli
                     </a>
                 </div>
             </header>
-            {userPlaylistsArr.length === 0 ? (
+            {loading ? (
+                <main id="pl-body-row" className="row">
+                    <div className="d-flex justify-content-center align-items-center">Loading...</div>
+                </main>
+            ) : userPlaylistsArr.length === 0 ? ( 
                 <main id="pl-body-row" className="row">
                     <EmptyPlaylistsCollection />
                 </main>

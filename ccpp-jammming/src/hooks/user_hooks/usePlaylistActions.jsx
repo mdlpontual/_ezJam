@@ -102,26 +102,6 @@ function usePlaylistActions({ playlistData, editPlaylists, refetchPlaylists, set
     };
 
     // Unfollow playlist
-    
-    /* const handleUnfollowPlaylist = async () => {
-        const confirmUnfollow = window.confirm("Are you sure you want to unfollow this playlist?");
-        if (confirmUnfollow) {
-            try {
-                await unfollowPlaylist(playlistData.playlistId);
-
-                // Remove the unfollowed playlist locally
-                setUserPlaylistsArr((prevPlaylists) =>
-                    prevPlaylists.filter((playlist) => playlist.playlistId !== playlistData.playlistId)
-                );
-
-                await refetchPlaylists();
-
-            } catch (error) {
-                console.error("Error unfollowing playlist:", error);
-            }
-        }
-    }; */
-
     const handleUnfollowPlaylist = async () => {
         const confirmUnfollow = window.confirm("Are you sure you want to unfollow this playlist?");
         if (confirmUnfollow) {

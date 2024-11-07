@@ -10,9 +10,8 @@ function PlaylistTrack({ order,
                         onPlayButton, onArtistClick, onAlbumClick, 
                         playTrack, pauseTrack, 
                         preDeleteTrack, resetTrackSaved, 
-                        onTrackClick, isSelected, 
-                        selectedTracks, userPlaylistsArr, accessToken 
-                    }) {
+                        onTrackClick, isSelected,  
+                        selectedTracks, userPlaylistsArr, accessToken }) {
     const { currentTrackUri, isPaused } = useTrack();
     const [isSaved, setIsSaved] = useState(true);  // Track whether the current track is saved
 
