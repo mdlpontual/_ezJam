@@ -33,7 +33,7 @@ function useUserInfo({ accessToken, limit = 50, offset = 0, market = 'US', pollI
         if (!accessToken) return;
 
         const now = Date.now();
-        const rateLimitInterval = 30000; // Set a 30-second minimum interval between requests
+        const rateLimitInterval = 35000; // Set a 30-second minimum interval between requests
 
         if (!forceRefetch && now - lastFetchTimestamp < rateLimitInterval) {
             console.warn("Fetch request skipped to prevent hitting rate limit.");

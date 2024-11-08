@@ -37,21 +37,61 @@
                 margin-right: 20px;
                 list-style: none;
                 flex-wrap: wrap;
-                gap: 10px;
-                button {
-                    color: white;
+                gap: 20px;
+                li {
+                    //border: $border-lime-dashed;
                     font-weight: bold;
-                    border-radius: 20px;
+                    button {
+                        color: white;
+                        font-weight: bold;
+                        border-radius: 20px;
+                        width: 150px;
+                        position: relative;
+                    }
                 }
-                a {
+                #logoff {
                     text-decoration: none;
                     color: white;
                     font-weight: bold;
                 }
-                a:hover {
+                #logoff:hover {
                     color: $secondary;
+                    background: none;
                 }
             }
         }
     }
+}
+
+.popover {
+    //border: $border-lime-dashed;
+    @include box-reset-default;
+    background-color: lightgrey;
+    width: auto !important;       
+    min-width: 1000px !important;  
+    max-width: 1250px !important;  
+    white-space: normal !important; 
+    p {
+        color: black;
+        font-size: large;
+        strong {
+            color: black;
+        }
+    }
+    h5 {
+        color: $primary;
+        font-size: larger;
+        font-weight: bold;
+    }
+    h6 {
+        font-size: larger;
+        font-weight: bolder;
+    }
+    br {
+        font-size: smaller;
+    }
+}
+.popover-header {
+    background-color: #ffffff; 
+    color: $secondary; 
 }

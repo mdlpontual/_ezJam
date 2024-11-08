@@ -2,7 +2,7 @@ import React from "react";
 import IMG from "../../../../assets/images/ImagesHUB";
 import AboutPopover from "../../../../utils/AboutPopover";
 
-function HomeHeader() {
+function HomeHeader({ logout }) {
     return (
         <>
             <header id="header-inner-container" className="container-fluid d-flex flex-column">
@@ -20,8 +20,28 @@ function HomeHeader() {
                     </figure>
                     <nav id="header-nav-col" className="col d-flex justify-content-end align-items-center">
                         <ul className="d-flex align-items-center">
-                            <li><AboutPopover content="copyright mdlpontual - 2024"/></li>
-                            <li><a href="">Logoff</a></li>
+                            <li>
+                                <div>
+                                    <AboutPopover content={`
+                                    <p>In this application, you will find a better and improved way to customize your beloved Spotify's playlists!</p>
+                                    <br>
+                                    <p>Only with ezJam will you have the ability to simultaneously view the content of your playlists while exploring Spotify's music catalog, all at the same time, side by side!</p>
+                                    <br>
+                                    <p>Focusing solely on songs, albums, and artists, you will have a more streamlined experience to create, edit, and customize your music playlists. Less distractions means better flow and more exploration!</p>
+                                    <br>
+                                    <h5>- Select one or multiple tracks at the same time;</h5>
+                                    <h5>- Drag and drop to add new songs or to change their order;</h5>
+                                    <h5>- Maintain control of your customization by saving or discarding the changes you make along the way.</h5>
+                                    <br>
+                                    <p>Enable the <strong>"ezJam Track Player"</strong> in the "Connect to a Device" section of your Spotify app to listen to your songs right here.</p>
+                                    <p>After your the work is done, you can play the playlists in your own Spotify app or even share them with a simple quick click!</p>
+                                    <br>
+                                    <p>Enjoy your jams!</p>
+                                    <hr></hr>
+                                    <h6>copyright mdlpontual - 2024</h6>`}/>
+                                </div>
+                            </li>
+                            <li id="logoff" type="button" onClick={logout} style={{ cursor: 'pointer' }}>Logoff</li>
                         </ul>
                     </nav>
                 </section>
