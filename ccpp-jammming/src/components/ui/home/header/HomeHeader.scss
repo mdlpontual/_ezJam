@@ -49,13 +49,14 @@
                         position: relative;
                     }
                 }
-                a {
+                #logoff {
                     text-decoration: none;
                     color: white;
                     font-weight: bold;
                 }
-                a:hover {
+                #logoff:hover {
                     color: $secondary;
+                    background: none;
                 }
             }
         }
@@ -73,6 +74,9 @@
     p {
         color: black;
         font-size: large;
+        strong {
+            color: black;
+        }
     }
     h5 {
         color: $primary;

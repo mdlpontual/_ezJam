@@ -63,8 +63,16 @@ function useAuth(code) {
         }, (expiresIn - 60) * 1000);
         return () => clearInterval(interval); 
     }, [refreshToken, expiresIn]); 
+    
+    // Logout function to clear tokens and redirect
+    const logout = () => {
+        setAccessToken(null);
+        setRefreshToken(null);
+        window.location = '/';
+       // window.location.href = "https://accounts.spotify.com/logout?continue=https://localhost:3000";
+    };
 
-    return { accessToken, refreshToken, expiresIn };
+    return { accessToken, refreshToken, expiresIn, logout };
 }
 
 export default useAuth;

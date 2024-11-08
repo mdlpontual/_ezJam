@@ -2,7 +2,7 @@ import React from "react";
 import IMG from "../../../../assets/images/ImagesHUB";
 import AboutPopover from "../../../../utils/AboutPopover";
 
-function HomeHeader() {
+function HomeHeader({ logout }) {
     return (
         <>
             <header id="header-inner-container" className="container-fluid d-flex flex-column">
@@ -33,14 +33,15 @@ function HomeHeader() {
                                     <h5>- Drag and drop to add new songs or to change their order;</h5>
                                     <h5>- Maintain control of your customization by saving or discarding the changes you make along the way.</h5>
                                     <br>
-                                    <p>After your customizations, you can play the playlists in your Spotify app or even share them with a simple quick click!</p>
+                                    <p>Enable the <strong>"ezJam Track Player"</strong> in the "Connect to a Device" section of your Spotify app to listen to your songs right here.</p>
+                                    <p>After your the work is done, you can play the playlists in your own Spotify app or even share them with a simple quick click!</p>
                                     <br>
                                     <p>Enjoy your jams!</p>
                                     <hr></hr>
                                     <h6>copyright mdlpontual - 2024</h6>`}/>
                                 </div>
                             </li>
-                            <li><a href="">Logoff</a></li>
+                            <li id="logoff" type="button" onClick={logout} style={{ cursor: 'pointer' }}>Logoff</li>
                         </ul>
                     </nav>
                 </section>

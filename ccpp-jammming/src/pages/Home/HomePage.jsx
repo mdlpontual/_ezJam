@@ -16,7 +16,7 @@ function HomePage({ code }) {
 
     const { currentTrackUri, updateCurrentTrackUri, updateCurrentTrackTitle, updateCurrentTrackArtist, 
             updateCurrentQueueUri, updateCurrentTrackAlbum, togglePausePlay } = useTrack();
-    const { accessToken } = useAuth(code);
+    const { accessToken, logout } = useAuth(code);
     const { uriTrack, uriQueue, 
             customUriQueue, updateUri, updateQueue } = usePlayTrack();
     const { isPaused, isActive, currentTrack, trackPosition, liveTrackPosition, 
@@ -50,7 +50,7 @@ function HomePage({ code }) {
             <div id="home-page-container" className="container-fluid d-flex flex-column">
                 <header id="header-row" className="row">
                     <div id="header-col" className="col">
-                        <HomeHeader/>
+                        <HomeHeader logout={logout}/>
                     </div>
                 </header>
                 <main id="main-row" className="row flex-grow-1">
