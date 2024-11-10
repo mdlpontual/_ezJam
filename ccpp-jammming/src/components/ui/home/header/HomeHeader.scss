@@ -37,7 +37,7 @@
                 margin-right: 20px;
                 list-style: none;
                 flex-wrap: wrap;
-                gap: 20px;
+                gap: 3px 15px;
                 li {
                     //border: $border-lime-dashed;
                     font-weight: bold;
@@ -45,18 +45,46 @@
                         color: white;
                         font-weight: bold;
                         border-radius: 20px;
-                        width: 150px;
+                        width: 100px;
+                        height: 40px;
                         position: relative;
+                        h6 {
+                            //border: $border-lime-dotted;
+                            @include box-reset-default;
+                        }
                     }
-                }
-                #logoff {
-                    text-decoration: none;
-                    color: white;
-                    font-weight: bold;
-                }
-                #logoff:hover {
-                    color: $secondary;
-                    background: none;
+                    #logoff {
+                        text-decoration: none;
+                        color: white;
+                        font-weight: bold;
+                    }
+                    #logoff:hover {
+                        color: $secondary;
+                        background: none;
+                    }
+                    #spotify-button {
+                        //border: $border-lime-dotted;
+                        @include box-reset-default;
+                        width: max-content;
+                        background-color: $bg-transparent;
+                        border: 2px solid $primary;
+                        border-radius: 25px;
+                        color: $primary;
+                        font-weight: bold;
+                        height: 40px;
+                        padding: 0px 10px 0px;
+                        img {
+                            //border: $border-lime-dotted;
+                            @include box-reset-default;
+                            height: 25px;
+                            width: 25px;
+                            margin-right: 5px;
+                        }
+                        h6 {
+                            //border: $border-lime-dotted;
+                            @include box-reset-default;
+                        }
+                    }
                 }
             }
         }
