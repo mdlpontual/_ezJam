@@ -127,6 +127,7 @@ function HomePage({ code }) {
                         <TrackPlayer 
                             isPaused={isPaused}
                             isActive={isActive}
+                            userInfo={userInfo}
                             currentTrack={currentTrack}
                             trackPosition={trackPosition}
                             playTrack={playTrack}

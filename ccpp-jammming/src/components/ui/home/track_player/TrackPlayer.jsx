@@ -4,7 +4,7 @@ import TrackDisplay from "./unit_components/TrackDisplay";
 import TrackVolume from "./unit_components/TrackVolume";
 import { useTrack } from "../../../../hooks/TrackContext"; 
 
-function TrackPlayer({ isPaused, isActive, 
+function TrackPlayer({ isPaused, isActive, userInfo,
                         currentTrack, playTrack, 
                         pauseTrack, previousTrack, 
                         nextTrack, volumeControl, 
@@ -14,6 +14,7 @@ function TrackPlayer({ isPaused, isActive,
                         handleProgressBarChange, accessToken}) {
 
     const { updateCurrentTrackUri } = useTrack(); // Access the context
+    const [isPremium, setIsPremium] = useState(true);
 
     // Update context when a new track is played
     useEffect(() => {
@@ -22,6 +23,10 @@ function TrackPlayer({ isPaused, isActive,
             onPlayTrack(currentTrack.uri); // Notify parent component of the new track
         }
     }, [currentTrack, onPlayTrack, updateCurrentTrackUri]);
+
+    useEffect(() => {
+        userInfo.product === "premium" ? setIsPremium(true) : setIsPremium(false);
+    }, [userInfo])
 
     // Handle play/pause toggle
     const handleTogglePlay = () => {
@@ -75,6 +80,61 @@ function TrackPlayer({ isPaused, isActive,
                     <div id="track-player-text" className="col d-flex flex-column justify-content-center align-items-center">
                         <h4>Enable your music player!</h4>
                         <p> Open the Spotify app, go to "Connect to a Device" and click on "ezJam Track Player" </p>
+                    </div>
+                </div>
+            </div>
+        );
+    } else if (isActive && !isPremium) {
+        return (
+            <div id="track-player-container" className="container-fluid">
+                <div id="track-player-row" className="row">
+                    <div id="col-track" className="col d-flex">
+                        <TrackDisplay 
+                            currentTrack={currentTrack} 
+                            onPlayButton={onPlayButton} 
+                            onArtistClick={onArtistClick} 
+                            onAlbumClick={onAlbumClick}
+                            userPlaylistsArr={userPlaylistsArr} 
+                            accessToken={accessToken} />
+                    </div>
+                    <div id="col-player" className="col d-flex flex-column">
+                        <div id="track-butttons-row" className="row d-flex justify-content-center align-items-center">
+                            <div id="col-play" className="col-auto d-flex justify-content-center align-items-center">
+                                <a id="togglePlay-button" type="button" onClick={handleTogglePlay} >
+                                    <img id="play-pause-white" src={isPaused ? IMG.playPNG : IMG.pausePNG} alt="play pause button" height="40px" />
+                                    <img id="play-pause-green" src={isPaused ? IMG.playGreenPNG : IMG.pauseGreenPNG} alt="play pause button" height="40px" />
+                                </a>
+                            </div>
+                        </div>
+                        <div id="progress-bar-row" className="row d-flex">
+                            <div id="col-left-time" className="col-1 d-flex justify-content-center align-items-center">
+                                <p>{millisToMinutesAndSeconds(liveTrackPosition)}</p>
+                            </div>
+                            <div id="col-bar" className="col d-flex justify-content-center align-items-center">
+                                <input
+                                    id="progress-bar-free"
+                                    type="range"
+                                    min={0}
+                                    max={currentTrack?.duration_ms || 0} // Ensure duration is valid
+                                    value={liveTrackPosition}
+                                />
+                            </div>
+                            <div id="col-right-time" className="col-1 d-flex justify-content-center align-items-center">
+                                <p>{millisToMinutesAndSeconds(currentTrack.duration_ms)}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="col-volume" className="col justify-content-end align-items-center">
+                        <div id="volume-bar-row" className="row d-flex justify-content-end align-items-center">
+                            <a type="button" 
+                                id="spotify-button" 
+                                className="btn btn-primary btn-lg d-flex justify-content-center align-items-center"
+                                href="https://www.spotify.com/br-pt/premium/"
+                                target="_blank" rel="noopener noreferrer">
+                                    <img src={IMG.spotifyIcon} height="35px" width="35px"/>
+                                    <h6>Get Spotify Premium</h6>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
