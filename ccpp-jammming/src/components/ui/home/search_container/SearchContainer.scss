@@ -112,11 +112,16 @@
                     @include box-reset-default;
                     margin-top: 20px;
                 }
+                #sptf-logo {
+                    //border: $border-lime-dashed;
+                    @include box-reset-default;
+                    margin-top: 10px;
+                }
                 #sptf {
                     //border: $border-lime-dashed;
                     @include box-reset-default;
                     text-align: center;
-                    width: 50%;
+                    width: 75%;
                     color: white;
                     margin-top: 30px;
                 }

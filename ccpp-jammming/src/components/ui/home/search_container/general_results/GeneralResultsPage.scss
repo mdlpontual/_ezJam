@@ -9,12 +9,40 @@
             //border: $border-cyan-dashed;
             @include box-reset-default;
             padding-bottom: 25px;
-            h4 {
+            #artist-box-title {
                 //border: $border-lime-dotted;
                 @include box-reset-default;
                 border-bottom: 1px solid white;
-                height: 30px;
+                height: 40px;
                 margin-bottom: 10px;
+                position: relative;
+                h4 {
+                    //border: $border-lime-dotted;
+                    @include box-reset-default;
+                    width: fit-content;
+                }
+                #white-logo  {
+                    //border: $border-lime-dotted;
+                    @include box-reset-default;
+                    position: absolute;
+                    right: 0;
+                    visibility: visible;
+                }
+                #green-logo  {
+                    //border: $border-lime-dotted;
+                    @include box-reset-default;
+                    position: absolute;
+                    right: 0;
+                    visibility: hidden;
+                }
+            }
+            #artist-box-title:hover {
+                #white-logo  {
+                    visibility: hidden;
+                }
+                #green-logo  {
+                    visibility: visible;
+                }
             }
         }
     }  
@@ -25,31 +53,89 @@
             //border: $border-cyan-dashed;
             @include box-reset-default;
             padding-bottom: 25px;
-            h4 {
+            #album-box-title {
                 //border: $border-lime-dotted;
                 @include box-reset-default;
                 border-bottom: 1px solid white;
-                height: 30px;
+                height: 40px;
                 margin-bottom: 10px;
+                position: relative;
+                h4 {
+                    //border: $border-lime-dotted;
+                    @include box-reset-default;
+                    width: fit-content;
+                }
+                #white-logo  {
+                    //border: $border-lime-dotted;
+                    @include box-reset-default;
+                    position: absolute;
+                    right: 0;
+                    visibility: visible;
+                }
+                #green-logo  {
+                    //border: $border-lime-dotted;
+                    @include box-reset-default;
+                    position: absolute;
+                    right: 0;
+                    visibility: hidden;
+                }
+            }
+            #album-box-title:hover {
+                #white-logo  {
+                    visibility: hidden;
+                }
+                #green-logo  {
+                    visibility: visible;
+                }
             }
         }
     }
-    #gen-results-songs {
+    #gen-results-songs{
         //border: $border-yellow-dashed;
         @include box-reset-default;
         #gen-results-songs-col {
-            //border: $border-cyan-dashed;
+            //border: $border-yellow-dashed;
             @include box-reset-default;
-            padding-bottom: 25px;
-            h4 {
-                //border: $border-lime-dotted;
+            #open-tracks-results-container  {
+                //border: $border-cyan-dashed;
                 @include box-reset-default;
-                border-bottom: 1px solid white;
-                margin-bottom: 5px;
-                height: 30px;
-                margin-bottom: 10px;
+                padding-bottom: 25px;
+                #track-box-title {
+                    //border: $border-lime-dotted;
+                    @include box-reset-default;
+                    border-bottom: 1px solid white;
+                    height: 40px;
+                    margin-bottom: 10px;
+                    position: relative;
+                    h4 {
+                        //border: $border-lime-dotted;
+                        @include box-reset-default;
+                        width: fit-content;
+                    }
+                    #white-logo  {
+                        //border: $border-lime-dotted;
+                        @include box-reset-default;
+                        position: absolute;
+                        right: 0;
+                        visibility: visible;
+                    }
+                    #green-logo  {
+                        //border: $border-lime-dotted;
+                        @include box-reset-default;
+                        position: absolute;
+                        right: 0;
+                        visibility: hidden;
+                    }
+                }
+                #track-box-title:hover {
+                    #white-logo  {
+                        visibility: hidden;
+                    }
+                    #green-logo  {
+                        visibility: visible;
+                    }
+                } 
             }
-            
         }
     }
 }

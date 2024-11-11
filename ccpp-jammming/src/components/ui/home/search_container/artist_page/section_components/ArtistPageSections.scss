@@ -14,12 +14,41 @@
         #top-five-col {
             //border: $border-cyan-dashed;
             @include box-reset-default;
-            h4 {
-                //border: $border-lime-solid;
+            #popular-box-title {
+                //border: $border-lime-dotted;
                 @include box-reset-default;
-                height: 50px;
-                padding: 10px 0 0 10px;
+                height: 40px;
+                margin-bottom: 10px;
+                padding: 0px 15px 0px 10px;
+                position: relative;
+                h4 {
+                    //border: $border-lime-dotted;
+                    @include box-reset-default;
+                    width: fit-content;
+                }
+                #white-logo  {
+                    //border: $border-lime-dotted;
+                    @include box-reset-default;
+                    position: absolute;
+                    right: 0;
+                    visibility: visible;
+                }
+                #green-logo  {
+                    //border: $border-lime-dotted;
+                    @include box-reset-default;
+                    position: absolute;
+                    right: 0;
+                    visibility: hidden;
+                }
             }
+            #popular-box-title:hover {
+                #white-logo  {
+                    visibility: hidden;
+                }
+                #green-logo  {
+                    visibility: visible;
+                }
+            } 
             #songs-inner-row {
                 //border: $border-yellow-dashed;
                 @include box-reset-default;
@@ -547,13 +576,41 @@
         #discography-col {
             //border: $border-cyan-dashed;
             @include box-reset-default;
-            h4 {
-                //border: $border-lime-solid;
+            #disco-box-title {
+                //border: $border-lime-dotted;
                 @include box-reset-default;
-                height: 35px;
                 border-bottom: 1px solid white;
+                height: 40px;
                 margin-bottom: 10px;
+                position: relative;
+                h4 {
+                    //border: $border-lime-dotted;
+                    @include box-reset-default;
+                    width: fit-content;
+                }
+                #white-logo  {
+                    //border: $border-lime-dotted;
+                    @include box-reset-default;
+                    position: absolute;
+                    right: 0;
+                    visibility: visible;
+                }
+                #green-logo  {
+                    //border: $border-lime-dotted;
+                    @include box-reset-default;
+                    position: absolute;
+                    right: 0;
+                    visibility: hidden;
+                }
             }
+            #disco-box-title:hover {
+                #white-logo  {
+                    visibility: hidden;
+                }
+                #green-logo  {
+                    visibility: visible;
+                }
+            } 
             #albuns-inner-row {
                 //border: $border-yellow-dotted;
                 @include box-reset-default;

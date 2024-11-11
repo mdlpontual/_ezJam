@@ -2,12 +2,7 @@ import React, { useState, useEffect } from "react";
 import IMG from "../../../../assets/images/ImagesHUB";
 import AboutPopover from "../../../../utils/AboutPopover";
 
-function HomeHeader({ logout, userInfo }) {
-    const [isPremium, setIsPremium] = useState(true);
-    
-    useEffect(() => {
-        userInfo.product === "premium" ? setIsPremium(true) : setIsPremium(false);
-    }, [userInfo])
+function HomeHeader({ logout }) {
 
     return (
         <>
@@ -21,25 +16,14 @@ function HomeHeader({ logout, userInfo }) {
                     <nav id="header-nav-col" className="col d-flex justify-content-end align-items-center">
                         <ul className="d-flex justify-content-center align-items-center">
                             <li className="d-flex justify-content-center align-items-center">
-                                {!isPremium ? (
-                                    <a type="button" 
-                                        id="spotify-button" 
-                                        className="btn btn-primary btn-lg d-flex justify-content-center align-items-center"
-                                        href="https://www.spotify.com/br-pt/premium/"
-                                        target="_blank" rel="noopener noreferrer">
-                                            <img src={IMG.spotifyIcon}/>
-                                            <h6>Get Spotify Premium</h6>
-                                    </a>
-                                ) : (
-                                    <a type="button" 
-                                        id="spotify-button" 
-                                        className="btn btn-primary btn-lg d-flex justify-content-center align-items-center"
-                                        href="https://open.spotify.com"
-                                        target="_blank" rel="noopener noreferrer">
-                                            <img src={IMG.spotifyIcon}/>
-                                            <h6>Open Spotify</h6>
-                                    </a>
-                                )}
+                                <a type="button" 
+                                    id="spotify-button" 
+                                    className="btn btn-primary btn-lg d-flex justify-content-center align-items-center"
+                                    href="https://open.spotify.com"
+                                    target="_blank" rel="noopener noreferrer">
+                                        <img src={IMG.spotifyIcon}/>
+                                        <h6>Play on Spotify</h6>
+                                </a>
                             </li>
                             <li>
                                 <div>

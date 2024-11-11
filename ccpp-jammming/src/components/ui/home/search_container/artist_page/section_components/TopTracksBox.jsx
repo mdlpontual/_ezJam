@@ -65,7 +65,11 @@ function TopTracksBox({ fetchedArtistTopTracksArray, onPlayButton, playTrack, pa
             >
                 <div id="top-five-row" className="row">
                     <div id="top-five-col" className="col">
+                    <div id="popular-box-title" className="container-fluid d-flex justify-content-between align-items-center">
                         <h4>Popular:</h4>
+                        <img id="white-logo" type="button" src={IMG.spotifyLogoWhite} width="100px"/>
+                        <img id="green-logo" type="button" src={IMG.spotifyLogo} width="100px"/>
+                    </div>
                         {fetchedArtistTopTracksArray.map((track, i) => (
                             <TopTrack 
                                 topTrack={track} 

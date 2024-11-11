@@ -28,12 +28,47 @@
                     white-space: nowrap;
                     overflow: hidden;
                     padding-left: 10px;
-                    p {
+                    #type-sptf {
                         //border: $border-lime-dotted;
                         @include box-reset-default;
-                        text-overflow: ellipsis;
-                        overflow: hidden;
+                        height: 40px;
+                        border-bottom: 1px solid white;
+                        padding-bottom: 3px;
+                        position: relative;
+                        h5 {
+                            //border: $border-lime-dotted;
+                            @include box-reset-default;
+                            text-overflow: ellipsis;
+                            overflow: hidden;
+                            max-width: fit-content;
+                        }
+                        #white-logo  {
+                            //border: $border-lime-dotted;
+                            @include box-reset-default;
+                            position: absolute;
+                            right: 0;
+                            visibility: visible;
+                            width: 100px;
+                            padding-bottom: 2px;
+                        }
+                        #green-logo  {
+                            //border: $border-lime-dotted;
+                            @include box-reset-default;
+                            position: absolute;
+                            right: 0;
+                            visibility: hidden;
+                            width: 100px;
+                            padding-bottom: 2px;
+                        }
                     }
+                    #type-sptf:hover {
+                        #white-logo  {
+                            visibility: hidden;
+                        }
+                        #green-logo  {
+                            visibility: visible;
+                        }
+                    } 
                     h1 {
                         //border: $border-lime-dotted;
                         @include box-reset-default;
