@@ -11,11 +11,11 @@ function DiscographyBox({ fetchedArtistDiscographyArray, onArtistClick, onAlbumC
                     <div id="discography-col" className="col">
                         <div id="disco-box-title" className="container-fluid d-flex justify-content-between align-items-center">
                             <h4>Discography:</h4>
-                            <a id="white-logo" href={`https://open.spotify.com/artist/${idArtist}/discography/all`} target="_blank" rel="noopener noreferrer">
-                                <img src={IMG.spotifyLogoWhite} width="100px"/>
+                            <a id="white-logo" className="row justify-content-center align-items-center" href={`https://open.spotify.com/artist/${idArtist}/discography/all`} target="_blank" rel="noopener noreferrer">
+                                <p className="col d-flex justify-content-center align-items-center"><img src={IMG.spotifyIconWhite} width="30px"/> Open Spotify</p>
                             </a>
-                            <a id="green-logo" href={`https://open.spotify.com/artist/${idArtist}/discography/all`} target="_blank" rel="noopener noreferrer">
-                                <img src={IMG.spotifyLogo} width="100px"/>
+                            <a id="green-logo" className="row justify-content-center align-items-center" href={`https://open.spotify.com/artist/${idArtist}/discography/all`} target="_blank" rel="noopener noreferrer">
+                                <p className="col d-flex justify-content-center align-items-center"><img src={IMG.spotifyIcon} width="30px"/> Open Spotify</p>
                             </a>
                         </div>
                         <div id="albuns-inner-row" className="row">

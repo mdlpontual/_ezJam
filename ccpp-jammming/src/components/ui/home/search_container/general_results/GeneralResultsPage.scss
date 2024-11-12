@@ -24,16 +24,31 @@
                 #white-logo  {
                     //border: $border-lime-dotted;
                     @include box-reset-default;
+                    height: 100%;
+                    text-decoration: none;
                     position: absolute;
                     right: 0;
                     visibility: visible;
+                    p {
+                        //border: $border-lime-dotted;
+                        @include box-reset-default;
+                        gap: 5px;
+                    }
                 }
                 #green-logo  {
                     //border: $border-lime-dotted;
                     @include box-reset-default;
+                    height: 100%;
+                    text-decoration: none;
                     position: absolute;
                     right: 0;
                     visibility: hidden;
+                    p {
+                        //border: $border-lime-dotted;
+                        @include box-reset-default;
+                        color: $primary;
+                        gap: 5px;
+                    }
                 }
             }
             #artist-box-title:hover {
@@ -68,16 +83,31 @@
                 #white-logo  {
                     //border: $border-lime-dotted;
                     @include box-reset-default;
+                    height: 100%;
+                    text-decoration: none;
                     position: absolute;
                     right: 0;
                     visibility: visible;
+                    p {
+                        //border: $border-lime-dotted;
+                        @include box-reset-default;
+                        gap: 5px;
+                    }
                 }
                 #green-logo  {
                     //border: $border-lime-dotted;
                     @include box-reset-default;
+                    height: 100%;
+                    text-decoration: none;
                     position: absolute;
                     right: 0;
                     visibility: hidden;
+                    p {
+                        //border: $border-lime-dotted;
+                        @include box-reset-default;
+                        color: $primary;
+                        gap: 5px;
+                    }
                 }
             }
             #album-box-title:hover {
@@ -115,16 +145,31 @@
                     #white-logo  {
                         //border: $border-lime-dotted;
                         @include box-reset-default;
+                        height: 100%;
+                        text-decoration: none;
                         position: absolute;
                         right: 0;
                         visibility: visible;
+                        p {
+                            //border: $border-lime-dotted;
+                            @include box-reset-default;
+                            gap: 5px;
+                        }
                     }
                     #green-logo  {
                         //border: $border-lime-dotted;
                         @include box-reset-default;
+                        height: 100%;
+                        text-decoration: none;
                         position: absolute;
                         right: 0;
                         visibility: hidden;
+                        p {
+                            //border: $border-lime-dotted;
+                            @include box-reset-default;
+                            color: $primary;
+                            gap: 5px;
+                        }
                     }
                 }
                 #track-box-title:hover {
