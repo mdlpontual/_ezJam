@@ -133,7 +133,7 @@
                 #col-add {
                     //border: $border-lime-dotted;
                     @include box-reset-default;
-                    width: 40px;
+                    width: 25px;
                     .drag {
                         @include box-reset-default;
                         cursor: grab;
@@ -333,7 +333,7 @@
                 #col-add {
                     //border: $border-lime-dotted;
                     @include box-reset-default;
-                    width: 40px;
+                    width: 25px;
                     .drag {
                         @include box-reset-default;
                         cursor: grab;
@@ -352,7 +352,6 @@
                         //border: $border-lime-dotted;
                         @include box-reset-default;
                         position: absolute;
-                        opacity: 0.25;
                     }
                     #play-button {
                         //border: $border-lime-dotted;
@@ -546,7 +545,6 @@
                         //border: $border-lime-dotted;
                         @include box-reset-default;
                         position: absolute;
-                        opacity: 0.25;
                     }
                     #play-button {
                         //border: $border-lime-dotted;
@@ -573,7 +571,6 @@
                         //border: $border-lime-dotted;
                         @include box-reset-default;
                         position: absolute;
-                        opacity: 0.25;
                     }
                     #play-button {
                         //border: $border-lime-dotted;

@@ -75,20 +75,22 @@ function TrackResultItem({  artistContent, albumContent, trackContent,
                 <div id="songs-inner-row" className={`row ${isSelected ? 'selected-track2' : ''}`} draggable="true" onDragStart={handleDragStart} onClick={onTrackClick}>
                     <div id="col-add" className="col-1 d-flex justify-content-center align-items-center">
                         <div className="drag" draggable="false" onDragStart={handleDragStart}> 
-                            <img src={IMG.dragPNG} height="25px" />
+                            <img src={IMG.dragPNG} height="23px" />
                         </div>
                     </div>
-                    <div id="col-cover" className="col-1 d-flex justify-content-center align-items-center">
-                        <img id="cover-img" src={trackCover} height="40px"/>
+                    <div id="col-play" className="col-1 d-flex justify-content-center align-items-center">
                         <a id="play-button" type="button" onClick={(e) => {onPlayButton(uriTrack, uriQueue); e.stopPropagation()}}>
-                            <img id="play-icon" src={IMG.play2PNG} alt="play icon" width="20px"/>
+                            <img id="play-icon" src={IMG.play3PNG} alt="play icon" width="25px"/>
                         </a>
+                    </div>
+                    <div id="col-cover" className="col-1 d-flex justify-content-center align-items-center">
+                        <img id="cover-img" src={trackCover} height="40px" type="button" onClick={() => onAlbumClick(albumContent, onArtistClick, onAlbumClick, onPlayButton, userPlaylistsArr, accessToken)}/>
                     </div>
                     <div id="col-title" className="col d-flex justify-content-start align-items-center">
                         <h5>{trackContent.trackTitle}</h5>
                         <p><a id="open-artist-page" type="button" onClick={() => onArtistClick(artistContent, onArtistClick, onAlbumClick, onPlayButton, userPlaylistsArr, accessToken)}>{trackContent.trackAuthor}</a></p>
                     </div>
-                    <div id="col-album" className="col-3 d-flex justify-content-start align-items-center">
+                    <div id="col-album" className="col-2 d-flex justify-content-start align-items-center">
                         <p><a id="open-album-page" type="button" onClick={() => onAlbumClick(albumContent, onArtistClick, onAlbumClick, onPlayButton, userPlaylistsArr, accessToken)}>{trackContent.trackAlbum}</a></p>
                     </div>
                     <div id="col-duration" className="col-1 d-flex justify-content-center align-items-center">
@@ -107,19 +109,21 @@ function TrackResultItem({  artistContent, albumContent, trackContent,
                         <img src={IMG.greenDragPNG} height="25px" />
                     </div>
                 </div>
-                <div id="col-cover" className="col-1 d-flex justify-content-center align-items-center">
-                    <img id="cover-img" src={trackCover} height="40px"/>
+                <div id="col-play" className="col-1 d-flex justify-content-center align-items-center">
                     <a className="col-1 d-flex justify-content-center align-items-center" id="play-button" type="button" onClick={(e) => onPlayButton(handleTogglePlay(e))}>
                         <div className="d-flex justify-content-center align-items-center" id="play-icon">
-                            {isPaused ? <img src={IMG.playPNG2Green} alt="play icon" width="22px" /> : <Equalizer />}
+                            {isPaused ? <img src={IMG.play3PNGGreen} alt="play icon" width="25px" /> : <Equalizer />}
                         </div>
                     </a>
+                </div>
+                <div id="col-cover" className="col-1 d-flex justify-content-center align-items-center">
+                    <img id="cover-img" src={trackCover} height="40px" type="button" onClick={() => onAlbumClick(albumContent, onArtistClick, onAlbumClick, onPlayButton, userPlaylistsArr, accessToken)}/>
                 </div>
                 <div id="col-title" className="col d-flex justify-content-start align-items-center">
                     <h5>{trackContent.trackTitle}</h5>
                     <p><a id="open-artist-page" type="button" onClick={() => onArtistClick(artistContent, onArtistClick, onAlbumClick, onPlayButton, userPlaylistsArr, accessToken)}>{trackContent.trackAuthor}</a></p>
                 </div>
-                <div id="col-album" className="col-3 d-flex justify-content-start align-items-center">
+                <div id="col-album" className="col-2 d-flex justify-content-start align-items-center">
                     <p><a id="open-album-page" type="button" onClick={() => onAlbumClick(albumContent, onArtistClick, onAlbumClick, onPlayButton, userPlaylistsArr, accessToken)}>{trackContent.trackAlbum}</a></p>
                 </div>
                 <div id="col-duration" className="col-1 d-flex justify-content-center align-items-center">

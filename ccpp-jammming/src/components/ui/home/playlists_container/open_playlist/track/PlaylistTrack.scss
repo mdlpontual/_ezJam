@@ -33,7 +33,6 @@
         #col-play {
             //border: $border-cyan-dotted;
             @include box-reset-default;
-            width: 30px;
             position: relative;
             #play-button {
                 //border: $border-lime-dotted;
@@ -210,7 +209,6 @@
         #col-play {
             //border: $border-cyan-dotted;
             @include box-reset-default;
-            width: 30px;
             position: relative;
             #play-button {
                 //border: $border-lime-dotted;
