@@ -24,18 +24,76 @@
                         //border: $border-cyan-dashed;
                         @include box-reset-default;
                         padding: 5px 5px 5px 0;
-                        img {
+                        position: relative;
+                        width: 25px;
+                        #back-white {
                             //border: $border-lime-dotted;
                             @include box-reset-default;
+                            position: absolute;
+                            visibility: visible;
+                        }
+                        #back-green {
+                            //border: $border-lime-dotted;
+                            @include box-reset-default;
+                            position: absolute;
+                            visibility: hidden;
                         }
                     }
                     #go-foward {
                         //border: $border-cyan-dashed;
                         @include box-reset-default;
                         padding: 5px;
-                        img {
+                        position: relative;
+                        width: 25px;
+                        #foward-white {
                             //border: $border-lime-dotted;
                             @include box-reset-default;
+                            position: absolute;
+                            visibility: visible;
+                        }
+                        #foward-green {
+                            //border: $border-lime-dotted;
+                            @include box-reset-default;
+                            position: absolute;
+                            visibility: hidden;
+                        }
+                    }
+                    #go-back:hover {
+                        //border: $border-cyan-dashed;
+                        @include box-reset-default;
+                        padding: 5px 5px 5px 0;
+                        position: relative;
+                        width: 25px;
+                        #back-white {
+                            //border: $border-lime-dotted;
+                            @include box-reset-default;
+                            position: absolute;
+                            visibility: hidden;
+                        }
+                        #back-green {
+                            //border: $border-lime-dotted;
+                            @include box-reset-default;
+                            position: absolute;
+                            visibility: visible;
+                        }
+                    }
+                    #go-foward:hover {
+                        //border: $border-cyan-dashed;
+                        @include box-reset-default;
+                        padding: 5px;
+                        position: relative;
+                        width: 25px;
+                        #foward-white {
+                            //border: $border-lime-dotted;
+                            @include box-reset-default;
+                            position: absolute;
+                            visibility: hidden;
+                        }
+                        #foward-green {
+                            //border: $border-lime-dotted;
+                            @include box-reset-default;
+                            position: absolute;
+                            visibility: visible;
                         }
                     }
                 }

@@ -276,7 +276,7 @@ function OpenPlaylist({ playlistData, onBackClick,
                 onDragOver={handleDragOver} 
                 onDrop={(event) => handleDrop(event, playlistData)}
             >
-                <header id="open-pl-header" className="row">
+                <header id="open-pl-header" className="row justify-content-center align-items-center">
                     <div id="go-back-col" className="col-auto d-flex flex-column justify-content-center align-items-start">
                         <a id="back-to-playlists" type="button" onClick={() => onBackClick()}>
                             <img src={IMG.gobackPNG} alt="go back button" width="22px" />
@@ -290,7 +290,7 @@ function OpenPlaylist({ playlistData, onBackClick,
                             id="saved-icon" 
                             src={isSaved ? IMG.savedPNG : IMG.unsavedPNG}
                             alt="saved icon" 
-                            width="27px" 
+                            width="35px" 
                         />
                     </div>
                     <div id="edit-button-col" className="col-auto d-flex flex-column justify-content-center align-items-center">

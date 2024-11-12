@@ -48,7 +48,7 @@
         #edit-button-col {
             //border: $border-cyan-solid;
             @include box-reset-default;
-            padding-left: 10px;
+            padding: 7px;
             img {
                 //border: $border-lime-dashed;
                 @include box-reset-default;
@@ -57,7 +57,7 @@
         #share-button-col {
             //border: $border-cyan-solid;
             @include box-reset-default;
-            padding-left: 10px;
+            padding: 7px;
             img {
                 //border: $border-lime-dashed;
                 @include box-reset-default;
@@ -66,11 +66,40 @@
         #delete-button-col {
             //border: $border-cyan-solid;
             @include box-reset-default;
-            padding-left: 10px;
+            padding: 7px;
             img {
                 //border: $border-lime-dashed;
                 @include box-reset-default;
             }
+        }
+        #edit-button-col:hover {
+            //border: $border-cyan-solid;
+            @include box-reset-default;
+            background-color: $bg-transparent;
+            border: 1px solid $primary;
+            box-sizing: border-box;
+            border-radius: 25%;
+            padding: 6px;
+        }
+        #share-button-col:hover {
+            //border: $border-cyan-solid;
+            @include box-reset-default;
+            background-color: $bg-transparent;
+            background-color: $bg-transparent;
+            border: 1px solid $primary;
+            box-sizing: border-box;
+            border-radius: 25%;
+            padding: 6px;
+        }
+        #delete-button-col:hover {
+            //border: $border-cyan-solid;
+            @include box-reset-default;
+            background-color: $bg-transparent;
+            background-color: $bg-transparent;
+            border: 1px solid $primary;
+            box-sizing: border-box;
+            border-radius: 25%;
+            padding: 6px;
         }
     }
     #open-pl-main {
