@@ -117,12 +117,17 @@
                 #col-num {
                     //border: $border-cyan-dotted;
                     @include box-reset-default;
-                    width: 40px;
+                    width: 25px;
                     h6 {
                         //border: $border-lime-dotted;
                         @include box-reset-default;
                         font-weight: lighter;
                     }
+                };
+                #col-blank {
+                    //border: $border-cyan-dotted;
+                    @include box-reset-default;
+                    width: 30px;
                 };
                 #col-cover {
                     //border: $border-cyan-dotted;
@@ -146,15 +151,6 @@
                         @include box-reset-default;
                     }
                 };
-                #col-saved {
-                    //border: $border-cyan-dotted;
-                    @include box-reset-default;
-                    width: 40px;
-                    img {
-                        //border: $border-lime-dotted;
-                        @include box-reset-default;
-                    }
-                };
                 #col-album {
                     //border: $border-cyan-dotted;
                     @include box-reset-default;
@@ -167,7 +163,7 @@
                 #col-duration {
                     //border: $border-cyan-dotted;
                     @include box-reset-default;
-                    width: 55px;
+                    min-width: 50px;
                     img {
                         //border: $border-lime-dotted;
                         @include box-reset-default;
@@ -178,7 +174,7 @@
                 #col-minus {
                     //border: $border-cyan-dotted;
                     @include box-reset-default;
-                    width: 50px;
+                    width: 40px;
                     margin-right: 5px;
                 }
                 #col-num, #col-cover, #col-title, 

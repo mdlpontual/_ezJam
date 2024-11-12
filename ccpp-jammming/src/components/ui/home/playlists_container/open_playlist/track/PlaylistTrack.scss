@@ -6,17 +6,19 @@
         @include box-reset-default;
         height: 50px;
         padding-right: 10px;
+        //padding-left: 5px;
         #col-num {
             //border: $border-cyan-dotted;
             @include box-reset-default;
-            width: 40px;
+            width: 25px;
             position: relative;
-            h5 {
+            h6 {
                 //border: $border-lime-dotted;
                 @include box-reset-default;
                 text-overflow: ellipsis;
                 overflow: hidden;
                 position: absolute;
+                //left: 0;            
             }
             .drag {
                 @include box-reset-default;
@@ -31,7 +33,7 @@
         #col-play {
             //border: $border-cyan-dotted;
             @include box-reset-default;
-            width: 40px;
+            width: 30px;
             position: relative;
             #play-button {
                 //border: $border-lime-dotted;
@@ -88,18 +90,6 @@
                 margin-top: -3px;
             }
         };
-        #col-saved {
-            //border: $border-cyan-dotted;
-            @include box-reset-default;
-            white-space: nowrap;
-            width: 40px;
-            position: relative;
-            #saved-icon {
-                //border: $border-lime-dotted;
-                @include box-reset-default;
-                position: absolute;
-            }
-        };
         #col-album {
             //border: $border-cyan-dotted;
             @include box-reset-default;
@@ -122,7 +112,7 @@
             //border: $border-cyan-dotted;
             @include box-reset-default;
             white-space: nowrap;
-            width: 55px;
+            min-width: 50px;
             p {
                 //border: $border-lime-dotted;
                 @include box-reset-default;
@@ -133,7 +123,7 @@
         #col-minus {
             //border: $border-cyan-dotted;
             @include box-reset-default;
-            width: 50px;
+            width: 40px;
             padding: 3px;
             #delete-track {
                 //border: $border-lime-dotted;
@@ -156,7 +146,7 @@
         #col-minus:hover {
             //border: $border-cyan-dotted;
             @include box-reset-default;
-            width: 50px;
+            width: 40px;
             padding: 5px;
             #delete-track {
                 //border: $border-lime-dotted;
@@ -198,8 +188,15 @@
             //border: $border-cyan-dotted;
             @include box-reset-default;
             color: $primary;
-            width: 40px;
+            width: 25px;
             position: relative;
+            h6 {
+                //border: $border-lime-dotted;
+                @include box-reset-default;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                position: absolute;
+            }
             .drag {
                 @include box-reset-default;
                 position: absolute;
@@ -213,7 +210,7 @@
         #col-play {
             //border: $border-cyan-dotted;
             @include box-reset-default;
-            width: 40px;
+            width: 30px;
             position: relative;
             #play-button {
                 //border: $border-lime-dotted;
@@ -310,7 +307,7 @@
             @include box-reset-default;
             color: $primary;
             white-space: nowrap;
-            width: 55px;
+            min-width: 50px;
             p {
                 //border: $border-lime-dotted;
                 @include box-reset-default;
@@ -322,7 +319,7 @@
         #col-minus {
             //border: $border-cyan-dotted;
             @include box-reset-default;
-            width: 50px;
+            width: 40px;
             padding: 3px;
             #delete-track {
                 //border: $border-lime-dotted;
@@ -345,7 +342,7 @@
         #col-minus:hover {
             //border: $border-cyan-dotted;
             @include box-reset-default;
-            width: 50px;
+            width: 40px;
             padding: 5px;
             #delete-track {
                 //border: $border-lime-dotted;
@@ -380,9 +377,9 @@
         #col-num {
             //border: $border-cyan-dotted;
             @include box-reset-default;
-            width: 40px;
+            width: 25px;
             position: relative;
-            h5 {
+            h6 {
                 //border: $border-lime-dotted;
                 @include box-reset-default;
                 text-overflow: ellipsis;
@@ -436,9 +433,9 @@
         #col-num {
             //border: $border-cyan-dotted;
             @include box-reset-default;
-            width: 40px;
+            width: 25px;
             position: relative;
-            h5 {
+            h6 {
                 //border: $border-lime-dotted;
                 @include box-reset-default;
                 text-overflow: ellipsis;
