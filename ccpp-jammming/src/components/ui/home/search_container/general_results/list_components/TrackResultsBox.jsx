@@ -6,7 +6,7 @@ import IMG from "../../../../../../assets/images/ImagesHUB";
 function TrackResultsBox({ searchArtistResults, searchAlbumResults, 
                             searchTrackResults, onArtistClick, 
                             onAlbumClick, onPlayButton, playTrack, 
-                            pauseTrack, userPlaylistsArr, accessToken }) {
+                            pauseTrack, userPlaylistsArr, urlSearch, accessToken }) {
                                 
     const { fetchedArtistsArray, fetchedAlbumsArray, 
             fetchedTracksArray, fetchMissingArtistByName, 
@@ -83,10 +83,10 @@ function TrackResultsBox({ searchArtistResults, searchAlbumResults,
                     onMouseUp={handleMouseUp}>
                 <div id="track-box-title" className="container-fluid d-flex justify-content-between align-items-center">
                     <h4>Tracks:</h4>
-                    <a id="white-logo" href="https://open.spotify.com/intl-pt" target="_blank" rel="noopener noreferrer">
+                    <a id="white-logo" href={`https://open.spotify.com/search/${urlSearch}`} target="_blank" rel="noopener noreferrer">
                         <img src={IMG.spotifyLogoWhite} width="100px"/>
                     </a>
-                    <a id="green-logo" href="https://open.spotify.com/intl-pt" target="_blank" rel="noopener noreferrer">
+                    <a id="green-logo" href={`https://open.spotify.com/search/${urlSearch}`} target="_blank" rel="noopener noreferrer">
                         <img src={IMG.spotifyLogo} width="100px"/>
                     </a>
                 </div>

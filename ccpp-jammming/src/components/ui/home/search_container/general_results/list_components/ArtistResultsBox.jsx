@@ -3,17 +3,17 @@ import ArtistResultItem from "./unit_components/ArtistResultItem";
 import useFetchSearchResults from "../../../../../../hooks/useFetchSearchResults";
 import IMG from "../../../../../../assets/images/ImagesHUB";
 
-function ArtistResultsBox({ searchArtistResults, onArtistClick, onAlbumClick, onPlayButton, userPlaylistsArr, accessToken }) {
+function ArtistResultsBox({ searchArtistResults, onArtistClick, onAlbumClick, onPlayButton, userPlaylistsArr, urlSearch, accessToken }) {
     const { fetchedArtistsArray } = useFetchSearchResults({ searchArtistResults, accessToken })
 
     return (
         <>
             <div id="artist-box-title" className="container-fluid d-flex justify-content-between align-items-center">
                 <h4>Artists:</h4>
-                <a id="white-logo" href="https://open.spotify.com/intl-pt" target="_blank" rel="noopener noreferrer">
+                <a id="white-logo" href={`https://open.spotify.com/search/${urlSearch}`} target="_blank" rel="noopener noreferrer">
                     <img src={IMG.spotifyLogoWhite} width="100px"/>
                 </a>
-                <a id="green-logo" href="https://open.spotify.com/intl-pt" target="_blank" rel="noopener noreferrer">
+                <a id="green-logo" href={`https://open.spotify.com/search/${urlSearch}`} target="_blank" rel="noopener noreferrer">
                     <img src={IMG.spotifyLogo} width="100px"/>
                 </a>
             </div>

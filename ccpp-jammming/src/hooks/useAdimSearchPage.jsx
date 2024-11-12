@@ -59,6 +59,7 @@ function useAdimSearchPage(search, updateUri, playTrack, pauseTrack, userPlaylis
                     playTrack={playTrack}
                     pauseTrack={pauseTrack}
                     userPlaylistsArr={userPlaylistsArr}
+                    search={search}
                     accessToken={accessToken}
                 />
             );

@@ -3,12 +3,10 @@ import ArtistResultsBox from "./list_components/ArtistResultsBox";
 import AlbumResultsBox from "./list_components/AlbumResultsBox";
 import TrackResultsBox from "./list_components/TrackResultsBox";
 
-function GeneralResultsPage({ searchArtistResults, searchAlbumResults, 
-                                searchTrackResults, onArtistClick, 
-                                onAlbumClick, onPlayButton, 
-                                playTrack, pauseTrack, 
-                                userPlaylistsArr, accessToken }) {
+function GeneralResultsPage({ searchArtistResults, searchAlbumResults, searchTrackResults, onArtistClick, onAlbumClick, onPlayButton, 
+                                playTrack, pauseTrack, userPlaylistsArr, search, accessToken }) {
 
+    const urlSearch = search.replace(" ", "%20");
                                     
     return (
         <>
@@ -21,6 +19,7 @@ function GeneralResultsPage({ searchArtistResults, searchAlbumResults,
                             onAlbumClick={onAlbumClick}
                             onPlayButton={onPlayButton}
                             userPlaylistsArr={userPlaylistsArr}
+                            urlSearch={urlSearch}
                             accessToken={accessToken}/>
                     </div>
                 </div>
@@ -34,6 +33,7 @@ function GeneralResultsPage({ searchArtistResults, searchAlbumResults,
                             onAlbumClick={onAlbumClick}
                             onPlayButton={onPlayButton}
                             userPlaylistsArr={userPlaylistsArr}
+                            urlSearch={urlSearch}
                             accessToken={accessToken}/>
                     </div>
                 </div>
@@ -49,6 +49,7 @@ function GeneralResultsPage({ searchArtistResults, searchAlbumResults,
                             playTrack={playTrack}
                             pauseTrack={pauseTrack}
                             userPlaylistsArr={userPlaylistsArr}
+                            urlSearch={urlSearch}
                             accessToken={accessToken}/>
                     </div>
                 </div>

@@ -6,7 +6,7 @@ import IMG from "../../../../../../assets/images/ImagesHUB";
 function AlbumResultsBox({ searchArtistResults, searchAlbumResults,
                              searchTrackResults, onArtistClick, 
                              onAlbumClick, onPlayButton, 
-                             userPlaylistsArr, accessToken }) {
+                             userPlaylistsArr, urlSearch, accessToken }) {
                                 
     const { fetchedArtistsArray, 
             fetchedAlbumsArray, 
@@ -22,10 +22,10 @@ function AlbumResultsBox({ searchArtistResults, searchAlbumResults,
         <>
             <div id="album-box-title" className="container-fluid d-flex justify-content-between align-items-center">
                 <h4>Albums:</h4>
-                <a id="white-logo" href="https://open.spotify.com/intl-pt" target="_blank" rel="noopener noreferrer">
+                <a id="white-logo" href={`https://open.spotify.com/search/${urlSearch}`} target="_blank" rel="noopener noreferrer">
                     <img src={IMG.spotifyLogoWhite} width="100px"/>
                 </a>
-                <a id="green-logo" href="https://open.spotify.com/intl-pt" target="_blank" rel="noopener noreferrer">
+                <a id="green-logo" href={`https://open.spotify.com/search/${urlSearch}`} target="_blank" rel="noopener noreferrer">
                     <img src={IMG.spotifyLogo} width="100px"/>
                 </a>
             </div>
