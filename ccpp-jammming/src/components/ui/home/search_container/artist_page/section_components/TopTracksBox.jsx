@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import IMG from "../../../../../../assets/images/ImagesHUB";
 import TopTrack from "./unit_components/TopTrack";
 
-function TopTracksBox({ fetchedArtistTopTracksArray, onPlayButton, playTrack, pauseTrack, userPlaylistsArr, accessToken}) {
+function TopTracksBox({ fetchedArtistTopTracksArray, onPlayButton, playTrack, pauseTrack, userPlaylistsArr, idArtist, accessToken}) {
     const [selectedTracks, setSelectedTracks] = useState([]);
     const [lastSelectedIndex, setLastSelectedIndex] = useState(null);
     const [isShiftSelecting, setIsShiftSelecting] = useState(false);
@@ -67,10 +67,10 @@ function TopTracksBox({ fetchedArtistTopTracksArray, onPlayButton, playTrack, pa
                     <div id="top-five-col" className="col">
                     <div id="popular-box-title" className="container-fluid d-flex justify-content-between align-items-center">
                         <h4>Popular:</h4>
-                        <a id="white-logo" href="https://open.spotify.com/intl-pt" target="_blank" rel="noopener noreferrer">
+                        <a id="white-logo" href={`https://open.spotify.com/artist/${idArtist}`} target="_blank" rel="noopener noreferrer">
                             <img src={IMG.spotifyLogoWhite} width="100px"/>
                         </a>
-                        <a id="green-logo" href="https://open.spotify.com/intl-pt" target="_blank" rel="noopener noreferrer">
+                        <a id="green-logo" href={`https://open.spotify.com/artist/${idArtist}`} target="_blank" rel="noopener noreferrer">
                             <img src={IMG.spotifyLogo} width="100px"/>
                         </a>
                     </div>

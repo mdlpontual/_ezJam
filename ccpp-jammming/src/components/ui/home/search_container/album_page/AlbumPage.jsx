@@ -75,10 +75,10 @@ function AlbumPage({ albumContent, onArtistClick, onAlbumClick, onPlayButton, pl
                             <div id="album-title-col" className="col flex-column justify-content-end align-items-start">
                                 <div id="type-sptf" className="row justify-content-between align-items-end">
                                     <h5 className="col">{albumContent.albumType}</h5>
-                                    <a id="white-logo" className="col-1" href="https://open.spotify.com/intl-pt" target="_blank" rel="noopener noreferrer">
+                                    <a id="white-logo" className="col-1" href={`https://open.spotify.com/album/${idAlbum}`}  target="_blank" rel="noopener noreferrer">
                                         <img src={IMG.spotifyLogoWhite} width="100px"/>
                                     </a>
-                                    <a id="green-logo" className="col-1" href="https://open.spotify.com/intl-pt" target="_blank" rel="noopener noreferrer">
+                                    <a id="green-logo" className="col-1" href={`https://open.spotify.com/album/${idAlbum}`}  target="_blank" rel="noopener noreferrer">
                                         <img src={IMG.spotifyLogo} width="100px"/>
                                     </a>
                                 </div>

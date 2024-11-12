@@ -25,6 +25,7 @@ function ArtistPage({ artistContent, onArtistClick, onAlbumClick, onPlayButton, 
                             playTrack={playTrack}
                             pauseTrack={pauseTrack}
                             userPlaylistsArr={userPlaylistsArr}
+                            idArtist={idArtist}
                             accessToken={accessToken}/>
                     </div>
                 </div>
@@ -36,6 +37,7 @@ function ArtistPage({ artistContent, onArtistClick, onAlbumClick, onPlayButton, 
                             onAlbumClick={onAlbumClick} 
                             onPlayButton={onPlayButton}
                             userPlaylistsArr={userPlaylistsArr}
+                            idArtist={idArtist}
                             accessToken={accessToken}/>
                     </div>
                 </div> 
