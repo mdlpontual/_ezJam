@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import IMG from "../../../../assets/images/ImagesHUB";
 import AboutPopover from "../../../../utils/AboutPopover";
 
 function HomeHeader({ logout }) {
+
     return (
         <>
             <header id="header-inner-container" className="container-fluid d-flex flex-column">
@@ -11,15 +12,19 @@ function HomeHeader({ logout }) {
                         <div id="jammming-logo" className="col">
                             <img src={IMG.jammmingLogo} alt="jammming logo" height="80px"/>
                         </div>
-                        <div id="spotify-logo" className="col d-flex">
-                            <p>with</p>
-                            <a href="https://open.spotify.com">
-                                <img src={IMG.spotifyLogo} alt="spotify logo" height="35px"/>
-                            </a>
-                        </div>
                     </figure>
                     <nav id="header-nav-col" className="col d-flex justify-content-end align-items-center">
-                        <ul className="d-flex align-items-center">
+                        <ul className="d-flex justify-content-center align-items-center">
+                            <li className="d-flex justify-content-center align-items-center">
+                                <a type="button" 
+                                    id="spotify-button" 
+                                    className="btn btn-primary btn-lg d-flex justify-content-center align-items-center"
+                                    href="https://open.spotify.com"
+                                    target="_blank" rel="noopener noreferrer">
+                                        <img src={IMG.spotifyIcon}/>
+                                        <h6>Play on Spotify</h6>
+                                </a>
+                            </li>
                             <li>
                                 <div>
                                     <AboutPopover content={`

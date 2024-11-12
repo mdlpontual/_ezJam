@@ -1,6 +1,8 @@
 const IMG = {
     jammmingLogo: new URL('./branding/00_jammming-logo.png', import.meta.url).href,  
     spotifyLogo: new URL('./branding/00_spotify-logo.png', import.meta.url).href,  
+    spotifyLogoWhite: new URL('./branding/Spotify_Full_Logo_RGB_White.png', import.meta.url).href,  
+    spotifyIcon: new URL('./branding/00_spotify-icon.png', import.meta.url).href, 
 
     plusPNG: new URL('./symbols/02_plus-symbol.png', import.meta.url).href,
     plusGreenPNG: new URL('./symbols/02_plus-symbol-green.png', import.meta.url).href,

@@ -24,14 +24,20 @@
             }
             #spotify-logo{
                 //border: $border-lime-dotted;
+                //background-color: black;
                 margin-right: 50px;
                 position: relative;
-                top: -55px;
-                right: 15px;
+                top: -25px;
+                right: -40px;
+                img {
+                    //border: $border-cyan-solid;
+                    @include box-reset-default;
+                    margin: 10px;
+                }
                 #with-text{
                     //border: $border-lime-dotted;
                     position: relative;
-                    top: 30px;
+                    top: 35px;
                 }
             }
         }
@@ -44,38 +50,49 @@
     #button-row{
         //border: $border-yellow-solid;
         @include box-reset-default;
-        height: 100px;
+        height: 175px;
         #button-col{
             //border: $border-cyan-solid;
             @include box-reset-default;
             height: 100%;
+            position: relative;
             #login-button {
                 //border: $border-lime-dotted;
                 @include box-reset-default;
-                width: 425px;
+                width: 400px;
                 border-radius: 25px;
-                height: 50px;
-                color: white;
+                min-height: 50px;
+                color: black;
+                font-weight: bold;
+                position: absolute;
             }
-        }
-    }
-    #sub-link-row{
-        //border: $border-yellow-solid;
-        @include box-reset-default;
-        height: 50px;
-        #sub-link-col{
-            //border: $border-cyan-solid;
-            @include box-reset-default;
-            p {
+            #or-text {
+                //border: $border-lime-dotted;
+                @include box-reset-default;
+                position: absolute;
+                bottom: 95px;
+            }
+            #subscribe-button {
+                //border: $border-lime-dotted;
+                @include box-reset-default;
+                width: 250px;
+                padding: 0px 25px 0px;
+                background-color: $bg-transparent;
+                border: 2px solid $primary;
+                border-radius: 25px;
+                min-height: 50px;
+                max-height: 50px;
                 color: $primary;
                 font-weight: bold;
-            }
-            a {
-                text-decoration: none;
-            }
-            a:hover {
-                p {
-                    color: $secondary;
+                position: absolute;
+                bottom: 0;
+                margin-bottom: 35px;
+                img {
+                    //border: $border-lime-dotted;
+                    @include box-reset-default;
+                    height: 30px;
+                    width: 30px;
+                    margin-right: 5px;
                 }
             }
         }

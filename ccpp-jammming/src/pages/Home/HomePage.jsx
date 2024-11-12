@@ -22,10 +22,10 @@ function HomePage({ code }) {
     const { isPaused, isActive, currentTrack, trackPosition, liveTrackPosition, 
             progressBarTrackPosition, playTrack, pauseTrack, previousTrack, 
             nextTrack, seekPosition, volumeControl, handleProgressBarChange } = usePlayerControls({uriTrack, uriQueue, customUriQueue, togglePausePlay, accessToken});
-    const { userPlaylistsArr } = useUserInfo({accessToken});
+    const { userInfo, userPlaylistsArr } = useUserInfo({accessToken});
     const { activePage, goBack, 
             goForward, handleArtistClick,
-             handleAlbumClick } = useAdimSearchPage(search, updateUri, playTrack, pauseTrack, userPlaylistsArr, accessToken);
+            handleAlbumClick } = useAdimSearchPage(search, updateUri, playTrack, pauseTrack, userPlaylistsArr, accessToken);
 
     // Function to handle when a new track is played
     const handlePlayTrack = () => {
@@ -50,7 +50,7 @@ function HomePage({ code }) {
             <div id="home-page-container" className="container-fluid d-flex flex-column">
                 <header id="header-row" className="row">
                     <div id="header-col" className="col">
-                        <HomeHeader logout={logout}/>
+                        <HomeHeader logout={logout} userInfo={userInfo}/>
                     </div>
                 </header>
                 <main id="main-row" className="row flex-grow-1">
@@ -127,6 +127,7 @@ function HomePage({ code }) {
                         <TrackPlayer 
                             isPaused={isPaused}
                             isActive={isActive}
+                            userInfo={userInfo}
                             currentTrack={currentTrack}
                             trackPosition={trackPosition}
                             playTrack={playTrack}

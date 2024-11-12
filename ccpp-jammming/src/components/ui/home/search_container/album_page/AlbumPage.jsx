@@ -73,7 +73,15 @@ function AlbumPage({ albumContent, onArtistClick, onAlbumClick, onPlayButton, pl
                                 <img src={albumContent.albumCover} alt="album cover" height="115px"/>
                             </div>
                             <div id="album-title-col" className="col flex-column justify-content-end align-items-start">
-                                <p>{albumContent.albumType}</p>
+                                <div id="type-sptf" className="row justify-content-between align-items-end">
+                                    <h5 className="col">{albumContent.albumType}</h5>
+                                    <a id="white-logo" className="col-1" href="https://open.spotify.com/intl-pt" target="_blank" rel="noopener noreferrer">
+                                        <img src={IMG.spotifyLogoWhite} width="100px"/>
+                                    </a>
+                                    <a id="green-logo" className="col-1" href="https://open.spotify.com/intl-pt" target="_blank" rel="noopener noreferrer">
+                                        <img src={IMG.spotifyLogo} width="100px"/>
+                                    </a>
+                                </div>
                                 <h1>{albumContent.albumTitle}</h1>
                                 <h5>by {albumContent.albumAuthor}</h5>
                             </div>

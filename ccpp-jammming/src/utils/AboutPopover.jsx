@@ -30,7 +30,7 @@ function AboutPopover(props) {
                 title="<h4>Welcome to ezJam!</h4>"
                 data-bs-content={props.content}
                 onClick={(e) => e.stopPropagation()}>
-                    About
+                    <h6>About</h6>
             </button>
         </div>
     )

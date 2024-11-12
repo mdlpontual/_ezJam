@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import TrackResultItem from "./unit_components/TrackResultItem";
 import useFetchSearchResults from "../../../../../../hooks/useFetchSearchResults";
+import IMG from "../../../../../../assets/images/ImagesHUB";
 
 function TrackResultsBox({ searchArtistResults, searchAlbumResults, 
                             searchTrackResults, onArtistClick, 
@@ -77,11 +78,18 @@ function TrackResultsBox({ searchArtistResults, searchAlbumResults,
     return (
         <>
             <div id="open-tracks-results-container" 
-                className={`container-fluid d-flex flex-column ${isShiftSelecting ? 'no-text-select' : ''}`}  
-                onMouseDown={handleMouseDown} 
-                onMouseUp={handleMouseUp}
-            >
-                <h4>tracks:</h4>
+                    className={`container-fluid d-flex flex-column ${isShiftSelecting ? 'no-text-select' : ''}`}  
+                    onMouseDown={handleMouseDown} 
+                    onMouseUp={handleMouseUp}>
+                <div id="track-box-title" className="container-fluid d-flex justify-content-between align-items-center">
+                    <h4>Tracks:</h4>
+                    <a id="white-logo" href="https://open.spotify.com/intl-pt" target="_blank" rel="noopener noreferrer">
+                        <img src={IMG.spotifyLogoWhite} width="100px"/>
+                    </a>
+                    <a id="green-logo" href="https://open.spotify.com/intl-pt" target="_blank" rel="noopener noreferrer">
+                        <img src={IMG.spotifyLogo} width="100px"/>
+                    </a>
+                </div>
                 {fetchedTracksArray.filter((track, idx) => idx < 10).map(track => {
                     let matchingArtist = updatedArtistContent.find(artist => artist.artistName === track.trackAuthor);
                     let matchingAlbum = updatedAlbumContent.find(album => album.albumTitle === track.trackAlbum);

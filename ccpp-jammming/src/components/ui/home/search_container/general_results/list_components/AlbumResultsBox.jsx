@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import AlbumResultItem from "./unit_components/AlbumResultItem";
 import useFetchSearchResults from "../../../../../../hooks/useFetchSearchResults";
+import IMG from "../../../../../../assets/images/ImagesHUB";
 
 function AlbumResultsBox({ searchArtistResults, searchAlbumResults,
                              searchTrackResults, onArtistClick, 
@@ -19,7 +20,15 @@ function AlbumResultsBox({ searchArtistResults, searchAlbumResults,
 
     return (
         <>
-            <h4>albums:</h4>
+            <div id="album-box-title" className="container-fluid d-flex justify-content-between align-items-center">
+                <h4>Albums:</h4>
+                <a id="white-logo" href="https://open.spotify.com/intl-pt" target="_blank" rel="noopener noreferrer">
+                    <img src={IMG.spotifyLogoWhite} width="100px"/>
+                </a>
+                <a id="green-logo" href="https://open.spotify.com/intl-pt" target="_blank" rel="noopener noreferrer">
+                    <img src={IMG.spotifyLogo} width="100px"/>
+                </a>
+            </div>
             { fetchedAlbumsArray.filter((album, idx) => idx < 5).map(album => {
                 let matchingArtist = updatedArtistContent.find(artist => artist.artistName === album.albumAuthor);
 
