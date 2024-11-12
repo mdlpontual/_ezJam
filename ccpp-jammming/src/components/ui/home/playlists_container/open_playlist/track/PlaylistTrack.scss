@@ -28,6 +28,22 @@
                 }
             }
         };
+        #col-play {
+            //border: $border-cyan-dotted;
+            @include box-reset-default;
+            width: 40px;
+            position: relative;
+            #play-button {
+                //border: $border-lime-dotted;
+                @include box-reset-default;
+                #play-icon {
+                    //border: $border-lime-dotted;
+                    @include box-reset-default;
+                    visibility: visible;
+                    position: absolute;
+                }
+            }
+        };
         #col-cover {
             //border: $border-cyan-dotted;
             @include box-reset-default;
@@ -40,16 +56,6 @@
                     //border: $border-lime-dotted;
                     @include box-reset-default;
                     visibility: visible;
-                }
-            }
-            #play-button {
-                //border: $border-lime-dotted;
-                @include box-reset-default;
-                #play-icon {
-                    //border: $border-lime-dotted;
-                    @include box-reset-default;
-                    visibility: hidden;
-                    position: absolute;
                 }
             }
         };
@@ -204,6 +210,22 @@
                 }
             }
         };
+        #col-play {
+            //border: $border-cyan-dotted;
+            @include box-reset-default;
+            width: 40px;
+            position: relative;
+            #play-button {
+                //border: $border-lime-dotted;
+                @include box-reset-default;
+                #play-icon {
+                    //border: $border-lime-dotted;
+                    @include box-reset-default;
+                    visibility: visible;
+                    position: absolute;
+                }
+            }
+        };
         #col-cover {
             //border: $border-cyan-dotted;
             @include box-reset-default;
@@ -216,24 +238,6 @@
                     //border: $border-lime-dotted;
                     @include box-reset-default;
                     visibility: visible;
-                    opacity: 0.25;
-                }
-            }
-            #play-button {
-                //border: $border-lime-dotted;
-                @include box-reset-default;
-                position: relative;
-                #play-icon {
-                    //border: $border-lime-dotted;
-                    @include box-reset-default;
-                    visibility: visible;
-                    position: absolute;
-                }
-                #pause-icon {
-                    //border: $border-lime-dotted;
-                    @include box-reset-default;
-                    visibility: hidden;
-                    position: absolute;
                 }
             }
         };
@@ -409,7 +413,6 @@
                     //border: $border-lime-dotted;
                     @include box-reset-default;
                     visibility: visible;
-                    opacity: 0.25;
                 }
             }
             #play-button {

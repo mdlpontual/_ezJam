@@ -87,13 +87,15 @@ function PlaylistTrack({ order,
                             <img src={IMG.dragPNG} height="25px" />
                         </div>
                     </div>
+                    <div id="col-play" className="col-1 d-flex justify-content-center align-items-center">
+                        <a className="col-1 d-flex justify-content-center align-items-center" id="play-button" type="button" onClick={handleTogglePlay}>
+                            <img id="play-icon" src={IMG.play2PNG} alt="play icon" width="22px" />
+                        </a>
+                    </div>
                     <div id="col-cover" className="col-1 d-flex justify-content-center align-items-center">
                         <div className="cover">
                             <img src={cover} height="40px" />
                         </div>
-                        <a className="col-1 d-flex justify-content-center align-items-center" id="play-button" type="button" onClick={handleTogglePlay}>
-                            <img id="play-icon" src={IMG.play2PNG} alt="play icon" width="22px" />
-                        </a>
                     </div>
                     <div id="col-title" className="col d-flex justify-content-start align-items-center">
                         <h5>{playlistTrack.trackTitle}</h5>
@@ -101,7 +103,7 @@ function PlaylistTrack({ order,
                             {playlistTrack.trackAuthor}
                         </p>
                     </div>
-                    <div id="col-album" className="col-3 d-flex justify-content-start align-items-center">
+                    <div id="col-album" className="col-2 d-flex justify-content-start align-items-center">
                         <p id="open-album-page" type="button" onClick={handleAlbumClick}>
                             {playlistTrack.trackAlbum}
                         </p>
@@ -129,15 +131,17 @@ function PlaylistTrack({ order,
                         <img src={IMG.greenDragPNG} height="25px" />
                     </div>
                 </div>
-                <div id="col-cover" className="col-1 d-flex justify-content-center align-items-center">
-                    <div className="cover">
-                        <img src={cover} height="40px" />
-                    </div>
+                <div id="col-play" className="col-1 d-flex justify-content-center align-items-center">
                     <a className="col-1 d-flex justify-content-center align-items-center" id="play-button" type="button" onClick={handleTogglePlay}>
                         <div className="d-flex justify-content-center align-items-center" id="play-icon">
                             {isPaused ? <img src={IMG.playPNG2Green} alt="play icon" width="22px" /> : <Equalizer />}
                         </div>
                     </a>
+                </div>
+                <div id="col-cover" className="col-1 d-flex justify-content-center align-items-center">
+                    <div className="cover">
+                        <img src={cover} height="40px" />
+                    </div>
                 </div>
                 <div id="col-title" className="col d-flex justify-content-start align-items-center">
                     <h5>{playlistTrack.trackTitle}</h5>
@@ -145,7 +149,7 @@ function PlaylistTrack({ order,
                         {playlistTrack.trackAuthor}
                     </p>
                 </div>
-                <div id="col-album" className="col-3 d-flex justify-content-start align-items-center">
+                <div id="col-album" className="col-2 d-flex justify-content-start align-items-center">
                     <p id="open-album-page" type="button" onClick={handleAlbumClick}>
                         {playlistTrack.trackAlbum}
                     </p>

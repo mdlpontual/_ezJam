@@ -107,7 +107,7 @@ function Playlist({ playlistData, onPlaylistClick,
                     <img 
                         id="saved-icon" 
                         src={isSaved ? IMG.savedPNG : IMG.cautionPNG}  // Sync saved state from global state
-                        height="35px" 
+                        height="30px" 
                     />
                 </div>
             </div>
