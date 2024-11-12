@@ -10,8 +10,12 @@ function DiscographyBox({ fetchedArtistDiscographyArray, onArtistClick, onAlbumC
                     <div id="discography-col" className="col">
                         <div id="disco-box-title" className="container-fluid d-flex justify-content-between align-items-center">
                             <h4>Discography:</h4>
-                            <img id="white-logo" type="button" src={IMG.spotifyLogoWhite} width="100px"/>
-                            <img id="green-logo" type="button" src={IMG.spotifyLogo} width="100px"/>
+                            <a id="white-logo" href="https://mangadex.org/chapter/43929ad2-7327-4336-b69f-3ed1cfd16c77/8" target="_blank" rel="noopener noreferrer">
+                                <img src={IMG.spotifyLogoWhite} width="100px"/>
+                            </a>
+                            <a id="green-logo" href="https://mangadex.org/chapter/43929ad2-7327-4336-b69f-3ed1cfd16c77/8" target="_blank" rel="noopener noreferrer">
+                                <img src={IMG.spotifyLogo} width="100px"/>
+                            </a>
                         </div>
                         <div id="albuns-inner-row" className="row">
                             {fetchedArtistDiscographyArray.map(album => (

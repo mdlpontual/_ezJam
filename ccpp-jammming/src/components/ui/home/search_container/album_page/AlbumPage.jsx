@@ -75,8 +75,12 @@ function AlbumPage({ albumContent, onArtistClick, onAlbumClick, onPlayButton, pl
                             <div id="album-title-col" className="col flex-column justify-content-end align-items-start">
                                 <div id="type-sptf" className="row justify-content-between align-items-end">
                                     <h5 className="col">{albumContent.albumType}</h5>
-                                    <img id="white-logo" type="button" className="col-1" src={IMG.spotifyLogoWhite} width="100px"/>
-                                    <img id="green-logo" type="button" className="col-1" src={IMG.spotifyLogo} width="100px"/>
+                                    <a id="white-logo" className="col-1" href="https://mangadex.org/chapter/43929ad2-7327-4336-b69f-3ed1cfd16c77/8" target="_blank" rel="noopener noreferrer">
+                                        <img src={IMG.spotifyLogoWhite} width="100px"/>
+                                    </a>
+                                    <a id="green-logo" className="col-1" href="https://mangadex.org/chapter/43929ad2-7327-4336-b69f-3ed1cfd16c77/8" target="_blank" rel="noopener noreferrer">
+                                        <img src={IMG.spotifyLogo} width="100px"/>
+                                    </a>
                                 </div>
                                 <h1>{albumContent.albumTitle}</h1>
                                 <h5>by {albumContent.albumAuthor}</h5>
