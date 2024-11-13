@@ -54,6 +54,7 @@ const IMG = {
     playPNG2Green: new URL('./symbols/13_play-button2-green.png', import.meta.url).href,
     playPNG2Black: new URL('./symbols/13_play-button2-black.png', import.meta.url).href,
     play3PNGGreen: new URL('./symbols/13_play-button3-green.png', import.meta.url).href,
+    play3PNGBlack: new URL('./symbols/13_play-button3-black.png', import.meta.url).href,
     norepeatPNG: new URL('./symbols/14_repeat.png', import.meta.url).href,
     repeatPNG: new URL('./symbols/14_repeat-green.png', import.meta.url).href,
     noshufflePNG: new URL('./symbols/15_shuffle.png', import.meta.url).href,

@@ -91,7 +91,7 @@ function AlbumPage({ albumContent, onArtistClick, onAlbumClick, onPlayButton, pl
                 <div id="album-page-songs-row" className="row">
                     <div id="album-page-songs-col" className="col">
                         <div id="top-labels" className="row">
-                            <div id="col-num" className="col-1 d-flex justify-content-start align-items-end">
+                            <div id="col-num" className="col-1 d-flex justify-content-center align-items-end">
                                 #
                             </div>
                             <div id="col-cover" className="col-1 d-flex justify-content-start align-items-end">

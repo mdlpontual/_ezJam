@@ -57,6 +57,7 @@
                     //border: $border-lime-dotted;
                     @include box-reset-default;
                     visibility: visible;
+                    border-radius: 2px;
                 }
             }
         };
@@ -233,6 +234,7 @@
                     //border: $border-lime-dotted;
                     @include box-reset-default;
                     visibility: visible;
+                    border-radius: 2px;
                 }
             }
         };
@@ -408,6 +410,7 @@
                     //border: $border-lime-dotted;
                     @include box-reset-default;
                     visibility: visible;
+                    border-radius: 2px;
                 }
             }
             #play-button {
@@ -463,6 +466,7 @@
                 //border: $border-lime-dotted;
                 @include box-reset-default;
                 visibility: hidden;
+                border-radius: 2px;
             }
         }
         #play-button {

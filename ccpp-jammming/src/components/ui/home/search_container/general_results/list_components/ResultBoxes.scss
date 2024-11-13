@@ -81,7 +81,7 @@
                     img {
                         //border: $border-lime-dotted;
                         @include box-reset-default;
-                        border-radius: 5px;
+                        border-radius: 2px;
                     }
                 }
                 #album-title {
@@ -151,7 +151,7 @@
                     #cover-img {
                         //border: $border-lime-dotted;
                         @include box-reset-default;
-                        position: absolute;
+                        border-radius: 2px;
                     }
                     #play-button {
                         //border: $border-lime-dotted;
@@ -351,7 +351,7 @@
                     #cover-img {
                         //border: $border-lime-dotted;
                         @include box-reset-default;
-                        position: absolute;
+                        border-radius: 2px;
                     }
                     #play-button {
                         //border: $border-lime-dotted;

@@ -76,9 +76,9 @@
                 #col-add {
                     //border: $border-lime-dotted;
                     @include box-reset-default;
-                    width: 30px;
+                    width: 25px;
                     position: relative;
-                    h5 {
+                    h6 {
                         //border: $border-lime-dotted;
                         @include box-reset-default;
                         text-overflow: ellipsis;
@@ -107,16 +107,10 @@
                         //border: $border-lime-dotted;
                         @include box-reset-default;
                         position: absolute;
-                    }
-                    #play-button {
-                        //border: $border-lime-dotted;
-                        @include box-reset-default;
-                        position: absolute;
-                        visibility: hidden;
-                        #play-icon {
+                        img {
                             //border: $border-lime-dotted;
                             @include box-reset-default;
-                            position: relative;
+                            border-radius: 2px;
                         }
                     }
                 }
@@ -262,9 +256,9 @@
                 #col-add {
                     //border: $border-lime-dotted;
                     @include box-reset-default;
-                    width: 30px;
+                    width: 25px;
                     position: relative;
-                    h5 {
+                    h6 {
                         //border: $border-lime-dotted;
                         @include box-reset-default;
                         text-overflow: ellipsis;
@@ -294,7 +288,11 @@
                         //border: $border-lime-dotted;
                         @include box-reset-default;
                         position: absolute;
-                        opacity: 0.25;
+                        img {
+                            //border: $border-lime-dotted;
+                            @include box-reset-default;
+                            border-radius: 2px;
+                        }
                     }
                     #play-button {
                         //border: $border-lime-dotted;
@@ -455,9 +453,9 @@
                 #col-add {
                     //border: $border-lime-dotted;
                     @include box-reset-default;
-                    width: 30px;
+                    width: 25px;
                     position: relative;
-                    h5 {
+                    h6 {
                         //border: $border-lime-dotted;
                         @include box-reset-default;
                         text-overflow: ellipsis;
@@ -487,11 +485,10 @@
                         //border: $border-lime-dotted;
                         @include box-reset-default;
                         position: absolute;
-                        opacity: 1;
-                        background-color: black;
-                        border-radius: 15%;
                         img {
-                            visibility: hidden;
+                            //border: $border-lime-dotted;
+                            @include box-reset-default;
+                            border-radius: 2px;
                         }
                     }
                     #play-button {
@@ -514,9 +511,9 @@
                 #col-add {
                     //border: $border-lime-dotted;
                     @include box-reset-default;
-                    width: 30px;
+                    width: 25px;
                     position: relative;
-                    h5 {
+                    h6 {
                         //border: $border-lime-dotted;
                         @include box-reset-default;
                         text-overflow: ellipsis;
@@ -537,6 +534,14 @@
                         }
                     }
                 }
+                #col-play {
+                    //border: $border-cyan-dotted;
+                    @include box-reset-default;
+                    background-color: black;
+                    border-radius: 50%;
+                    margin: 6.5px 0;
+                    padding-right: 0.1px;
+                };
                 #col-cover {
                     //border: $border-lime-dotted;
                     @include box-reset-default;
@@ -546,11 +551,10 @@
                         //border: $border-lime-dotted;
                         @include box-reset-default;
                         position: absolute;
-                        opacity: 1;
-                        background-color: black;
-                        border-radius: 15%;
                         img {
-                            visibility: hidden;
+                            //border: $border-lime-dotted;
+                            @include box-reset-default;
+                            border-radius: 2px;
                         }
                     }
                     #play-button {
@@ -658,7 +662,7 @@
                         @include box-reset-default;
                         padding-bottom: 5px;
                         width: 100%;
-                        border-radius: 10px;
+                        border-radius: 4px;
                     } 
                     h6 {
                         //border: $border-lime-solid;

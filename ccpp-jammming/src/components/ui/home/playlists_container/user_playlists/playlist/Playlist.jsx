@@ -81,7 +81,7 @@ function Playlist({ playlistData, onPlaylistClick,
         <div id="single-pl-container" className="container-fluid" >
             <div id="single-pl-row" className="row">
                 <div id="checkmark-col" className="col-1 d-flex flex-column justify-content-center align-items-center">
-                    <img id="playlist-cover" src={cover} alt="saved icon" width="60px" />
+                    <img id="playlist-cover" src={cover} alt="saved icon" width="65px" />
                 </div>
                 <div id="pl-title-col" className="col d-flex flex-column justify-content-center align-items-start">
                     <h3 id="pl-name" type="button" onClick={() => onPlaylistClick(playlistData, onBackClick, onPlayButton, onArtistClick, onAlbumClick, playTrack, pauseTrack, accessToken)}>
