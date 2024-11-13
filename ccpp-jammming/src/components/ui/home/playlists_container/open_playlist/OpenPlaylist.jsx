@@ -276,7 +276,7 @@ function OpenPlaylist({ playlistData, onBackClick,
                 onDragOver={handleDragOver} 
                 onDrop={(event) => handleDrop(event, playlistData)}
             >
-                <header id="open-pl-header" className="row">
+                <header id="open-pl-header" className="row justify-content-center align-items-center">
                     <div id="go-back-col" className="col-auto d-flex flex-column justify-content-center align-items-start">
                         <a id="back-to-playlists" type="button" onClick={() => onBackClick()}>
                             <img src={IMG.gobackPNG} alt="go back button" width="22px" />
@@ -290,7 +290,7 @@ function OpenPlaylist({ playlistData, onBackClick,
                             id="saved-icon" 
                             src={isSaved ? IMG.savedPNG : IMG.unsavedPNG}
                             alt="saved icon" 
-                            width="27px" 
+                            width="35px" 
                         />
                     </div>
                     <div id="edit-button-col" className="col-auto d-flex flex-column justify-content-center align-items-center">
@@ -317,10 +317,11 @@ function OpenPlaylist({ playlistData, onBackClick,
                 <main id="open-pl-main" className="row flex-grow-1">
                     <div id="open-pl-col" className="col d-flex flex-column">
                         <div id="top-labels" className="row">
-                            <div id="col-num" className="col-1 d-flex justify-content-start align-items-end">#</div>
+                            <div id="col-num" className="col-1 d-flex justify-content-center align-items-end">#</div>
+                            <div id="col-blank" className="col-1 d-flex justify-content-start align-items-end"></div>
                             <div id="col-cover" className="col-1 d-flex justify-content-start align-items-end"></div>
                             <div id="col-title" className="col d-flex justify-content-start align-items-end">title</div>
-                            <div id="col-album" className="col-3 d-flex justify-content-start align-items-end">album</div>
+                            <div id="col-album" className="col-2 d-flex justify-content-start align-items-end">album</div>
                             <div id="col-duration" className="col-1 d-flex justify-content-center align-items-end">
                                 <img src={IMG.clockPNG} alt="clock icon" height="15px" />
                             </div>

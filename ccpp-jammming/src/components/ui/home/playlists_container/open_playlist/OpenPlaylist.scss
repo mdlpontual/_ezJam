@@ -48,7 +48,7 @@
         #edit-button-col {
             //border: $border-cyan-solid;
             @include box-reset-default;
-            padding-left: 10px;
+            padding: 7px;
             img {
                 //border: $border-lime-dashed;
                 @include box-reset-default;
@@ -57,7 +57,7 @@
         #share-button-col {
             //border: $border-cyan-solid;
             @include box-reset-default;
-            padding-left: 10px;
+            padding: 7px;
             img {
                 //border: $border-lime-dashed;
                 @include box-reset-default;
@@ -66,11 +66,40 @@
         #delete-button-col {
             //border: $border-cyan-solid;
             @include box-reset-default;
-            padding-left: 10px;
+            padding: 7px;
             img {
                 //border: $border-lime-dashed;
                 @include box-reset-default;
             }
+        }
+        #edit-button-col:hover {
+            //border: $border-cyan-solid;
+            @include box-reset-default;
+            background-color: $bg-transparent;
+            border: 1px solid $primary;
+            box-sizing: border-box;
+            border-radius: 25%;
+            padding: 6px;
+        }
+        #share-button-col:hover {
+            //border: $border-cyan-solid;
+            @include box-reset-default;
+            background-color: $bg-transparent;
+            background-color: $bg-transparent;
+            border: 1px solid $primary;
+            box-sizing: border-box;
+            border-radius: 25%;
+            padding: 6px;
+        }
+        #delete-button-col:hover {
+            //border: $border-cyan-solid;
+            @include box-reset-default;
+            background-color: $bg-transparent;
+            background-color: $bg-transparent;
+            border: 1px solid $primary;
+            box-sizing: border-box;
+            border-radius: 25%;
+            padding: 6px;
         }
     }
     #open-pl-main {
@@ -88,12 +117,17 @@
                 #col-num {
                     //border: $border-cyan-dotted;
                     @include box-reset-default;
-                    width: 40px;
+                    width: 25px;
                     h6 {
                         //border: $border-lime-dotted;
                         @include box-reset-default;
                         font-weight: lighter;
                     }
+                };
+                #col-blank {
+                    //border: $border-cyan-dotted;
+                    @include box-reset-default;
+                    width: 30px;
                 };
                 #col-cover {
                     //border: $border-cyan-dotted;
@@ -117,15 +151,6 @@
                         @include box-reset-default;
                     }
                 };
-                #col-saved {
-                    //border: $border-cyan-dotted;
-                    @include box-reset-default;
-                    width: 40px;
-                    img {
-                        //border: $border-lime-dotted;
-                        @include box-reset-default;
-                    }
-                };
                 #col-album {
                     //border: $border-cyan-dotted;
                     @include box-reset-default;
@@ -138,7 +163,7 @@
                 #col-duration {
                     //border: $border-cyan-dotted;
                     @include box-reset-default;
-                    width: 55px;
+                    min-width: 50px;
                     img {
                         //border: $border-lime-dotted;
                         @include box-reset-default;
@@ -149,7 +174,7 @@
                 #col-minus {
                     //border: $border-cyan-dotted;
                     @include box-reset-default;
-                    width: 50px;
+                    width: 40px;
                     margin-right: 5px;
                 }
                 #col-num, #col-cover, #col-title, 

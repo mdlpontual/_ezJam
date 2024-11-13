@@ -73,18 +73,20 @@ function TopTrack({ topTrack, order, onPlayButton,
             <>
                 <div id="songs-inner-row" className={`row ${isSelected ? 'selected-track3' : ''}`} draggable="true" onDragStart={handleDragStart} onClick={onTrackClick}>
                     <div id="col-add" className="col-1 d-flex justify-content-center align-items-center">
-                        <h5>{order + 1}</h5>
+                        <h6>{order + 1}</h6>
                         <div id="drag-button" className="drag" draggable="false" onDragStart={handleDragStart}> 
                             <img id="drag-icon" src={IMG.dragPNG} height="25px" />
                         </div>
+                    </div>
+                    <div id="col-play" className="col-1 d-flex justify-content-center align-items-center">
+                        <a className="col-1 d-flex justify-content-center align-items-center" id="play-button" type="button" onClick={(e) => {onPlayButton(uriTrack, uriQueue); e.stopPropagation()}}>
+                            <img id="play-icon" src={IMG.play3PNG} alt="play icon" width="25px"/>
+                        </a>
                     </div>
                     <div id="col-cover" className="col-1 d-flex justify-content-center align-items-center">
                         <div id="cover-img" className="cover">
                             <img src={cover} height="40px" />
                         </div>
-                        <a id="play-button" type="button" onClick={(e) => {onPlayButton(uriTrack, uriQueue); e.stopPropagation()}}>
-                            <img id="play-icon" src={IMG.play2PNG} alt="play icon" width="25px"/>
-                        </a>
                     </div>
                     <div id="col-title" className="col d-flex justify-content-start align-items-center">
                         <h5>{topTrack.trackTitle}</h5>
@@ -101,20 +103,22 @@ function TopTrack({ topTrack, order, onPlayButton,
         <>
             <div id="songs-inner-row-green" className={`row ${isSelected ? 'selected-track3' : ''}`} draggable="true" onDragStart={handleDragStart} onClick={onTrackClick}>
                 <div id="col-add" className="col-1 d-flex justify-content-center align-items-center">
-                    <h5>{order + 1}</h5>
+                    <h6>{order + 1}</h6>
                     <div id="drag-button" className="drag" draggable="false" onDragStart={handleDragStart}> 
                         <img id="drag-icon" src={IMG.blackDragPNG} height="25px" />
                     </div>
                 </div>
+                    <div id="col-play" className="col-1 d-flex justify-content-center align-items-center">
+                        <a className="col-1 d-flex justify-content-center align-items-center" id="play-button" type="button" onClick={(e) => onPlayButton(handleTogglePlay(e))}>
+                            <div className="d-flex justify-content-center align-items-center" id="play-icon">
+                                {isPaused ? <img src={IMG.play3PNGGreen} alt="play icon" width="25px" /> : <Equalizer />}
+                            </div>
+                        </a>
+                    </div>
                 <div id="col-cover" className="col-1 d-flex justify-content-center align-items-center">
                     <div id="cover-img" className="cover">
                         <img src={cover} height="40px" />
                     </div>
-                    <a className="col-1 d-flex justify-content-center align-items-center" id="play-button" type="button" onClick={(e) => onPlayButton(handleTogglePlay(e))}>
-                        <div className="d-flex justify-content-center align-items-center" id="play-icon">
-                            {isPaused ? <img src={IMG.playPNG2Green} alt="play icon" width="25px" /> : <Equalizer />}
-                        </div>
-                    </a>
                 </div>
                 <div id="col-title" className="col d-flex justify-content-start align-items-center">
                     <h5>{topTrack.trackTitle}</h5>

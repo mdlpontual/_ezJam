@@ -17,10 +17,12 @@ function SearchContainer({ search, setSearch, activePage, goBack, goForward }) {
                         <div id="arrow-container" className="container">
                             <div id="arrow-row" className="row">
                                 <a id="go-back" type="button" className="col-auto d-flex flex-column justify-content-center align-items-center" onClick={goBack}>
-                                    <img src={IMG.gobackPNG} alt="go back button" width="22px"/>
+                                    <img id="back-white" src={IMG.gobackPNG} alt="go back button" width="22px"/>
+                                    <img id="back-green" src={IMG.gobackGreenPNG} alt="go back button" width="22px"/>
                                 </a>
                                 <a id="go-foward" type="button" className="col-auto d-flex flex-column justify-content-center align-items-center" onClick={goForward}>
-                                    <img src={IMG.gofowardPNG} alt="go foward button" width="22px"/>
+                                    <img id="foward-white" src={IMG.gofowardPNG} alt="go foward button" width="22px"/>
+                                    <img id="foward-green" src={IMG.gofowardGreenPNG} alt="go foward button" width="22px"/>
                                 </a>
                             </div>
                         </div>

@@ -55,23 +55,23 @@ function TrackPlayer({ isPaused, isActive, userInfo,
         return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
     }
 
-    // Inside the TrackPlayer component
     useEffect(() => {
         const handleKeyDown = (e) => {
-            if (e.code === "Space") {
-                e.preventDefault(); // Prevent scrolling
+            // Check if the key pressed is "Space" and the active element is not an input or content-editable element
+            if (e.code === "Space" && !["INPUT", "TEXTAREA"].includes(document.activeElement.tagName) && document.activeElement.getAttribute("contentEditable") !== "true") {
+                e.preventDefault(); // Prevent default space scrolling behavior
                 handleTogglePlay();
             }
         };
-
-        // Attach event listener
+    
+        // Attach the event listener
         window.addEventListener("keydown", handleKeyDown);
-
-        // Clean up event listener
+    
+        // Clean up the event listener on component unmount
         return () => {
             window.removeEventListener("keydown", handleKeyDown);
         };
-    }, [isPaused, playTrack, pauseTrack]); // Add dependencies to avoid stale state
+    }, [isPaused, playTrack, pauseTrack]); // Dependencies to avoid stale state    
 
     if (!isActive) {
         return (

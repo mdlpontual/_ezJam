@@ -19,7 +19,7 @@
                     img {
                         //border: $border-lime-dotted;
                         @include box-reset-default;
-                        border-radius: 10px;
+                        border-radius: 4px;
                     }
                 }
                 #album-title-col {
@@ -45,20 +45,33 @@
                         #white-logo  {
                             //border: $border-lime-dotted;
                             @include box-reset-default;
+                            text-decoration: none;
                             position: absolute;
                             right: 0;
                             visibility: visible;
-                            width: 100px;
+                            width: fit-content;
                             padding-bottom: 2px;
+                            p {
+                                //border: $border-lime-dotted;
+                                @include box-reset-default;
+                                gap: 5px;
+                            }
                         }
                         #green-logo  {
                             //border: $border-lime-dotted;
                             @include box-reset-default;
+                            text-decoration: none;
                             position: absolute;
                             right: 0;
                             visibility: hidden;
-                            width: 100px;
+                            width: fit-content;
                             padding-bottom: 2px;
+                            p {
+                                //border: $border-lime-dotted;
+                                @include box-reset-default;
+                                color: $primary;
+                                gap: 5px;
+                            }
                         }
                     }
                     #type-sptf:hover {

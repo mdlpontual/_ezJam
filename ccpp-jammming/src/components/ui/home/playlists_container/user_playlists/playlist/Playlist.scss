@@ -19,7 +19,7 @@
                 @include box-reset-default;
             }
             #playlist-cover {
-                border-radius: 5px;
+                border-radius: 2px;
                 visibility: visible;
                 position: absolute;
             }
@@ -93,97 +93,6 @@
         }
     }
 }
-#single-pl-container-green {
-    //border: $border-red-solid;
-    @include box-reset-default;
-    color: $primary;
-    height: 75px;
-    padding-right: 10px;
-    margin-right: 5px;
-    padding-right: 10px;
-    padding-left: 10px;
-    #single-pl-row {
-        //border: $border-yellow-solid;
-        @include box-reset-default;
-        color: $primary;
-        height: 100%;
-        #checkmark-col {
-            //border: $border-cyan-solid;
-            @include box-reset-default;
-            color: $primary;
-            position: relative;
-            width: 75px;
-            img {
-                //border: $border-lime-dashed;
-                @include box-reset-default;
-            }
-            #playlist-cover {
-                border-radius: 5px;
-                visibility: visible;
-                position: absolute;
-                opacity: 0.5;
-            }
-            #play-button {
-                //border: $border-lime-dashed;
-                @include box-reset-default;
-                position: absolute;
-                #play-icon {
-                    //border: $border-lime-dashed;
-                    @include box-reset-default;
-                    visibility: visible;
-                    position: relative;
-                }
-            }
-        }
-        #pl-title-col {
-            //border: $border-cyan-solid;
-            @include box-reset-default;
-            overflow: hidden;
-            color: $primary;
-            h3 {
-                //border: $border-lime-dashed;
-                @include box-reset-default;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                display: block;
-                max-width: 100%;
-                margin-left: 5px;
-            }
-        }
-        #edit-button-col {
-            //border: $border-cyan-solid;
-            @include box-reset-default;
-            padding: 0px 5px;
-            img {
-                //border: $border-lime-dashed;
-                @include box-reset-default;
-                visibility: hidden;
-            }
-        }
-        #share-button-col {
-            //border: $border-cyan-solid;
-            @include box-reset-default;
-            padding: 0px 5px;
-            img {
-                //border: $border-lime-dashed;
-                @include box-reset-default;
-                visibility: hidden;
-            }
-        }
-        #delete-button-col {
-            //border: $border-cyan-solid;
-            @include box-reset-default;
-            padding: 0px 5px;
-            img {
-                //border: $border-lime-dashed;
-                @include box-reset-default;
-                visibility: hidden;
-            }
-        }
-    }
-}
-
 
 
 #single-pl-container:hover {
@@ -208,7 +117,6 @@
             #playlist-cover {
                 visibility: visible;
                 position: absolute;
-                opacity: 0.25;
             }
             #play-button {
                 //border: $border-lime-dashed;
@@ -234,113 +142,70 @@
         #edit-button-col {
             //border: $border-cyan-solid;
             @include box-reset-default;
-            padding: 0px 5px;
             img {
                 //border: $border-lime-dashed;
                 @include box-reset-default;
                 visibility: visible;
+                height: 45px;
+                width: 45px;
+                padding: 7px;
             }
         }
         #share-button-col {
             //border: $border-cyan-solid;
             @include box-reset-default;
-            padding: 0px 5px;
             img {
                 //border: $border-lime-dashed;
                 @include box-reset-default;
                 visibility: visible;
+                height: 45px;
+                width: 45px;
+                padding: 7px;
             }
         }
         #delete-button-col {
             //border: $border-cyan-solid;
             @include box-reset-default;
-            padding: 0px 10px;
             img {
                 //border: $border-lime-dashed;
                 @include box-reset-default;
                 visibility: visible;
+                height: 45px;
+                width: 45px;
+                padding: 7px;
             }
         }
-    }
-}
-#single-pl-container-green:hover {
-    //border: $border-red-solid;
-    @include box-reset-default;
-    color: $primary;
-    background-color: $bg-transparent;
-    border-radius: 10px;
-    margin-right: 10px;
-    padding-right: 10px;
-    #single-pl-row {
-        //border: $border-yellow-solid;
-        @include box-reset-default;
-        color: $primary;
-        padding-left: 10px;
-        #checkmark-col {
+        #edit-button-col:hover {
             //border: $border-cyan-solid;
             @include box-reset-default;
-            position: relative;
             img {
-                //border: $border-lime-dashed;
-                @include box-reset-default;
-            }
-            #playlist-cover {
-                visibility: visible;
-                position: absolute;
-                opacity: 0.25;
-            }
-            #play-button {
-                //border: $border-lime-dashed;
-                @include box-reset-default;
-                position: absolute;
-                z-index: 1;
-                #play-icon {
-                    //border: $border-lime-dashed;
-                    @include box-reset-default;
-                    visibility: visible;
-                    position: relative;
-                }
+                background-color: $bg-transparent;
+                border: 1px solid $primary;
+                box-sizing: border-box;
+                border-radius: 25%;
+                padding: 6px;
             }
         }
-        #pl-title-col {
+        #share-button-col:hover {
             //border: $border-cyan-solid;
             @include box-reset-default;
-            color: $primary;
-            h4 {
-                //border: $border-lime-dashed;
-                @include box-reset-default;
-                color: $primary;
-                margin-left: 5px;
-            }
-        }
-        #edit-button-col {
-            //border: $border-cyan-solid;
-            @include box-reset-default;
-            padding: 0px 5px;
             img {
-                //border: $border-lime-dashed;
-                @include box-reset-default;
-                visibility: visible;
+                background-color: $bg-transparent;
+                border: 1px solid $primary;
+                box-sizing: border-box;
+                border-radius: 25%;
+                padding: 6px;
             }
         }
-        #share-button-col {
+        #delete-button-col:hover {
             //border: $border-cyan-solid;
             @include box-reset-default;
-            padding: 0px 5px;
             img {
-                //border: $border-lime-dashed;
-                @include box-reset-default;
-                visibility: visible;
-            }
-        }
-        #delete-button-col {
-            //border: $border-cyan-solid;
-            @include box-reset-default;
-            padding: 0px 10px;
-            img {
-                //border: $border-lime-dashed;
-                @include box-reset-default;
-                visibility: visible;
+                background-color: $bg-transparent;
+                border: 1px solid $primary;
+                box-sizing: border-box;
+                border-radius: 25%;
+                padding: 6px;
             }
         }
     }
