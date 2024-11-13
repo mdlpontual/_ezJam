@@ -34,6 +34,7 @@
             //border: $border-cyan-dotted;
             @include box-reset-default;
             position: relative;
+            width: 30px;
             #play-button {
                 //border: $border-lime-dotted;
                 @include box-reset-default;
@@ -211,6 +212,7 @@
             //border: $border-cyan-dotted;
             @include box-reset-default;
             position: relative;
+            width: 30px;
             #play-button {
                 //border: $border-lime-dotted;
                 @include box-reset-default;
@@ -398,6 +400,11 @@
                 }
             }
         }
+        #col-play {
+            //border: $border-lime-dotted;
+            @include box-reset-default;
+            width: 30px;
+        }
         #col-cover {
             //border: $border-cyan-dotted;
             @include box-reset-default;
@@ -454,6 +461,11 @@
                 }
             }
         }
+    }
+    #col-play {
+        //border: $border-lime-dotted;
+        @include box-reset-default;
+        width: 30px;
     }
     #col-cover {
         //border: $border-cyan-dotted;

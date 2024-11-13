@@ -98,6 +98,23 @@
                         }
                     }
                 }
+                #col-play {
+                    //border: $border-lime-dotted;
+                    @include box-reset-default;
+                    width: 40px;
+                    #play-button {
+                        //border: $border-red-dotted;
+                        @include box-reset-default;
+                        height: 35px;
+                        width: 35px;
+                        border-radius: 50%;
+                        background-color: black;
+                        #play-icon {
+                            //border: $border-red-dotted;
+                            @include box-reset-default;
+                        }
+                    }
+                }
                 #col-cover {
                     //border: $border-lime-dotted;
                     @include box-reset-default;
@@ -279,6 +296,23 @@
                         }
                     }
                 }
+                #col-play {
+                    //border: $border-lime-dotted;
+                    @include box-reset-default;
+                    width: 40px;
+                    #play-button {
+                        //border: $border-red-dotted;
+                        @include box-reset-default;
+                        height: 35px;
+                        width: 35px;
+                        border-radius: 50%;
+                        background-color: black;
+                        #play-icon {
+                            //border: $border-red-dotted;
+                            @include box-reset-default;
+                        }
+                    }
+                }
                 #col-cover {
                     //border: $border-lime-dotted;
                     @include box-reset-default;
@@ -292,17 +326,6 @@
                             //border: $border-lime-dotted;
                             @include box-reset-default;
                             border-radius: 2px;
-                        }
-                    }
-                    #play-button {
-                        //border: $border-lime-dotted;
-                        @include box-reset-default;
-                        position: absolute;
-                        visibility: visible;
-                        #play-icon {
-                            //border: $border-lime-dotted;
-                            @include box-reset-default;
-                            position: relative;
                         }
                     }
                 }
@@ -534,14 +557,6 @@
                         }
                     }
                 }
-                #col-play {
-                    //border: $border-cyan-dotted;
-                    @include box-reset-default;
-                    background-color: black;
-                    border-radius: 50%;
-                    margin: 6.5px 0;
-                    padding-right: 0.1px;
-                };
                 #col-cover {
                     //border: $border-lime-dotted;
                     @include box-reset-default;

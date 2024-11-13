@@ -24,10 +24,18 @@ function TrackDisplay({ currentTrack, onPlayButton, onArtistClick, onAlbumClick,
         <>
             <div id="col-cover" className="col-1 d-flex justify-content-center align-items-center">
                 <a id="display-cover" type="button" onClick={() => onAlbumClick(albumContent, onArtistClick, onAlbumClick, onPlayButton, userPlaylistsArr, accessToken)}>
-                    <img src={coverPicture} height="70px" width="70px"/>
+                    <img src={coverPicture} height="75px" width="75px"/>
                 </a>
             </div>
             <div id="col-title" className="row d-flex flex-column justify-content-center align-items-start">
+                <div id="logo-box-title" className="container-fluid d-flex justify-content-start align-items-center">
+                    <a id="white-logo" className="row justify-content-center align-items-center" href={`https://open.spotify.com/`} target="_blank" rel="noopener noreferrer" >
+                        <img className="col d-flex justify-content-start align-items-center" src={IMG.spotifyLogoWhite} width="100px"/>
+                    </a>
+                    <a id="green-logo" className="row justify-content-center align-items-center" href={`https://open.spotify.com/`} target="_blank" rel="noopener noreferrer">
+                        <img className="col d-flex justify-content-center align-items-center" src={IMG.spotifyLogo} width="100px"/>
+                    </a>
+                </div>
                 <h5>{currentTrack.name}</h5>
                 <p id="display-artist" type="button" onClick={() => onArtistClick(artistContent, onArtistClick, onAlbumClick, onPlayButton, userPlaylistsArr, accessToken)}>
                     {currentTrack.artists[0].name}

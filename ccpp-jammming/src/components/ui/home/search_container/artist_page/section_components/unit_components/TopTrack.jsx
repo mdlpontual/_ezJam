@@ -79,7 +79,7 @@ function TopTrack({ topTrack, order, onPlayButton,
                         </div>
                     </div>
                     <div id="col-play" className="col-1 d-flex justify-content-center align-items-center">
-                        <a id="play-button" type="button" onClick={(e) => {onPlayButton(uriTrack, uriQueue); e.stopPropagation()}}>
+                        <a className="col-1 d-flex justify-content-center align-items-center" id="play-button" type="button" onClick={(e) => {onPlayButton(uriTrack, uriQueue); e.stopPropagation()}}>
                             <img id="play-icon" src={IMG.play3PNG} alt="play icon" width="25px"/>
                         </a>
                     </div>
