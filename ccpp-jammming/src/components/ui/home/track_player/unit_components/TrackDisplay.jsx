@@ -30,10 +30,10 @@ function TrackDisplay({ currentTrack, onPlayButton, onArtistClick, onAlbumClick,
             <div id="col-title" className="row d-flex flex-column justify-content-center align-items-start">
                 <div id="logo-box-title" className="container-fluid d-flex justify-content-start align-items-center">
                     <a id="white-logo" className="row justify-content-center align-items-center" href={`https://open.spotify.com/`} target="_blank" rel="noopener noreferrer" >
-                        <img title="Open Spotify" className="col d-flex justify-content-start align-items-center" src={IMG.spotifyLogoWhite} width="100px"/>
+                        <img title="Open Spotify" className="col d-flex justify-content-start align-items-center" src={IMG.spotifyLogo} width="100px"/>
                     </a>
                     <a id="green-logo" className="row justify-content-center align-items-center" href={`https://open.spotify.com/`} target="_blank" rel="noopener noreferrer">
-                        <img title="Open Spotify" className="col d-flex justify-content-center align-items-center" src={IMG.spotifyLogo} width="100px"/>
+                        <img title="Open Spotify" className="col d-flex justify-content-center align-items-center" src={IMG.spotifyLogoWhite} width="100px"/>
                     </a>
                 </div>
                 <h5 title={currentTrack.name}>{currentTrack.name}</h5>
