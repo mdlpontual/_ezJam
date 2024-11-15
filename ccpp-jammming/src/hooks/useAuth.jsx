@@ -8,68 +8,69 @@ function useAuth(code) {
     const isRequestInProgress = useRef(false);
 
     useEffect(() => {
-        if (!code || isRequestInProgress.current) return; // Prevent multiple calls
+        if (!code || isRequestInProgress.current) return;
 
         const fetchAuthData = async () => {
             isRequestInProgress.current = true;
             try {
-                const res = await axios.post("http://localhost:3001/login", { code }, {
+                const res = await axios.post("/.netlify/functions/login", { code }, {
                     headers: {
-                        'Content-Type': 'application/json'
-                    }
+                        'Content-Type': 'application/json',
+                    },
                 });
 
                 setAccessToken(res.data.accessToken);
                 setRefreshToken(res.data.refreshToken);
-                setExpiresIn(res.data.expiresIn); 
+                setExpiresIn(res.data.expiresIn);
 
                 console.log("Authorization successful:", res.data);
                 window.history.pushState({}, null, '/');
             } catch (error) {
-                console.error("Authorization failed:", error.res?.data || error.message);
+                console.error("Authorization failed:", error.response?.data || error.message);
                 window.location = '/';
             } finally {
                 isRequestInProgress.current = false;
             }
         };
-        
+
         fetchAuthData();
     }, [code]);
 
     useEffect(() => {
-        if (!refreshToken || !expiresIn) return; // Prevent multiple calls
+        if (!refreshToken || !expiresIn) return;
+
         const interval = setInterval(() => {
             const fetchAuthData = async () => {
                 isRequestInProgress.current = true;
                 try {
-                    const res = await axios.post("http://localhost:3001/refresh", { refreshToken }, {
+                    const res = await axios.post("/.netlify/functions/refresh", { refreshToken }, {
                         headers: {
-                            'Content-Type': 'application/json'
-                        }
+                            'Content-Type': 'application/json',
+                        },
                     });
-    
+
                     setAccessToken(res.data.accessToken);
                     setExpiresIn(res.data.expiresIn);
-    
-                    console.log("Authorization successful:", res.data);
+
+                    console.log("Token refreshed:", res.data);
                 } catch (error) {
-                    console.error("Authorization failed:", error.res?.data || error.message);
+                    console.error("Token refresh failed:", error.response?.data || error.message);
                     window.location = '/';
                 } finally {
                     isRequestInProgress.current = false;
                 }
             };
+
             fetchAuthData();
         }, (expiresIn - 60) * 1000);
-        return () => clearInterval(interval); 
-    }, [refreshToken, expiresIn]); 
-    
-    // Logout function to clear tokens and redirect
+
+        return () => clearInterval(interval);
+    }, [refreshToken, expiresIn]);
+
     const logout = () => {
         setAccessToken(null);
         setRefreshToken(null);
         window.location = '/';
-       // window.location.href = "https://accounts.spotify.com/logout?continue=https://localhost:3000";
     };
 
     return { accessToken, refreshToken, expiresIn, logout };
