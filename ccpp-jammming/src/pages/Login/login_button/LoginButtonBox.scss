@@ -1,7 +1,7 @@
 #button-box-container{
     //border: $border-red-solid;
     @include box-reset-default;
-    background-color: $bg-transparent;
+    background-color: $bg-transparent2;
     border-radius: 20px;
     max-height: 750px;
     width: 480px;
@@ -24,11 +24,14 @@
             }
             #spotify-logo{
                 //border: $border-lime-dotted;
-                //background-color: black;
+                background-color: $primary;
                 margin-right: 50px;
                 position: relative;
-                top: -25px;
-                right: -40px;
+                top: 0px;
+                right: 0px;
+                padding-left: 10px;
+                border-radius: 50px;
+                width: 300px;
                 img {
                     //border: $border-cyan-solid;
                     @include box-reset-default;
@@ -62,7 +65,7 @@
                 width: 400px;
                 border-radius: 25px;
                 min-height: 50px;
-                color: black;
+                color: white;
                 font-weight: bold;
                 position: absolute;
             }
@@ -77,7 +80,7 @@
                 @include box-reset-default;
                 width: 250px;
                 padding: 0px 25px 0px;
-                background-color: $bg-transparent;
+                background-color: black;
                 border: 2px solid $primary;
                 border-radius: 25px;
                 min-height: 50px;

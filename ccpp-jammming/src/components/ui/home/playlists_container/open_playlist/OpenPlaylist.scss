@@ -11,9 +11,45 @@
             //border: $border-cyan-solid;
             @include box-reset-default;
             width: 35px;
-            img {
-                //border: $border-lime-dashed;
+            height: 100%;
+            #go-back {
+                //border: $border-cyan-dashed;
                 @include box-reset-default;
+                padding: 5px 5px 5px 0;
+                position: relative;
+                width: 25px;
+                height: 100%;
+                #back-white {
+                    //border: $border-lime-dotted;
+                    @include box-reset-default;
+                    position: absolute;
+                    visibility: visible;
+                }
+                #back-green {
+                    //border: $border-lime-dotted;
+                    @include box-reset-default;
+                    position: absolute;
+                    visibility: hidden;
+                }
+            }
+            #go-back:hover {
+                //border: $border-cyan-dashed;
+                @include box-reset-default;
+                padding: 5px 5px 5px 0;
+                position: relative;
+                width: 25px;
+                #back-white {
+                    //border: $border-lime-dotted;
+                    @include box-reset-default;
+                    position: absolute;
+                    visibility: hidden;
+                }
+                #back-green {
+                    //border: $border-lime-dotted;
+                    @include box-reset-default;
+                    position: absolute;
+                    visibility: visible;
+                }
             }
         }
         #title-col {

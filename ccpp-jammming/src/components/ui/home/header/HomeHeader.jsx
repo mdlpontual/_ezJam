@@ -28,7 +28,7 @@ function HomeHeader({ logout }) {
                             <li>
                                 <div>
                                     <AboutPopover content={`
-                                    <p>In this application, you will find a better and improved way to customize your beloved Spotify's playlists!</p>
+                                    <p>In this application, you will find an improved and more focused way to customize your beloved Spotify playlists!</p>
                                     <br>
                                     <p>Only with ezJam will you have the ability to simultaneously view the content of your playlists while exploring Spotify's music catalog, all at the same time, side by side!</p>
                                     <br>
@@ -39,7 +39,7 @@ function HomeHeader({ logout }) {
                                     <h5>- Maintain control of your customization by saving or discarding the changes you make along the way.</h5>
                                     <br>
                                     <p>Enable the <strong>"ezJam Track Player"</strong> in the "Connect to a Device" section of your Spotify app to listen to your songs right here.</p>
-                                    <p>After your the work is done, you can play the playlists in your own Spotify app or even share them with a simple quick click!</p>
+                                    <p>After the work is done, you can play the playlists in any Spotify app or share them with a simple quick click!</p>
                                     <br>
                                     <p>Enjoy your jams!</p>
                                     <hr></hr>

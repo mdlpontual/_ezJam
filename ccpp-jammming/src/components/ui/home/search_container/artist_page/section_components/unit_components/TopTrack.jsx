@@ -74,22 +74,22 @@ function TopTrack({ topTrack, order, onPlayButton,
                 <div id="songs-inner-row" className={`row ${isSelected ? 'selected-track3' : ''}`} draggable="true" onDragStart={handleDragStart} onClick={onTrackClick}>
                     <div id="col-add" className="col-1 d-flex justify-content-center align-items-center">
                         <h6>{order + 1}</h6>
-                        <div id="drag-button" className="drag" draggable="false" onDragStart={handleDragStart}> 
+                        <div title="Drag and Drop to add this Track to a Playlist" id="drag-button" className="drag" draggable="false" onDragStart={handleDragStart}> 
                             <img id="drag-icon" src={IMG.dragPNG} height="25px" />
                         </div>
                     </div>
                     <div id="col-play" className="col-1 d-flex justify-content-center align-items-center">
                         <a className="col-1 d-flex justify-content-center align-items-center" id="play-button" type="button" onClick={(e) => {onPlayButton(uriTrack, uriQueue); e.stopPropagation()}}>
-                            <img id="play-icon" src={IMG.play3PNG} alt="play icon" width="25px"/>
+                            <img title="Click to Play" id="play-icon" src={IMG.play3PNG} alt="play icon" width="25px"/>
                         </a>
                     </div>
                     <div id="col-cover" className="col-1 d-flex justify-content-center align-items-center">
                         <div id="cover-img" className="cover">
-                            <img src={cover} height="40px" />
+                            <img title={topTrack.trackAlbum} src={cover} height="40px" />
                         </div>
                     </div>
                     <div id="col-title" className="col d-flex justify-content-start align-items-center">
-                        <h5>{topTrack.trackTitle}</h5>
+                        <h5 title={topTrack.trackTitle}>{topTrack.trackTitle}</h5>
                     </div>
                     <div id="col-duration" className="col-1 d-flex justify-content-center align-items-center">
                         <p>{millisToMinutesAndSeconds(topTrack.trackDuration)}</p>
@@ -105,23 +105,23 @@ function TopTrack({ topTrack, order, onPlayButton,
                 <div id="col-add" className="col-1 d-flex justify-content-center align-items-center">
                     <h6>{order + 1}</h6>
                     <div id="drag-button" className="drag" draggable="false" onDragStart={handleDragStart}> 
-                        <img id="drag-icon" src={IMG.blackDragPNG} height="25px" />
+                        <img title="Drag and Drop to add this Track to a Playlist" id="drag-icon" src={IMG.blackDragPNG} height="25px" />
                     </div>
                 </div>
                     <div id="col-play" className="col-1 d-flex justify-content-center align-items-center">
                         <a className="col-1 d-flex justify-content-center align-items-center" id="play-button" type="button" onClick={(e) => onPlayButton(handleTogglePlay(e))}>
-                            <div className="d-flex justify-content-center align-items-center" id="play-icon">
+                            <div title={isPaused ? "Click to Resume" : "Click to Pause"} className="d-flex justify-content-center align-items-center" id="play-icon">
                                 {isPaused ? <img src={IMG.play3PNGGreen} alt="play icon" width="25px" /> : <Equalizer />}
                             </div>
                         </a>
                     </div>
                 <div id="col-cover" className="col-1 d-flex justify-content-center align-items-center">
                     <div id="cover-img" className="cover">
-                        <img src={cover} height="40px" />
+                        <img title={topTrack.trackAlbum} src={cover} height="40px" />
                     </div>
                 </div>
                 <div id="col-title" className="col d-flex justify-content-start align-items-center">
-                    <h5>{topTrack.trackTitle}</h5>
+                    <h5 title={topTrack.trackTitle}>{topTrack.trackTitle}</h5>
                 </div>
                 <div id="col-duration" className="col-1 d-flex justify-content-center align-items-center">
                     <p>{millisToMinutesAndSeconds(topTrack.trackDuration)}</p>
