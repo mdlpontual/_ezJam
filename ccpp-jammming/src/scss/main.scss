@@ -16,7 +16,7 @@ $form-check-input-focus-box-shadow: none;
 
 //------------home_page------------//
 
-@import "../pages/home/HomePage.scss";
+@import "../pages/Home/HomePage.scss";
 @import "../components/ui/home/header/HomeHeader.scss";
 @import "../components/ui/home/playlists_container/user_playlists/UserPlaylists.scss";
 @import "../components/ui/home/playlists_container/user_playlists/playlist/Playlist.scss";
@@ -32,7 +32,7 @@ $form-check-input-focus-box-shadow: none;
 
 //-----------login_page-----------//
 
-@import "../pages/login/LoginPage.scss";
+@import "../pages/Login/LoginPage.scss";
 @import "../pages/Login/login_button/LoginButtonBox.scss";
 
 //------------------------------------------------------------------------------//
