@@ -29,6 +29,28 @@ function useUserInfo({ accessToken, limit = 50, offset = 0, market = 'US', pollI
         return () => clearInterval(interval);
     }, [accessToken]);
 
+    const fetchUserInfo = async () => {
+        if (!accessToken) return;
+
+        if (userInfoCache) {
+            setUserInfo(userInfoCache);
+            return;
+        }
+
+        try {
+            const res = await axios.get(`https://api.spotify.com/v1/me`, {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                },
+            });
+
+            userInfoCache = res.data;
+            setUserInfo(res.data);
+        } catch (error) {
+            console.error("Error fetching user info:", error);
+        }
+    };
+
     const fetchUserPlaylists = async (forceRefetch = false) => {
         if (!accessToken) return;
 
@@ -52,7 +74,7 @@ function useUserInfo({ accessToken, limit = 50, offset = 0, market = 'US', pollI
                 },
             });
 
-            const playlists = res.data.items.filter((playlist) => playlist.owner.display_name === "mdl.al").map((playlist) => ({
+            const playlists = res.data.items.filter((playlist) => playlist.owner.display_name === userInfo.display_name).map((playlist) => ({
                 playlistId: playlist.id,
                 playlistTitle: playlist.name,
                 playlistUri: playlist.uri,
@@ -86,28 +108,6 @@ function useUserInfo({ accessToken, limit = 50, offset = 0, market = 'US', pollI
                     : playlist
             );
             setUserPlaylistsArr(playlistsCache);
-        }
-    };
-
-    const fetchUserInfo = async () => {
-        if (!accessToken) return;
-
-        if (userInfoCache) {
-            setUserInfo(userInfoCache);
-            return;
-        }
-
-        try {
-            const res = await axios.get(`https://api.spotify.com/v1/me`, {
-                headers: {
-                    Authorization: `Bearer ${accessToken}`,
-                },
-            });
-
-            userInfoCache = res.data;
-            setUserInfo(res.data);
-        } catch (error) {
-            console.error("Error fetching user info:", error);
         }
     };
 
