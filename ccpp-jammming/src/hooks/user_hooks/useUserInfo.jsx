@@ -13,8 +13,6 @@ function useUserInfo({ accessToken, limit = 50, offset = 0, market = 'US', pollI
     const [userInfo, setUserInfo] = useState({});
     const [userPlaylistsArr, setUserPlaylistsArr] = useState([]);
 
-    console.log(userInfo)
-
     useEffect(() => {
         if (isDirty || !playlistsCache) {
             fetchUserPlaylists();
@@ -76,7 +74,7 @@ function useUserInfo({ accessToken, limit = 50, offset = 0, market = 'US', pollI
                 },
             });
 
-            const playlists = res.data.items.filter((playlist) => playlist.owner.display_name === "mdl.al").map((playlist) => ({
+            const playlists = res.data.items.filter((playlist) => playlist.owner.display_name === userInfo.display_name).map((playlist) => ({
                 playlistId: playlist.id,
                 playlistTitle: playlist.name,
                 playlistUri: playlist.uri,
