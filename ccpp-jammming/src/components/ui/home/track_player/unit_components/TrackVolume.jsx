@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import IMG from "../../../../../assets/images/ImagesHUB";
 
 function TrackVolume({ volumeControl }) {
-    const [volume, setVolume] = useState(100); // Default volume at 50%
+    const [volume, setVolume] = useState(50); // Default volume at 50%
     const debounceRef = useRef(null); // Ref to store the debounce timeout
     const prevVolumeRef = useRef(volume); // Ref to store the previous volume value before muting
 
