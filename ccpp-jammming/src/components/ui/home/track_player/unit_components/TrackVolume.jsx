@@ -52,7 +52,7 @@ function TrackVolume({ volumeControl }) {
     return (
         <>
             <div id="volume-bar-row" className="row d-flex">
-                <a id="mute-icon" type="button" className="col d-flex justify-content-end align-items-center" onClick={handleMuteButton}>
+                <a title="mute/unmute" id="mute-icon" type="button" className="col d-flex justify-content-end align-items-center" onClick={handleMuteButton}>
                     <img src={speakerPicture} alt="mute volume" height="20px"/>
                 </a>
                 <div id="volume-bar" className="col-1 d-flex justify-content-center align-items-center">

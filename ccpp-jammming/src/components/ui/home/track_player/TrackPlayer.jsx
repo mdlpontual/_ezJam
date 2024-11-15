@@ -101,8 +101,8 @@ function TrackPlayer({ isPaused, isActive, userInfo,
                         <div id="track-butttons-row" className="row d-flex justify-content-center align-items-center">
                             <div id="col-play" className="col-auto d-flex justify-content-center align-items-center">
                                 <a id="togglePlay-button" type="button" onClick={handleTogglePlay} >
-                                    <img id="play-pause-white" src={isPaused ? IMG.playPNG : IMG.pausePNG} alt="play pause button" height="40px" />
-                                    <img id="play-pause-green" src={isPaused ? IMG.playGreenPNG : IMG.pauseGreenPNG} alt="play pause button" height="40px" />
+                                    <img title={isPaused ? "Play" : "Pause"} id="play-pause-white" src={isPaused ? IMG.playPNG : IMG.pausePNG} alt="play pause button" height="40px" />
+                                    <img title={isPaused ? "Play" : "Pause"} id="play-pause-green" src={isPaused ? IMG.playGreenPNG : IMG.pauseGreenPNG} alt="play pause button" height="40px" />
                                 </a>
                             </div>
                         </div>
@@ -155,18 +155,18 @@ function TrackPlayer({ isPaused, isActive, userInfo,
                     <div id="col-player" className="col d-flex flex-column">
                         <div id="track-butttons-row" className="row d-flex justify-content-center align-items-center">
                             <div id="col-prev" className="col-auto d-flex justify-content-center align-items-center">
-                                <img id="prev-white" src={IMG.previousPNG} alt="previous track button" height="25px" onClick={handlePreviousTrack} />
-                                <img id="prev-green" src={IMG.previousGreenPNG} alt="previous track button" height="25px" onClick={handlePreviousTrack} />
+                                <img title="Previous" id="prev-white" src={IMG.previousPNG} alt="previous track button" height="25px" onClick={handlePreviousTrack} />
+                                <img title="Previous" id="prev-green" src={IMG.previousGreenPNG} alt="previous track button" height="25px" onClick={handlePreviousTrack} />
                             </div>
                             <div id="col-play" className="col-auto d-flex justify-content-center align-items-center">
                                 <a id="togglePlay-button" type="button" onClick={handleTogglePlay} >
-                                    <img id="play-pause-white" src={isPaused ? IMG.playPNG : IMG.pausePNG} alt="play pause button" height="40px" />
-                                    <img id="play-pause-green" src={isPaused ? IMG.playGreenPNG : IMG.pauseGreenPNG} alt="play pause button" height="40px" />
+                                    <img title={isPaused ? "Play" : "Pause"} id="play-pause-white" src={isPaused ? IMG.playPNG : IMG.pausePNG} alt="play pause button" height="40px" />
+                                    <img title={isPaused ? "Play" : "Pause"} id="play-pause-green" src={isPaused ? IMG.playGreenPNG : IMG.pauseGreenPNG} alt="play pause button" height="40px" />
                                 </a>
                             </div>
                             <div id="col-next" className="col-auto d-flex justify-content-center align-items-center">
-                                <img id="next-white" src={IMG.nextPNG} alt="next track button" height="25px" onClick={handleNextTrack} />
-                                <img id="next-green" src={IMG.nextGreenPNG} alt="next track button" height="25px" onClick={handleNextTrack} />
+                                <img title="Next" id="next-white" src={IMG.nextPNG} alt="next track button" height="25px" onClick={handleNextTrack} />
+                                <img title="Next" id="next-green" src={IMG.nextGreenPNG} alt="next track button" height="25px" onClick={handleNextTrack} />
                             </div>
                         </div>
                         <div id="progress-bar-row" className="row d-flex">
