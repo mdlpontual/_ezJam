@@ -9,7 +9,7 @@ function DropdownAddButton({ dropdownButtonRef, handleDropDownAdd, accessToken }
     return (
     <>
         <div id="col-plus" className="dropdown col-1 d-flex justify-content-end align-items-center">
-            <div className="dropdown">
+            <div title="Click and Select a Playlist to add Tracks" className="dropdown">
                 <button id="plus-dd" ref={dropdownButtonRef} className="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" onClick={(e) => e.stopPropagation()}>
                     <img id="plus-icon" src={IMG.plus2PNG} alt="plus icon" width="25px"/>
                     <img id="plus-icon-green" src={IMG.plus2GreenPNG} alt="plus icon" width="25px"/>

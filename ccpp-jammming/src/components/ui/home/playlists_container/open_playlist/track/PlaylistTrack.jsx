@@ -103,7 +103,7 @@ function PlaylistTrack({ order,
                             {playlistTrack.trackAuthor}
                         </p>
                     </div>
-                    <div id="col-album" className="col-2 d-flex justify-content-start align-items-center">
+                    <div id="col-album" className="col-3 d-flex justify-content-start align-items-center">
                         <p title={playlistTrack.trackAlbum} id="open-album-page" type="button" onClick={handleAlbumClick}>
                             {playlistTrack.trackAlbum}
                         </p>
@@ -149,7 +149,7 @@ function PlaylistTrack({ order,
                         {playlistTrack.trackAuthor}
                     </p>
                 </div>
-                <div id="col-album" className="col-2 d-flex justify-content-start align-items-center">
+                <div id="col-album" className="col-3 d-flex justify-content-start align-items-center">
                     <p title={playlistTrack.trackAlbum} id="open-album-page" type="button" onClick={handleAlbumClick}>
                         {playlistTrack.trackAlbum}
                     </p>

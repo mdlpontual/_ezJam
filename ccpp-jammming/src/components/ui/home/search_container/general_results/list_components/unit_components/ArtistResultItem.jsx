@@ -15,13 +15,14 @@ function ArtistResultItem({ artistContent, onArtistClick, onAlbumClick, onPlayBu
                 <div id="artist-thumbnail" className="col-1 d-flex justify-content-center align-items-center">
                     <img 
                         src={profilePicture} 
+                        title={artistContent.artistName}
                         type="button" 
                         onClick={() => onArtistClick(artistContent, onArtistClick, onAlbumClick, onPlayButton, userPlaylistsArr, accessToken)}
                         alt="profile picture" 
                         height="175x"/>
                 </div>
                 <div id="artist-name" className="col d-flex justify-content-center align-items-start">
-                    <h6 id="open-artist-page" type="button" onClick={() => onArtistClick(artistContent, onArtistClick, onAlbumClick, onPlayButton, userPlaylistsArr, accessToken)}>
+                    <h6 title={artistContent.artistName} id="open-artist-page" type="button" onClick={() => onArtistClick(artistContent, onArtistClick, onAlbumClick, onPlayButton, userPlaylistsArr, accessToken)}>
                         {artistContent.artistName}
                     </h6>
                 </div>
