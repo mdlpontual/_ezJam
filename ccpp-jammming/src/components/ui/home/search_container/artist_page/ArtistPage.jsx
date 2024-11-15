@@ -14,7 +14,7 @@ function ArtistPage({ artistContent, onArtistClick, onAlbumClick, onPlayButton, 
                     <img src={artistContent.artistBanner} alt="artist image" />
                     <div id="filter"></div>
                     <div id="artist-page-banner-col" className="col d-flex justify-content-start align-items-end">
-                        <h1>{artistContent.artistName}</h1>
+                        <h1 title={artistContent.artistName}>{artistContent.artistName}</h1>
                     </div>
                 </div>
                 <div id="artist-page-top-five-row" className="row">

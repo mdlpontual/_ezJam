@@ -70,16 +70,16 @@ function AlbumTracks({ trackContent, fetchedAlbumTracksArray,
                     <div id="col-num" className="col-1 d-flex justify-content-center align-items-center">
                         <h5 id="number-icon">{trackContent.trackNumber}</h5>
                         <div id="drag-button" className="drag" draggable="false" onDragStart={handleDragStart}> 
-                            <img id="drag-icon" src={IMG.dragPNG} height="25px" />
+                            <img title="Drag and Drop to add this Track to a Playlist" id="drag-icon" src={IMG.dragPNG} height="25px" />
                         </div>
                     </div>
                     <div id="col-play" className="col-1 d-flex justify-content-center align-items-center">
                         <a id="play-button" type="button" onClick={(e) => {onPlayButton(uriTrack, uriQueue); e.stopPropagation()}}>
-                            <img id="play-icon" src={IMG.play3PNG} alt="play icon" width="30px"/>
+                            <img title="Click to Play" id="play-icon" src={IMG.play3PNG} alt="play icon" width="30px"/>
                         </a>
                     </div>
                     <div id="col-title" className="col d-flex justify-content-start align-items-center">
-                        <h5>{trackContent.trackTitle}</h5>
+                        <h5 title={trackContent.trackTitle}>{trackContent.trackTitle}</h5>
                     </div>
                     <div id="col-duration" className="col-1 d-flex justify-content-center align-items-center">
                         <p>{millisToMinutesAndSeconds(trackContent.trackDuration)}</p>
@@ -95,18 +95,18 @@ function AlbumTracks({ trackContent, fetchedAlbumTracksArray,
                 <div id="col-num" className="col-1 d-flex justify-content-center align-items-center">
                         <h5 id="number-icon">{trackContent.trackNumber}</h5>
                         <div id="drag-button" className="drag" draggable="false" onDragStart={handleDragStart}> 
-                            <img id="drag-icon" src={IMG.greenDragPNG} height="25px" />
+                            <img title="Drag and Drop to add this Track to a Playlist" id="drag-icon" src={IMG.greenDragPNG} height="25px" />
                         </div>
                     </div>
                     <div id="col-play" className="col-1 d-flex justify-content-center align-items-center">
                         <a className="col-1 d-flex justify-content-center align-items-center" id="play-button" type="button" onClick={(e) => onPlayButton(handleTogglePlay(e))}>
-                            <div className="d-flex justify-content-center align-items-center" id="play-icon">
+                            <div title={isPaused ? "Click to Resume" : "Click to Pause"} className="d-flex justify-content-center align-items-center" id="play-icon">
                                 {isPaused ? <img src={IMG.play3PNGGreen} alt="play icon" width="30px" /> : <Equalizer />}
                             </div>
                         </a>
                     </div>
                 <div id="col-title" className="col d-flex justify-content-start align-items-center">
-                    <h5>{trackContent.trackTitle}</h5>
+                    <h5 title={trackContent.trackTitle}>{trackContent.trackTitle}</h5>
                 </div>
                 <div id="col-duration" className="col-1 d-flex justify-content-center align-items-center">
                     <p>{millisToMinutesAndSeconds(trackContent.trackDuration)}</p>

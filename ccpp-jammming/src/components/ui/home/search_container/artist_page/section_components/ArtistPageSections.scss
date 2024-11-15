@@ -101,12 +101,12 @@
                 #col-play {
                     //border: $border-lime-dotted;
                     @include box-reset-default;
-                    width: 40px;
+                    width: 50px;
                     #play-button {
                         //border: $border-red-dotted;
                         @include box-reset-default;
-                        height: 35px;
-                        width: 35px;
+                        height: 45px;
+                        width: 45px;
                         border-radius: 50%;
                         background-color: black;
                         #play-icon {
@@ -299,12 +299,12 @@
                 #col-play {
                     //border: $border-lime-dotted;
                     @include box-reset-default;
-                    width: 40px;
+                    width: 50px;
                     #play-button {
                         //border: $border-red-dotted;
                         @include box-reset-default;
-                        height: 35px;
-                        width: 35px;
+                        height: 45px;
+                        width: 45px;
                         border-radius: 50%;
                         background-color: black;
                         #play-icon {

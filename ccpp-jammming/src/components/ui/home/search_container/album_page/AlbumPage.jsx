@@ -70,20 +70,20 @@ function AlbumPage({ albumContent, onArtistClick, onAlbumClick, onPlayButton, pl
                     <div id="album-page-banner-col" className="col">
                         <div id="album-inner-banner-row" className="row justify-content-center align-items-center">
                             <div id="album-cover-col" className="col-auto justify-content-center align-items-center">
-                                <img src={albumContent.albumCover} alt="album cover" height="115px"/>
+                                <img title={albumContent.albumTitle} src={albumContent.albumCover} alt="album cover" height="115px"/>
                             </div>
                             <div id="album-title-col" className="col flex-column justify-content-end align-items-start">
                                 <div id="type-sptf" className="row justify-content-between align-items-end">
                                     <h5 className="col">{albumContent.albumType}</h5>
-                                    <a id="white-logo" href={`https://open.spotify.com/album/${idAlbum}`}  target="_blank" rel="noopener noreferrer">
+                                    <a title="Open Spotify" id="white-logo" href={`https://open.spotify.com/album/${idAlbum}`}  target="_blank" rel="noopener noreferrer">
                                         <p className="col d-flex justify-content-center align-items-center"><img src={IMG.spotifyIconWhite} width="30px"/> Open Spotify</p>
                                     </a>
-                                    <a id="green-logo" href={`https://open.spotify.com/album/${idAlbum}`}  target="_blank" rel="noopener noreferrer">
+                                    <a title="Open Spotify" id="green-logo" href={`https://open.spotify.com/album/${idAlbum}`}  target="_blank" rel="noopener noreferrer">
                                         <p className="col d-flex justify-content-center align-items-center"><img src={IMG.spotifyIcon} width="30px"/> Open Spotify</p>
                                     </a>
                                 </div>
-                                <h1>{albumContent.albumTitle}</h1>
-                                <h5>by {albumContent.albumAuthor}</h5>
+                                <h1 title={albumContent.albumTitle}>{albumContent.albumTitle}</h1>
+                                <h5 title={albumContent.albumAuthor}>by {albumContent.albumAuthor}</h5>
                             </div>
                         </div>
                     </div>

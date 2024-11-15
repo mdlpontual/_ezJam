@@ -15,7 +15,7 @@
                 #album-cover-col {
                     //border: $border-cyan-dashed;
                     @include box-reset-default;
-                    padding: 10px;
+                    padding: 10px 10px 10px 0px;
                     img {
                         //border: $border-lime-dotted;
                         @include box-reset-default;
