@@ -84,27 +84,27 @@ function PlaylistTrack({ order,
                     <div id="col-num" className="col-1 d-flex justify-content-center align-items-center">
                         <h6 id="number-icon">{order + 1}</h6>
                         <div className="drag" {...listeners} {...attributes} onMouseUp={handleTrackChange}>
-                            <img src={IMG.dragPNG} height="23px" />
+                            <img title="Click and Drag to move this Track" src={IMG.dragPNG} height="23px" />
                         </div>
                     </div>
                     <div id="col-play" className="col-1 d-flex justify-content-center align-items-center">
                         <a className="col-1 d-flex justify-content-center align-items-center" id="play-button" type="button" onClick={handleTogglePlay}>
-                            <img id="play-icon" src={IMG.play3PNG} alt="play icon" width="25px" />
+                            <img title="Click to Play" id="play-icon" src={IMG.play3PNG} alt="play icon" width="25px" />
                         </a>
                     </div>
                     <div id="col-cover" className="col-1 d-flex justify-content-center align-items-center">
                         <div className="cover">
-                            <img src={cover} height="40px" type="button" onClick={handleAlbumClick}/>
+                            <img title={playlistTrack.trackAlbum} src={cover} height="40px" type="button" onClick={handleAlbumClick}/>
                         </div>
                     </div>
                     <div id="col-title" className="col d-flex justify-content-start align-items-center">
-                        <h5>{playlistTrack.trackTitle}</h5>
-                        <p id="open-artist-page" type="button" onClick={handleArtistClick}>
+                        <h5 title={playlistTrack.trackTitle}>{playlistTrack.trackTitle}</h5>
+                        <p title={playlistTrack.trackAuthor} id="open-artist-page" type="button" onClick={handleArtistClick}>
                             {playlistTrack.trackAuthor}
                         </p>
                     </div>
                     <div id="col-album" className="col-2 d-flex justify-content-start align-items-center">
-                        <p id="open-album-page" type="button" onClick={handleAlbumClick}>
+                        <p title={playlistTrack.trackAlbum} id="open-album-page" type="button" onClick={handleAlbumClick}>
                             {playlistTrack.trackAlbum}
                         </p>
                     </div>
@@ -112,7 +112,7 @@ function PlaylistTrack({ order,
                         <p>{millisToMinutesAndSeconds(playlistTrack.trackDuration)}</p>
                     </div>
                     <div id="col-minus" className="col-1 d-flex justify-content-end align-items-center">
-                        <a id="delete-track" className="col-1 d-flex justify-content-end align-items-center" type="button" onClick={handleDeleteClick}>
+                        <a title="Click to Remove this Track from the Playlist" id="delete-track" className="col-1 d-flex justify-content-end align-items-center" type="button" onClick={handleDeleteClick}>
                             <img id="minus-icon" src={IMG.minus2PNG} alt="minus icon" width="25px" />
                             <img id="minus-icon-red" src={IMG.minusRedPNG} alt="minus icon" width="25px" />
                         </a>
@@ -128,29 +128,29 @@ function PlaylistTrack({ order,
                 <div id="col-num" className="col-1 d-flex justify-content-center align-items-center">
                     <h6 id="number-icon">{order + 1}</h6>
                     <div className="drag" {...listeners} {...attributes} onMouseDown={handleTrackChange}>
-                        <img src={IMG.greenDragPNG} height="23px" />
+                        <img title="Click and Drag to move this Track" src={IMG.greenDragPNG} height="23px" />
                     </div>
                 </div>
                 <div id="col-play" className="col-1 d-flex justify-content-center align-items-center">
                     <a className="col-1 d-flex justify-content-center align-items-center" id="play-button" type="button" onClick={handleTogglePlay}>
-                        <div className="d-flex justify-content-center align-items-center" id="play-icon">
+                        <div title={isPaused ? "Click to Resume" : "Click to Pause"} className="d-flex justify-content-center align-items-center" id="play-icon">
                             {isPaused ? <img src={IMG.play3PNGGreen} alt="play icon" width="25px" /> : <Equalizer />}
                         </div>
                     </a>
                 </div>
                 <div id="col-cover" className="col-1 d-flex justify-content-center align-items-center">
                     <div className="cover">
-                        <img src={cover} height="40px" type="button" onClick={handleAlbumClick}/>
+                        <img title={playlistTrack.trackAlbum} src={cover} height="40px" type="button" onClick={handleAlbumClick}/>
                     </div>
                 </div>
                 <div id="col-title" className="col d-flex justify-content-start align-items-center">
-                    <h5>{playlistTrack.trackTitle}</h5>
-                    <p id="open-artist-page" type="button" onClick={handleArtistClick}>
+                    <h5 title={playlistTrack.trackTitle}>{playlistTrack.trackTitle}</h5>
+                    <p title={playlistTrack.trackAuthor} id="open-artist-page" type="button" onClick={handleArtistClick}>
                         {playlistTrack.trackAuthor}
                     </p>
                 </div>
                 <div id="col-album" className="col-2 d-flex justify-content-start align-items-center">
-                    <p id="open-album-page" type="button" onClick={handleAlbumClick}>
+                    <p title={playlistTrack.trackAlbum} id="open-album-page" type="button" onClick={handleAlbumClick}>
                         {playlistTrack.trackAlbum}
                     </p>
                 </div>
@@ -158,7 +158,7 @@ function PlaylistTrack({ order,
                     <p>{millisToMinutesAndSeconds(playlistTrack.trackDuration)}</p>
                 </div>
                 <div id="col-minus" className="col-1 d-flex justify-content-end align-items-center">
-                    <a id="delete-track" className="col-1 d-flex justify-content-end align-items-center" type="button" onClick={handleDeleteClick}>
+                    <a title="Click to Remove this Track from the Playlist" id="delete-track" className="col-1 d-flex justify-content-end align-items-center" type="button" onClick={handleDeleteClick}>
                         <img id="minus-icon" src={IMG.minus2PNG} alt="minus icon" width="25px" />
                         <img id="minus-icon-red" src={IMG.minusRedPNG} alt="minus icon" width="25px" />
                     </a>

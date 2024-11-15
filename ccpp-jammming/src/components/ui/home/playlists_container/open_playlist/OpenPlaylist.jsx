@@ -277,17 +277,19 @@ function OpenPlaylist({ playlistData, onBackClick,
                 onDrop={(event) => handleDrop(event, playlistData)}
             >
                 <header id="open-pl-header" className="row justify-content-center align-items-center">
-                    <div id="go-back-col" className="col-auto d-flex flex-column justify-content-center align-items-start">
-                        <a id="back-to-playlists" type="button" onClick={() => onBackClick()}>
-                            <img src={IMG.gobackPNG} alt="go back button" width="22px" />
+                    <div title="Go to Previous Page" id="go-back-col" className="col-auto d-flex flex-column justify-content-center align-items-center">
+                        <a id="go-back" type="button" className="d-flex flex-column justify-content-center align-items-center" onClick={() => onBackClick()}>
+                            <img id="back-white" src={IMG.gobackPNG} alt="go back button" width="22px"/>
+                            <img id="back-green" src={IMG.gobackGreenPNG} alt="go back button" width="22px"/>
                         </a>
                     </div>
                     <div id="title-col" className="col d-flex flex-column justify-content-center align-items-start">
-                        <h3 className="align-items-center">{newEditedName}</h3>
+                        <h3 title={newEditedName}  className="align-items-center">{newEditedName}</h3>
                     </div>
                     <div id="checkmark-col" className="col-auto d-flex flex-column justify-content-center align-items-center">
                         <img 
                             id="saved-icon" 
+                            title={isSaved ? "This Playlist is Saved" : "This Playlist is not Saved"} 
                             src={isSaved ? IMG.savedPNG : IMG.unsavedPNG}
                             alt="saved icon" 
                             width="35px" 
@@ -295,12 +297,12 @@ function OpenPlaylist({ playlistData, onBackClick,
                     </div>
                     <div id="edit-button-col" className="col-auto d-flex flex-column justify-content-center align-items-center">
                         <a id="edit-button" type="button" onClick={handleEditPlaylist}>
-                            <img src={IMG.pencilPNG} alt="edit icon" width="27px" />
+                            <img title="Edit this Playlist Name" src={IMG.pencilPNG} alt="edit icon" width="27px" />
                         </a>
                     </div>
                     <div id="share-button-col" className="col-auto d-flex flex-column justify-content-center align-items-center">
                         <a id="share-button" type="button" onClick={handleSharePlaylist}>
-                            <img src={IMG.sharePNG} alt="share icon" width="27px" />
+                            <img title="Share this Playlist" src={IMG.sharePNG} alt="share icon" width="27px" />
                         </a>
                     </div>
                     <div id="delete-button-col" className="col-auto d-flex flex-column justify-content-center align-items-center">
@@ -310,7 +312,7 @@ function OpenPlaylist({ playlistData, onBackClick,
                                 onBackClick();
                             }, 1000);
                         }}>
-                            <img src={IMG.trashBinPNG} alt="delete icon" width="27px" />
+                            <img title="Delete this Playlist" src={IMG.trashBinPNG} alt="delete icon" width="27px" />
                         </a>
                     </div>
                 </header>
@@ -370,12 +372,12 @@ function OpenPlaylist({ playlistData, onBackClick,
                 </main>
                 <footer id="open-pl-footer" className="row">
                     <div id="save-button-col" className="col-5 d-flex flex-column justify-content-center align-items-center">
-                        <button id="save-button" className={`btn btn-lg ${!isSaved ? 'btn-primary' : 'btn-outline-light'}`} onClick={handleSaveChanges} disabled={isSaved}>
+                        <button title="Save this Playlist" id="save-button" className={`btn btn-lg ${!isSaved ? 'btn-primary' : 'btn-outline-light'}`} onClick={handleSaveChanges} disabled={isSaved}>
                             Save to Spotify
                         </button>
                     </div>
                     <div id="discard-button-col" className="col-5 d-flex flex-column justify-content-center align-items-center">
-                        <button id="discard-button" className={`btn btn-lg ${!isSaved ? 'btn-danger' : 'btn-outline-light'}`} onClick={handleDiscardChanges} disabled={isSaved}>
+                        <button title="Discard All Changes" id="discard-button" className={`btn btn-lg ${!isSaved ? 'btn-danger' : 'btn-outline-light'}`} onClick={handleDiscardChanges} disabled={isSaved}>
                             Discard Changes
                         </button>
                     </div>
