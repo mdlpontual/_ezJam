@@ -26,3 +26,6 @@ dist-ssr
 # Enviroment Variables
 .env
 .env.test
+
+# Ignore server folder
+/server
