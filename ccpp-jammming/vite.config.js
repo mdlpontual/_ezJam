@@ -9,5 +9,8 @@ export default defineConfig({
     https: true,
     port: 3000,
     cors: true,
+  },
+  build: {
+    sourcemap: true, // Enable source maps
   }
 })
