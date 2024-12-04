@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+/* import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 
 function useFetchSearchResults({ searchArtistResults, searchAlbumResults, searchTrackResults, accessToken, market = 'US' }) {
@@ -235,10 +235,10 @@ function useFetchSearchResults({ searchArtistResults, searchAlbumResults, search
   return { fetchedArtistsArray, fetchedAlbumsArray, fetchedTracksArray, fetchMissingArtistByName, fetchMissingAlbumByName };
 }
 
-export default useFetchSearchResults;
+export default useFetchSearchResults; */
 
 
-/* import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 
 function useFetchSearchResults({ searchArtistResults, searchAlbumResults, searchTrackResults, accessToken, market = 'US' }) {
@@ -471,4 +471,4 @@ function useFetchSearchResults({ searchArtistResults, searchAlbumResults, search
   return { fetchedArtistsArray, fetchedAlbumsArray, fetchedTracksArray, fetchMissingArtistByName, fetchMissingAlbumByName };
 }
 
-export default useFetchSearchResults; */
+export default useFetchSearchResults;
