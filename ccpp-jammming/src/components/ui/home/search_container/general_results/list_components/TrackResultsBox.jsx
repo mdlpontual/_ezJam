@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import TrackResultItem from "./unit_components/TrackResultItem";
 import useFetchSearchResults from "../../../../../../hooks/useFetchSearchResults";
 import IMG from "../../../../../../assets/images/ImagesHUB";
 
-function TrackResultsBox({ searchArtistResults, searchAlbumResults, searchTrackResults, onArtistClick, onAlbumClick, onPlayButton, playTrack, pauseTrack, userPlaylistsArr, urlSearch, accessToken }) {
+const TrackResultsBox = React.memo(function TrackResultsBox({ searchArtistResults, searchAlbumResults, searchTrackResults, onArtistClick, onAlbumClick, onPlayButton, playTrack, pauseTrack, userPlaylistsArr, urlSearch, accessToken }) {
     const { fetchedArtistsArray, fetchedAlbumsArray, fetchedTracksArray, fetchMissingArtistByName, fetchMissingAlbumByName } = useFetchSearchResults({ searchArtistResults, searchAlbumResults, searchTrackResults, accessToken });
 
     const [updatedArtistContent, setUpdatedArtistContent] = useState([]);
@@ -14,8 +14,10 @@ function TrackResultsBox({ searchArtistResults, searchAlbumResults, searchTrackR
     const artistCache = useRef(new Map());
     const albumCache = useRef(new Map());
 
+    
     console.log("TrackResultsBox is on")
 
+    // Update artist and album content when fetched arrays change
     useEffect(() => {
         setUpdatedArtistContent(fetchedArtistsArray);
     }, [fetchedArtistsArray]);
@@ -24,17 +26,18 @@ function TrackResultsBox({ searchArtistResults, searchAlbumResults, searchTrackR
         setUpdatedAlbumContent(fetchedAlbumsArray);
     }, [fetchedAlbumsArray]);
 
+    // Batch fetch missing artists
     useEffect(() => {
         const fetchMissingArtistsBatch = async () => {
             const missingArtists = fetchedTracksArray
                 .map(track => track.trackAuthor)
                 .filter(artistName => !updatedArtistContent.some(artist => artist.artistName === artistName) && !artistCache.current.has(artistName));
 
-            const uniqueArtists = [...new Set(missingArtists)];
+            if (missingArtists.length === 0) return;
 
             try {
                 const results = await Promise.all(
-                    uniqueArtists.map(async artistName => {
+                    missingArtists.map(async artistName => {
                         const artist = await fetchMissingArtistByName(artistName);
                         if (artist) {
                             artistCache.current.set(artistName, artist);
@@ -50,22 +53,21 @@ function TrackResultsBox({ searchArtistResults, searchAlbumResults, searchTrackR
             }
         };
 
-        if (fetchedTracksArray.length > 0) {
-            fetchMissingArtistsBatch();
-        }
+        if (fetchedTracksArray.length > 0) fetchMissingArtistsBatch();
     }, [fetchedTracksArray, updatedArtistContent, fetchMissingArtistByName]);
 
+    // Batch fetch missing albums
     useEffect(() => {
         const fetchMissingAlbumsBatch = async () => {
             const missingAlbums = fetchedTracksArray
                 .map(track => track.trackAlbum)
                 .filter(albumTitle => !updatedAlbumContent.some(album => album.albumTitle === albumTitle) && !albumCache.current.has(albumTitle));
 
-            const uniqueAlbums = [...new Set(missingAlbums)];
+            if (missingAlbums.length === 0) return;
 
             try {
                 const results = await Promise.all(
-                    uniqueAlbums.map(async albumTitle => {
+                    missingAlbums.map(async albumTitle => {
                         const album = await fetchMissingAlbumByName(albumTitle);
                         if (album) {
                             albumCache.current.set(albumTitle, album);
@@ -81,12 +83,20 @@ function TrackResultsBox({ searchArtistResults, searchAlbumResults, searchTrackR
             }
         };
 
-        if (fetchedTracksArray.length > 0) {
-            fetchMissingAlbumsBatch();
-        }
+        if (fetchedTracksArray.length > 0) fetchMissingAlbumsBatch();
     }, [fetchedTracksArray, updatedAlbumContent, fetchMissingAlbumByName]);
 
-    const handleTrackClick = (uriTrack, index, event) => {
+    // Memoize derived data
+    const matchingContent = useMemo(() => {
+        return fetchedTracksArray.map(track => ({
+            track,
+            matchingArtist: updatedArtistContent.find(artist => artist.artistName === track.trackAuthor),
+            matchingAlbum: updatedAlbumContent.find(album => album.albumTitle === track.trackAlbum),
+        }));
+    }, [fetchedTracksArray, updatedArtistContent, updatedAlbumContent]);
+
+    // Callback for track click
+    const handleTrackClick = useCallback((uriTrack, index, event) => {
         const isCtrlOrCmdPressed = event.metaKey || event.ctrlKey;
         const isShiftPressed = event.shiftKey;
 
@@ -105,22 +115,24 @@ function TrackResultsBox({ searchArtistResults, searchAlbumResults, searchTrackR
                 return prevSelected.includes(uriTrack) ? [] : [uriTrack];
             }
         });
-    };
+    }, [lastSelectedIndex, fetchedTracksArray]);
 
-    const handleMouseDown = (event) => {
+    const handleMouseDown = useCallback((event) => {
         if (event.shiftKey) setIsShiftSelecting(true);
-    };
+    }, []);
 
-    const handleMouseUp = () => setIsShiftSelecting(false);
+    const handleMouseUp = useCallback(() => {
+        setIsShiftSelecting(false);
+    }, []);
 
-    const handleOutsideClick = (event) => {
+    const handleOutsideClick = useCallback((event) => {
         const container = document.getElementById("open-tracks-results-container");
         if (!container.contains(event.target)) setSelectedTracks([]);
-    };
+    }, []);
 
-    const handleKeyDown = (event) => {
+    const handleKeyDown = useCallback((event) => {
         if (event.key === "Escape") setSelectedTracks([]);
-    };
+    }, []);
 
     useEffect(() => {
         document.addEventListener("mousedown", handleOutsideClick);
@@ -129,7 +141,7 @@ function TrackResultsBox({ searchArtistResults, searchAlbumResults, searchTrackR
             document.removeEventListener("mousedown", handleOutsideClick);
             document.removeEventListener("keydown", handleKeyDown);
         };
-    }, []);
+    }, [handleOutsideClick, handleKeyDown]);
 
     return (
         <>
@@ -143,36 +155,32 @@ function TrackResultsBox({ searchArtistResults, searchAlbumResults, searchTrackR
                         <p className="col d-flex justify-content-center align-items-center"><img src={IMG.spotifyIcon} width="30px" /> Open Spotify</p>
                     </a>
                 </div>
-                {fetchedTracksArray.filter((track, idx) => idx < 10).map(track => {
-                    const matchingArtist = updatedArtistContent.find(artist => artist.artistName === track.trackAuthor);
-                    const matchingAlbum = updatedAlbumContent.find(album => album.albumTitle === track.trackAlbum);
-
-                    return (
-                        <TrackResultItem
-                            trackContent={track}
-                            artistContent={matchingArtist}
-                            albumContent={matchingAlbum}
-                            fetchedTracksArray={fetchedTracksArray}
-                            onArtistClick={onArtistClick}
-                            onAlbumClick={onAlbumClick}
-                            onPlayButton={onPlayButton}
-                            playTrack={playTrack}
-                            pauseTrack={pauseTrack}
-                            accessToken={accessToken}
-                            key={track.trackUri}
-                            onTrackClick={(event) => handleTrackClick(track.trackUri, fetchedTracksArray.indexOf(track), event)}
-                            isSelected={selectedTracks.includes(track.trackUri)}
-                            userPlaylistsArr={userPlaylistsArr}
-                            selectedTracks={selectedTracks}
-                        />
-                    );
-                })}
+                {matchingContent.map(({ track, matchingArtist, matchingAlbum }) => (
+                    <TrackResultItem
+                        trackContent={track}
+                        artistContent={matchingArtist}
+                        albumContent={matchingAlbum}
+                        fetchedTracksArray={fetchedTracksArray}
+                        onArtistClick={onArtistClick}
+                        onAlbumClick={onAlbumClick}
+                        onPlayButton={onPlayButton}
+                        playTrack={playTrack}
+                        pauseTrack={pauseTrack}
+                        accessToken={accessToken}
+                        key={track.trackUri}
+                        onTrackClick={(event) => handleTrackClick(track.trackUri, fetchedTracksArray.indexOf(track), event)}
+                        isSelected={selectedTracks.includes(track.trackUri)}
+                        userPlaylistsArr={userPlaylistsArr}
+                        selectedTracks={selectedTracks}
+                    />
+                ))}
             </div>
         </>
     );
-}
+});
 
 export default TrackResultsBox;
+
 
 
 /* import React, { useState, useEffect } from "react";
