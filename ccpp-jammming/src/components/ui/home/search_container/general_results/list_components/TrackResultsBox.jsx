@@ -14,7 +14,7 @@ function TrackResultsBox({ searchArtistResults, searchAlbumResults, searchTrackR
     const artistCache = useRef(new Map());
     const albumCache = useRef(new Map());
 
-    console.log("new version is on")
+    //console.log("new version is on")
 
     useEffect(() => {
         setUpdatedArtistContent(fetchedArtistsArray);
