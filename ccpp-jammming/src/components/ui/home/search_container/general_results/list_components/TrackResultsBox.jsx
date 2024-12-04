@@ -24,6 +24,68 @@ function TrackResultsBox({ searchArtistResults, searchAlbumResults, searchTrackR
         setUpdatedAlbumContent(fetchedAlbumsArray);
     }, [fetchedAlbumsArray]);
 
+    useEffect(() => {
+        const fetchMissingArtistsBatch = async () => {
+            const missingArtists = fetchedTracksArray
+                .map(track => track.trackAuthor)
+                .filter(artistName => !updatedArtistContent.some(artist => artist.artistName === artistName) && !artistCache.current.has(artistName));
+
+            const uniqueArtists = [...new Set(missingArtists)];
+
+            try {
+                const results = await Promise.all(
+                    uniqueArtists.map(async artistName => {
+                        const artist = await fetchMissingArtistByName(artistName);
+                        if (artist) {
+                            artistCache.current.set(artistName, artist);
+                        }
+                        return artist;
+                    })
+                );
+
+                const newArtistContent = results.filter(Boolean);
+                setUpdatedArtistContent(prevContent => [...prevContent, ...newArtistContent]);
+            } catch (error) {
+                console.error("Error fetching missing artists in batch:", error);
+            }
+        };
+
+        if (fetchedTracksArray.length > 0) {
+            fetchMissingArtistsBatch();
+        }
+    }, [fetchedTracksArray, updatedArtistContent, fetchMissingArtistByName]);
+
+    useEffect(() => {
+        const fetchMissingAlbumsBatch = async () => {
+            const missingAlbums = fetchedTracksArray
+                .map(track => track.trackAlbum)
+                .filter(albumTitle => !updatedAlbumContent.some(album => album.albumTitle === albumTitle) && !albumCache.current.has(albumTitle));
+
+            const uniqueAlbums = [...new Set(missingAlbums)];
+
+            try {
+                const results = await Promise.all(
+                    uniqueAlbums.map(async albumTitle => {
+                        const album = await fetchMissingAlbumByName(albumTitle);
+                        if (album) {
+                            albumCache.current.set(albumTitle, album);
+                        }
+                        return album;
+                    })
+                );
+
+                const newAlbumContent = results.filter(Boolean);
+                setUpdatedAlbumContent(prevContent => [...prevContent, ...newAlbumContent]);
+            } catch (error) {
+                console.error("Error fetching missing albums in batch:", error);
+            }
+        };
+
+        if (fetchedTracksArray.length > 0) {
+            fetchMissingAlbumsBatch();
+        }
+    }, [fetchedTracksArray, updatedAlbumContent, fetchMissingAlbumByName]);
+
     const handleTrackClick = (uriTrack, index, event) => {
         const isCtrlOrCmdPressed = event.metaKey || event.ctrlKey;
         const isShiftPressed = event.shiftKey;
@@ -68,64 +130,6 @@ function TrackResultsBox({ searchArtistResults, searchAlbumResults, searchTrackR
             document.removeEventListener("keydown", handleKeyDown);
         };
     }, []);
-
-    useEffect(() => {
-        const fetchMissingArtistsBatch = async () => {
-            const missingArtists = fetchedTracksArray
-                .map(track => track.trackAuthor)
-                .filter(artistName => !updatedArtistContent.some(artist => artist.artistName === artistName) && !artistCache.current.has(artistName));
-
-            const uniqueArtists = [...new Set(missingArtists)].slice(0, 50);
-
-            try {
-                const results = await Promise.all(
-                    uniqueArtists.map(async artistName => {
-                        const artist = await fetchMissingArtistByName(artistName);
-                        if (artist) {
-                            artistCache.current.set(artistName, artist);
-                        }
-                        return artist;
-                    })
-                );
-
-                const newArtistContent = results.filter(Boolean);
-                setUpdatedArtistContent(prevContent => [...prevContent, ...newArtistContent]);
-            } catch (error) {
-                console.error("Error fetching missing artists in batch:", error);
-            }
-        };
-
-        fetchMissingArtistsBatch();
-    }, [fetchedTracksArray, updatedArtistContent, fetchMissingArtistByName]);
-
-    useEffect(() => {
-        const fetchMissingAlbumsBatch = async () => {
-            const missingAlbums = fetchedTracksArray
-                .map(track => track.trackAlbum)
-                .filter(albumTitle => !updatedAlbumContent.some(album => album.albumTitle === albumTitle) && !albumCache.current.has(albumTitle));
-
-            const uniqueAlbums = [...new Set(missingAlbums)].slice(0, 50);
-
-            try {
-                const results = await Promise.all(
-                    uniqueAlbums.map(async albumTitle => {
-                        const album = await fetchMissingAlbumByName(albumTitle);
-                        if (album) {
-                            albumCache.current.set(albumTitle, album);
-                        }
-                        return album;
-                    })
-                );
-
-                const newAlbumContent = results.filter(Boolean);
-                setUpdatedAlbumContent(prevContent => [...prevContent, ...newAlbumContent]);
-            } catch (error) {
-                console.error("Error fetching missing albums in batch:", error);
-            }
-        };
-
-        fetchMissingAlbumsBatch();
-    }, [fetchedTracksArray, updatedAlbumContent, fetchMissingAlbumByName]);
 
     return (
         <>
