@@ -6,7 +6,7 @@ import IMG from "../../../../../../assets/images/ImagesHUB";
 function ArtistResultsBox({ searchArtistResults, onArtistClick, onAlbumClick, onPlayButton, userPlaylistsArr, urlSearch, accessToken }) {
     const { fetchedArtistsArray } = useFetchSearchResults({ searchArtistResults, accessToken })
 
-    console.log("new version is on")
+    console.log("ArtistResultsBox is on")
 
     return (
         <>

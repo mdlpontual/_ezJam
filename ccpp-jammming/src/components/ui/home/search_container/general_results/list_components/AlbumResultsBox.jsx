@@ -14,6 +14,8 @@ function AlbumResultsBox({ searchArtistResults, searchAlbumResults,
             fetchMissingArtistByName } = useFetchSearchResults({ searchArtistResults, searchAlbumResults, searchTrackResults, accessToken });
     const [updatedArtistContent, setUpdatedArtistContent] = useState([]);
 
+    console.log("Album is on")
+
     useEffect(() => {
         setUpdatedArtistContent(fetchedArtistsArray);
     }, [fetchedArtistsArray]);
