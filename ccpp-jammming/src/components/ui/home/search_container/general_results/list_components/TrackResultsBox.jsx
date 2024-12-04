@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useRef, useCallback, useMemo } from "react";
+import React, { useState, useEffect, useRef, useMemo, useCallback } from "react";
 import TrackResultItem from "./unit_components/TrackResultItem";
 import useFetchSearchResults from "../../../../../../hooks/useFetchSearchResults";
 import IMG from "../../../../../../assets/images/ImagesHUB";
 
-const TrackResultsBox = React.memo(function TrackResultsBox({ searchArtistResults, searchAlbumResults, searchTrackResults, onArtistClick, onAlbumClick, onPlayButton, playTrack, pauseTrack, userPlaylistsArr, urlSearch, accessToken }) {
+function TrackResultsBox({ searchArtistResults, searchAlbumResults, searchTrackResults, onArtistClick, onAlbumClick, onPlayButton, playTrack, pauseTrack, userPlaylistsArr, urlSearch, accessToken }) {
     const { fetchedArtistsArray, fetchedAlbumsArray, fetchedTracksArray, fetchMissingArtistByName, fetchMissingAlbumByName } = useFetchSearchResults({ searchArtistResults, searchAlbumResults, searchTrackResults, accessToken });
 
     const [updatedArtistContent, setUpdatedArtistContent] = useState([]);
@@ -14,10 +14,11 @@ const TrackResultsBox = React.memo(function TrackResultsBox({ searchArtistResult
     const artistCache = useRef(new Map());
     const albumCache = useRef(new Map());
 
-    
     console.log("TrackResultsBox is on")
 
-    // Update artist and album content when fetched arrays change
+    // Memoized values to avoid unnecessary recomputation
+    const stableFetchedTracksArray = useMemo(() => fetchedTracksArray, [fetchedTracksArray]);
+
     useEffect(() => {
         setUpdatedArtistContent(fetchedArtistsArray);
     }, [fetchedArtistsArray]);
@@ -26,77 +27,64 @@ const TrackResultsBox = React.memo(function TrackResultsBox({ searchArtistResult
         setUpdatedAlbumContent(fetchedAlbumsArray);
     }, [fetchedAlbumsArray]);
 
-    // Batch fetch missing artists
+    const fetchMissingArtistsBatch = useCallback(async () => {
+        const missingArtists = stableFetchedTracksArray
+            .map(track => track.trackAuthor)
+            .filter(artistName => !updatedArtistContent.some(artist => artist.artistName === artistName) && !artistCache.current.has(artistName));
+
+        const uniqueArtists = [...new Set(missingArtists)];
+
+        try {
+            const results = await Promise.all(
+                uniqueArtists.map(async artistName => {
+                    const artist = await fetchMissingArtistByName(artistName);
+                    if (artist) {
+                        artistCache.current.set(artistName, artist);
+                    }
+                    return artist;
+                })
+            );
+
+            const newArtistContent = results.filter(Boolean);
+            setUpdatedArtistContent(prevContent => [...prevContent, ...newArtistContent]);
+        } catch (error) {
+            console.error("Error fetching missing artists in batch:", error);
+        }
+    }, [stableFetchedTracksArray, updatedArtistContent, fetchMissingArtistByName]);
+
+    const fetchMissingAlbumsBatch = useCallback(async () => {
+        const missingAlbums = stableFetchedTracksArray
+            .map(track => track.trackAlbum)
+            .filter(albumTitle => !updatedAlbumContent.some(album => album.albumTitle === albumTitle) && !albumCache.current.has(albumTitle));
+
+        const uniqueAlbums = [...new Set(missingAlbums)];
+
+        try {
+            const results = await Promise.all(
+                uniqueAlbums.map(async albumTitle => {
+                    const album = await fetchMissingAlbumByName(albumTitle);
+                    if (album) {
+                        albumCache.current.set(albumTitle, album);
+                    }
+                    return album;
+                })
+            );
+
+            const newAlbumContent = results.filter(Boolean);
+            setUpdatedAlbumContent(prevContent => [...prevContent, ...newAlbumContent]);
+        } catch (error) {
+            console.error("Error fetching missing albums in batch:", error);
+        }
+    }, [stableFetchedTracksArray, updatedAlbumContent, fetchMissingAlbumByName]);
+
     useEffect(() => {
-        const fetchMissingArtistsBatch = async () => {
-            const missingArtists = fetchedTracksArray
-                .map(track => track.trackAuthor)
-                .filter(artistName => !updatedArtistContent.some(artist => artist.artistName === artistName) && !artistCache.current.has(artistName));
+        if (stableFetchedTracksArray.length > 0) {
+            fetchMissingArtistsBatch();
+            fetchMissingAlbumsBatch();
+        }
+    }, [stableFetchedTracksArray, fetchMissingArtistsBatch, fetchMissingAlbumsBatch]);
 
-            if (missingArtists.length === 0) return;
-
-            try {
-                const results = await Promise.all(
-                    missingArtists.map(async artistName => {
-                        const artist = await fetchMissingArtistByName(artistName);
-                        if (artist) {
-                            artistCache.current.set(artistName, artist);
-                        }
-                        return artist;
-                    })
-                );
-
-                const newArtistContent = results.filter(Boolean);
-                setUpdatedArtistContent(prevContent => [...prevContent, ...newArtistContent]);
-            } catch (error) {
-                console.error("Error fetching missing artists in batch:", error);
-            }
-        };
-
-        if (fetchedTracksArray.length > 0) fetchMissingArtistsBatch();
-    }, [fetchedTracksArray, updatedArtistContent, fetchMissingArtistByName]);
-
-    // Batch fetch missing albums
-    useEffect(() => {
-        const fetchMissingAlbumsBatch = async () => {
-            const missingAlbums = fetchedTracksArray
-                .map(track => track.trackAlbum)
-                .filter(albumTitle => !updatedAlbumContent.some(album => album.albumTitle === albumTitle) && !albumCache.current.has(albumTitle));
-
-            if (missingAlbums.length === 0) return;
-
-            try {
-                const results = await Promise.all(
-                    missingAlbums.map(async albumTitle => {
-                        const album = await fetchMissingAlbumByName(albumTitle);
-                        if (album) {
-                            albumCache.current.set(albumTitle, album);
-                        }
-                        return album;
-                    })
-                );
-
-                const newAlbumContent = results.filter(Boolean);
-                setUpdatedAlbumContent(prevContent => [...prevContent, ...newAlbumContent]);
-            } catch (error) {
-                console.error("Error fetching missing albums in batch:", error);
-            }
-        };
-
-        if (fetchedTracksArray.length > 0) fetchMissingAlbumsBatch();
-    }, [fetchedTracksArray, updatedAlbumContent, fetchMissingAlbumByName]);
-
-    // Memoize derived data
-    const matchingContent = useMemo(() => {
-        return fetchedTracksArray.map(track => ({
-            track,
-            matchingArtist: updatedArtistContent.find(artist => artist.artistName === track.trackAuthor),
-            matchingAlbum: updatedAlbumContent.find(album => album.albumTitle === track.trackAlbum),
-        }));
-    }, [fetchedTracksArray, updatedArtistContent, updatedAlbumContent]);
-
-    // Callback for track click
-    const handleTrackClick = useCallback((uriTrack, index, event) => {
+    const handleTrackClick = (uriTrack, index, event) => {
         const isCtrlOrCmdPressed = event.metaKey || event.ctrlKey;
         const isShiftPressed = event.shiftKey;
 
@@ -104,7 +92,7 @@ const TrackResultsBox = React.memo(function TrackResultsBox({ searchArtistResult
             if (isShiftPressed && lastSelectedIndex !== null) {
                 const start = Math.min(lastSelectedIndex, index);
                 const end = Math.max(lastSelectedIndex, index);
-                const range = fetchedTracksArray.slice(start, end + 1).map(track => track.trackUri);
+                const range = stableFetchedTracksArray.slice(start, end + 1).map(track => track.trackUri);
                 return Array.from(new Set([...prevSelected, ...range]));
             } else if (isCtrlOrCmdPressed) {
                 return prevSelected.includes(uriTrack)
@@ -115,15 +103,13 @@ const TrackResultsBox = React.memo(function TrackResultsBox({ searchArtistResult
                 return prevSelected.includes(uriTrack) ? [] : [uriTrack];
             }
         });
-    }, [lastSelectedIndex, fetchedTracksArray]);
+    };
 
-    const handleMouseDown = useCallback((event) => {
+    const handleMouseDown = (event) => {
         if (event.shiftKey) setIsShiftSelecting(true);
-    }, []);
+    };
 
-    const handleMouseUp = useCallback(() => {
-        setIsShiftSelecting(false);
-    }, []);
+    const handleMouseUp = () => setIsShiftSelecting(false);
 
     const handleOutsideClick = useCallback((event) => {
         const container = document.getElementById("open-tracks-results-container");
@@ -155,32 +141,36 @@ const TrackResultsBox = React.memo(function TrackResultsBox({ searchArtistResult
                         <p className="col d-flex justify-content-center align-items-center"><img src={IMG.spotifyIcon} width="30px" /> Open Spotify</p>
                     </a>
                 </div>
-                {matchingContent.map(({ track, matchingArtist, matchingAlbum }) => (
-                    <TrackResultItem
-                        trackContent={track}
-                        artistContent={matchingArtist}
-                        albumContent={matchingAlbum}
-                        fetchedTracksArray={fetchedTracksArray}
-                        onArtistClick={onArtistClick}
-                        onAlbumClick={onAlbumClick}
-                        onPlayButton={onPlayButton}
-                        playTrack={playTrack}
-                        pauseTrack={pauseTrack}
-                        accessToken={accessToken}
-                        key={track.trackUri}
-                        onTrackClick={(event) => handleTrackClick(track.trackUri, fetchedTracksArray.indexOf(track), event)}
-                        isSelected={selectedTracks.includes(track.trackUri)}
-                        userPlaylistsArr={userPlaylistsArr}
-                        selectedTracks={selectedTracks}
-                    />
-                ))}
+                {stableFetchedTracksArray.filter((track, idx) => idx < 10).map(track => {
+                    const matchingArtist = updatedArtistContent.find(artist => artist.artistName === track.trackAuthor);
+                    const matchingAlbum = updatedAlbumContent.find(album => album.albumTitle === track.trackAlbum);
+
+                    return (
+                        <TrackResultItem
+                            trackContent={track}
+                            artistContent={matchingArtist}
+                            albumContent={matchingAlbum}
+                            fetchedTracksArray={stableFetchedTracksArray}
+                            onArtistClick={onArtistClick}
+                            onAlbumClick={onAlbumClick}
+                            onPlayButton={onPlayButton}
+                            playTrack={playTrack}
+                            pauseTrack={pauseTrack}
+                            accessToken={accessToken}
+                            key={track.trackUri}
+                            onTrackClick={(event) => handleTrackClick(track.trackUri, stableFetchedTracksArray.indexOf(track), event)}
+                            isSelected={selectedTracks.includes(track.trackUri)}
+                            userPlaylistsArr={userPlaylistsArr}
+                            selectedTracks={selectedTracks}
+                        />
+                    );
+                })}
             </div>
         </>
     );
-});
+}
 
 export default TrackResultsBox;
-
 
 
 /* import React, { useState, useEffect } from "react";
@@ -202,6 +192,8 @@ function TrackResultsBox({ searchArtistResults, searchAlbumResults,
     const [selectedTracks, setSelectedTracks] = useState([]);
     const [lastSelectedIndex, setLastSelectedIndex] = useState(null);
     const [isShiftSelecting, setIsShiftSelecting] = useState(false);
+
+    console.log("TrackResultsBox is on")
 
     useEffect(() => {
         setUpdatedArtistContent(fetchedArtistsArray);
