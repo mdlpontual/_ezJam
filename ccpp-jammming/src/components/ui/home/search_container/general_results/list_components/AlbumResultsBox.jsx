@@ -32,7 +32,7 @@ function AlbumResultsBox({ searchArtistResults, searchAlbumResults,
                 </a>
             </div>
             { fetchedAlbumsArray.filter((album, idx) => idx < 5).map(album => {
-                //let matchingArtist = updatedArtistContent.find(artist => artist.artistName === album.albumAuthor);
+                let matchingArtist = updatedArtistContent.find(artist => artist.artistName === album.albumAuthor);
 
 /*                 // If matchingArtist is not found, trigger a fetch
                 if (!matchingArtist) {

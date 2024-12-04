@@ -93,8 +93,8 @@ function TrackResultsBox({ searchArtistResults, searchAlbumResults,
                     </a>
                 </div>
                 {fetchedTracksArray.filter((track, idx) => idx < 10).map(track => {
-                    //let matchingArtist = updatedArtistContent.find(artist => artist.artistName === track.trackAuthor);
-                    //let matchingAlbum = updatedAlbumContent.find(album => album.albumTitle === track.trackAlbum);
+                    let matchingArtist = updatedArtistContent.find(artist => artist.artistName === track.trackAuthor);
+                    let matchingAlbum = updatedAlbumContent.find(album => album.albumTitle === track.trackAlbum);
 /* 
                     // If matchingArtist is not found, trigger a fetch
                     if (!matchingArtist) {
