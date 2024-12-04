@@ -14,7 +14,7 @@ function AlbumResultsBox({ searchArtistResults, searchAlbumResults,
             fetchMissingArtistByName } = useFetchSearchResults({ searchArtistResults, searchAlbumResults, searchTrackResults, accessToken });
     const [updatedArtistContent, setUpdatedArtistContent] = useState([]);
 
-    console.log("Album is on")
+    console.log("album")
 
     useEffect(() => {
         setUpdatedArtistContent(fetchedArtistsArray);
@@ -32,16 +32,16 @@ function AlbumResultsBox({ searchArtistResults, searchAlbumResults,
                 </a>
             </div>
             { fetchedAlbumsArray.filter((album, idx) => idx < 5).map(album => {
-                let matchingArtist = updatedArtistContent.find(artist => artist.artistName === album.albumAuthor);
+                //let matchingArtist = updatedArtistContent.find(artist => artist.artistName === album.albumAuthor);
 
-                // If matchingArtist is not found, trigger a fetch
+/*                 // If matchingArtist is not found, trigger a fetch
                 if (!matchingArtist) {
                     fetchMissingArtistByName(album.albumAuthor).then(newArtist => {
                         if (newArtist) {
                             setUpdatedArtistContent(prevContent => [...prevContent, newArtist]);
                         }
                     });
-                }
+                } */
 
                 return (
                     <AlbumResultItem 
