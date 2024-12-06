@@ -27,6 +27,8 @@ function HomePage({ code }) {
             goForward, handleArtistClick,
             handleAlbumClick } = useAdimSearchPage(search, updateUri, playTrack, pauseTrack, userPlaylistsArr, accessToken);
 
+    console.log("branch preview test")
+
     // Function to handle when a new track is played
     const handlePlayTrack = () => {
         updateCurrentTrackUri(currentTrack.uri);
