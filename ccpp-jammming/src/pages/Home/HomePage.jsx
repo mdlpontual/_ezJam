@@ -28,6 +28,7 @@ function HomePage({ code }) {
             handleAlbumClick } = useAdimSearchPage(search, updateUri, playTrack, pauseTrack, userPlaylistsArr, accessToken);
 
     console.log("trying again with pull request")
+    console.log("trying again with pull request 02")
 
     // Function to handle when a new track is played
     const handlePlayTrack = () => {
