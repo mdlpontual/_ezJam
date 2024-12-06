@@ -20,7 +20,7 @@ function DropdownAddButton({ dropdownButtonRef, handleDropDownAdd, accessToken }
                     <li><hr className="dropdown-divider"></hr></li>
                     {userPlaylistsArr.map((playlistData) => (
                         <li key={playlistData.playlistId}>
-                            <a id="dd-item" className="dropdown-item" type="button" onClick={console.log('clicked on util')}>
+                            <a id="dd-item" className="dropdown-item" type="button" onClick={() => console.log('clicked on util')}>
                                 {playlistData.playlistTitle}
                             </a>
                         </li>
