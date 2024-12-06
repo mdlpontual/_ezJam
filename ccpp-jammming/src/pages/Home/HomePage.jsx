@@ -9,8 +9,6 @@ import usePlayTrack from "../../hooks/usePlayTrack";
 import usePlayerControls from "../../hooks/usePlayerControls";
 import { useTrack } from "../../hooks/TrackContext";
 import useUserInfo from "../../hooks/user_hooks/useUserInfo";
-import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import '../../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js';
 
 function HomePage({ code }) {
     const [search, setSearch] = useState("");

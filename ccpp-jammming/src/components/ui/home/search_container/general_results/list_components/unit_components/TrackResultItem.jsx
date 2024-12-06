@@ -67,6 +67,7 @@ function TrackResultItem({  artistContent, albumContent, trackContent,
                 dropdownInstance.hide();
             }
         }
+        console.log("clicked")
     };
 
     if(currentTrackUri !== uriTrack) {
