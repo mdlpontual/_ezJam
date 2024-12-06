@@ -96,7 +96,7 @@ function TrackResultsBox({ searchArtistResults, searchAlbumResults,
                     let matchingArtist = updatedArtistContent.find(artist => artist.artistName === track.trackAuthor);
                     let matchingAlbum = updatedAlbumContent.find(album => album.albumTitle === track.trackAlbum);
 
-                    // If matchingArtist is not found, trigger a fetch
+/*                     // If matchingArtist is not found, trigger a fetch
                     if (!matchingArtist) {
                         fetchMissingArtistByName(track.trackAuthor).then(newArtist => {
                             if (newArtist) {
@@ -111,7 +111,7 @@ function TrackResultsBox({ searchArtistResults, searchAlbumResults,
                                 setUpdatedAlbumContent(prevContent => [...prevContent, newAlbum]);
                             }
                         });
-                    }
+                    } */
 
                     return (
                         <TrackResultItem 
