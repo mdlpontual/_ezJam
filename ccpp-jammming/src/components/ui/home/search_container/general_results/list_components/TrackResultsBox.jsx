@@ -28,6 +28,36 @@ function TrackResultsBox({ searchArtistResults, searchAlbumResults,
         setUpdatedAlbumContent(fetchedAlbumsArray);
     }, [fetchedAlbumsArray]);
 
+    useEffect(() => {
+        const fetchMissingData = async () => {
+            const missingArtists = fetchedTracksArray
+                .filter(track => !updatedArtistContent.find(artist => artist.artistName === track.trackAuthor))
+                .map(track => track.trackAuthor);
+
+            const uniqueMissingArtists = [...new Set(missingArtists)];
+            for (const artistName of uniqueMissingArtists) {
+                const newArtist = await fetchMissingArtistByName(artistName);
+                if (newArtist) {
+                    setUpdatedArtistContent(prevContent => [...prevContent, newArtist]);
+                }
+            }
+
+            const missingAlbums = fetchedTracksArray
+                .filter(track => !updatedAlbumContent.find(album => album.albumTitle === track.trackAlbum))
+                .map(track => track.trackAlbum);
+
+            const uniqueMissingAlbums = [...new Set(missingAlbums)];
+            for (const albumTitle of uniqueMissingAlbums) {
+                const newAlbum = await fetchMissingAlbumByName(albumTitle);
+                if (newAlbum) {
+                    setUpdatedAlbumContent(prevContent => [...prevContent, newAlbum]);
+                }
+            }
+        };
+
+        fetchMissingData();
+    }, [fetchedTracksArray, updatedArtistContent, updatedAlbumContent, fetchMissingArtistByName, fetchMissingAlbumByName]);
+
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     const handleTrackClick = (uriTrack, index, event) => {
