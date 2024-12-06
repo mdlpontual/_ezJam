@@ -78,9 +78,8 @@ function TrackPlayer({ isPaused, isActive, userInfo,
             <div id="track-player-container" className="container-fluid d-flex justify-content-center align-items-center">
                 <div id="track-player-row" className="row d-flex justify-content-center align-items-center">
                     <div id="track-player-text" className="col d-flex flex-column justify-content-center align-items-center">
-                        {/* <h4>Enable your music player!</h4>
-                        <p> Open the Spotify app, go to "Connect to a Device" and click on "ezJam Track Player" </p> */}
-                        <h1>FROM MAIN!</h1>
+                        <h4>Enable your music player!</h4>
+                        <p> Open the Spotify app, go to "Connect to a Device" and click on "ezJam Track Player" </p>
                     </div>
                 </div>
             </div>
