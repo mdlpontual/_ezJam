@@ -2,7 +2,6 @@ import React from "react";
 import IMG from "../assets/images/ImagesHUB";
 import useUserInfo from "../hooks/user_hooks/useUserInfo"
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 function DropdownAddButton({ dropdownButtonRef, handleDropDownAdd, accessToken }) {
     const { userPlaylistsArr } = useUserInfo({accessToken});
@@ -20,7 +19,7 @@ function DropdownAddButton({ dropdownButtonRef, handleDropDownAdd, accessToken }
                     <li><hr className="dropdown-divider"></hr></li>
                     {userPlaylistsArr.map((playlistData) => (
                         <li key={playlistData.playlistId}>
-                            <a id="dd-item" className="dropdown-item" type="button" onClick={() => console.log('clicked on util')}>
+                            <a id="dd-item" className="dropdown-item" type="button" onClick={(e) => {handleDropDownAdd(playlistData); e.stopPropagation()}}>
                                 {playlistData.playlistTitle}
                             </a>
                         </li>
@@ -33,5 +32,3 @@ function DropdownAddButton({ dropdownButtonRef, handleDropDownAdd, accessToken }
 };
 
 export default DropdownAddButton;
-
-//(e) => {handleDropDownAdd(playlistData); e.stopPropagation()}
