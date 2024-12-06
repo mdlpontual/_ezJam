@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+/* import React, { useEffect, useState } from "react";
 import AlbumResultItem from "./unit_components/AlbumResultItem";
 import useFetchSearchResults from "../../../../../../hooks/useFetchSearchResults";
 import IMG from "../../../../../../assets/images/ImagesHUB";
@@ -76,9 +76,9 @@ function AlbumResultsBox({ searchArtistResults, searchAlbumResults,
     );
 }
 
-export default AlbumResultsBox;
+export default AlbumResultsBox; */
 
-/* import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import AlbumResultItem from "./unit_components/AlbumResultItem";
 import useFetchSearchResults from "../../../../../../hooks/useFetchSearchResults";
 import IMG from "../../../../../../assets/images/ImagesHUB";
@@ -142,4 +142,4 @@ function AlbumResultsBox({ searchArtistResults, searchAlbumResults,
     );
 }
 
-export default AlbumResultsBox; */
+export default AlbumResultsBox;
