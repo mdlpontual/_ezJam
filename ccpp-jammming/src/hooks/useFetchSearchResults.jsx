@@ -162,48 +162,51 @@ function useFetchSearchResults({ searchArtistResults, searchAlbumResults, search
   const fetchMissingArtistByName = useCallback(async (artistNames) => {
     if (!artistNames || !accessToken || artistFetchCount >= fetchLimit) return null;
 
-    const uniqueNames = artistNames.filter(name => !fetchedArtistsSet.has(name));
+    // Ensure artistNames is an array
+    const uniqueNames = Array.isArray(artistNames) 
+        ? artistNames.filter(name => !fetchedArtistsSet.has(name)) 
+        : [];
 
     for (let i = 0; i < uniqueNames.length; i += batchSize) {
-      const batch = uniqueNames.slice(i, i + batchSize);
+        const batch = uniqueNames.slice(i, i + batchSize);
 
-      try {
-        const responses = await Promise.all(
-          batch.map(async (artistName) => {
-            const res = await axios.get(
-              `https://api.spotify.com/v1/search?q=${encodeURIComponent(artistName)}&type=artist`,
-              {
-                headers: {
-                  Authorization: `Bearer ${accessToken}`,
-                },
-                params: {
-                  market: market,
-                },
-              }
+        try {
+            const responses = await Promise.all(
+                batch.map(async (artistName) => {
+                    const res = await axios.get(
+                        `https://api.spotify.com/v1/search?q=${encodeURIComponent(artistName)}&type=artist`,
+                        {
+                            headers: {
+                                Authorization: `Bearer ${accessToken}`,
+                            },
+                            params: {
+                                market: market,
+                            },
+                        }
+                    );
+                    return res.data.artists.items[0];
+                })
             );
-            return res.data.artists.items[0];
-          })
-        );
 
-        const newArtists = responses
-          .filter(artist => artist)
-          .map(artist => ({
-            artistId: artist.id,
-            artistType: artist.type,
-            artistName: artist.name,
-            artistBanner: artist.images[0]?.url,
-            artistProfileImg: artist.images[artist.images.length - 1]?.url,
-            artistGenres: artist.genres,
-            artistUri: artist.uri,
-          }));
+            const newArtists = responses
+                .filter(artist => artist)
+                .map(artist => ({
+                    artistId: artist.id,
+                    artistType: artist.type,
+                    artistName: artist.name,
+                    artistBanner: artist.images[0]?.url,
+                    artistProfileImg: artist.images[artist.images.length - 1]?.url,
+                    artistGenres: artist.genres,
+                    artistUri: artist.uri,
+                }));
 
-        setFetchedArtistsArray(prev => [...prev, ...newArtists]);
-        setArtistFetchCount(prev => prev + newArtists.length);
-      } catch (error) {
-        console.error("Error fetching missing artists:", error);
-      }
+            setFetchedArtistsArray(prev => [...prev, ...newArtists]);
+            setArtistFetchCount(prev => prev + newArtists.length);
+        } catch (error) {
+            console.error("Error fetching missing artists:", error);
+        }
 
-      await new Promise(resolve => setTimeout(resolve, delayBetweenBatches));
+        await new Promise(resolve => setTimeout(resolve, delayBetweenBatches));
     }
   }, [accessToken, artistFetchCount]);
 
@@ -212,51 +215,54 @@ function useFetchSearchResults({ searchArtistResults, searchAlbumResults, search
   const fetchMissingAlbumByName = useCallback(async (albumTitles) => {
     if (!albumTitles || !accessToken || albumFetchCount >= fetchLimit) return null;
 
-    const uniqueTitles = albumTitles.filter(title => !fetchedAlbumsSet.has(title));
+    // Ensure albumTitles is an array
+    const uniqueTitles = Array.isArray(albumTitles) 
+        ? albumTitles.filter(title => !fetchedAlbumsSet.has(title)) 
+        : [];
 
     for (let i = 0; i < uniqueTitles.length; i += batchSize) {
-      const batch = uniqueTitles.slice(i, i + batchSize);
+        const batch = uniqueTitles.slice(i, i + batchSize);
 
-      try {
-        const responses = await Promise.all(
-          batch.map(async (albumTitle) => {
-            const res = await axios.get(
-              `https://api.spotify.com/v1/search?q=${encodeURIComponent(albumTitle)}&type=album`,
-              {
-                headers: {
-                  Authorization: `Bearer ${accessToken}`,
-                },
-                params: {
-                  market: market,
-                },
-              }
+        try {
+            const responses = await Promise.all(
+                batch.map(async (albumTitle) => {
+                    const res = await axios.get(
+                        `https://api.spotify.com/v1/search?q=${encodeURIComponent(albumTitle)}&type=album`,
+                        {
+                            headers: {
+                                Authorization: `Bearer ${accessToken}`,
+                            },
+                            params: {
+                                market: market,
+                            },
+                        }
+                    );
+                    return res.data.albums.items[0];
+                })
             );
-            return res.data.albums.items[0];
-          })
-        );
 
-        const newAlbums = responses
-          .filter(album => album)
-          .map(album => ({
-            albumId: album.id,
-            albumAuthor: album.artists[0].name,
-            albumTitle: album.name,
-            albumType: album.album_type,
-            albumCover: album.images[0]?.url,
-            albumYear: album.release_date.slice(0, 4),
-            albumTotalTracks: album.total_tracks,
-            albumExternalUrls: album.external_urls,
-            albumUri: album.uri,
-          }));
+            const newAlbums = responses
+                .filter(album => album)
+                .map(album => ({
+                    albumId: album.id,
+                    albumAuthor: album.artists[0].name,
+                    albumTitle: album.name,
+                    albumType: album.album_type,
+                    albumCover: album.images[0]?.url,
+                    albumYear: album.release_date.slice(0, 4),
+                    albumTotalTracks: album.total_tracks,
+                    albumExternalUrls: album.external_urls,
+                    albumUri: album.uri,
+                }));
 
-        setFetchedAlbumsArray(prev => [...prev, ...newAlbums]);
-        setAlbumFetchCount(prev => prev + newAlbums.length);
-      } catch (error) {
-        console.error("Error fetching missing albums:", error);
+            setFetchedAlbumsArray(prev => [...prev, ...newAlbums]);
+            setAlbumFetchCount(prev => prev + newAlbums.length);
+        } catch (error) {
+            console.error("Error fetching missing albums:", error);
+        }
+
+        await new Promise(resolve => setTimeout(resolve, delayBetweenBatches));
       }
-
-      await new Promise(resolve => setTimeout(resolve, delayBetweenBatches));
-    }
   }, [accessToken, albumFetchCount]);
 
   //----------------------------------------------------------------------------------------------------------------------------------------------
