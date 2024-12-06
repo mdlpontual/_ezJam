@@ -15,7 +15,7 @@ function LoginPage() {
                 <footer id="footer-row" className="row">
                     <article id="footer-col" className="col">
                         <h6 id="light-signature">ezJam - a front-end portfolio project</h6>
-                        <h6 id="bold-signature">copyright mdlpontual - 2024</h6>
+                        <h6 id="bold-signature">!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</h6>
                     </article>
                 </footer>
             </div>
@@ -24,3 +24,5 @@ function LoginPage() {
 }
 
 export default LoginPage;
+
+//copyright mdlpontual - 2024
