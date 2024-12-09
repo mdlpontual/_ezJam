@@ -3,7 +3,6 @@ import IMG from "../../../../../../../assets/images/ImagesHUB";
 import { useTrack } from "../../../../../../../hooks/TrackContext";
 import { useAddTrack } from "../../../../../../../hooks/user_hooks/AddTrackContext";
 import Equalizer from "../../../../../../../utils/Equalizer";
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import DropdownAddButton from "../../../../../../../utils/DropdownAddButton";
 
 function TrackResultItem({  artistContent, albumContent, trackContent, 

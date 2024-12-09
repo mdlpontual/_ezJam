@@ -1,7 +1,6 @@
 import React from "react";
 import IMG from "../assets/images/ImagesHUB";
 import useUserInfo from "../hooks/user_hooks/useUserInfo"
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 function DropdownAddButton({ dropdownButtonRef, handleDropDownAdd, accessToken }) {
     const { userPlaylistsArr } = useUserInfo({accessToken});
