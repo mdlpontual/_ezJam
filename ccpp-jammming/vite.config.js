@@ -13,6 +13,9 @@ export default defineConfig({
   build: {
     sourcemap: true, // Enable source maps
   },
+  optimizeDeps: {
+    include: ["bootstrap"],
+  },
   base: './', // Ensure relative paths for production assets
 });
 
