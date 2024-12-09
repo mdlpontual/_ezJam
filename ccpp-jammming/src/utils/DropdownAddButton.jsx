@@ -27,17 +27,13 @@ function DropdownAddButton({ dropdownButtonRef, handleDropDownAdd, accessToken }
     return (
         <>
             <div id="col-plus" className="col-1 d-flex justify-content-end align-items-center">
-                <div
-                    title="Click and Select a Playlist to add Tracks"
-                    className="custom-dropdown"
-                    ref={dropdownButtonRef}
-                >
-                    <button id="plus-dd" className="btn" type="button" onClick={toggleMenu}>
-                        <img id="plus-icon" src={IMG.plus2PNG} alt="plus icon" width="25px" />
-                        <img id="plus-icon-green" src={IMG.plus2GreenPNG} alt="plus icon" width="25px" />
+                <div id="custom-dropdown" title="Click and Select a Playlist to add Tracks" className="container-fluid justify-content-center align-items-center custom-dropdown" ref={dropdownButtonRef}>
+                    <button id="plus-dd" className="row d-flex justify-content-center align-items-center btn" type="button" onClick={toggleMenu}>
+                        <img id="plus-icon" className="col justify-content-center align-items-center" src={IMG.plus2PNG} alt="plus icon" width="25px" />
+                        <img id="plus-icon-green" className="col justify-content-center align-items-center" src={IMG.plus2GreenPNG} alt="plus icon" width="25px" />
                     </button>
                     {isMenuOpen && (
-                        <ul id="dropdown-ul" className="custom-menu">
+                        <ul id="dropdown-ul" className="container-fluid">
                             <li>
                                 <h5 id="dd-top-text" className="custom-menu-item">
                                     Select a playlist to add this track:
@@ -48,16 +44,7 @@ function DropdownAddButton({ dropdownButtonRef, handleDropDownAdd, accessToken }
                             </li>
                             {userPlaylistsArr.map((playlistData) => (
                                 <li key={playlistData.playlistId}>
-                                    <button
-                                        id="dd-item"
-                                        className="custom-menu-item"
-                                        type="button"
-                                        onClick={(e) => {
-                                            handleDropDownAdd(playlistData);
-                                            e.stopPropagation();
-                                            closeMenu();
-                                        }}
-                                    >
+                                    <button id="dd-item" className="custom-menu-item" type="button" onClick={(e) => {handleDropDownAdd(playlistData); e.stopPropagation(); closeMenu();}}>
                                         {playlistData.playlistTitle}
                                     </button>
                                 </li>
@@ -71,39 +58,3 @@ function DropdownAddButton({ dropdownButtonRef, handleDropDownAdd, accessToken }
 }
 
 export default DropdownAddButton;
-
-
-/* import React from "react";
-import IMG from "../assets/images/ImagesHUB";
-import useUserInfo from "../hooks/user_hooks/useUserInfo"
-
-function DropdownAddButton({ dropdownButtonRef, handleDropDownAdd, accessToken }) {
-    const { userPlaylistsArr } = useUserInfo({accessToken});
-
-    return (
-    <>
-        <div id="col-plus" className="dropdown col-1 d-flex justify-content-end align-items-center">
-            <div title="Click and Select a Playlist to add Tracks" className="dropdown">
-                <button id="plus-dd" ref={dropdownButtonRef} className="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" onClick={(e) => e.stopPropagation()}>
-                    <img id="plus-icon" src={IMG.plus2PNG} alt="plus icon" width="25px"/>
-                    <img id="plus-icon-green" src={IMG.plus2GreenPNG} alt="plus icon" width="25px"/>
-                </button>
-                <ul id="dropdown-ul" className="dropdown-menu">
-                    <li><h5 id="dd-top-text" className="dropdown-item">Select a playlist to add this track:</h5></li>
-                    <li><hr className="dropdown-divider"></hr></li>
-                    {userPlaylistsArr.map((playlistData) => (
-                        <li key={playlistData.playlistId}>
-                            <a id="dd-item" className="dropdown-item" type="button" onClick={(e) => {handleDropDownAdd(playlistData); e.stopPropagation()}}>
-                                {playlistData.playlistTitle}
-                            </a>
-                        </li>
-                    ))}
-                </ul>
-            </div>
-        </div>
-    </>
-    );
-};
-
-export default DropdownAddButton;
- */
