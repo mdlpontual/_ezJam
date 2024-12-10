@@ -1,8 +1,10 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import IMG from "../../../../assets/images/ImagesHUB";
 
 function SearchContainer({ search, setSearch, activePage, goBack, goForward }) {
     
+    const [latestSearch, setLatestSearch] = useState(search); // Store the latest input
+
     const disableEnter = (event) => {
         if (event.key === 'Enter') {
             event.preventDefault();
@@ -20,14 +22,21 @@ function SearchContainer({ search, setSearch, activePage, goBack, goForward }) {
         };
     };
 
-    // Throttled version of setSearch
-    const throttledSetSearch = useCallback(
-        throttle((query) => setSearch(query), 500),
-        []
+    // Throttled fetch function
+    const throttledFetch = useCallback(
+        throttle((query) => {
+            setSearch(query); // Trigger the fetch here
+        }, 500),
+        [] // Only initialize the throttle once
     );
 
+    // Effect to monitor the latest search and throttle the fetch
+    useEffect(() => {
+        throttledFetch(latestSearch);
+    }, [latestSearch, throttledFetch]);
+
     const handleInputChange = (event) => {
-        throttledSetSearch(event.target.value);
+        setLatestSearch(event.target.value); // Update the search value immediately
     };
 
     return (
@@ -43,7 +52,7 @@ function SearchContainer({ search, setSearch, activePage, goBack, goForward }) {
                                 </a>
                                 <a id="go-foward" type="button" className="col-auto d-flex flex-column justify-content-center align-items-center" onClick={goForward}>
                                     <img title="Go to Next Page" id="foward-white" src={IMG.gofowardPNG} alt="go foward button" width="22px"/>
-                                    <img title="Go to Next Page" id="foward-green" src={IMG.gofowardGreenPNG} alt="go foward button" width="22px"/>
+                                    <img title="Go to Next Page" id="foward-green" src={IMG.gobackGreenPNG} alt="go foward button" width="22px"/>
                                 </a>
                             </div>
                         </div>
@@ -59,7 +68,7 @@ function SearchContainer({ search, setSearch, activePage, goBack, goForward }) {
                                     type="search" 
                                     placeholder="Search the Spotify Library" 
                                     className="col" 
-                                    value={search} 
+                                    value={latestSearch} 
                                     onChange={handleInputChange} 
                                     onKeyDown={disableEnter}/>
                             </div>
