@@ -78,7 +78,7 @@ function TrackPlayer({ isPaused, isActive, userInfo,
             <div id="track-player-container" className="container-fluid d-flex justify-content-center align-items-center">
                 <div id="track-player-row" className="row d-flex justify-content-center align-items-center">
                     <div id="track-player-text" className="col d-flex flex-column justify-content-center align-items-center">
-                        <h4>Enable your music player!</h4>
+                        <h4>Listen to your playlists with ezJam!</h4>
                         <p> Open the Spotify app, go to "Connect to a Device" and click on "ezJam Track Player" </p>
                     </div>
                 </div>
@@ -124,7 +124,7 @@ function TrackPlayer({ isPaused, isActive, userInfo,
                             </div>
                         </div>
                     </div>
-                    <div id="col-volume" className="col justify-content-end align-items-center">
+                    <div id="col-volume" className="col justify-content-end align-items-center d-none d-lg-flex">
                         <div id="volume-bar-row" className="row d-flex justify-content-end align-items-center">
                             <a type="button" 
                                 id="spotify-button" 
@@ -188,7 +188,7 @@ function TrackPlayer({ isPaused, isActive, userInfo,
                             </div>
                         </div>
                     </div>
-                    <div id="col-volume" className="col">
+                    <div id="col-volume" className="col justify-content-end align-items-center d-none d-lg-flex">
                         <TrackVolume volumeControl={volumeControl} />
                     </div>
                 </div>

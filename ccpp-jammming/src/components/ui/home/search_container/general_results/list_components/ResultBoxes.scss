@@ -18,12 +18,13 @@
                     #inside-col {
                         //border: $border-lime-dotted;
                         height: 235px;
-                        max-width: 175px;
+                        max-width: 100%;
                         padding-top: 20px;
                         #artist-inner-row {
                             //border: $border-yellow-dotted;
                             @include box-reset-default;
                             height: 100%;
+                            max-width: 100%;
                             #artist-thumbnail {
                                 //border: $border-cyan-dotted;
                                 @include box-reset-default;
@@ -99,6 +100,7 @@
                         white-space: nowrap;
                         text-overflow: ellipsis;
                         height: fit-content;
+                        width: 100%;
                     }
                     p {
                         //border: $border-magenta-dotted;
@@ -107,6 +109,7 @@
                         white-space: nowrap;
                         text-overflow: ellipsis;
                         height: fit-content;
+                        width: 100%;
                     }
                     #open-artist-page:hover{
                         text-decoration: underline;

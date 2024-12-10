@@ -22,9 +22,9 @@ function TrackDisplay({ currentTrack, onPlayButton, onArtistClick, onAlbumClick,
     
     return (
         <>
-            <div id="col-cover" className="col-1 d-flex justify-content-center align-items-center">
+            <div id="col-cover" className="col-1 d-flex justify-content-center align-items-center d-none d-lg-flex">
                 <a id="display-cover" type="button" onClick={() => onAlbumClick(albumContent, onArtistClick, onAlbumClick, onPlayButton, userPlaylistsArr, accessToken)}>
-                    <img title={albumCurrent} src={coverPicture} height="75px" width="75px"/>
+                    <img title={albumCurrent} src={coverPicture} height="75px" width="75px" />
                 </a>
             </div>
             <div id="col-title" className="row d-flex flex-column justify-content-center align-items-start">

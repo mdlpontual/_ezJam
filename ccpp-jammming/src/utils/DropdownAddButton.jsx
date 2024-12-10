@@ -24,6 +24,12 @@ function DropdownAddButton({ dropdownButtonRef, handleDropDownAdd, accessToken }
         return () => document.removeEventListener("click", handleOutsideClick);
     }, [dropdownButtonRef]);
 
+    // Update handleDropDownAdd to close the menu after selection
+    const handleItemClick = (playlistData) => {
+        handleDropDownAdd(playlistData); // Call the passed-in function
+        closeMenu(); // Close the dropdown menu
+    };
+
     return (
         <>
             <div id="col-plus" className="col-1 d-flex justify-content-end align-items-center">
@@ -44,7 +50,7 @@ function DropdownAddButton({ dropdownButtonRef, handleDropDownAdd, accessToken }
                             </li>
                             {userPlaylistsArr.map((playlistData) => (
                                 <li key={playlistData.playlistId}>
-                                    <button id="dd-item" className="custom-menu-item" type="button" onClick={(e) => {handleDropDownAdd(playlistData); e.stopPropagation(); closeMenu();}}>
+                                    <button id="dd-item" className="custom-menu-item" type="button" onClick={(e) => {handleDropDownAdd(playlistData); e.stopPropagation(); handleItemClick(playlistData);}}>
                                         {playlistData.playlistTitle}
                                     </button>
                                 </li>

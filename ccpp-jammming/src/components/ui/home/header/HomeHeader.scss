@@ -9,21 +9,16 @@
         #header-logo-col {
             //border: $border-cyan-solid;
             @include box-reset-default;
-            height: 100%;
             #jammming-logo {
                 //border: $border-lime-dashed;
                 @include box-reset-default;
-            }
-            #spotify-logo {
-                //border: $border-lime-dashed;
-                @include box-reset-default;
-                position: relative;
-                top: 21px;
-                right: 87px;
-                p {
-                    font-size: 0.75rem;
-                    position: relative;
-                    top: 15px;
+                img {
+                    //border: $border-lime-dashed;
+                    @include box-reset-default;
+                    max-height: 80px; 
+                    max-width: 100%;
+                    height: auto; 
+                    object-fit: contain; 
                 }
             }
         }
@@ -52,15 +47,11 @@
                             //border: $border-lime-dotted;
                             @include box-reset-default;
                         }
-                    }
-                    #logoff {
-                        text-decoration: none;
-                        color: white;
-                        font-weight: bold;
-                    }
-                    #logoff:hover {
-                        color: $secondary;
-                        background: none;
+                        h6:hover {
+                            //border: $border-lime-dotted;
+                            @include box-reset-default;
+                            color: black;
+                        }
                     }
                     #spotify-button {
                         //border: $border-lime-dotted;
@@ -85,6 +76,19 @@
                             @include box-reset-default;
                         }
                     }
+                }
+                #logoff {
+                    //border: $border-lime-dotted;
+                    @include box-reset-default;
+                    text-decoration: none;
+                    color: white;
+                    font-weight: bold;
+                }
+                #logoff:hover {
+                    //border: $border-lime-dotted;
+                    @include box-reset-default;
+                    color: $secondary;
+                    background: none;
                 }
             }
         }

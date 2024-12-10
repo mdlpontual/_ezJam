@@ -321,10 +321,10 @@ function OpenPlaylist({ playlistData, onBackClick,
                         <div id="top-labels" className="row">
                             <div id="col-num" className="col-1 d-flex justify-content-center align-items-end">#</div>
                             <div id="col-blank" className="col-1 d-flex justify-content-start align-items-end"></div>
-                            <div id="col-cover" className="col-1 d-flex justify-content-start align-items-end"></div>
+                            <div id="col-cover" className="col-1 d-flex justify-content-start align-items-end d-none d-md-flex"></div>
                             <div id="col-title" className="col d-flex justify-content-start align-items-end">title</div>
-                            <div id="col-album" className="col-3 d-flex justify-content-start align-items-end">album</div>
-                            <div id="col-duration" className="col-1 d-flex justify-content-center align-items-end">
+                            <div id="col-album" className="col-3 d-flex justify-content-start align-items-end d-none d-md-flex">album</div>
+                            <div id="col-duration" className="col-1 d-flex justify-content-center align-items-end d-none d-md-flex">
                                 <img src={IMG.clockPNG} alt="clock icon" height="15px" />
                             </div>
                             <div id="col-minus" className="col-1 d-flex justify-content-start align-items-end"></div>

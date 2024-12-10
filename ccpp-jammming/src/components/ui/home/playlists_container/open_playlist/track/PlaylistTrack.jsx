@@ -92,7 +92,7 @@ function PlaylistTrack({ order,
                             <img title="Click to Play" id="play-icon" src={IMG.play3PNG} alt="play icon" width="25px" />
                         </a>
                     </div>
-                    <div id="col-cover" className="col-1 d-flex justify-content-center align-items-center">
+                    <div id="col-cover" className="col-1 d-flex justify-content-center align-items-center d-none d-md-flex">
                         <div className="cover">
                             <img title={playlistTrack.trackAlbum} src={cover} height="40px" type="button" onClick={handleAlbumClick}/>
                         </div>
@@ -103,12 +103,12 @@ function PlaylistTrack({ order,
                             {playlistTrack.trackAuthor}
                         </p>
                     </div>
-                    <div id="col-album" className="col-3 d-flex justify-content-start align-items-center">
+                    <div id="col-album" className="col-3 d-flex justify-content-start align-items-center d-none d-md-flex">
                         <p title={playlistTrack.trackAlbum} id="open-album-page" type="button" onClick={handleAlbumClick}>
                             {playlistTrack.trackAlbum}
                         </p>
                     </div>
-                    <div id="col-duration" className="col-1 d-flex justify-content-center align-items-center">
+                    <div id="col-duration" className="col-1 d-flex justify-content-center align-items-center d-none d-md-flex">
                         <p>{millisToMinutesAndSeconds(playlistTrack.trackDuration)}</p>
                     </div>
                     <div id="col-minus" className="col-1 d-flex justify-content-end align-items-center">
@@ -138,7 +138,7 @@ function PlaylistTrack({ order,
                         </div>
                     </a>
                 </div>
-                <div id="col-cover" className="col-1 d-flex justify-content-center align-items-center">
+                <div id="col-cover" className="col-1 d-flex justify-content-center align-items-center d-none d-md-flex">
                     <div className="cover">
                         <img title={playlistTrack.trackAlbum} src={cover} height="40px" type="button" onClick={handleAlbumClick}/>
                     </div>
@@ -149,12 +149,12 @@ function PlaylistTrack({ order,
                         {playlistTrack.trackAuthor}
                     </p>
                 </div>
-                <div id="col-album" className="col-3 d-flex justify-content-start align-items-center">
+                <div id="col-album" className="col-3 d-flex justify-content-start align-items-center d-none d-md-flex">
                     <p title={playlistTrack.trackAlbum} id="open-album-page" type="button" onClick={handleAlbumClick}>
                         {playlistTrack.trackAlbum}
                     </p>
                 </div>
-                <div id="col-duration" className="col-1 d-flex justify-content-center align-items-center">
+                <div id="col-duration" className="col-1 d-flex justify-content-center align-items-center d-none d-md-flex">
                     <p>{millisToMinutesAndSeconds(playlistTrack.trackDuration)}</p>
                 </div>
                 <div id="col-minus" className="col-1 d-flex justify-content-end align-items-center">

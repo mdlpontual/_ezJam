@@ -8,12 +8,12 @@ function HomeHeader({ logout }) {
         <>
             <header id="header-inner-container" className="container-fluid d-flex flex-column">
                 <section id="header-inner-row" className="row">
-                    <figure id="header-logo-col" className="col-auto d-flex justify-content-start align-items-center">
-                        <div id="jammming-logo" className="col">
+                    <figure id="header-logo-col" className="col-4 d-flex justify-content-start align-items-center">
+                        <div id="jammming-logo" className="col justify-content-center align-items-center">
                             <img src={IMG.jammmingLogo} alt="jammming logo" height="80px"/>
                         </div>
                     </figure>
-                    <nav id="header-nav-col" className="col d-flex justify-content-end align-items-center">
+                    <nav id="header-nav-col" className="col-8 d-flex justify-content-end align-items-center">
                         <ul className="d-flex justify-content-center align-items-center">
                             <li className="d-flex justify-content-center align-items-center">
                                 <a type="button" 
@@ -46,7 +46,7 @@ function HomeHeader({ logout }) {
                                     <h6>copyright mdlpontual - 2024</h6>`}/>
                                 </div>
                             </li>
-                            <li id="logoff" type="button" onClick={logout} style={{ cursor: 'pointer' }}>Logoff</li>
+                            <li id="logoff" type="button" onClick={logout}>Logoff</li>
                         </ul>
                     </nav>
                 </section>

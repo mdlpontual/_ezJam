@@ -103,7 +103,7 @@ function AlbumPage({ albumContent, onArtistClick, onAlbumClick, onPlayButton, pl
                             <div id="col-artist" className="col-2 d-flex justify-content-start align-items-center">
 
                             </div>
-                            <div id="col-duration" className="col-1 d-flex justify-content-center align-items-end">
+                            <div id="col-duration" className="col-1 d-flex justify-content-center align-items-end d-none d-md-flex">
                                 <img src={IMG.clockPNG} alt="clock icon" height="15px"/>
                             </div>
                             <div id="col-cover" className="col-1 d-flex justify-content-start align-items-end">

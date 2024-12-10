@@ -3,7 +3,6 @@ import IMG from "../../../../../assets/images/ImagesHUB";
 import { useTrack } from "../../../../../hooks/TrackContext";
 import { useAddTrack } from "../../../../../hooks/user_hooks/AddTrackContext";
 import Equalizer from "../../../../../utils/Equalizer";
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import DropdownAddButton from "../../../../../utils/DropdownAddButton";
 
 function AlbumTracks({ trackContent, fetchedAlbumTracksArray, 
@@ -52,14 +51,6 @@ function AlbumTracks({ trackContent, fetchedAlbumTracksArray,
             updateTrackToAdd(uriTrack, selectedTracksIds, playlistData, accessToken);
             //console.log(selectedTracksIds);
         }
-
-        // Close the dropdown after selection
-        if (dropdownButtonRef.current) {
-            const dropdownInstance = bootstrap.Dropdown.getInstance(dropdownButtonRef.current);
-            if (dropdownInstance) {
-                dropdownInstance.hide();
-            }
-        }
     };
 
     
@@ -81,7 +72,7 @@ function AlbumTracks({ trackContent, fetchedAlbumTracksArray,
                     <div id="col-title" className="col d-flex justify-content-start align-items-center">
                         <h5 title={trackContent.trackTitle}>{trackContent.trackTitle}</h5>
                     </div>
-                    <div id="col-duration" className="col-1 d-flex justify-content-center align-items-center">
+                    <div id="col-duration" className="col-1 d-flex justify-content-center align-items-center d-none d-md-flex">
                         <p>{millisToMinutesAndSeconds(trackContent.trackDuration)}</p>
                     </div>
                     <DropdownAddButton dropdownButtonRef={dropdownButtonRef} handleDropDownAdd={handleDropDownAdd} accessToken={accessToken}/>                 
@@ -108,7 +99,7 @@ function AlbumTracks({ trackContent, fetchedAlbumTracksArray,
                 <div id="col-title" className="col d-flex justify-content-start align-items-center">
                     <h5 title={trackContent.trackTitle}>{trackContent.trackTitle}</h5>
                 </div>
-                <div id="col-duration" className="col-1 d-flex justify-content-center align-items-center">
+                <div id="col-duration" className="col-1 d-flex justify-content-center align-items-center d-none d-md-flex">
                     <p>{millisToMinutesAndSeconds(trackContent.trackDuration)}</p>
                 </div>
                 <DropdownAddButton dropdownButtonRef={dropdownButtonRef} handleDropDownAdd={handleDropDownAdd} accessToken={accessToken}/>              

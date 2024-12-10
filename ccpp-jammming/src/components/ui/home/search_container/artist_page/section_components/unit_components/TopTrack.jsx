@@ -3,7 +3,6 @@ import IMG from "../../../../../../../assets/images/ImagesHUB";
 import { useTrack } from "../../../../../../../hooks/TrackContext";
 import { useAddTrack } from "../../../../../../../hooks/user_hooks/AddTrackContext";
 import Equalizer from "../../../../../../../utils/Equalizer"
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import DropdownAddButton from "../../../../../../../utils/DropdownAddButton";
 
 function TopTrack({ topTrack, order, onPlayButton, 
@@ -58,14 +57,6 @@ function TopTrack({ topTrack, order, onPlayButton,
             updateTrackToAdd(uriTrack, selectedTracksIds, playlistData, accessToken);
             //console.log(selectedTracksIds);
         }
-
-        // Close the dropdown after selection
-        if (dropdownButtonRef.current) {
-            const dropdownInstance = bootstrap.Dropdown.getInstance(dropdownButtonRef.current);
-            if (dropdownInstance) {
-                dropdownInstance.hide();
-            }
-        }
     };
 
     if(currentTrackUri !== uriTrack) {
@@ -83,7 +74,7 @@ function TopTrack({ topTrack, order, onPlayButton,
                             <img title="Click to Play" id="play-icon" src={IMG.play3PNG} alt="play icon" width="25px"/>
                         </a>
                     </div>
-                    <div id="col-cover" className="col-1 d-flex justify-content-center align-items-center">
+                    <div id="col-cover" className="col-1 d-flex justify-content-center align-items-center d-none d-md-flex">
                         <div id="cover-img" className="cover">
                             <img title={topTrack.trackAlbum} src={cover} height="40px" />
                         </div>
@@ -91,7 +82,7 @@ function TopTrack({ topTrack, order, onPlayButton,
                     <div id="col-title" className="col d-flex justify-content-start align-items-center">
                         <h5 title={topTrack.trackTitle}>{topTrack.trackTitle}</h5>
                     </div>
-                    <div id="col-duration" className="col-1 d-flex justify-content-center align-items-center">
+                    <div id="col-duration" className="col-1 d-flex justify-content-center align-items-center d-none d-md-flex">
                         <p>{millisToMinutesAndSeconds(topTrack.trackDuration)}</p>
                     </div>
                     <DropdownAddButton dropdownButtonRef={dropdownButtonRef} handleDropDownAdd={handleDropDownAdd} accessToken={accessToken}/>     
@@ -115,7 +106,7 @@ function TopTrack({ topTrack, order, onPlayButton,
                             </div>
                         </a>
                     </div>
-                <div id="col-cover" className="col-1 d-flex justify-content-center align-items-center">
+                <div id="col-cover" className="col-1 d-flex justify-content-center align-items-center d-none d-md-flex">
                     <div id="cover-img" className="cover">
                         <img title={topTrack.trackAlbum} src={cover} height="40px" />
                     </div>
@@ -123,7 +114,7 @@ function TopTrack({ topTrack, order, onPlayButton,
                 <div id="col-title" className="col d-flex justify-content-start align-items-center">
                     <h5 title={topTrack.trackTitle}>{topTrack.trackTitle}</h5>
                 </div>
-                <div id="col-duration" className="col-1 d-flex justify-content-center align-items-center">
+                <div id="col-duration" className="col-1 d-flex justify-content-center align-items-center d-none d-md-flex">
                     <p>{millisToMinutesAndSeconds(topTrack.trackDuration)}</p>
                 </div>
                 <DropdownAddButton dropdownButtonRef={dropdownButtonRef} handleDropDownAdd={handleDropDownAdd} accessToken={accessToken}/>             

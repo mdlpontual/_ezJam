@@ -58,15 +58,6 @@ function TrackResultItem({  artistContent, albumContent, trackContent,
             updateTrackToAdd(uriTrack, selectedTracksIds, playlistData, accessToken);
             //console.log(selectedTracksIds);
         }
-
-        // Close the dropdown after selection
-        if (dropdownButtonRef.current) {
-            const dropdownInstance = bootstrap.Dropdown.getInstance(dropdownButtonRef.current);
-            if (dropdownInstance) {
-                dropdownInstance.hide();
-            }
-        }
-        console.log("clicked")
     };
 
     if(currentTrackUri !== uriTrack) {
@@ -83,17 +74,17 @@ function TrackResultItem({  artistContent, albumContent, trackContent,
                             <img title="Click to Play" id="play-icon" src={IMG.play3PNG} alt="play icon" width="25px"/>
                         </a>
                     </div>
-                    <div id="col-cover" className="col-1 d-flex justify-content-center align-items-center">
+                    <div id="col-cover" className="col-1 d-flex justify-content-center align-items-center d-none d-md-flex">
                         <img title={trackContent.trackAlbum} id="cover-img" src={trackCover} height="40px" type="button" onClick={() => onAlbumClick(albumContent, onArtistClick, onAlbumClick, onPlayButton, userPlaylistsArr, accessToken)}/>
                     </div>
                     <div id="col-title" className="col d-flex justify-content-start align-items-center">
                         <h5 title={trackContent.trackTitle}>{trackContent.trackTitle}</h5>
                         <p title={trackContent.trackAuthor}><a id="open-artist-page" type="button" onClick={() => onArtistClick(artistContent, onArtistClick, onAlbumClick, onPlayButton, userPlaylistsArr, accessToken)}>{trackContent.trackAuthor}</a></p>
                     </div>
-                    <div id="col-album" className="col-3 d-flex justify-content-start align-items-center">
+                    <div id="col-album" className="col-3 d-flex justify-content-start align-items-center d-none d-md-flex">
                         <p title={trackContent.trackAlbum}><a id="open-album-page" type="button" onClick={() => onAlbumClick(albumContent, onArtistClick, onAlbumClick, onPlayButton, userPlaylistsArr, accessToken)}>{trackContent.trackAlbum}</a></p>
                     </div>
-                    <div id="col-duration" className="col-1 d-flex justify-content-center align-items-center">
+                    <div id="col-duration" className="col-1 d-flex justify-content-center align-items-center d-none d-md-flex">
                         <p>{millisToMinutesAndSeconds(trackContent.trackDuration)}</p>
                     </div>
                     <DropdownAddButton dropdownButtonRef={dropdownButtonRef} handleDropDownAdd={handleDropDownAdd} accessToken={accessToken}/>      
@@ -116,17 +107,17 @@ function TrackResultItem({  artistContent, albumContent, trackContent,
                         </div>
                     </a>
                 </div>
-                <div id="col-cover" className="col-1 d-flex justify-content-center align-items-center">
+                <div id="col-cover" className="col-1 d-flex justify-content-center align-items-center d-none d-md-flex">
                     <img title={trackContent.trackAlbum} id="cover-img" src={trackCover} height="40px" type="button" onClick={() => onAlbumClick(albumContent, onArtistClick, onAlbumClick, onPlayButton, userPlaylistsArr, accessToken)}/>
                 </div>
                 <div id="col-title" className="col d-flex justify-content-start align-items-center">
                     <h5 title={trackContent.trackTitle}>{trackContent.trackTitle}</h5>
                     <p title={trackContent.trackAuthor}><a id="open-artist-page" type="button" onClick={() => onArtistClick(artistContent, onArtistClick, onAlbumClick, onPlayButton, userPlaylistsArr, accessToken)}>{trackContent.trackAuthor}</a></p>
                 </div>
-                <div id="col-album" className="col-3 d-flex justify-content-start align-items-center">
+                <div id="col-album" className="col-3 d-flex justify-content-start align-items-center d-none d-md-flex">
                     <p title={trackContent.trackAlbum}><a id="open-album-page" type="button" onClick={() => onAlbumClick(albumContent, onArtistClick, onAlbumClick, onPlayButton, userPlaylistsArr, accessToken)}>{trackContent.trackAlbum}</a></p>
                 </div>
-                <div id="col-duration" className="col-1 d-flex justify-content-center align-items-center">
+                <div id="col-duration" className="col-1 d-flex justify-content-center align-items-center d-none d-md-flex">
                     <p>{millisToMinutesAndSeconds(trackContent.trackDuration)}</p>
                 </div>
                 <DropdownAddButton dropdownButtonRef={dropdownButtonRef} handleDropDownAdd={handleDropDownAdd} accessToken={accessToken}/>     

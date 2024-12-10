@@ -80,7 +80,7 @@ function Playlist({ playlistData, onPlaylistClick,
     return (
         <div id="single-pl-container" className="container-fluid" >
             <div id="single-pl-row" className="row">
-                <div id="checkmark-col" className="col-1 d-flex flex-column justify-content-center align-items-center">
+                <div id="checkmark-col" className="col-1 d-flex flex-column justify-content-center align-items-center d-none d-md-flex">
                     <img id="playlist-cover" src={cover} alt="saved icon" width="65px" />
                 </div>
                 <div id="pl-title-col" className="col d-flex flex-column justify-content-center align-items-start">
