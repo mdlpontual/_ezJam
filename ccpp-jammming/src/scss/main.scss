@@ -42,7 +42,7 @@ $form-check-input-focus-box-shadow: none;
     margin: 0;
     padding: 0;
     color: white;
-
+    touch-action: pan-y;
 }
 
 body{

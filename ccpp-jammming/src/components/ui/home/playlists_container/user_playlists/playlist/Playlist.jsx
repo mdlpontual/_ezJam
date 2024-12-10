@@ -88,17 +88,17 @@ function Playlist({ playlistData, onPlaylistClick,
                         {playlistData.playlistTitle}
                     </h3>
                 </div>
-                <div id="edit-button-col" className="col-auto d-flex flex-column justify-content-center align-items-center">
+                <div id="edit-button-col" className="col-auto d-flex flex-column justify-content-center align-items-center d-none d-md-flex">
                     <div id="edit-pl-button" type="button" className="justify-content-center align-items-center" onClick={handleEditPlaylist}>
                         <img title="Edit this Playlist Name" src={IMG.pencilPNG} alt="edit icon" width="25px" />
                     </div>
                 </div>
-                <div id="share-button-col" className="col-auto d-flex flex-column justify-content-center align-items-center">
+                <div id="share-button-col" className="col-auto d-flex flex-column justify-content-center align-items-center d-none d-md-flex">
                     <a id="share-pl-button" type="button" onClick={handleSharePlaylist}>
                         <img title="Share this Playlist" src={IMG.sharePNG} alt="share icon" width="25px" />
                     </a>
                 </div>
-                <div id="delete-button-col" className="col-auto d-flex flex-column justify-content-center align-items-center">
+                <div id="delete-button-col" className="col-auto d-flex flex-column justify-content-center align-items-center d-none d-md-flex">
                     <a id="delete-pl-button" type="button" onClick={handleUnfollowPlaylist}>
                         <img title="Delete this Playlist" src={IMG.trashBinPNG} alt="delete icon" width="25px" />
                     </a>

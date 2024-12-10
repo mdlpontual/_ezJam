@@ -14,7 +14,7 @@ function LoginButtonBox({authUrl}) {
                         <div id="spotify-logo" className="col d-flex justify-content-center">
                             <h6 id="with-text">with</h6>
                             <a href="https://open.spotify.com" target="_blank" rel="noopener noreferrer">
-                                <img src={IMG.spotifyLogoWhite} alt="spotify logo" height="65px"/>
+                                <img src={IMG.spotifyLogoWhite} alt="spotify logo" height="50px"/>
                             </a>
                         </div>
                     </div>

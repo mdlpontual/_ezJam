@@ -74,12 +74,12 @@ function AlbumPage({ albumContent, onArtistClick, onAlbumClick, onPlayButton, pl
                             </div>
                             <div id="album-title-col" className="col flex-column justify-content-end align-items-start">
                                 <div id="type-sptf" className="row justify-content-between align-items-end">
-                                    <h5 className="col">{albumContent.albumType}</h5>
-                                    <a title="Open Spotify" id="white-logo" href={`https://open.spotify.com/album/${idAlbum}`}  target="_blank" rel="noopener noreferrer">
-                                        <p className="col d-flex justify-content-center align-items-center"><img src={IMG.spotifyIconWhite} width="30px"/> Open Spotify</p>
+                                    <h5 className="col d-none d-md-flex">{albumContent.albumType}</h5>
+                                    <a className="col" title="Open Spotify" id="white-logo" href={`https://open.spotify.com/album/${idAlbum}`}  target="_blank" rel="noopener noreferrer">
+                                        <p className="col d-flex justify-content-center align-items-center"><img src={IMG.spotifyIconWhite} width="25px"/> Open Spotify</p>
                                     </a>
-                                    <a title="Open Spotify" id="green-logo" href={`https://open.spotify.com/album/${idAlbum}`}  target="_blank" rel="noopener noreferrer">
-                                        <p className="col d-flex justify-content-center align-items-center"><img src={IMG.spotifyIcon} width="30px"/> Open Spotify</p>
+                                    <a className="col" title="Open Spotify" id="green-logo" href={`https://open.spotify.com/album/${idAlbum}`}  target="_blank" rel="noopener noreferrer">
+                                        <p className="col d-flex justify-content-center align-items-center"><img src={IMG.spotifyIcon} width="25px"/> Open Spotify</p>
                                     </a>
                                 </div>
                                 <h1 title={albumContent.albumTitle}>{albumContent.albumTitle}</h1>

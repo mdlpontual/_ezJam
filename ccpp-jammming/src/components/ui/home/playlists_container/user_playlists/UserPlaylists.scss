@@ -91,9 +91,15 @@
 #empty-pl-collection-col {
     //border: $border-yellow-solid;
     @include box-reset-default;
+    img {
+        //border: $border-yellow-solid;
+        @include box-reset-default;
+        width: 30%;
+    }
     p {
         //border: $border-yellow-solid;
         @include box-reset-default;
         color: lightgray;
+        text-align: center;
     }
 }

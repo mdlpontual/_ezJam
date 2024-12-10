@@ -248,9 +248,15 @@
             @include box-reset-default;
             padding-bottom: 5px;
             width: 50%;
+            overflow: hidden;
+            white-space: nowrap;
             #save-button {
                 //border: $border-lime-solid;
                 @include box-reset-default;
+                padding: 10px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
                 color: white;
                 width: 90%;
                 height: 50px;
@@ -262,9 +268,15 @@
             @include box-reset-default;
             padding-bottom: 5px;
             width: 50%;
+            overflow: hidden;
+            white-space: nowrap;
             #discard-button {
                 //border: $border-lime-solid;
                 @include box-reset-default;
+                padding: 10px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
                 color: white;
                 width: 90%;
                 height: 50px;

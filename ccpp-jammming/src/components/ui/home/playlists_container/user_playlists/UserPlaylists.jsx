@@ -40,8 +40,8 @@ function UserPlaylists({ onPlaylistClick, onBackClick, onPlayButton, onArtistCli
                 </div>
                 <div id="add-button-col" className="col-auto d-flex justify-content-end align-items-center">
                     <a id="create-pl-button" type="button" onClick={handleCreatePlaylist}>
-                        <img title="Create a New Playlist" id="plus" src={IMG.plusPNG} alt="add playlist button" height="30px" />
-                        <img title="Create a New Playlist" id="plusGreen" src={IMG.plusGreenPNG} alt="add playlist button" height="30px" />
+                        <img title="Create a New Playlist" id="plus" src={IMG.plusPNG} alt="add playlist button" height="25px" />
+                        <img title="Create a New Playlist" id="plusGreen" src={IMG.plusGreenPNG} alt="add playlist button" height="25px" />
                     </a>
                 </div>
             </header>

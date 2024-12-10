@@ -510,12 +510,18 @@
             //border: $border-cyan-dotted;
             @include box-reset-default;
             height: 100%;
+            img {
+                //border: $border-cyan-dotted;
+                @include box-reset-default;
+                padding-top: 15px;
+            }
             h3 {
                 //border: $border-cyan-dotted;
                 @include box-reset-default;
-                padding-top: 25px;
+                padding-top: 10px;
                 padding-bottom: 10px;
                 color: $primary;
+                text-align: center;
             }
             h6 {
                 //border: $border-cyan-dotted;

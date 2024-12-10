@@ -14,7 +14,7 @@ function HomeHeader({ logout }) {
                         </div>
                     </figure>
                     <nav id="header-nav-col" className="col-8 d-flex justify-content-end align-items-center">
-                        <ul className="d-flex justify-content-center align-items-center">
+                        <ul className="d-flex justify-content-end align-items-center">
                             <li className="d-flex justify-content-center align-items-center">
                                 <a type="button" 
                                     id="spotify-button" 

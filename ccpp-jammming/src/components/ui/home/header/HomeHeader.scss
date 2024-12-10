@@ -41,7 +41,7 @@
                         font-weight: bold;
                         border-radius: 20px;
                         width: 100px;
-                        height: 40px;
+                        height: 35px;
                         position: relative;
                         h6 {
                             //border: $border-lime-dotted;
@@ -54,7 +54,7 @@
                         }
                     }
                     #spotify-button {
-                        //border: $border-lime-dotted;
+                        //border: $border-red-dotted;
                         @include box-reset-default;
                         width: max-content;
                         background-color: black;
