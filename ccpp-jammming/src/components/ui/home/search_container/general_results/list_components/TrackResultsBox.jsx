@@ -18,8 +18,6 @@ function TrackResultsBox({ searchArtistResults, searchAlbumResults,
     const [lastSelectedIndex, setLastSelectedIndex] = useState(null);
     const [isShiftSelecting, setIsShiftSelecting] = useState(false);
 
-    console.log("tracks");
-
     useEffect(() => {
         setUpdatedArtistContent(fetchedArtistsArray);
     }, [fetchedArtistsArray]);
