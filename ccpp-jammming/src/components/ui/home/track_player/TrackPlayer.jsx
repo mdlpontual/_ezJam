@@ -106,7 +106,7 @@ function TrackPlayer({ isPaused, isActive, userInfo,
                                 </a>
                             </div>
                         </div>
-                        <div id="progress-bar-row" className="row d-flex">
+                        <div id="progress-bar-row" className="row d-flex d-none d-md-flex">
                             <div id="col-left-time" className="col-1 d-flex justify-content-center align-items-center">
                                 <p>{millisToMinutesAndSeconds(liveTrackPosition)}</p>
                             </div>
@@ -124,7 +124,7 @@ function TrackPlayer({ isPaused, isActive, userInfo,
                             </div>
                         </div>
                     </div>
-                    <div id="col-volume" className="col justify-content-end align-items-center d-none d-lg-flex">
+                    <div id="col-volume" className="col justify-content-end align-items-center d-none d-md-flex">
                         <div id="volume-bar-row" className="row d-flex justify-content-end align-items-center">
                             <a type="button" 
                                 id="spotify-button" 
@@ -169,7 +169,7 @@ function TrackPlayer({ isPaused, isActive, userInfo,
                                 <img title="Next" id="next-green" src={IMG.nextGreenPNG} alt="next track button" height="25px" onClick={handleNextTrack} />
                             </div>
                         </div>
-                        <div id="progress-bar-row" className="row d-flex">
+                        <div id="progress-bar-row" className="row d-flex d-none d-md-flex">
                             <div id="col-left-time" className="col-1 d-flex justify-content-center align-items-center">
                                 <p>{millisToMinutesAndSeconds(liveTrackPosition)}</p>
                             </div>
@@ -188,7 +188,7 @@ function TrackPlayer({ isPaused, isActive, userInfo,
                             </div>
                         </div>
                     </div>
-                    <div id="col-volume" className="col justify-content-end align-items-center d-none d-lg-flex">
+                    <div id="col-volume" className="col justify-content-end align-items-center d-none d-md-flex">
                         <TrackVolume volumeControl={volumeControl} />
                     </div>
                 </div>

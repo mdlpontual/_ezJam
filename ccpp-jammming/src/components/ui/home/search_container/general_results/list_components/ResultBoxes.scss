@@ -17,9 +17,12 @@
                     height: 100%;
                     #inside-col {
                         //border: $border-lime-dotted;
-                        height: 235px;
-                        max-width: 100%;
+                        height: 200px;
+                        min-width: 135px;
+                        max-width: 150px;
                         padding-top: 20px;
+                        padding-left: 2.5px;
+                        padding-right: 2.5px;
                         #artist-inner-row {
                             //border: $border-yellow-dotted;
                             @include box-reset-default;
@@ -28,8 +31,8 @@
                             #artist-thumbnail {
                                 //border: $border-cyan-dotted;
                                 @include box-reset-default;
-                                width: 140px;
-                                height: 140px;
+                                width: 125px;
+                                height: 125px;
                                 border-radius: 50%;
                                 overflow: hidden;
                             }
@@ -55,9 +58,12 @@
                         //border: $border-lime-dotted;
                         background-color: $bg-transparent;
                         border-radius: 10px;
-                        height: 235px;
-                        width: 175px;
+                        height: 200px;
+                        min-width: 135px;
+                        max-width: 150px;
                         padding-top: 20px;
+                        padding-left: 2.5px;
+                        padding-right: 2.5px;
                     }
                 }
             }
@@ -146,6 +152,19 @@
                         }
                     }
                 }
+                #col-play{
+                    //border: $border-lime-dotted;
+                    @include box-reset-default;
+                    width: 50px;
+                    #play-button {
+                        //border: $border-lime-dotted;
+                        @include box-reset-default;
+                        #play-icon {
+                            //border: $border-lime-dotted;
+                            @include box-reset-default;
+                        }
+                    }
+                }
                 #col-cover {
                     //border: $border-lime-dotted;
                     @include box-reset-default;
@@ -155,17 +174,6 @@
                         //border: $border-lime-dotted;
                         @include box-reset-default;
                         border-radius: 2px;
-                    }
-                    #play-button {
-                        //border: $border-lime-dotted;
-                        @include box-reset-default;
-                        position: absolute;
-                        visibility: hidden;
-                        #play-icon {
-                            //border: $border-lime-dotted;
-                            @include box-reset-default;
-                            position: relative;
-                        }
                     }
                 }
                 #col-title {
@@ -239,81 +247,6 @@
                         overflow: hidden;
                     }
                 }
-                #col-plus {
-                    //border: $border-cyan-dotted;
-                    @include box-reset-default;
-                    width: 50px;
-                    padding: 3px;
-                    position: relative;
-                    #plus-dd {
-                        //border: $border-cyan-dotted;
-                        @include box-reset-default;
-                        width: 40px;
-                        position: relative;
-                        padding-right: 7px;
-                        #plus-icon {
-                            //border: $border-cyan-dotted;
-                            @include box-reset-default;
-                            visibility: visible;
-                            position: absolute;
-                        }
-                        #plus-icon-green {
-                            //border: $border-cyan-dotted;
-                            @include box-reset-default;
-                            visibility: hidden;
-                            position: absolute;
-                        }
-                    }
-                    #plus-dd:hover {
-                        //border: $border-cyan-dotted;
-                        @include box-reset-default;
-                        width: 40px;
-                        position: relative;
-                        padding-right: 7px;
-                        #plus-icon {
-                            //border: $border-cyan-dotted;
-                            @include box-reset-default;
-                            visibility: hidden;
-                            position: absolute;
-                        }
-                        #plus-icon-green {
-                            //border: $border-cyan-dotted;
-                            @include box-reset-default;
-                            visibility: visible;
-                            position: absolute;
-                        }
-                    }
-                    #dropdown-ul {
-                        //border: $border-cyan-dotted;
-                        max-height: 300px;
-                        overflow-y: hidden;
-                        scrollbar-gutter: stable;
-                        padding-right: 5px;
-                        background-color: $primary;
-                        #dd-top-text {
-                            //border: $border-cyan-dotted;
-                            color: white;
-                            background-color: $primary;
-                        }
-                        #dd-item{
-                            //border: $border-cyan-dotted;
-                            font-weight: bold;
-                        }
-                        #dd-item:hover {
-                            //border: $border-cyan-dotted;
-                            background-color: $secondary;
-                            color: white;
-                            font-weight: bold;
-                        }
-                    }
-                    #dropdown-ul:hover {
-                        overflow-y: auto;
-                    }
-                    #plus-dd:focus, #plus-dd:focus-visible {
-                        border: none;
-                        outline: none;
-                    }
-                }
                 #col-minus {
                     //border: $border-cyan-dotted;
                     @include box-reset-default;
@@ -346,6 +279,19 @@
                         }
                     }
                 }
+                #col-play{
+                    //border: $border-lime-dotted;
+                    @include box-reset-default;
+                    width: 50px;
+                    #play-button {
+                        //border: $border-lime-dotted;
+                        @include box-reset-default;
+                        #play-icon {
+                            //border: $border-lime-dotted;
+                            @include box-reset-default;
+                        }
+                    }
+                }
                 #col-cover {
                     //border: $border-lime-dotted;
                     @include box-reset-default;
@@ -355,17 +301,6 @@
                         //border: $border-lime-dotted;
                         @include box-reset-default;
                         border-radius: 2px;
-                    }
-                    #play-button {
-                        //border: $border-lime-dotted;
-                        @include box-reset-default;
-                        position: absolute;
-                        visibility: visible;
-                        #play-icon {
-                            //border: $border-lime-dotted;
-                            @include box-reset-default;
-                            position: relative;
-                        }
                     }
                 }
                 #col-title {

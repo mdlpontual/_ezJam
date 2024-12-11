@@ -63,7 +63,7 @@ function TopTrack({ topTrack, order, onPlayButton,
         return (
             <>
                 <div id="songs-inner-row" className={`row ${isSelected ? 'selected-track3' : ''}`} draggable="true" onDragStart={handleDragStart} onClick={onTrackClick}>
-                    <div id="col-add" className="col-1 d-flex justify-content-center align-items-center">
+                    <div id="col-add" className="col-1 d-flex justify-content-center align-items-center d-none d-md-flex">
                         <h6>{order + 1}</h6>
                         <div title="Drag and Drop to add this Track to a Playlist" id="drag-button" className="drag" draggable="false" onDragStart={handleDragStart}> 
                             <img id="drag-icon" src={IMG.dragPNG} height="25px" />
@@ -93,7 +93,7 @@ function TopTrack({ topTrack, order, onPlayButton,
     return (
         <>
             <div id="songs-inner-row-green" className={`row ${isSelected ? 'selected-track3' : ''}`} draggable="true" onDragStart={handleDragStart} onClick={onTrackClick}>
-                <div id="col-add" className="col-1 d-flex justify-content-center align-items-center">
+                <div id="col-add" className="col-1 d-flex justify-content-center align-items-center d-none d-md-flex">
                     <h6>{order + 1}</h6>
                     <div id="drag-button" className="drag" draggable="false" onDragStart={handleDragStart}> 
                         <img title="Drag and Drop to add this Track to a Playlist" id="drag-icon" src={IMG.blackDragPNG} height="25px" />

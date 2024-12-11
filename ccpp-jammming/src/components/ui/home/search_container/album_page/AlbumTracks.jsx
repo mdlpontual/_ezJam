@@ -58,9 +58,9 @@ function AlbumTracks({ trackContent, fetchedAlbumTracksArray,
         return (
             <>
                 <div id="songs-inner-row" className={`row ${isSelected ? 'selected-track2' : ''}`} draggable="true" onDragStart={handleDragStart} onClick={onTrackClick}>
-                    <div id="col-num" className="col-1 d-flex justify-content-center align-items-center">
+                    <div id="col-num" className="col-1 d-flex justify-content-center align-items-center d-none d-md-flex">
                         <h5 id="number-icon">{trackContent.trackNumber}</h5>
-                        <div id="drag-button" className="drag" draggable="false" onDragStart={handleDragStart}> 
+                        <div id="drag-button" className="drag d-none d-md-flex" draggable="false" onDragStart={handleDragStart}> 
                             <img title="Drag and Drop to add this Track to a Playlist" id="drag-icon" src={IMG.dragPNG} height="25px" />
                         </div>
                     </div>
@@ -83,9 +83,9 @@ function AlbumTracks({ trackContent, fetchedAlbumTracksArray,
     return (
         <>
             <div id="songs-inner-row-green" className={`row ${isSelected ? 'selected-track2' : ''}`} draggable="true" onDragStart={handleDragStart} onClick={onTrackClick}>
-                <div id="col-num" className="col-1 d-flex justify-content-center align-items-center">
+                <div id="col-num" className="col-1 d-flex justify-content-center align-items-center d-none d-md-flex">
                         <h5 id="number-icon">{trackContent.trackNumber}</h5>
-                        <div id="drag-button" className="drag" draggable="false" onDragStart={handleDragStart}> 
+                        <div id="drag-button" className="drag d-none d-md-flex" draggable="false" onDragStart={handleDragStart}> 
                             <img title="Drag and Drop to add this Track to a Playlist" id="drag-icon" src={IMG.greenDragPNG} height="25px" />
                         </div>
                     </div>

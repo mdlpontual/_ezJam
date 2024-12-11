@@ -19,7 +19,7 @@ function ArtistResultsBox({ searchArtistResults, onArtistClick, onAlbumClick, on
             </div>
             <div id="inside-container" className="container-fluid justify-content-center align-items-center">
                 <div id="inside-row" className="row justify-content-center align-items-center">
-                    {fetchedArtistsArray.filter((artist, idx) => idx < 10).map(artist => (
+                    {fetchedArtistsArray.filter((artist, idx) => idx < 6).map(artist => (
                         <div id="inside-col" className="col justify-content-center align-items-start" key={artist.artistUri}>
                             <ArtistResultItem 
                                 artistContent={artist}

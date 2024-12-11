@@ -64,7 +64,7 @@ function TrackResultItem({  artistContent, albumContent, trackContent,
         return (
             <>
                 <div id="songs-inner-row" className={`row ${isSelected ? 'selected-track2' : ''}`} draggable="true" onDragStart={handleDragStart} onClick={onTrackClick}>
-                    <div id="col-add" className="col-1 d-flex justify-content-center align-items-center">
+                    <div id="col-add" className="col-1 d-flex justify-content-center align-items-center d-none d-md-flex">
                         <div className="drag" draggable="false" onDragStart={handleDragStart}> 
                             <img title="Drag and Drop to add this Track to a Playlist" src={IMG.dragPNG} height="23px" />
                         </div>
@@ -95,7 +95,7 @@ function TrackResultItem({  artistContent, albumContent, trackContent,
     return (
         <>
             <div id="songs-inner-row-green" className={`row ${isSelected ? 'selected-track2' : ''}`} draggable="true" onDragStart={handleDragStart} onClick={onTrackClick}>
-                <div id="col-add" className="col-1 d-flex justify-content-center align-items-center">
+                <div id="col-add" className="col-1 d-flex justify-content-center align-items-center d-none d-md-flex">
                     <div className="drag">
                         <img title="Drag and Drop to add this Track to a Playlist" src={IMG.greenDragPNG} height="25px" />
                     </div>

@@ -22,8 +22,10 @@ function ArtistResultItem({ artistContent, onArtistClick, onAlbumClick, onPlayBu
                         height="175x"/>
                 </div>
                 <div id="artist-name" className="col d-flex justify-content-center align-items-start">
-                    <h6 title={artistContent.artistName} id="open-artist-page" type="button" onClick={() => onArtistClick(artistContent, onArtistClick, onAlbumClick, onPlayButton, userPlaylistsArr, accessToken)}>
-                        {artistContent.artistName}
+                    <h6 title={artistContent.artistName} 
+                        id="open-artist-page" type="button" 
+                        onClick={() => onArtistClick(artistContent, onArtistClick, onAlbumClick, onPlayButton, userPlaylistsArr, accessToken)}>
+                            {artistContent.artistName}
                     </h6>
                 </div>
             </div>
