@@ -298,22 +298,24 @@
             #dropdown-ul {
                 //border: $border-blue-dotted;
                 @include box-reset-default;
-                max-height: 300px;
+                max-height: 423px;
                 min-height: 100px;
                 overflow-y: hidden;
                 scrollbar-gutter: stable;
-                padding-right: 5px;
-                background-color: $primary;
-                border-radius: 0.5rem;
+                border: 2px solid $primary;
+                border-left: none;
                 #list-item {
                     //border: $border-red-dotted;
                     @include box-reset-default;
                     overflow: hidden;
                     white-space: nowrap;
-                    height: 43px;
+                    height: 45px;
+                    background-color: $primary;
+                    margin-bottom: 2px;
                     #dd-item {
                         //border: $border-red-dotted;
                         @include box-reset-default;
+                        height: 100%;
                         display: block;
                         width: 100%;
                         padding: 0.5rem;
@@ -353,7 +355,7 @@
                 background-color: $bg-transparent;
                 color: red;
                 border: 1px solid red;
-                border-radius: 0.25rem;
+                border-radius: 0;
                 cursor: pointer;
             }
             #closeButt:hover {
@@ -365,7 +367,7 @@
                 background-color: red;
                 color: white;
                 border: 1px solid red;
-                border-radius: 0.25rem;
+                border-radius: 0;
                 cursor: pointer;
             }
         }

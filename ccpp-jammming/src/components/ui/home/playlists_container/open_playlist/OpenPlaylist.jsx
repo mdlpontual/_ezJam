@@ -199,7 +199,7 @@ function OpenPlaylist({ playlistData, onBackClick,
     }, [trackToAddContent]);
 
     useEffect(() => {
-        let timeoutDuration = playlistStateCache[playlistData.playlistId] ? 200 : 700;
+        let timeoutDuration = playlistStateCache[playlistData.playlistId] ? 200 : 1000;
         const timer = setTimeout(() => setLoading(false), timeoutDuration);
         return () => clearTimeout(timer);
     }, [playlistData.playlistId]);
