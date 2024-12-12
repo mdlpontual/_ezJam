@@ -1,9 +1,6 @@
 import React, { useEffect } from "react";
 import IMG from "../../../../../../assets/images/ImagesHUB";
-import { useTrack } from "../../../../../../hooks/TrackContext"; 
-import usePlaylistInfo from "../../../../../../hooks/user_hooks/usePlaylistInfo";
 import usePlaylistActions from "../../../../../../hooks/user_hooks/usePlaylistActions";
-import Equalizer from '../../../../../../utils/Equalizer';
 import { useSave } from "../../../../../../hooks/user_hooks/SaveContext"; // Import the Save context
 
 function Playlist({ playlistData, onPlaylistClick, 
@@ -12,70 +9,13 @@ function Playlist({ playlistData, onPlaylistClick,
                     refetchPlaylists, editPlaylists, 
                     setUserPlaylistsArr, accessToken }) {
 
-    const { currentQueueUri, isPaused } = useTrack(); 
-    const { playlistTracksArr } = usePlaylistInfo({ playlistData, accessToken });    
     const { handleEditPlaylist, handleSharePlaylist, handleUnfollowPlaylist } = usePlaylistActions({ playlistData, editPlaylists, refetchPlaylists, setUserPlaylistsArr, accessToken });
-
-    const uriQueue = playlistTracksArr.map(track => track.trackUri);
-
-    const firstUriTrack = uriQueue[0];
 
     const cover = playlistData.playlistCover || IMG.placeHolders;
 
     // Use the save context to get the save state for this specific playlist
     const { getIsSaved } = useSave();
     const isSaved = getIsSaved(playlistData.playlistId); // Get the saved state for this playlist
-
-    const handleTogglePlay = () => {
-        if (isPaused) {
-            playTrack(); // Play the track
-        } else {
-            pauseTrack(); // Pause the track
-        }
-    };
-
-    function arraysAreEqual(arr1, arr2) {
-        // First ensure both arrays have the same length
-        if (arr1.length !== arr2.length) {
-            return false;
-        }
-    
-        // Helper function to compare partial arrays
-        function partialArraysAreEqual(arr1, arr2, start, end) {
-            for (let i = start; i < end; i++) {
-                if (arr1[i] !== arr2[i]) {
-                    return false;
-                }
-            }
-            return true;
-        }
-    
-        const quarterLength = Math.floor(arr1.length / 4);
-        const halfLength = Math.floor(arr1.length / 2);
-    
-        // Check the first quarter of the arrays
-        if (!partialArraysAreEqual(arr1, arr2, 0, quarterLength)) {
-            return false;
-        }
-    
-        // Check the first half of the arrays
-        if (!partialArraysAreEqual(arr1, arr2, 0, halfLength)) {
-            return false;
-        }
-    
-        // Check the full array (if quarter and half checks passed)
-        return partialArraysAreEqual(arr1, arr2, 0, arr1.length);
-    }
-    
-    let isTrackPlaying = false;
-    
-    // Check conditions step by step, short-circuiting on failure
-    if (Array.isArray(uriQueue) &&
-        Array.isArray(currentQueueUri) &&
-        uriQueue.length === currentQueueUri.length &&
-        arraysAreEqual(uriQueue, currentQueueUri)) {
-            isTrackPlaying = true;
-    }
 
     return (
         <div id="single-pl-container" className="container-fluid" >
