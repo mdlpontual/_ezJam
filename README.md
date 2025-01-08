@@ -2,6 +2,8 @@
 ## Create, edit, and listen to your playlists in a more streamlined way. 
 
 **This web application was commissioned by a part-time DJ that needed a tool to help him customize his Spotify playlists off-platform while improving a few points of the user experience catered to his specific needs.**
+______________________________________________________________________
+Scope and Client's profile:
 
 The client is an electrician who works with photovoltaic system installations during the week, but performs as a DJ at parties on weekends as a hobby, attending mostly birthday parties and small weddings in the countryside. He has been doing this since the 1990s and has used all types of gear technology over the years. Nowadays he has condensed most of his equipment to a laptop, a pair of quality speakers, a portable mixing table, and a Spotify premium account.
 
@@ -11,17 +13,36 @@ The main objective of this new application is to improve the experience of custo
 
 Scope of the project:
 * The app needs to work separately and independently from the main Spotify app;
-* Build the UI in a way that the client can see the content of his playlists on the same screen as the search results from Spotify's library, at all times and side by side;
+* Build the UI in a way that the client can see the content of his playlists on the same screen as the search results from Spotify's library, side by side;
 * Imitate the same basic mechanisms and functionalities of the Spotify app;
 * Have a built-in track player;
-* Have vibrant colors with excellent contrast so it pops on the screen when playing in dark rooms while also helping differentiate from the Spotify app in dark mode when using both at the same time;
+* Have vibrant colors with good contrast so it pops on the screen when using at the same time with the Spotifyy app, witch he uses with dark mode;
 * Allow full control of the customizations by saving or discarding changes to playlists before they are updated permanently;
-* Upload the changes to his playlists automatically and quickly, so he can play or modify them at will and live.
+* Upload the changes to his playlists automatically and quickly, so he can play or modify them at will when live.
 
 He doesn't need the app to be installed on his laptop or smartphone, so a web application using the Spotify Web API was the selected option for the development of this project. He preferred the option of opening this app with a browser so he could use it as a backup for playing the tracks in case the main app installed crashes on the fly.
 
-The application is in development and Spotify restricts access to the public.
+______________________________________________________________________
+About the Application:
 
-To check out the ezJam app, use this account:
+Despite being commissioned by a specific client, ezJam is being developed with the idea of being a public tool once it is finished, with the endorsement of the client himself. With that in mind, the overall functionality of the application was planned to be as similar as possible to the official Spotify app, with the intent of being used as an assist tool for the main one and respecting the terms and conditions of the API documentation.
+
+In this application, you will find an improved and more focused way to customize your beloved Spotify playlists. Only with ezJam will you have the ability to simultaneously view the content of your playlists while exploring Spotify's music catalog, all at the same time, side by side!
+
+Focusing solely on songs, albums, and artists, you will have a more streamlined experience to create, edit, and customize your music playlists. Fewer distractions mean better flow and more exploration!
+
+* Select one or multiple tracks at the same time;
+
+* Use the drag and drop feature to add new songs or modify their order;
+
+* Maintain control of your customization by saving or discarding the changes you make along the way.
+
+Enable the "ezJam Track Player" in the "Connect to a Device" section of your Spotify app to listen to your songs right here.
+
+Once completed, you can play the playlists in any Spotify app or share them with just a quick click!
+
+______________________________________________________________________
+
+**The application is currently in the final stages of its development stage. Consequently, Spotify limits public access to the app until it is ready to launch and their team reviews it. Until then, you can check out the application by logging in with this free account:**
 * Login: *demoSpotifyUser@gmail.com*
 * Password: *12345*
