@@ -43,6 +43,4 @@ Once completed, you can play the playlists in any Spotify app or share them with
 
 ______________________________________________________________________
 
-**The application is currently in the final stages of its development stage. Consequently, Spotify limits public access to the app until it is ready to launch and their team reviews it. Until then, you can check out the application by logging in with this free account:**
-* Login: 
-* Password: 
+**The application is currently in the final stages of its development stage. Consequently, Spotify limits public access to the app until it is ready to launch and their team reviews it.**
