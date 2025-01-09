@@ -25,12 +25,14 @@
         #footer-col {
             @include box-reset-default;
             padding: 17px;
-            
+            h5 {
+                @include box-reset-default;
+                text-align: center;
+            }
             h6 {
                 @include box-reset-default;
                 text-align: center;
             }
-            
             #light-signature {
                 font-weight: lighter;
             }

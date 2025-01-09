@@ -14,7 +14,7 @@ function LoginPage() {
                 </main>
                 <footer id="footer-row" className="row">
                     <article id="footer-col" className="col">
-                        <h6 id="light-signature">ezJam</h6>
+                        <h5 id="light-signature">ezJam</h5>
                         <h6 id="bold-signature">copyright mdlpontual - 2024</h6>
                     </article>
                 </footer>
