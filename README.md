@@ -3,7 +3,7 @@
 
 **This web application was commissioned by a part-time DJ that needed a tool to help him customize his Spotify playlists off-platform while improving a few points of the user experience catered to his specific needs.**
 ______________________________________________________________________
-Scope and Client's profile:
+Client's profile:
 
 The client is an electrician who works with photovoltaic system installations during the week, but performs as a DJ at parties on weekends as a hobby, attending mostly birthday parties and small weddings in the countryside. He has been doing this since the 1990s and has used all types of gear technology over the years. Nowadays he has condensed most of his equipment to a laptop, a pair of quality speakers, a portable mixing table, and a Spotify premium account.
 
