@@ -45,4 +45,4 @@ ______________________________________________________________________
 
 **The application is currently in the final stages of its development stage. Consequently, Spotify limits public access to the app until it is ready to launch and their team reviews it. In the meantime, you can check a demo video with the following link or contact me to allow access to a demo account.**
 
-...
+<https://www.youtube.com/watch?v=t-3TiMsOU4I>
