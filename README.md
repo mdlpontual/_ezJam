@@ -1,9 +1,28 @@
 # ezJam (with Spotify) 
 ## Create, edit, and listen to your playlists in a more streamlined way. 
 
-**This web application was commissioned by a part-time DJ that needed a tool to help him customize his Spotify playlists off-platform while improving a few points of the user experience catered to his specific needs.**
+**This web application was commissioned by a part-time DJ that needed an off-platform tool to help him customize his Spotify playlists while improving the user experience catered to his specific needs.**
 ______________________________________________________________________
-Client's profile:
+
+### About ezJam:
+
+In this application, you will find an improved and more focused way to customize your beloved Spotify playlists. Only ezJam allows the user to simultaneously view the content of the playlists while exploring Spotify's music catalog, all at the same time, side by side.
+
+* Focus solely on songs, albums, and artists for a more streamlined experience (fewer distractions mean better flow and more exploration);
+* Create, edit and delete your playlists;
+* Search Spotify's full music catalog;
+* Select one or multiple tracks at the same time;
+* Use the drag-and-drop feature to add new songs or modify their order;
+* Listen to any song you want in the same platform;
+* Maintain control of your customization by saving or discarding the changes you make along the way.
+
+**For more information, chekout the demo video with the following link:** <https://www.youtube.com/watch?v=t-3TiMsOU4I>
+
+Once completed, you can play the playlists in any Spotify app or share them with just one click.
+
+______________________________________________________________________
+
+### About the project:
 
 The client is an electrician who works with photovoltaic system installations during the week and performs as a DJ at parties on weekends as a hobby, attending mostly birthday parties and small weddings in the countryside. He has been doing this since the 1990s and has used all types of gear technology over the years. Nowadays he has condensed most of his equipment to a laptop, a pair of quality speakers, a portable mixing table, and a Spotify premium account.
 
@@ -11,7 +30,7 @@ Within his Spotify account, he collects a variety of pre-made, battle-tested pla
 
 The main objective of this new application is to improve the experience of customizing and modifying his playlists outside of the job by solving an old issue that he always had with Spotify's user experience: the fact that you can't see the content of the user's playlists and the searched results from the Spotify library on the same screen side by side. The second objective is to have an off-platform tool to assist and back up the main app during events. During gigs, he will continue to use the official Spotify application on his laptop as the primary tool for playing and visualizing tracks.
 
-Scope of the project:
+#### Scope of the project:
 * The app needs to work separately and independently from the main Spotify app;
 * Build the UI in a way that the client can see the content of his playlists on the same screen as the search results from Spotify's library, side by side;
 * Imitate the same basic mechanisms and functionalities of the Spotify app;
@@ -20,27 +39,21 @@ Scope of the project:
 * Allow full control of the customizations by saving or discarding changes to playlists before they are updated permanently;
 * Upload the changes to his playlists automatically and quickly, so he can play or modify them at will when live.
 
-He doesn't need the app to be installed on his laptop or smartphone, so a web application using the Spotify Web API was the selected option for the development of this project. He preferred the option of opening this app with a browser so he could use it as a backup for playing the tracks in case the main app installed crashes on the fly.
+Because the client wanted an off-platform tool, he also wanted to be able to open it on any device with a browser. This would allow him to use it as a backup for playing the tracks in case the main app installed crashes or something goes wrong. With all that settled, it was decided to build the app as a **web application** using React.
 
-______________________________________________________________________
-About the Application:
-
-With the endorsement of the client himself, ezJam is being developed with the idea of public use once it is finished. With that in mind, the overall functionality of the application was planned to be as similar as possible to the official Spotify app, with the intent of being used as an assist tool for the main app while respecting the terms and conditions of the API documentation.
-
-In this application, you will find an improved and more focused way to customize your beloved Spotify playlists. Only with ezJam will you have the ability to simultaneously view the content of your playlists while exploring Spotify's music catalog, all at the same time, side by side!
-
-Focusing solely on songs, albums, and artists, you will have a more streamlined experience to create, edit, and customize your music playlists. Fewer distractions mean better flow and more exploration!
-
-* Select one or multiple tracks at the same time;
-* Use the drag-and-drop feature to add new songs or modify their order;
-* Maintain control of your customization by saving or discarding the changes you make along the way.
-
-Enable the "ezJam Track Player" in the "Connect to a Device" section of your Spotify app to listen to your songs.
-
-Once completed, you can play the playlists in any Spotify app or share them with just one click!
+#### Technologies and languages used:
+* Spotify Web API;
+* Spotify Web Playback SDK;
+* React;
+* JavaScript;
+* Bootstrap;
+* SASS;
+* Vite;
+* Axios;
+* Netlify.
 
 ______________________________________________________________________
 
-**The application is currently in restricted testing mode, and it's been reviewed by the Spotify team for public access. In the meantime, you can check a demo video with the following link or contact me for more details.**
+We are developing ezJam with the intention of releasing it for public use once completed. The app's functionality was designed to mimic the Spotify app as an assist tool while adhering to API documentation.
 
-<https://www.youtube.com/watch?v=t-3TiMsOU4I>
+**The application is currently in restricted testing mode, and it is in review by the Spotify team for public access. In the meantime, you can check the demo video above or contact me for more details.**
