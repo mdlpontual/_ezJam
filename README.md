@@ -8,6 +8,7 @@ ______________________________________________________________________
 
 In this application, you will find an improved and more focused way to customize your beloved Spotify playlists. Only ezJam allows the user to simultaneously view the content of the playlists while exploring Spotify's music catalog, all at the same time, side by side.
 
+#### Features:
 * Focus solely on songs, albums, and artists for a more streamlined experience (fewer distractions mean better flow and more exploration);
 * Create, edit and delete your playlists;
 * Search Spotify's full music catalog;
@@ -16,7 +17,8 @@ In this application, you will find an improved and more focused way to customize
 * Listen to any song you want in the same platform;
 * Maintain control of your customization by saving or discarding the changes you make along the way.
 
-**For more information, chekout the demo video with the following link:** <https://www.youtube.com/watch?v=t-3TiMsOU4I>
+**For more information, chekout the demo video with the following link:** 
+<https://www.youtube.com/watch?v=t-3TiMsOU4I>
 
 Once completed, you can play the playlists in any Spotify app or share them with just one click.
 
