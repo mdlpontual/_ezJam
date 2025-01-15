@@ -24,8 +24,6 @@ Once completed, you can play the playlists in any Spotify app or share them with
 
 ______________________________________________________________________
 
-Because the client wanted an off-platform tool, he also wanted to be able to open it on any device with a browser. This would allow him to use it as a backup for playing the tracks in case the main app installed crashes or something goes wrong. With all that settled, it was decided to build the app as a **web application** using React.
-
 ### Technologies and languages used:
 * Spotify Web API;
 * Spotify Web Playback SDK;
@@ -55,6 +53,8 @@ The main objective of this new application is to improve the experience of custo
 * Have vibrant colors with good contrast so it pops on the screen when using it at the same time with the Spotify app, which he uses with dark mode;
 * Allow full control of the customizations by saving or discarding changes to playlists before they are updated permanently;
 * Upload the changes to his playlists automatically and quickly, so he can play or modify them at will when live.
+
+Because the client wanted an off-platform tool, he also wanted to be able to open it on any device with a browser. This would allow him to use it as a backup for playing the tracks in case the main app installed crashes or something goes wrong. With all that settled, it was decided to build the app as a **web application** using React.
 
 ______________________________________________________________________
 
