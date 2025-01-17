@@ -26,13 +26,16 @@ ______________________________________________________________________
 
 ### Technologies and languages used:
 * Spotify Web API;
-* Spotify Web Playback SDK;
+* API Integration;
+* RESTful API;
+* OAuth Authenticantion; 
 * React;
 * JavaScript;
 * Bootstrap;
 * SASS;
 * Vite;
 * Axios;
+* Node.js (used for API proxying and server-side logic during development);
 * Netlify.
 
 ______________________________________________________________________
